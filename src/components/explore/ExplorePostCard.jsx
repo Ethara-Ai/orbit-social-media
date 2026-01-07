@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { Heart, Zap } from "../icons";
 import Avatar from "../common/Avatar";
@@ -74,5 +75,4 @@ const HoverOverlay = ({ likes, isLiked }) => {
   );
 };
 
-export { NewBadge, HoverOverlay };
 export default ExplorePostCard;

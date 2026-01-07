@@ -1,30 +1,10 @@
 import { useFeed } from "../../context/AppContext";
-import { useUser } from "../../context/AppContext";
 import CreatePost from "./CreatePost";
 import PostCard from "./PostCard";
 
 const FeedTab = () => {
-  // Access feed state and actions directly from context
-  const {
-    posts,
-    comments,
-    showComments,
-    newComment,
-    setNewComment,
-    newPostContent,
-    setNewPostContent,
-    selectedImage,
-    setSelectedImage,
-    handleLike,
-    handleComment,
-    handleAddComment,
-    handlePostClick,
-    handleCreatePost,
-    handleImageUpload,
-  } = useFeed();
-
-  // Access user data from context
-  const { currentUser, currentUserAvatar } = useUser();
+  // Only need posts from context - child components access their own data via hooks
+  const { posts } = useFeed();
 
   return (
     <div className="max-w-2xl mx-auto w-full px-0 max-w-[100vw] overflow-x-hidden">
@@ -38,36 +18,13 @@ const FeedTab = () => {
         </p>
       </div>
 
-      {/* Create Post Section */}
-      <CreatePost
-        currentUser={currentUser}
-        currentUserAvatar={currentUserAvatar}
-        newPostContent={newPostContent}
-        setNewPostContent={setNewPostContent}
-        selectedImage={selectedImage}
-        setSelectedImage={setSelectedImage}
-        onCreatePost={handleCreatePost}
-        onImageUpload={handleImageUpload}
-      />
+      {/* Create Post Section - uses hooks internally */}
+      <CreatePost />
 
-      {/* Posts List */}
+      {/* Posts List - PostCard uses hooks internally */}
       <div className="space-y-3 sm:space-y-4">
         {posts.map((post, index) => (
-          <PostCard
-            key={post.id}
-            post={post}
-            index={index}
-            currentUser={currentUser}
-            currentUserAvatar={currentUserAvatar}
-            comments={comments}
-            showComments={showComments}
-            newComment={newComment}
-            setNewComment={setNewComment}
-            onLike={handleLike}
-            onComment={handleComment}
-            onAddComment={handleAddComment}
-            onPostClick={handlePostClick}
-          />
+          <PostCard key={post.id} post={post} index={index} />
         ))}
       </div>
     </div>

@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 
 const MessageBubble = ({ message }) => {
@@ -59,5 +60,4 @@ const MessageTimestamp = ({ timestamp, isSent }) => {
   );
 };
 
-export { MessageAttachment, MessageTimestamp };
 export default MessageBubble;

@@ -1,4 +1,5 @@
 import { createPortal } from "react-dom";
+// eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, Fire, Heart, MessageCircle } from "../../icons";
 import Avatar from "../../common/Avatar";
@@ -233,6 +234,7 @@ const ActionButton = ({
   onClick,
   isActive,
   activeClassName = "",
+  // eslint-disable-next-line no-unused-vars
   icon: Icon,
   count,
   label,

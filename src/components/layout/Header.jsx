@@ -1,10 +1,17 @@
+// eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
 import { useUser, useUI } from "../../context/AppContext";
 import { Sun, Moon } from "../icons";
 
 const Header = () => {
   const { currentUser } = useUser();
-  const { showMobileNav, setShowMobileNav, setShowCurrentUserModal, isDarkMode, toggleTheme } = useUI();
+  const {
+    showMobileNav,
+    setShowMobileNav,
+    setShowCurrentUserModal,
+    isDarkMode,
+    toggleTheme,
+  } = useUI();
 
   return (
     <header className="fixed top-0 left-0 right-0 h-14 sm:h-16 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 z-40 px-2 sm:px-4 lg:px-6 w-full max-w-[100vw] transition-colors duration-300">
@@ -35,7 +42,9 @@ const Header = () => {
             className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center justify-center transition-colors duration-300"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
+            aria-label={
+              isDarkMode ? "Switch to light mode" : "Switch to dark mode"
+            }
           >
             <AnimatePresence mode="wait" initial={false}>
               {isDarkMode ? (
@@ -77,7 +86,9 @@ const Header = () => {
               <p className="text-sm font-semibold text-slate-900 dark:text-white transition-colors">
                 {currentUser.name}
               </p>
-              <p className="text-xs text-slate-500 dark:text-slate-400 transition-colors">{currentUser.profession}</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400 transition-colors">
+                {currentUser.profession}
+              </p>
             </div>
           </motion.div>
         </div>

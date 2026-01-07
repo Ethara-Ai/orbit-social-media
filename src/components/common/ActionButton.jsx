@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 
 const ActionButton = ({
@@ -13,15 +14,21 @@ const ActionButton = ({
   rounded = "full",
   ...props
 }) => {
-  const baseStyles = "font-medium transition-colors cursor-pointer disabled:cursor-not-allowed";
+  const baseStyles =
+    "font-medium transition-colors cursor-pointer disabled:cursor-not-allowed";
 
   const variants = {
-    primary: "bg-orange-500 hover:bg-orange-600 text-white disabled:opacity-40 disabled:hover:bg-orange-500",
-    secondary: "bg-slate-100 hover:bg-slate-200 text-slate-600 disabled:opacity-40",
-    ghost: "bg-transparent hover:bg-slate-100 text-slate-600 disabled:opacity-40",
+    primary:
+      "bg-orange-500 hover:bg-orange-600 text-white disabled:opacity-40 disabled:hover:bg-orange-500",
+    secondary:
+      "bg-slate-100 hover:bg-slate-200 text-slate-600 disabled:opacity-40",
+    ghost:
+      "bg-transparent hover:bg-slate-100 text-slate-600 disabled:opacity-40",
     danger: "bg-rose-500 hover:bg-rose-600 text-white disabled:opacity-40",
-    success: "bg-emerald-500 hover:bg-emerald-600 text-white disabled:opacity-40",
-    outline: "border border-slate-200 bg-white hover:bg-slate-50 text-slate-600 disabled:opacity-40",
+    success:
+      "bg-emerald-500 hover:bg-emerald-600 text-white disabled:opacity-40",
+    outline:
+      "border border-slate-200 bg-white hover:bg-slate-50 text-slate-600 disabled:opacity-40",
   };
 
   const sizes = {
@@ -67,13 +74,9 @@ const ActionButton = ({
       whileTap={{ scale: disabled ? 1 : 0.98 }}
       {...props}
     >
-      {Icon && iconPosition === "left" && (
-        <Icon className={iconSizes[size]} />
-      )}
+      {Icon && iconPosition === "left" && <Icon className={iconSizes[size]} />}
       {children}
-      {Icon && iconPosition === "right" && (
-        <Icon className={iconSizes[size]} />
-      )}
+      {Icon && iconPosition === "right" && <Icon className={iconSizes[size]} />}
     </motion.button>
   );
 };

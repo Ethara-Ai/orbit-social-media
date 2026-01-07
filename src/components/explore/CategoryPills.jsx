@@ -1,5 +1,15 @@
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
-import { Hash, Code, Palette, Briefcase, Coffee, Globe, Music, BookOpen } from "../icons";
+import {
+  Hash,
+  Code,
+  Palette,
+  Briefcase,
+  Coffee,
+  Globe,
+  Music,
+  BookOpen,
+} from "../icons";
 
 const categoryIcons = {
   Code,
@@ -43,7 +53,15 @@ const CategoryPills = ({ categories, activeCategory, setActiveCategory }) => {
   );
 };
 
-const CategoryPill = ({ isActive, onClick, icon: Icon, label, index = 0, animated = false }) => {
+const CategoryPill = ({
+  isActive,
+  onClick,
+  // eslint-disable-next-line no-unused-vars
+  icon: Icon,
+  label,
+  index = 0,
+  animated = false,
+}) => {
   const baseClasses = `
     shrink-0
     flex
@@ -92,5 +110,4 @@ const CategoryPill = ({ isActive, onClick, icon: Icon, label, index = 0, animate
   );
 };
 
-export { CategoryPill };
 export default CategoryPills;

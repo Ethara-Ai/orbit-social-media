@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 
 const Badge = ({
@@ -38,11 +39,7 @@ const Badge = ({
     );
   }
 
-  return (
-    <span className={baseClasses}>
-      {count > 99 ? "99+" : count}
-    </span>
-  );
+  return <span className={baseClasses}>{count > 99 ? "99+" : count}</span>;
 };
 
 export default Badge;

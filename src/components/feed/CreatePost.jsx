@@ -1,16 +1,23 @@
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { Camera, X } from "../icons";
+import { useFeed } from "../../context/AppContext";
+import { useUser } from "../../context/AppContext";
 
-const CreatePost = ({
-  currentUser,
-  currentUserAvatar,
-  newPostContent,
-  setNewPostContent,
-  selectedImage,
-  setSelectedImage,
-  onCreatePost,
-  onImageUpload,
-}) => {
+const CreatePost = () => {
+  // Access state and actions directly from context
+  const {
+    newPostContent,
+    setNewPostContent,
+    selectedImage,
+    setSelectedImage,
+    handleCreatePost,
+    handleImageUpload,
+  } = useFeed();
+
+  // Access user data from context
+  const { currentUser, currentUserAvatar } = useUser();
+
   const removeSelectedMedia = () => {
     setSelectedImage(null);
   };
@@ -28,7 +35,8 @@ const CreatePost = ({
           alt={currentUser.name}
           className="w-9 h-9 sm:w-11 sm:h-11 rounded-full object-cover shrink-0"
           onError={(e) => {
-            e.target.src = "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=50&h=50&fit=crop&crop=face";
+            e.target.src =
+              "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=50&h=50&fit=crop&crop=face";
           }}
         />
         <div className="flex-1 min-w-0">
@@ -43,7 +51,13 @@ const CreatePost = ({
 
             {/* Action buttons inside input field */}
             <div className="absolute bottom-2 right-2 sm:bottom-3 sm:right-3 flex items-center gap-1.5 sm:gap-2">
-              <input type="file" id="image-upload" accept="image/*" onChange={onImageUpload} className="hidden" />
+              <input
+                type="file"
+                id="image-upload"
+                accept="image/*"
+                onChange={handleImageUpload}
+                className="hidden"
+              />
               <motion.button
                 onClick={() => document.getElementById("image-upload")?.click()}
                 className="p-1.5 sm:p-2 text-slate-500 dark:text-slate-400 hover:text-emerald-500 dark:hover:text-emerald-400 hover:bg-slate-100 dark:hover:bg-slate-600 rounded-full transition-colors cursor-pointer"
@@ -55,7 +69,7 @@ const CreatePost = ({
               </motion.button>
 
               <motion.button
-                onClick={onCreatePost}
+                onClick={handleCreatePost}
                 disabled={!newPostContent.trim() && !selectedImage}
                 className="bg-orange-500 hover:bg-orange-600 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full font-semibold text-xs sm:text-sm transition-colors disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-orange-500"
                 whileHover={{

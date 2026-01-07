@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import Avatar from "../../common/Avatar";
 
@@ -41,7 +42,12 @@ const PostComments = ({
 
       {/* Add Comment */}
       <div className="flex gap-2 sm:gap-3 pt-2 sm:pt-3 border-t border-slate-200 dark:border-slate-700 transition-colors">
-        <Avatar src={currentUserAvatar} alt={currentUser.name} size="sm" className="w-6 h-6 sm:w-8 sm:h-8 shrink-0" />
+        <Avatar
+          src={currentUserAvatar}
+          alt={currentUser.name}
+          size="sm"
+          className="w-6 h-6 sm:w-8 sm:h-8 shrink-0"
+        />
         <div className="flex-1 min-w-0 flex gap-1.5 sm:gap-2">
           <input
             type="text"
@@ -78,7 +84,12 @@ const CommentItem = ({ comment, index }) => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.05 }}
     >
-      <Avatar src={comment.user.avatar} alt={comment.user.name} size="sm" className="w-6 h-6 sm:w-8 sm:h-8 shrink-0" />
+      <Avatar
+        src={comment.user.avatar}
+        alt={comment.user.name}
+        size="sm"
+        className="w-6 h-6 sm:w-8 sm:h-8 shrink-0"
+      />
       <div className="flex-1 min-w-0 bg-white dark:bg-slate-700 rounded-lg sm:rounded-xl p-2 sm:p-3 shadow-sm transition-colors">
         <div className="flex items-center gap-1 sm:gap-2 mb-0.5 sm:mb-1">
           <span className="font-semibold text-slate-900 dark:text-white text-xs sm:text-sm truncate transition-colors">
@@ -88,7 +99,9 @@ const CommentItem = ({ comment, index }) => {
             {comment.timestamp}
           </span>
         </div>
-        <p className="text-slate-700 dark:text-slate-300 text-xs sm:text-sm transition-colors">{comment.content}</p>
+        <p className="text-slate-700 dark:text-slate-300 text-xs sm:text-sm transition-colors">
+          {comment.content}
+        </p>
       </div>
     </motion.div>
   );

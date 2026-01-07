@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { useUI, useMessages } from "../../context/AppContext";
 import { useScrollPosition } from "../../hooks";

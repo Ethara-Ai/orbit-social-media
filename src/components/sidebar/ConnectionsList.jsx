@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
 import { Users, ChevronDown } from "../icons";
 import Avatar from "../common/Avatar";
@@ -103,5 +104,4 @@ const ConnectionItem = ({ friend, index, onClick }) => {
   );
 };
 
-export { ConnectionsHeader, ConnectionItem };
 export default ConnectionsList;

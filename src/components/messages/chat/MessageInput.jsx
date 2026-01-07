@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { Paperclip, Send, X } from "../../icons";
 
@@ -29,12 +30,23 @@ const MessageInput = ({
   return (
     <div className="p-2 sm:p-4 border-t border-slate-100 dark:border-slate-700 bg-white dark:bg-slate-900 transition-colors">
       {/* Attachment Preview */}
-      {messageAttachment && <AttachmentPreview attachment={messageAttachment} onRemove={removeAttachment} />}
+      {messageAttachment && (
+        <AttachmentPreview
+          attachment={messageAttachment}
+          onRemove={removeAttachment}
+        />
+      )}
 
       {/* Input Row */}
       <div className="flex items-center gap-1 sm:gap-2">
         {/* Hidden File Input */}
-        <input type="file" id="message-attachment" accept="image/*" onChange={onAttachmentUpload} className="hidden" />
+        <input
+          type="file"
+          id="message-attachment"
+          accept="image/*"
+          onChange={onAttachmentUpload}
+          className="hidden"
+        />
 
         {/* Attachment Button */}
         <motion.button
@@ -88,5 +100,4 @@ const AttachmentPreview = ({ attachment, onRemove }) => {
   );
 };
 
-export { AttachmentPreview };
 export default MessageInput;

@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
 import { Home, Search, MessageCircle, Bell, X } from "../icons";
 import UserProfileCard from "../sidebar/UserProfileCard";

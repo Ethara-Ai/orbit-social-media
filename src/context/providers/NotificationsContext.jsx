@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import {
   createContext,
   useContext,
@@ -46,7 +47,7 @@ export function NotificationsProvider({ children }) {
   // ==========================================================================
   const mockNotifications = useMemo(
     () => createMockNotifications(friends, suggestedUsers),
-    []
+    [],
   );
 
   // ==========================================================================
@@ -54,7 +55,7 @@ export function NotificationsProvider({ children }) {
   // ==========================================================================
   const [notifications, setNotifications] = useState(mockNotifications);
   const [notificationCount, setNotificationCount] = useState(() =>
-    countUnread(mockNotifications)
+    countUnread(mockNotifications),
   );
   const [showNotificationPopup, setShowNotificationPopup] = useState(false);
   const [latestNotification, setLatestNotification] = useState(null);
@@ -69,7 +70,7 @@ export function NotificationsProvider({ children }) {
       const newNotification = generateRandomNotification(
         friends,
         suggestedUsers,
-        FRIEND_REQUEST_PROBABILITY
+        FRIEND_REQUEST_PROBABILITY,
       );
 
       if (newNotification) {
@@ -77,7 +78,7 @@ export function NotificationsProvider({ children }) {
           const updated = addNotification(
             prev,
             newNotification,
-            MAX_NOTIFICATIONS
+            MAX_NOTIFICATIONS,
           );
           setNotificationCount(countUnread(updated));
           return updated;
@@ -140,7 +141,7 @@ export function NotificationsProvider({ children }) {
       latestNotification,
       markNotificationsAsRead,
       dismissNotificationPopup,
-    ]
+    ],
   );
 
   return (
@@ -157,7 +158,9 @@ export function NotificationsProvider({ children }) {
 export function useNotifications() {
   const context = useContext(NotificationsContext);
   if (!context) {
-    throw new Error("useNotifications must be used within a NotificationsProvider");
+    throw new Error(
+      "useNotifications must be used within a NotificationsProvider",
+    );
   }
   return context;
 }

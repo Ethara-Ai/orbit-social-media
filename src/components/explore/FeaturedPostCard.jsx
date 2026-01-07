@@ -1,18 +1,17 @@
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { Heart } from "../icons";
 import Avatar from "../common/Avatar";
 
-const FeaturedPostCard = ({
-  post,
-  index,
-  onClick,
-}) => {
+const FeaturedPostCard = ({ post, index, onClick }) => {
   const handleImageError = (e) => {
-    e.target.src = "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=600&h=400&fit=crop";
+    e.target.src =
+      "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=600&h=400&fit=crop";
   };
 
   const handleAvatarError = (e) => {
-    e.target.src = "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=50&h=50&fit=crop&crop=face";
+    e.target.src =
+      "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=50&h=50&fit=crop&crop=face";
   };
 
   return (

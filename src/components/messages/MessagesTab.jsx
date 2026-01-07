@@ -1,4 +1,5 @@
 import { useRef, useEffect, useState } from "react";
+// eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
 import { useMessages } from "../../context/AppContext";
 import ConversationsList from "./chat/ConversationsList";

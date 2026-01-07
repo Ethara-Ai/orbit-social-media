@@ -1,23 +1,28 @@
+// eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
+import { useFeed } from "../../context/AppContext";
+import { useUser } from "../../context/AppContext";
 import PostHeader from "./post/PostHeader";
 import PostContent from "./post/PostContent";
 import PostActions from "./post/PostActions";
 import PostComments from "./post/PostComments";
 
-const PostCard = ({
-  post,
-  index,
-  currentUser,
-  currentUserAvatar,
-  comments,
-  showComments,
-  newComment,
-  setNewComment,
-  onLike,
-  onComment,
-  onAddComment,
-  onPostClick,
-}) => {
+const PostCard = ({ post, index }) => {
+  // Access feed state and actions directly from context
+  const {
+    comments,
+    showComments,
+    newComment,
+    setNewComment,
+    handleLike,
+    handleComment,
+    handleAddComment,
+    handlePostClick,
+  } = useFeed();
+
+  // Access user data from context
+  const { currentUser, currentUserAvatar } = useUser();
+
   const isCommentsVisible = showComments.includes(post.id);
 
   return (
@@ -34,7 +39,7 @@ const PostCard = ({
         boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
         transition: { duration: 0.2 },
       }}
-      onClick={() => onPostClick(post.id)}
+      onClick={() => handlePostClick(post.id)}
     >
       <PostHeader user={post.user} timestamp={post.timestamp} />
 
@@ -45,8 +50,8 @@ const PostCard = ({
         likes={post.likes}
         commentsCount={post.comments}
         isLiked={post.isLiked}
-        onLike={onLike}
-        onComment={onComment}
+        onLike={handleLike}
+        onComment={handleComment}
       />
 
       {/* Comments Section */}
@@ -67,7 +72,7 @@ const PostCard = ({
               currentUserAvatar={currentUserAvatar}
               newComment={newComment}
               setNewComment={setNewComment}
-              onAddComment={onAddComment}
+              onAddComment={handleAddComment}
             />
           </motion.div>
         )}

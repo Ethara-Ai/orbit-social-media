@@ -1,62 +1,54 @@
-import { useState, useEffect, useMemo } from "react";
+import { useCallback, useSyncExternalStore } from "react";
 
 /**
  * Custom hook for responsive design using CSS media queries
+ * Uses useSyncExternalStore for safe subscription to media query changes
  * @param {string} query - The media query string (e.g., '(min-width: 768px)')
  * @returns {boolean} - Whether the media query matches
  */
 function useMediaQuery(query) {
-  // Create media query list once per query
-  const mediaQueryList = useMemo(() => {
+  // For SSR compatibility, return false during server render
+  const getServerSnapshot = useCallback(() => false, []);
+
+  // Get the current snapshot of the media query
+  const getSnapshot = useCallback(() => {
     if (typeof window === "undefined") {
-      return null;
+      return false;
     }
-    return window.matchMedia(query);
+    return window.matchMedia(query).matches;
   }, [query]);
 
-  // Use lazy initializer to get initial value
-  const [matches, setMatches] = useState(() => {
-    if (mediaQueryList) {
-      return mediaQueryList.matches;
-    }
-    return false;
-  });
+  // Subscribe to media query changes
+  const subscribe = useCallback(
+    (callback) => {
+      if (typeof window === "undefined") {
+        return () => {};
+      }
 
-  useEffect(() => {
-    if (!mediaQueryList) {
-      return;
-    }
+      const mediaQueryList = window.matchMedia(query);
 
-    // Update state to match current value when query changes
-    // This is safe because it only runs when the query prop changes
-    setMatches(mediaQueryList.matches);
-
-    // Create event listener function that updates state
-    const handleChange = (event) => {
-      setMatches(event.matches);
-    };
-
-    // Add event listener using the modern API with fallback
-    if (mediaQueryList.addEventListener) {
-      mediaQueryList.addEventListener("change", handleChange);
-    } else {
-      // Fallback for older browsers
-      mediaQueryList.addListener(handleChange);
-    }
-
-    // Cleanup
-    return () => {
-      if (mediaQueryList.removeEventListener) {
-        mediaQueryList.removeEventListener("change", handleChange);
+      // Add event listener using the modern API with fallback
+      if (mediaQueryList.addEventListener) {
+        mediaQueryList.addEventListener("change", callback);
       } else {
         // Fallback for older browsers
-        mediaQueryList.removeListener(handleChange);
+        mediaQueryList.addListener(callback);
       }
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [mediaQueryList]);
 
-  return matches;
+      // Cleanup
+      return () => {
+        if (mediaQueryList.removeEventListener) {
+          mediaQueryList.removeEventListener("change", callback);
+        } else {
+          // Fallback for older browsers
+          mediaQueryList.removeListener(callback);
+        }
+      };
+    },
+    [query],
+  );
+
+  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 }
 
 // Predefined breakpoint hooks for convenience
