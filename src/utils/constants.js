@@ -4,88 +4,6 @@
  */
 
 /**
- * Global scrollbar styles to be injected into the document
- * These styles provide custom scrollbar appearance across the application
- */
-export const GLOBAL_SCROLLBAR_STYLES = `
-  * {
-    box-sizing: border-box;
-  }
-
-  /* Light mode scrollbar */
-  body::-webkit-scrollbar {
-    width: 8px;
-  }
-
-  body::-webkit-scrollbar-track {
-    background: #f1f5f9;
-  }
-
-  body::-webkit-scrollbar-thumb {
-    background: linear-gradient(to bottom, #f97316, #ea580c);
-    border-radius: 10px;
-  }
-
-  body::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(to bottom, #ea580c, #c2410c);
-  }
-
-  body {
-    scrollbar-width: thin;
-    scrollbar-color: #f97316 #f1f5f9;
-  }
-
-  /* Dark mode scrollbar */
-  .dark body::-webkit-scrollbar-track,
-  html.dark body::-webkit-scrollbar-track {
-    background: #1e293b;
-  }
-
-  .dark body,
-  html.dark body {
-    scrollbar-color: #f97316 #1e293b;
-  }
-
-  .custom-scrollbar::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  .custom-scrollbar::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
-    border-radius: 10px;
-  }
-
-  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: #94a3b8;
-  }
-
-  .custom-scrollbar {
-    scrollbar-width: thin;
-    scrollbar-color: #cbd5e1 transparent;
-  }
-
-  /* Dark mode custom scrollbar */
-  .dark .custom-scrollbar::-webkit-scrollbar-thumb,
-  html.dark .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: #475569;
-  }
-
-  .dark .custom-scrollbar::-webkit-scrollbar-thumb:hover,
-  html.dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: #64748b;
-  }
-
-  .dark .custom-scrollbar,
-  html.dark .custom-scrollbar {
-    scrollbar-color: #475569 transparent;
-  }
-`;
-
-/**
  * Navigation tab identifiers
  */
 export const TABS = {
@@ -245,7 +163,6 @@ export const APP_CONFIG = {
 };
 
 export default {
-  GLOBAL_SCROLLBAR_STYLES,
   TABS,
   LOADING_DURATION,
   NOTIFICATION_POPUP_DURATION,

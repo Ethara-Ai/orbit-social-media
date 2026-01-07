@@ -1,5 +1,4 @@
 import { useUI } from "./context/AppContext";
-import { GLOBAL_SCROLLBAR_STYLES } from "./utils/constants";
 
 // Import Layout Components
 import {
@@ -27,8 +26,6 @@ export default function SocialMediaDashboard() {
 
   return (
     <div className="min-h-screen w-full max-w-[100vw] overflow-x-hidden bg-slate-50 dark:bg-slate-950 font-['Inter',sans-serif] transition-colors duration-300">
-      <style>{GLOBAL_SCROLLBAR_STYLES}</style>
-
       {/* Header */}
       <Header />
 

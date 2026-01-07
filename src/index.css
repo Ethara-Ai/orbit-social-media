@@ -124,6 +124,40 @@ select {
     scrollbar-color: #475569 transparent;
 }
 
+/* Body scrollbar with orange gradient theme */
+body::-webkit-scrollbar {
+    width: 8px;
+}
+
+body::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+
+body::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #f97316, #ea580c);
+    border-radius: 10px;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(to bottom, #ea580c, #c2410c);
+}
+
+body {
+    scrollbar-width: thin;
+    scrollbar-color: #f97316 #f1f5f9;
+}
+
+/* Dark mode body scrollbar */
+.dark body::-webkit-scrollbar-track,
+html.dark body::-webkit-scrollbar-track {
+    background: #1e293b;
+}
+
+.dark body,
+html.dark body {
+    scrollbar-color: #f97316 #1e293b;
+}
+
 /* Hide scrollbar utility */
 .scrollbar-hide::-webkit-scrollbar {
     display: none;
