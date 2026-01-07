@@ -156,7 +156,7 @@ export const createMockPosts = (friendsList) => [
     content:
       "Just deployed a new decentralized identity solution on the blockchain! 🔐 After months of research and development, we're finally live. This could revolutionize how we handle digital identity verification. What are your thoughts on self-sovereign identity?",
     image:
-      "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=600&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=1920&h=1080&fit=crop&q=80",
     likes: 312,
     comments: 3,
     shares: 47,
@@ -170,7 +170,7 @@ export const createMockPosts = (friendsList) => [
     content:
       "Behind the scenes of today's content shoot! 🎬 Creating authentic stories is what drives me. Remember: your unique perspective is your superpower. Keep creating, keep inspiring, keep being genuinely you!",
     image:
-      "https://images.unsplash.com/photo-1598550476439-6847785fcea6?w=600&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1540655037529-dec987208707?w=1920&h=1080&fit=crop&q=80",
     likes: 245,
     comments: 2,
     shares: 28,
@@ -184,7 +184,7 @@ export const createMockPosts = (friendsList) => [
     content:
       "Our latest research paper on neural network interpretability just got accepted! 🧠✨ Understanding how AI makes decisions is crucial for building trustworthy systems. Excited to present this at the upcoming conference in Vienna!",
     image:
-      "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1920&h=1080&fit=crop&q=80",
     likes: 189,
     comments: 3,
     shares: 56,
@@ -198,7 +198,7 @@ export const createMockPosts = (friendsList) => [
     content:
       "Design sprint complete! 🎨 We reimagined the entire onboarding flow for our fintech app. The power of user research + rapid prototyping is incredible. Always remember: great design is invisible when it works perfectly.",
     image:
-      "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=600&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=1920&h=1080&fit=crop&q=80",
     likes: 156,
     comments: 2,
     shares: 19,
@@ -212,7 +212,7 @@ export const createMockPosts = (friendsList) => [
     content:
       "Thrilled to announce our Series A funding! 🚀 Building sustainable tech solutions for emerging markets has been an incredible journey. Grateful for our amazing team and investors who believe in our vision. The future is collaborative!",
     image:
-      "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=600&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=1920&h=1080&fit=crop&q=80",
     likes: 423,
     comments: 3,
     shares: 89,
@@ -226,7 +226,7 @@ export const createExplorePosts = (friendsList) => [
   {
     id: "e1",
     image:
-      "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=600&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=1920&h=1080&fit=crop&q=80",
     title: "The Future of Web3: Beyond Cryptocurrency",
     user: friendsList[0],
     likes: 1567,
@@ -237,7 +237,7 @@ export const createExplorePosts = (friendsList) => [
   {
     id: "e2",
     image:
-      "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=600&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=1920&h=1080&fit=crop&q=80",
     title: "Designing for Emotional Intelligence in Apps",
     user: friendsList[3],
     likes: 943,
@@ -248,7 +248,7 @@ export const createExplorePosts = (friendsList) => [
   {
     id: "e3",
     image:
-      "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1920&h=1080&fit=crop&q=80",
     title: "Building Remote-First Company Culture",
     user: friendsList[4],
     likes: 1234,
@@ -259,7 +259,7 @@ export const createExplorePosts = (friendsList) => [
   {
     id: "e4",
     image:
-      "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1920&h=1080&fit=crop&q=80",
     title: "Ethical AI: Principles for Responsible Development",
     user: friendsList[2],
     likes: 876,
@@ -270,7 +270,7 @@ export const createExplorePosts = (friendsList) => [
   {
     id: "e5",
     image:
-      "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=600&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1920&h=1080&fit=crop&q=80",
     title: "Scaling Startups: From Seed to Series A",
     user: friendsList[4],
     likes: 1089,
@@ -280,7 +280,7 @@ export const createExplorePosts = (friendsList) => [
   {
     id: "e6",
     image:
-      "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=600&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=1920&h=1080&fit=crop&q=80",
     title: "The Science of Sound: Music Production Deep Dive",
     user: friendsList[5],
     likes: 723,
@@ -290,7 +290,7 @@ export const createExplorePosts = (friendsList) => [
   {
     id: "e7",
     image:
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=1920&h=1080&fit=crop&q=80",
     title: "Quantum Computing: What Developers Need to Know",
     user: friendsList[0],
     likes: 1321,
@@ -301,7 +301,7 @@ export const createExplorePosts = (friendsList) => [
   {
     id: "e8",
     image:
-      "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=600&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1609921212029-bb5a28e60960?w=1920&h=1080&fit=crop&q=80",
     title: "Motion Design: Creating Delightful Micro-interactions",
     user: friendsList[3],
     likes: 812,
@@ -312,7 +312,7 @@ export const createExplorePosts = (friendsList) => [
   {
     id: "e9",
     image:
-      "https://images.unsplash.com/photo-1503220317375-aaad61436b1b?w=600&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=1920&h=1080&fit=crop&q=80",
     title: "Sustainable Travel: Eco-Friendly Adventures",
     user: friendsList[6],
     likes: 1456,
@@ -323,7 +323,7 @@ export const createExplorePosts = (friendsList) => [
   {
     id: "e10",
     image:
-      "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=600&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1522199755839-a2bacb67c546?w=1920&h=1080&fit=crop&q=80",
     title: "Digital Nomad Essentials: Work From Anywhere",
     user: friendsList[1],
     likes: 967,
@@ -334,7 +334,7 @@ export const createExplorePosts = (friendsList) => [
   {
     id: "e11",
     image:
-      "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=600&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1526327760257-75f515c74478?w=1920&h=1080&fit=crop&q=80",
     title: "AI in Music: The Next Creative Revolution",
     user: friendsList[5],
     likes: 654,
@@ -344,7 +344,7 @@ export const createExplorePosts = (friendsList) => [
   {
     id: "e12",
     image:
-      "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=600&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=1920&h=1080&fit=crop&q=80",
     title: "From Bedroom to Billboard: Modern Music Journey",
     user: friendsList[5],
     likes: 1098,
@@ -355,7 +355,7 @@ export const createExplorePosts = (friendsList) => [
   {
     id: "e13",
     image:
-      "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=600&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=1920&h=1080&fit=crop&q=80",
     title: "The Future of Learning: AI-Powered Education",
     user: friendsList[2],
     likes: 1278,
@@ -366,7 +366,7 @@ export const createExplorePosts = (friendsList) => [
   {
     id: "e14",
     image:
-      "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1920&h=1080&fit=crop&q=80",
     title: "Mastering New Skills: Learning in the Digital Age",
     user: friendsList[0],
     likes: 789,
