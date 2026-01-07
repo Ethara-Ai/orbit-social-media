@@ -1,0 +1,19 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ExploreHeader > snapshot > should match snapshot 1`] = `
+<div
+  class="mb-8"
+  style="opacity: 0; transform: translateY(-10px);"
+>
+  <h1
+    class="text-2xl font-bold text-slate-900 dark:text-white transition-colors"
+  >
+    Discover
+  </h1>
+  <p
+    class="text-slate-500 dark:text-slate-400 text-sm mt-1 transition-colors"
+  >
+    Explore content from creators worldwide
+  </p>
+</div>
+`;

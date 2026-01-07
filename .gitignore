@@ -43,6 +43,7 @@ build/
 out/
 bin/
 obj/
+coverage/
 *.log
 *.tmp
 *.bak
