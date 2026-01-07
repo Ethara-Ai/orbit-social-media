@@ -93,7 +93,9 @@ describe("useScrollPosition", () => {
       const exploreElement = document.createElement("div");
 
       const feedRefCallback = result.current.registerScrollContainer(TABS.FEED);
-      const exploreRefCallback = result.current.registerScrollContainer(TABS.EXPLORE);
+      const exploreRefCallback = result.current.registerScrollContainer(
+        TABS.EXPLORE,
+      );
 
       act(() => {
         feedRefCallback(feedElement);
@@ -101,7 +103,9 @@ describe("useScrollPosition", () => {
       });
 
       expect(result.current.getScrollContainer(TABS.FEED)).toBe(feedElement);
-      expect(result.current.getScrollContainer(TABS.EXPLORE)).toBe(exploreElement);
+      expect(result.current.getScrollContainer(TABS.EXPLORE)).toBe(
+        exploreElement,
+      );
     });
 
     it("should handle null element registration", () => {
@@ -133,7 +137,9 @@ describe("useScrollPosition", () => {
         refCallback(mockElement);
       });
 
-      expect(result.current.getScrollContainer(TABS.MESSAGES)).toBe(mockElement);
+      expect(result.current.getScrollContainer(TABS.MESSAGES)).toBe(
+        mockElement,
+      );
     });
   });
 
@@ -597,7 +603,7 @@ describe("useScrollPosition", () => {
 
       const { result, rerender } = renderHook(
         ({ activeTab }) => useScrollPosition(activeTab),
-        { initialProps: { activeTab: TABS.FEED } }
+        { initialProps: { activeTab: TABS.FEED } },
       );
 
       act(() => {
@@ -634,7 +640,7 @@ describe("useScrollPosition", () => {
 
       const { result, rerender } = renderHook(
         ({ activeTab }) => useScrollPosition(activeTab),
-        { initialProps: { activeTab: TABS.FEED } }
+        { initialProps: { activeTab: TABS.FEED } },
       );
 
       act(() => {
@@ -675,7 +681,7 @@ describe("useScrollPosition", () => {
 
       const { result, rerender } = renderHook(
         ({ activeTab }) => useScrollPosition(activeTab),
-        { initialProps: { activeTab: TABS.FEED } }
+        { initialProps: { activeTab: TABS.FEED } },
       );
 
       act(() => {
@@ -694,7 +700,7 @@ describe("useScrollPosition", () => {
     it("should return stable saveScrollPosition function", () => {
       const { result, rerender } = renderHook(
         ({ activeTab }) => useScrollPosition(activeTab),
-        { initialProps: { activeTab: TABS.FEED } }
+        { initialProps: { activeTab: TABS.FEED } },
       );
 
       const firstSave = result.current.saveScrollPosition;
@@ -707,7 +713,7 @@ describe("useScrollPosition", () => {
     it("should return stable restoreScrollPosition function", () => {
       const { result, rerender } = renderHook(
         ({ activeTab }) => useScrollPosition(activeTab),
-        { initialProps: { activeTab: TABS.FEED } }
+        { initialProps: { activeTab: TABS.FEED } },
       );
 
       const firstRestore = result.current.restoreScrollPosition;
@@ -720,7 +726,7 @@ describe("useScrollPosition", () => {
     it("should return stable registerScrollContainer function", () => {
       const { result, rerender } = renderHook(
         ({ activeTab }) => useScrollPosition(activeTab),
-        { initialProps: { activeTab: TABS.FEED } }
+        { initialProps: { activeTab: TABS.FEED } },
       );
 
       const firstRegister = result.current.registerScrollContainer;
@@ -733,7 +739,7 @@ describe("useScrollPosition", () => {
     it("should return stable createScrollHandler function", () => {
       const { result, rerender } = renderHook(
         ({ activeTab }) => useScrollPosition(activeTab),
-        { initialProps: { activeTab: TABS.FEED } }
+        { initialProps: { activeTab: TABS.FEED } },
       );
 
       const firstCreate = result.current.createScrollHandler;
@@ -746,9 +752,9 @@ describe("useScrollPosition", () => {
 
   describe("edge cases", () => {
     it("should handle rapid tab switching", () => {
-      const { result, rerender } = renderHook(
+      const { rerender } = renderHook(
         ({ activeTab }) => useScrollPosition(activeTab),
-        { initialProps: { activeTab: TABS.FEED } }
+        { initialProps: { activeTab: TABS.FEED } },
       );
 
       expect(() => {
@@ -826,10 +832,10 @@ describe("useScrollPosition", () => {
   describe("multiple hook instances", () => {
     it("should maintain independent state between instances", () => {
       const { result: result1 } = renderHook(() =>
-        useScrollPosition(TABS.FEED)
+        useScrollPosition(TABS.FEED),
       );
       const { result: result2 } = renderHook(() =>
-        useScrollPosition(TABS.EXPLORE)
+        useScrollPosition(TABS.EXPLORE),
       );
 
       const element1 = document.createElement("div");

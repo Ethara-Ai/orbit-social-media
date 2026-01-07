@@ -9,8 +9,12 @@ import CategoryPills from "./CategoryPills";
 // Mock framer-motion to avoid animation issues in tests
 vi.mock("framer-motion", () => ({
   motion: {
-    button: ({ children, className, onClick, ...props }) => (
-      <button className={className} onClick={onClick} data-testid="motion-button">
+    button: ({ children, className, onClick }) => (
+      <button
+        className={className}
+        onClick={onClick}
+        data-testid="motion-button"
+      >
         {children}
       </button>
     ),
@@ -99,7 +103,10 @@ describe("CategoryPills", () => {
     it("should call setActiveCategory with null when For You is clicked", () => {
       const setActiveCategory = vi.fn();
       render(
-        <CategoryPills {...defaultProps} setActiveCategory={setActiveCategory} />
+        <CategoryPills
+          {...defaultProps}
+          setActiveCategory={setActiveCategory}
+        />,
       );
 
       fireEvent.click(screen.getByText("For You"));
@@ -109,7 +116,10 @@ describe("CategoryPills", () => {
     it("should call setActiveCategory with category id when category is clicked", () => {
       const setActiveCategory = vi.fn();
       render(
-        <CategoryPills {...defaultProps} setActiveCategory={setActiveCategory} />
+        <CategoryPills
+          {...defaultProps}
+          setActiveCategory={setActiveCategory}
+        />,
       );
 
       fireEvent.click(screen.getByText("Technology"));
@@ -119,7 +129,10 @@ describe("CategoryPills", () => {
     it("should call setActiveCategory with correct id for each category", () => {
       const setActiveCategory = vi.fn();
       render(
-        <CategoryPills {...defaultProps} setActiveCategory={setActiveCategory} />
+        <CategoryPills
+          {...defaultProps}
+          setActiveCategory={setActiveCategory}
+        />,
       );
 
       fireEvent.click(screen.getByText("Design"));
@@ -132,7 +145,10 @@ describe("CategoryPills", () => {
     it("should handle multiple clicks", () => {
       const setActiveCategory = vi.fn();
       render(
-        <CategoryPills {...defaultProps} setActiveCategory={setActiveCategory} />
+        <CategoryPills
+          {...defaultProps}
+          setActiveCategory={setActiveCategory}
+        />,
       );
 
       fireEvent.click(screen.getByText("Technology"));
@@ -216,22 +232,20 @@ describe("CategoryPills", () => {
           <CategoryPills
             {...defaultProps}
             categories={categoriesWithUnknownIcon}
-          />
+          />,
         );
       }).not.toThrow();
       expect(screen.getByText("Unknown")).toBeInTheDocument();
     });
 
     it("should handle category without icon property", () => {
-      const categoriesWithoutIcon = [
-        { id: "cat1", name: "No Icon" },
-      ];
+      const categoriesWithoutIcon = [{ id: "cat1", name: "No Icon" }];
       expect(() => {
         render(
           <CategoryPills
             {...defaultProps}
             categories={categoriesWithoutIcon}
-          />
+          />,
         );
       }).not.toThrow();
       expect(screen.getByText("No Icon")).toBeInTheDocument();
@@ -239,15 +253,23 @@ describe("CategoryPills", () => {
 
     it("should handle long category names", () => {
       const categoriesWithLongNames = [
-        { id: "cat1", name: "This Is A Very Long Category Name That Might Overflow", icon: "Code" },
+        {
+          id: "cat1",
+          name: "This Is A Very Long Category Name That Might Overflow",
+          icon: "Code",
+        },
       ];
       render(
         <CategoryPills
           {...defaultProps}
           categories={categoriesWithLongNames}
-        />
+        />,
       );
-      expect(screen.getByText("This Is A Very Long Category Name That Might Overflow")).toBeInTheDocument();
+      expect(
+        screen.getByText(
+          "This Is A Very Long Category Name That Might Overflow",
+        ),
+      ).toBeInTheDocument();
     });
 
     it("should handle special characters in category names", () => {
@@ -259,7 +281,7 @@ describe("CategoryPills", () => {
         <CategoryPills
           {...defaultProps}
           categories={categoriesWithSpecialChars}
-        />
+        />,
       );
       expect(screen.getByText("Tech & Design")).toBeInTheDocument();
       expect(screen.getByText("Art + Music")).toBeInTheDocument();
@@ -271,12 +293,7 @@ describe("CategoryPills", () => {
         name: `Category ${i}`,
         icon: "Code",
       }));
-      render(
-        <CategoryPills
-          {...defaultProps}
-          categories={manyCategories}
-        />
-      );
+      render(<CategoryPills {...defaultProps} categories={manyCategories} />);
       // For You + 20 categories = 21 buttons
       const buttons = screen.getAllByTestId("motion-button");
       expect(buttons).toHaveLength(21);
@@ -302,43 +319,72 @@ describe("CategoryPills", () => {
   describe("category icons mapping", () => {
     it("should map Code icon correctly", () => {
       const categoriesWithCode = [{ id: "cat1", name: "Coding", icon: "Code" }];
-      render(<CategoryPills {...defaultProps} categories={categoriesWithCode} />);
+      render(
+        <CategoryPills {...defaultProps} categories={categoriesWithCode} />,
+      );
       expect(screen.getByText("Coding")).toBeInTheDocument();
     });
 
     it("should map Palette icon correctly", () => {
-      const categoriesWithPalette = [{ id: "cat1", name: "Art", icon: "Palette" }];
-      render(<CategoryPills {...defaultProps} categories={categoriesWithPalette} />);
+      const categoriesWithPalette = [
+        { id: "cat1", name: "Art", icon: "Palette" },
+      ];
+      render(
+        <CategoryPills {...defaultProps} categories={categoriesWithPalette} />,
+      );
       expect(screen.getByText("Art")).toBeInTheDocument();
     });
 
     it("should map Briefcase icon correctly", () => {
-      const categoriesWithBriefcase = [{ id: "cat1", name: "Work", icon: "Briefcase" }];
-      render(<CategoryPills {...defaultProps} categories={categoriesWithBriefcase} />);
+      const categoriesWithBriefcase = [
+        { id: "cat1", name: "Work", icon: "Briefcase" },
+      ];
+      render(
+        <CategoryPills
+          {...defaultProps}
+          categories={categoriesWithBriefcase}
+        />,
+      );
       expect(screen.getByText("Work")).toBeInTheDocument();
     });
 
     it("should map Coffee icon correctly", () => {
-      const categoriesWithCoffee = [{ id: "cat1", name: "Lifestyle", icon: "Coffee" }];
-      render(<CategoryPills {...defaultProps} categories={categoriesWithCoffee} />);
+      const categoriesWithCoffee = [
+        { id: "cat1", name: "Lifestyle", icon: "Coffee" },
+      ];
+      render(
+        <CategoryPills {...defaultProps} categories={categoriesWithCoffee} />,
+      );
       expect(screen.getByText("Lifestyle")).toBeInTheDocument();
     });
 
     it("should map Globe icon correctly", () => {
-      const categoriesWithGlobe = [{ id: "cat1", name: "Travel", icon: "Globe" }];
-      render(<CategoryPills {...defaultProps} categories={categoriesWithGlobe} />);
+      const categoriesWithGlobe = [
+        { id: "cat1", name: "Travel", icon: "Globe" },
+      ];
+      render(
+        <CategoryPills {...defaultProps} categories={categoriesWithGlobe} />,
+      );
       expect(screen.getByText("Travel")).toBeInTheDocument();
     });
 
     it("should map Music icon correctly", () => {
-      const categoriesWithMusic = [{ id: "cat1", name: "Songs", icon: "Music" }];
-      render(<CategoryPills {...defaultProps} categories={categoriesWithMusic} />);
+      const categoriesWithMusic = [
+        { id: "cat1", name: "Songs", icon: "Music" },
+      ];
+      render(
+        <CategoryPills {...defaultProps} categories={categoriesWithMusic} />,
+      );
       expect(screen.getByText("Songs")).toBeInTheDocument();
     });
 
     it("should map BookOpen icon correctly", () => {
-      const categoriesWithBookOpen = [{ id: "cat1", name: "Reading", icon: "BookOpen" }];
-      render(<CategoryPills {...defaultProps} categories={categoriesWithBookOpen} />);
+      const categoriesWithBookOpen = [
+        { id: "cat1", name: "Reading", icon: "BookOpen" },
+      ];
+      render(
+        <CategoryPills {...defaultProps} categories={categoriesWithBookOpen} />,
+      );
       expect(screen.getByText("Reading")).toBeInTheDocument();
     });
   });

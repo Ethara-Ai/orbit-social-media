@@ -9,7 +9,7 @@ import ConnectionsList from "./ConnectionsList";
 // Mock framer-motion to avoid animation issues in tests
 vi.mock("framer-motion", () => ({
   motion: {
-    button: ({ children, className, onClick, ...props }) => (
+    button: ({ children, className, onClick }) => (
       <button
         className={className}
         onClick={onClick}
@@ -18,7 +18,7 @@ vi.mock("framer-motion", () => ({
         {children}
       </button>
     ),
-    div: ({ children, className, onClick, ...props }) => (
+    div: ({ children, className, onClick }) => (
       <div className={className} onClick={onClick} data-testid="motion-div">
         {children}
       </div>

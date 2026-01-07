@@ -337,9 +337,7 @@ describe("FriendItem", () => {
 
   describe("avatar props", () => {
     it("should pass correct size to Avatar", () => {
-      const { container } = render(
-        <FriendItem friend={mockOnlineFriend} index={0} />,
-      );
+      render(<FriendItem friend={mockOnlineFriend} index={0} />);
       // Avatar with size "md" should have w-10 h-10 classes
       const avatar = screen.getByAltText("Alice Johnson");
       expect(avatar).toHaveClass("w-10", "h-10");
@@ -409,7 +407,7 @@ describe("FriendItem", () => {
 
     it("should render multiple friend items", () => {
       const handleClick = vi.fn();
-      const { container } = render(
+      render(
         <>
           <FriendItem
             friend={mockOnlineFriend}

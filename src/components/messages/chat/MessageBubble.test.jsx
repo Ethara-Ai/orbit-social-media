@@ -9,7 +9,7 @@ import MessageBubble from "./MessageBubble";
 // Mock framer-motion to avoid animation issues in tests
 vi.mock("framer-motion", () => ({
   motion: {
-    div: ({ children, className, ...props }) => (
+    div: ({ children, className }) => (
       <div className={className} data-testid="motion-div">
         {children}
       </div>

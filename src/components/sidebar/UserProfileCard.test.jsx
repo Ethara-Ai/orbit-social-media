@@ -17,12 +17,6 @@ const mockUser = {
 
 const mockAvatar = "https://example.com/avatar.jpg";
 
-const mockStats = {
-  posts: 142,
-  followers: "24.7K",
-  following: 318,
-};
-
 describe("UserProfileCard", () => {
   describe("rendering", () => {
     it("should render without crashing", () => {

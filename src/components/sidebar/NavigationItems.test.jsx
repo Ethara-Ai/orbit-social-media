@@ -9,7 +9,7 @@ import NavigationItems from "./NavigationItems";
 // Mock framer-motion to avoid animation issues in tests
 vi.mock("framer-motion", () => ({
   motion: {
-    button: ({ children, className, onClick, ...props }) => (
+    button: ({ children, className, onClick }) => (
       <button className={className} onClick={onClick} data-testid="nav-button">
         {children}
       </button>
@@ -161,7 +161,7 @@ describe("NavigationItems", () => {
         <NavigationItems
           {...defaultProps}
           markNotificationsAsRead={markNotificationsAsRead}
-        />
+        />,
       );
 
       fireEvent.click(screen.getByText("Notifications"));
@@ -174,7 +174,7 @@ describe("NavigationItems", () => {
         <NavigationItems
           {...defaultProps}
           markNotificationsAsRead={markNotificationsAsRead}
-        />
+        />,
       );
 
       fireEvent.click(screen.getByText("Feed"));
@@ -204,7 +204,7 @@ describe("NavigationItems", () => {
       render(<NavigationItems {...defaultProps} notificationCount={5} />);
       const badges = screen.getAllByTestId("badge");
       const notificationBadge = badges.find(
-        (badge) => badge.getAttribute("data-count") === "5"
+        (badge) => badge.getAttribute("data-count") === "5",
       );
       expect(notificationBadge).toBeInTheDocument();
     });
@@ -213,7 +213,7 @@ describe("NavigationItems", () => {
       render(<NavigationItems {...defaultProps} notificationCount={0} />);
       const badges = screen.getAllByTestId("badge");
       const notificationBadge = badges.find(
-        (badge) => badge.getAttribute("data-count") === "0"
+        (badge) => badge.getAttribute("data-count") === "0",
       );
       expect(notificationBadge).toBeUndefined();
     });
@@ -224,11 +224,11 @@ describe("NavigationItems", () => {
           {...defaultProps}
           activeTab="feed"
           notificationCount={5}
-        />
+        />,
       );
       const badges = screen.getAllByTestId("badge");
       const notificationBadge = badges.find(
-        (badge) => badge.getAttribute("data-count") === "5"
+        (badge) => badge.getAttribute("data-count") === "5",
       );
       expect(notificationBadge).toHaveAttribute("data-variant", "danger");
     });
@@ -239,11 +239,11 @@ describe("NavigationItems", () => {
           {...defaultProps}
           activeTab="notifications"
           notificationCount={5}
-        />
+        />,
       );
       const badges = screen.getAllByTestId("badge");
       const notificationBadge = badges.find(
-        (badge) => badge.getAttribute("data-count") === "5"
+        (badge) => badge.getAttribute("data-count") === "5",
       );
       expect(notificationBadge).toHaveAttribute("data-variant", "light");
     });
@@ -254,7 +254,7 @@ describe("NavigationItems", () => {
       render(<NavigationItems {...defaultProps} totalUnreadMessages={3} />);
       const badges = screen.getAllByTestId("badge");
       const messagesBadge = badges.find(
-        (badge) => badge.getAttribute("data-count") === "3"
+        (badge) => badge.getAttribute("data-count") === "3",
       );
       expect(messagesBadge).toBeInTheDocument();
     });
@@ -263,7 +263,7 @@ describe("NavigationItems", () => {
       render(<NavigationItems {...defaultProps} totalUnreadMessages={0} />);
       const badges = screen.getAllByTestId("badge");
       const messagesBadge = badges.find(
-        (badge) => badge.getAttribute("data-count") === "0"
+        (badge) => badge.getAttribute("data-count") === "0",
       );
       expect(messagesBadge).toBeUndefined();
     });
@@ -274,11 +274,11 @@ describe("NavigationItems", () => {
           {...defaultProps}
           activeTab="feed"
           totalUnreadMessages={3}
-        />
+        />,
       );
       const badges = screen.getAllByTestId("badge");
       const messagesBadge = badges.find(
-        (badge) => badge.getAttribute("data-count") === "3"
+        (badge) => badge.getAttribute("data-count") === "3",
       );
       expect(messagesBadge).toHaveAttribute("data-variant", "primary");
     });
@@ -289,11 +289,11 @@ describe("NavigationItems", () => {
           {...defaultProps}
           activeTab="messages"
           totalUnreadMessages={3}
-        />
+        />,
       );
       const badges = screen.getAllByTestId("badge");
       const messagesBadge = badges.find(
-        (badge) => badge.getAttribute("data-count") === "3"
+        (badge) => badge.getAttribute("data-count") === "3",
       );
       expect(messagesBadge).toHaveAttribute("data-variant", "light");
     });
@@ -425,7 +425,7 @@ describe("NavigationItems", () => {
       render(<NavigationItems {...defaultProps} notificationCount={999} />);
       const badges = screen.getAllByTestId("badge");
       const notificationBadge = badges.find(
-        (badge) => badge.getAttribute("data-count") === "999"
+        (badge) => badge.getAttribute("data-count") === "999",
       );
       expect(notificationBadge).toBeInTheDocument();
     });
@@ -434,7 +434,7 @@ describe("NavigationItems", () => {
       render(<NavigationItems {...defaultProps} totalUnreadMessages={500} />);
       const badges = screen.getAllByTestId("badge");
       const messagesBadge = badges.find(
-        (badge) => badge.getAttribute("data-count") === "500"
+        (badge) => badge.getAttribute("data-count") === "500",
       );
       expect(messagesBadge).toBeInTheDocument();
     });
@@ -448,9 +448,7 @@ describe("NavigationItems", () => {
     });
 
     it("should handle emoji in label", () => {
-      const emojiItems = [
-        { id: "test", label: "Feed 🔥", icon: MockIcon },
-      ];
+      const emojiItems = [{ id: "test", label: "Feed 🔥", icon: MockIcon }];
       render(<NavigationItems {...defaultProps} navItems={emojiItems} />);
       expect(screen.getByText("Feed 🔥")).toBeInTheDocument();
     });
@@ -479,7 +477,7 @@ describe("NavigationItems", () => {
           {...defaultProps}
           notificationCount={5}
           totalUnreadMessages={3}
-        />
+        />,
       );
       const badges = screen.getAllByTestId("badge");
       expect(badges).toHaveLength(2);
@@ -491,7 +489,7 @@ describe("NavigationItems", () => {
           {...defaultProps}
           notificationCount={0}
           totalUnreadMessages={0}
-        />
+        />,
       );
       const badges = screen.queryAllByTestId("badge");
       expect(badges).toHaveLength(0);

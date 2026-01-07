@@ -9,7 +9,7 @@ import NotificationItem from "./NotificationItem";
 // Mock framer-motion to avoid animation issues in tests
 vi.mock("framer-motion", () => ({
   motion: {
-    div: ({ children, className, onClick, ...props }) => (
+    div: ({ children, className, onClick }) => (
       <div className={className} onClick={onClick} data-testid="motion-div">
         {children}
       </div>
@@ -73,7 +73,9 @@ describe("NotificationItem", () => {
     it("should show unread indicator when notification is unread", () => {
       render(<NotificationItem {...defaultProps} />);
       // Unread indicator is a small orange dot
-      const unreadIndicator = document.querySelector(".bg-orange-500.rounded-full");
+      const unreadIndicator = document.querySelector(
+        ".bg-orange-500.rounded-full",
+      );
       expect(unreadIndicator).toBeInTheDocument();
     });
 
@@ -83,12 +85,11 @@ describe("NotificationItem", () => {
         isRead: true,
       };
       render(
-        <NotificationItem
-          {...defaultProps}
-          notification={readNotification}
-        />
+        <NotificationItem {...defaultProps} notification={readNotification} />,
       );
-      const unreadIndicator = document.querySelector(".w-2.h-2.bg-orange-500.rounded-full");
+      const unreadIndicator = document.querySelector(
+        ".w-2.h-2.bg-orange-500.rounded-full",
+      );
       expect(unreadIndicator).not.toBeInTheDocument();
     });
 
@@ -104,10 +105,7 @@ describe("NotificationItem", () => {
         isRead: true,
       };
       render(
-        <NotificationItem
-          {...defaultProps}
-          notification={readNotification}
-        />
+        <NotificationItem {...defaultProps} notification={readNotification} />,
       );
       const container = screen.getByTestId("motion-div");
       expect(container).toHaveClass("border-slate-200");
@@ -137,7 +135,7 @@ describe("NotificationItem", () => {
         <NotificationItem
           {...defaultProps}
           notification={commentNotification}
-        />
+        />,
       );
       const badge = document.querySelector(".bg-blue-50");
       expect(badge).toBeInTheDocument();
@@ -153,7 +151,7 @@ describe("NotificationItem", () => {
         <NotificationItem
           {...defaultProps}
           notification={followNotification}
-        />
+        />,
       );
       const badge = document.querySelector(".bg-emerald-50");
       expect(badge).toBeInTheDocument();
@@ -169,7 +167,7 @@ describe("NotificationItem", () => {
         <NotificationItem
           {...defaultProps}
           notification={mentionNotification}
-        />
+        />,
       );
       const badge = document.querySelector(".bg-orange-50");
       expect(badge).toBeInTheDocument();
@@ -185,7 +183,7 @@ describe("NotificationItem", () => {
         <NotificationItem
           {...defaultProps}
           notification={friendRequestNotification}
-        />
+        />,
       );
       const badge = document.querySelector(".bg-purple-50");
       expect(badge).toBeInTheDocument();
@@ -201,7 +199,7 @@ describe("NotificationItem", () => {
         <NotificationItem
           {...defaultProps}
           notification={unknownNotification}
-        />
+        />,
       );
       const badge = document.querySelector(".bg-slate-50");
       expect(badge).toBeInTheDocument();
@@ -307,12 +305,11 @@ describe("NotificationItem", () => {
         message: "This is a custom notification message",
       };
       render(
-        <NotificationItem
-          {...defaultProps}
-          notification={notification}
-        />
+        <NotificationItem {...defaultProps} notification={notification} />,
       );
-      expect(screen.getByText("This is a custom notification message")).toBeInTheDocument();
+      expect(
+        screen.getByText("This is a custom notification message"),
+      ).toBeInTheDocument();
     });
 
     it("should display timestamp with slate color", () => {
@@ -373,10 +370,7 @@ describe("NotificationItem", () => {
         message: "",
       };
       render(
-        <NotificationItem
-          {...defaultProps}
-          notification={notification}
-        />
+        <NotificationItem {...defaultProps} notification={notification} />,
       );
       expect(screen.getByText("John Doe")).toBeInTheDocument();
     });
@@ -390,24 +384,23 @@ describe("NotificationItem", () => {
         },
       };
       render(
-        <NotificationItem
-          {...defaultProps}
-          notification={notification}
-        />
+        <NotificationItem {...defaultProps} notification={notification} />,
       );
-      expect(screen.getByText("A Very Long User Name That Might Overflow The Container")).toBeInTheDocument();
+      expect(
+        screen.getByText(
+          "A Very Long User Name That Might Overflow The Container",
+        ),
+      ).toBeInTheDocument();
     });
 
     it("should handle long message", () => {
       const notification = {
         ...mockNotification,
-        message: "This is a very long notification message that contains a lot of text and might need special handling to display properly in the UI",
+        message:
+          "This is a very long notification message that contains a lot of text and might need special handling to display properly in the UI",
       };
       render(
-        <NotificationItem
-          {...defaultProps}
-          notification={notification}
-        />
+        <NotificationItem {...defaultProps} notification={notification} />,
       );
       expect(screen.getByText(notification.message)).toBeInTheDocument();
     });
@@ -415,13 +408,11 @@ describe("NotificationItem", () => {
     it("should handle special characters in message", () => {
       const notification = {
         ...mockNotification,
-        message: "liked your post with <script>alert('xss')</script> special chars & symbols!",
+        message:
+          "liked your post with <script>alert('xss')</script> special chars & symbols!",
       };
       render(
-        <NotificationItem
-          {...defaultProps}
-          notification={notification}
-        />
+        <NotificationItem {...defaultProps} notification={notification} />,
       );
       expect(screen.getByText(notification.message)).toBeInTheDocument();
     });
@@ -435,10 +426,7 @@ describe("NotificationItem", () => {
         },
       };
       render(
-        <NotificationItem
-          {...defaultProps}
-          notification={notification}
-        />
+        <NotificationItem {...defaultProps} notification={notification} />,
       );
       expect(screen.getByText("John 👋 Doe")).toBeInTheDocument();
     });
@@ -453,10 +441,7 @@ describe("NotificationItem", () => {
       };
       expect(() => {
         render(
-          <NotificationItem
-            {...defaultProps}
-            notification={notification}
-          />
+          <NotificationItem {...defaultProps} notification={notification} />,
         );
       }).not.toThrow();
     });

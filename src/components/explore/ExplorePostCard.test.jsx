@@ -9,7 +9,7 @@ import ExplorePostCard from "./ExplorePostCard";
 // Mock framer-motion to avoid animation issues in tests
 vi.mock("framer-motion", () => ({
   motion: {
-    article: ({ children, className, onClick, ...props }) => (
+    article: ({ children, className, onClick }) => (
       <article className={className} onClick={onClick} data-testid="post-card">
         {children}
       </article>

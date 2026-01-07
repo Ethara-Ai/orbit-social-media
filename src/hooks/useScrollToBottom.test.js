@@ -75,7 +75,7 @@ describe("useScrollToBottom", () => {
 
     it("should use provided scroll behavior", () => {
       const { result } = renderHook(() =>
-        useScrollToBottom([], { behavior: "instant" })
+        useScrollToBottom([], { behavior: "instant" }),
       );
 
       const mockElement = {
@@ -94,7 +94,7 @@ describe("useScrollToBottom", () => {
 
     it("should allow overriding behavior when calling scrollToBottom", () => {
       const { result } = renderHook(() =>
-        useScrollToBottom([], { behavior: "smooth" })
+        useScrollToBottom([], { behavior: "smooth" }),
       );
 
       const mockElement = {
@@ -292,7 +292,7 @@ describe("useScrollToBottom", () => {
 
       const { result, rerender } = renderHook(
         ({ deps }) => useScrollToBottom(deps, { autoScroll: true }),
-        { initialProps: { deps: [1] } }
+        { initialProps: { deps: [1] } },
       );
 
       result.current.bottomRef.current = mockElement;
@@ -317,7 +317,7 @@ describe("useScrollToBottom", () => {
 
       const { result, rerender } = renderHook(
         ({ deps }) => useScrollToBottom(deps, { autoScroll: false }),
-        { initialProps: { deps: [1] } }
+        { initialProps: { deps: [1] } },
       );
 
       result.current.bottomRef.current = mockElement;
@@ -354,7 +354,7 @@ describe("useScrollToBottom", () => {
 
       const { result, rerender } = renderHook(
         ({ deps }) => useScrollToBottom(deps, { autoScroll: true }),
-        { initialProps: { deps: [1] } }
+        { initialProps: { deps: [1] } },
       );
 
       result.current.bottomRef.current = mockElement;
@@ -393,7 +393,7 @@ describe("useScrollToBottom", () => {
 
       const { result, rerender } = renderHook(
         ({ deps }) => useScrollToBottom(deps),
-        { initialProps: { deps: [1] } }
+        { initialProps: { deps: [1] } },
       );
 
       result.current.bottomRef.current = mockElement;
@@ -428,7 +428,7 @@ describe("useScrollToBottom", () => {
 
     it("should accept custom behavior option", () => {
       const { result } = renderHook(() =>
-        useScrollToBottom([], { behavior: "auto" })
+        useScrollToBottom([], { behavior: "auto" }),
       );
 
       const mockElement = {
@@ -460,7 +460,7 @@ describe("useScrollToBottom", () => {
     it("should handle dependencies with objects", () => {
       const { result, rerender } = renderHook(
         ({ deps }) => useScrollToBottom(deps),
-        { initialProps: { deps: [{ id: 1 }] } }
+        { initialProps: { deps: [{ id: 1 }] } },
       );
 
       expect(() => {
@@ -473,7 +473,7 @@ describe("useScrollToBottom", () => {
     it("should handle dependencies with arrays", () => {
       const { result, rerender } = renderHook(
         ({ deps }) => useScrollToBottom(deps),
-        { initialProps: { deps: [[1, 2, 3]] } }
+        { initialProps: { deps: [[1, 2, 3]] } },
       );
 
       expect(() => {
@@ -486,7 +486,7 @@ describe("useScrollToBottom", () => {
 
   describe("cleanup", () => {
     it("should clear timeout on unmount", () => {
-      const clearTimeoutSpy = vi.spyOn(global, "clearTimeout");
+      const clearTimeoutSpy = vi.spyOn(globalThis, "clearTimeout");
 
       const { result, unmount } = renderHook(() => useScrollToBottom([1]));
 

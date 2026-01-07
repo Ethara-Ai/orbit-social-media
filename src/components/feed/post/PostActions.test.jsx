@@ -9,8 +9,12 @@ import PostActions from "./PostActions";
 // Mock framer-motion to avoid animation issues in tests
 vi.mock("framer-motion", () => ({
   motion: {
-    button: ({ children, className, onClick, ...props }) => (
-      <button className={className} onClick={onClick} data-testid="motion-button">
+    button: ({ children, className, onClick }) => (
+      <button
+        className={className}
+        onClick={onClick}
+        data-testid="motion-button"
+      >
         {children}
       </button>
     ),
@@ -106,7 +110,7 @@ describe("PostActions", () => {
       render(
         <div onClick={parentClick}>
           <PostActions {...defaultProps} onLike={onLike} />
-        </div>
+        </div>,
       );
 
       const likeButton = screen.getAllByTestId("motion-button")[0];
@@ -363,7 +367,9 @@ describe("PostActions", () => {
 
     it("should handle different post IDs", () => {
       const onLike = vi.fn();
-      render(<PostActions {...defaultProps} postId="different-id" onLike={onLike} />);
+      render(
+        <PostActions {...defaultProps} postId="different-id" onLike={onLike} />,
+      );
 
       const likeButton = screen.getAllByTestId("motion-button")[0];
       fireEvent.click(likeButton);
@@ -373,7 +379,9 @@ describe("PostActions", () => {
 
     it("should handle numeric post IDs", () => {
       const onComment = vi.fn();
-      render(<PostActions {...defaultProps} postId={12345} onComment={onComment} />);
+      render(
+        <PostActions {...defaultProps} postId={12345} onComment={onComment} />,
+      );
 
       const commentButton = screen.getAllByTestId("motion-button")[1];
       fireEvent.click(commentButton);
@@ -409,7 +417,9 @@ describe("PostActions", () => {
     it("should handle interleaved like and comment clicks", () => {
       const onLike = vi.fn();
       const onComment = vi.fn();
-      render(<PostActions {...defaultProps} onLike={onLike} onComment={onComment} />);
+      render(
+        <PostActions {...defaultProps} onLike={onLike} onComment={onComment} />,
+      );
 
       const likeButton = screen.getAllByTestId("motion-button")[0];
       const commentButton = screen.getAllByTestId("motion-button")[1];
@@ -481,7 +491,7 @@ describe("PostActions", () => {
     it("should render buttons as clickable elements", () => {
       render(<PostActions {...defaultProps} />);
       const buttons = screen.getAllByTestId("motion-button");
-      buttons.forEach(button => {
+      buttons.forEach((button) => {
         expect(button.tagName).toBe("BUTTON");
       });
     });
