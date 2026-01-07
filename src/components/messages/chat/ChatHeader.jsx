@@ -2,19 +2,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import Avatar from "../../common/Avatar";
 import { MoreHorizontal, X } from "../../icons";
 
-const ChatHeader = ({
-  conversation,
-  onBack,
-  showDropdown,
-  setShowDropdown,
-  onClearChat,
-}) => {
+const ChatHeader = ({ conversation, onBack, showDropdown, setShowDropdown, onClearChat }) => {
   return (
     <div className="p-2 sm:p-4 border-b border-slate-100 dark:border-slate-700 flex items-center gap-2 sm:gap-3 bg-white dark:bg-slate-900 transition-colors">
       {/* Back Button (Mobile) */}
       <motion.button
         onClick={onBack}
-        className="sm:hidden p-1.5 sm:p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors flex-shrink-0"
+        className="sm:hidden p-1.5 sm:p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors shrink-0"
         whileTap={{ scale: 0.95 }}
       >
         <svg
@@ -23,12 +17,7 @@ const ChatHeader = ({
           stroke="currentColor"
           viewBox="0 0 24 24"
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M15 19l-7-7 7-7"
-          />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
         </svg>
       </motion.button>
 
@@ -39,7 +28,7 @@ const ChatHeader = ({
         size="md"
         isOnline={conversation.user.isOnline}
         showStatus={true}
-        className="flex-shrink-0"
+        className="shrink-0"
       />
       <div className="flex-1 min-w-0">
         <h3 className="font-semibold text-slate-900 dark:text-white text-xs sm:text-sm truncate transition-colors">
@@ -51,7 +40,7 @@ const ChatHeader = ({
       </div>
 
       {/* Dropdown Menu */}
-      <div className="relative chat-dropdown-container flex-shrink-0">
+      <div className="relative chat-dropdown-container shrink-0">
         <motion.button
           onClick={() => setShowDropdown(!showDropdown)}
           className="p-1.5 sm:p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"

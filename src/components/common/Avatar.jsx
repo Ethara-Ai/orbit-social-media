@@ -52,7 +52,7 @@ const Avatar = ({
     : {};
 
   return (
-    <Component {...componentProps} className={`relative flex-shrink-0 ${onClick ? "cursor-pointer" : ""}`}>
+    <Component {...componentProps} className={`relative shrink-0 ${onClick ? "cursor-pointer" : ""}`}>
       <img
         src={src || "/placeholder.svg"}
         alt={alt || "User avatar"}

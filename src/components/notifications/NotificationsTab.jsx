@@ -24,9 +24,7 @@ const NotificationsTab = () => {
               key={notification.id}
               notification={notification}
               index={index}
-              onClick={() =>
-                handleViewProfile && handleViewProfile(notification.user)
-              }
+              onClick={() => handleViewProfile && handleViewProfile(notification.user)}
             />
           ))
         ) : (
@@ -39,9 +37,7 @@ const NotificationsTab = () => {
       </div>
 
       {/* Footer */}
-      {notifications.length > 0 && (
-        <NotificationsFooter count={notifications.length} />
-      )}
+      {notifications.length > 0 && <NotificationsFooter count={notifications.length} />}
     </div>
   );
 };
@@ -49,9 +45,7 @@ const NotificationsTab = () => {
 const NotificationsHeader = () => {
   return (
     <div className="mb-6">
-      <h1 className="text-2xl font-bold text-slate-900 dark:text-white transition-colors">
-        Activity
-      </h1>
+      <h1 className="text-2xl font-bold text-slate-900 dark:text-white transition-colors">Activity</h1>
       <p className="text-slate-500 dark:text-slate-400 text-sm mt-1 transition-colors">
         Stay updated with your latest interactions
       </p>
@@ -88,7 +82,7 @@ const NotificationItem = ({ notification, index, onClick }) => {
 
 const NotificationAvatar = ({ user, type }) => {
   return (
-    <div className="relative flex-shrink-0">
+    <div className="relative shrink-0">
       <Avatar src={user.avatar} alt={user.name} size="xl" />
       <NotificationIconBadge type={type} />
     </div>
@@ -98,13 +92,7 @@ const NotificationAvatar = ({ user, type }) => {
 const NotificationIconBadge = ({ type }) => {
   const { icon, bgClass } = getNotificationIconConfig(type);
 
-  return (
-    <div
-      className={`absolute -bottom-1 -right-1 rounded-full p-1.5 shadow-sm ${bgClass}`}
-    >
-      {icon}
-    </div>
-  );
+  return <div className={`absolute -bottom-1 -right-1 rounded-full p-1.5 shadow-sm ${bgClass}`}>{icon}</div>;
 };
 
 const NotificationContent = ({ notification, isUnread }) => {
@@ -116,12 +104,8 @@ const NotificationContent = ({ notification, isUnread }) => {
         </span>
         {isUnread && <UnreadDot />}
       </div>
-      <p className="text-slate-600 dark:text-slate-300 text-sm transition-colors">
-        {notification.message}
-      </p>
-      <p className="text-slate-400 dark:text-slate-500 text-xs mt-1 transition-colors">
-        {notification.timestamp}
-      </p>
+      <p className="text-slate-600 dark:text-slate-300 text-sm transition-colors">{notification.message}</p>
+      <p className="text-slate-400 dark:text-slate-500 text-xs mt-1 transition-colors">{notification.timestamp}</p>
     </div>
   );
 };

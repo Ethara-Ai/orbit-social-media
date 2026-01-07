@@ -29,28 +29,17 @@ const MessageInput = ({
   return (
     <div className="p-2 sm:p-4 border-t border-slate-100 dark:border-slate-700 bg-white dark:bg-slate-900 transition-colors">
       {/* Attachment Preview */}
-      {messageAttachment && (
-        <AttachmentPreview
-          attachment={messageAttachment}
-          onRemove={removeAttachment}
-        />
-      )}
+      {messageAttachment && <AttachmentPreview attachment={messageAttachment} onRemove={removeAttachment} />}
 
       {/* Input Row */}
       <div className="flex items-center gap-1 sm:gap-2">
         {/* Hidden File Input */}
-        <input
-          type="file"
-          id="message-attachment"
-          accept="image/*"
-          onChange={onAttachmentUpload}
-          className="hidden"
-        />
+        <input type="file" id="message-attachment" accept="image/*" onChange={onAttachmentUpload} className="hidden" />
 
         {/* Attachment Button */}
         <motion.button
           onClick={handleAttachmentClick}
-          className="p-2 sm:p-2.5 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-500 dark:text-slate-400 flex-shrink-0"
+          className="p-2 sm:p-2.5 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-500 dark:text-slate-400 shrink-0"
           whileTap={{ scale: 0.95 }}
         >
           <Paperclip className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -70,7 +59,7 @@ const MessageInput = ({
         <motion.button
           onClick={onSendMessage}
           disabled={!canSend}
-          className="p-2 sm:p-2.5 bg-orange-500 hover:bg-orange-600 text-white rounded-full disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-orange-500 transition-colors flex-shrink-0"
+          className="p-2 sm:p-2.5 bg-orange-500 hover:bg-orange-600 text-white rounded-full disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-orange-500 transition-colors shrink-0"
           whileHover={{ scale: canSend ? 1.05 : 1 }}
           whileTap={{ scale: canSend ? 0.95 : 1 }}
         >

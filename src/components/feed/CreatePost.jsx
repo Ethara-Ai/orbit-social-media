@@ -26,10 +26,9 @@ const CreatePost = ({
         <img
           src={currentUserAvatar || "/placeholder.svg"}
           alt={currentUser.name}
-          className="w-9 h-9 sm:w-11 sm:h-11 rounded-full object-cover flex-shrink-0"
+          className="w-9 h-9 sm:w-11 sm:h-11 rounded-full object-cover shrink-0"
           onError={(e) => {
-            e.target.src =
-              "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=50&h=50&fit=crop&crop=face";
+            e.target.src = "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=50&h=50&fit=crop&crop=face";
           }}
         />
         <div className="flex-1 min-w-0">
@@ -44,13 +43,7 @@ const CreatePost = ({
 
             {/* Action buttons inside input field */}
             <div className="absolute bottom-2 right-2 sm:bottom-3 sm:right-3 flex items-center gap-1.5 sm:gap-2">
-              <input
-                type="file"
-                id="image-upload"
-                accept="image/*"
-                onChange={onImageUpload}
-                className="hidden"
-              />
+              <input type="file" id="image-upload" accept="image/*" onChange={onImageUpload} className="hidden" />
               <motion.button
                 onClick={() => document.getElementById("image-upload")?.click()}
                 className="p-1.5 sm:p-2 text-slate-500 dark:text-slate-400 hover:text-emerald-500 dark:hover:text-emerald-400 hover:bg-slate-100 dark:hover:bg-slate-600 rounded-full transition-colors cursor-pointer"

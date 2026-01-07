@@ -39,9 +39,7 @@ const CommentsPanel = ({
 const CommentsPanelHeader = ({ onClose }) => {
   return (
     <div className="flex items-center justify-between p-4 border-b border-slate-100 dark:border-slate-700 transition-colors">
-      <h3 className="font-bold text-slate-900 dark:text-white transition-colors">
-        Comments
-      </h3>
+      <h3 className="font-bold text-slate-900 dark:text-white transition-colors">Comments</h3>
       <button
         onClick={onClose}
         className="p-1 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-full transition-colors"
@@ -70,45 +68,27 @@ const CommentItem = ({ comment, index }) => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.05 }}
     >
-      <Avatar
-        src={comment.user.avatar}
-        alt={comment.user.name}
-        size="sm"
-        className="w-6 h-6 sm:w-8 sm:h-8 flex-shrink-0"
-      />
+      <Avatar src={comment.user.avatar} alt={comment.user.name} size="sm" className="w-6 h-6 sm:w-8 sm:h-8 shrink-0" />
       <div className="flex-1 min-w-0 bg-white dark:bg-slate-700 rounded-lg sm:rounded-xl p-2 sm:p-3 shadow-sm transition-colors">
         <div className="flex items-center gap-1 sm:gap-2 mb-0.5 sm:mb-1">
           <span className="font-semibold text-slate-900 dark:text-white text-xs sm:text-sm truncate transition-colors">
             {comment.user.name}
           </span>
-          <span className="text-[10px] sm:text-xs text-slate-400 dark:text-slate-500 flex-shrink-0 transition-colors">
+          <span className="text-[10px] sm:text-xs text-slate-400 dark:text-slate-500 shrink-0 transition-colors">
             {comment.time}
           </span>
         </div>
-        <p className="text-slate-700 dark:text-slate-300 text-xs sm:text-sm transition-colors">
-          {comment.text}
-        </p>
+        <p className="text-slate-700 dark:text-slate-300 text-xs sm:text-sm transition-colors">{comment.text}</p>
       </div>
     </motion.div>
   );
 };
 
-const CommentInput = ({
-  commentText,
-  setCommentText,
-  onAddComment,
-  onKeyDown,
-  currentUserAvatar,
-}) => {
+const CommentInput = ({ commentText, setCommentText, onAddComment, onKeyDown, currentUserAvatar }) => {
   return (
-    <div className="flex-shrink-0 p-4 border-t border-slate-100 dark:border-slate-700 bg-white dark:bg-slate-800 transition-colors">
+    <div className="shrink-0 p-4 border-t border-slate-100 dark:border-slate-700 bg-white dark:bg-slate-800 transition-colors">
       <div className="flex items-center gap-2 sm:gap-3">
-        <Avatar
-          src={currentUserAvatar}
-          alt="You"
-          size="sm"
-          className="flex-shrink-0"
-        />
+        <Avatar src={currentUserAvatar} alt="You" size="sm" className="shrink-0" />
         <div className="flex-1 min-w-0 flex gap-2">
           <input
             type="text"
@@ -121,7 +101,7 @@ const CommentInput = ({
           <motion.button
             onClick={onAddComment}
             disabled={!commentText.trim()}
-            className="flex-shrink-0 bg-orange-500 hover:bg-orange-600 text-white px-3 sm:px-4 py-2 rounded-full font-medium text-sm disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-orange-500 transition-colors whitespace-nowrap"
+            className="shrink-0 bg-orange-500 hover:bg-orange-600 text-white px-3 sm:px-4 py-2 rounded-full font-medium text-sm disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-orange-500 transition-colors whitespace-nowrap"
             whileHover={{
               scale: commentText.trim() ? 1.02 : 1,
             }}

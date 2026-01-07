@@ -41,12 +41,7 @@ const PostComments = ({
 
       {/* Add Comment */}
       <div className="flex gap-2 sm:gap-3 pt-2 sm:pt-3 border-t border-slate-200 dark:border-slate-700 transition-colors">
-        <Avatar
-          src={currentUserAvatar}
-          alt={currentUser.name}
-          size="sm"
-          className="w-6 h-6 sm:w-8 sm:h-8 flex-shrink-0"
-        />
+        <Avatar src={currentUserAvatar} alt={currentUser.name} size="sm" className="w-6 h-6 sm:w-8 sm:h-8 shrink-0" />
         <div className="flex-1 min-w-0 flex gap-1.5 sm:gap-2">
           <input
             type="text"
@@ -59,7 +54,7 @@ const PostComments = ({
           <motion.button
             onClick={handleSubmit}
             disabled={!newComment[postId]?.trim()}
-            className="bg-orange-500 hover:bg-orange-600 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full font-medium text-xs sm:text-sm disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-orange-500 transition-colors flex-shrink-0"
+            className="bg-orange-500 hover:bg-orange-600 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full font-medium text-xs sm:text-sm disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-orange-500 transition-colors shrink-0"
             whileHover={{
               scale: newComment[postId]?.trim() ? 1.02 : 1,
             }}
@@ -83,24 +78,17 @@ const CommentItem = ({ comment, index }) => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.05 }}
     >
-      <Avatar
-        src={comment.user.avatar}
-        alt={comment.user.name}
-        size="sm"
-        className="w-6 h-6 sm:w-8 sm:h-8 flex-shrink-0"
-      />
+      <Avatar src={comment.user.avatar} alt={comment.user.name} size="sm" className="w-6 h-6 sm:w-8 sm:h-8 shrink-0" />
       <div className="flex-1 min-w-0 bg-white dark:bg-slate-700 rounded-lg sm:rounded-xl p-2 sm:p-3 shadow-sm transition-colors">
         <div className="flex items-center gap-1 sm:gap-2 mb-0.5 sm:mb-1">
           <span className="font-semibold text-slate-900 dark:text-white text-xs sm:text-sm truncate transition-colors">
             {comment.user.name}
           </span>
-          <span className="text-[10px] sm:text-xs text-slate-400 dark:text-slate-500 flex-shrink-0 transition-colors">
+          <span className="text-[10px] sm:text-xs text-slate-400 dark:text-slate-500 shrink-0 transition-colors">
             {comment.timestamp}
           </span>
         </div>
-        <p className="text-slate-700 dark:text-slate-300 text-xs sm:text-sm transition-colors">
-          {comment.content}
-        </p>
+        <p className="text-slate-700 dark:text-slate-300 text-xs sm:text-sm transition-colors">{comment.content}</p>
       </div>
     </motion.div>
   );
