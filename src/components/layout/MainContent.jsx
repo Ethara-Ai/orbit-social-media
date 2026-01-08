@@ -21,7 +21,7 @@ const TabLoadingFallback = () => (
     {/* Header skeleton */}
     <div className="mb-6">
       <div className="h-8 bg-slate-200 dark:bg-slate-700 rounded-lg w-48 mb-2" />
-      <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded w-32" />
+      <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded-sm w-32" />
     </div>
 
     {/* Content skeleton */}
@@ -31,13 +31,13 @@ const TabLoadingFallback = () => (
         <div className="flex items-center gap-3 mb-4">
           <div className="w-10 h-10 bg-slate-200 dark:bg-slate-700 rounded-full" />
           <div className="flex-1">
-            <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded w-32 mb-2" />
-            <div className="h-3 bg-slate-200 dark:bg-slate-700 rounded w-24" />
+            <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded-sm w-32 mb-2" />
+            <div className="h-3 bg-slate-200 dark:bg-slate-700 rounded-sm w-24" />
           </div>
         </div>
         <div className="space-y-2">
-          <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded w-full" />
-          <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded w-3/4" />
+          <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded-sm w-full" />
+          <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded-sm w-3/4" />
         </div>
       </div>
 
@@ -46,14 +46,14 @@ const TabLoadingFallback = () => (
         <div className="flex items-center gap-3 mb-4">
           <div className="w-10 h-10 bg-slate-200 dark:bg-slate-700 rounded-full" />
           <div className="flex-1">
-            <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded w-40 mb-2" />
-            <div className="h-3 bg-slate-200 dark:bg-slate-700 rounded w-20" />
+            <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded-sm w-40 mb-2" />
+            <div className="h-3 bg-slate-200 dark:bg-slate-700 rounded-sm w-20" />
           </div>
         </div>
         <div className="h-48 bg-slate-200 dark:bg-slate-700 rounded-lg mb-3" />
         <div className="space-y-2">
-          <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded w-full" />
-          <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded w-1/2" />
+          <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded-sm w-full" />
+          <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded-sm w-1/2" />
         </div>
       </div>
 
@@ -62,14 +62,14 @@ const TabLoadingFallback = () => (
         <div className="flex items-center gap-3 mb-4">
           <div className="w-10 h-10 bg-slate-200 dark:bg-slate-700 rounded-full" />
           <div className="flex-1">
-            <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded w-36 mb-2" />
-            <div className="h-3 bg-slate-200 dark:bg-slate-700 rounded w-28" />
+            <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded-sm w-36 mb-2" />
+            <div className="h-3 bg-slate-200 dark:bg-slate-700 rounded-sm w-28" />
           </div>
         </div>
         <div className="space-y-2">
-          <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded w-full" />
-          <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded w-5/6" />
-          <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded w-2/3" />
+          <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded-sm w-full" />
+          <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded-sm w-5/6" />
+          <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded-sm w-2/3" />
         </div>
       </div>
     </div>

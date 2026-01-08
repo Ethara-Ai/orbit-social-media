@@ -89,7 +89,7 @@ const MessagesTab = () => {
 
   return (
     <div className="max-w-5xl mx-auto w-full max-w-[100vw] overflow-x-hidden px-0">
-      <div className="bg-white dark:bg-slate-900 sm:rounded-2xl shadow-sm border-0 sm:border border-slate-200 dark:border-slate-800 overflow-hidden h-[calc(100vh-5rem)] sm:h-[calc(100vh-7rem)] lg:h-[calc(100vh-8rem)] transition-colors duration-200">
+      <div className="bg-white dark:bg-slate-900 sm:rounded-2xl shadow-xs border-0 sm:border border-slate-200 dark:border-slate-800 overflow-hidden h-[calc(100vh-5rem)] sm:h-[calc(100vh-7rem)] lg:h-[calc(100vh-8rem)] transition-colors duration-200">
         <div className="flex h-full">
           {/* Conversations List */}
           <ConversationsList

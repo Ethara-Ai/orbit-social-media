@@ -5,11 +5,65 @@
 
 // Import jest-dom matchers for DOM assertions
 // This adds custom matchers like toBeInTheDocument(), toHaveClass(), etc.
-import '@testing-library/jest-dom';
+import "@testing-library/jest-dom";
 
 // Clean up after each test
-import { cleanup } from '@testing-library/react';
-import { afterEach, vi } from 'vitest';
+import { cleanup } from "@testing-library/react";
+import { afterEach, beforeEach, vi } from "vitest";
+
+// Mock localStorage that properly delegates to Storage.prototype
+// This allows tests to spy on Storage.prototype methods
+let localStorageStore = {};
+
+// Store original Storage.prototype methods
+const originalStorageGetItem = Storage.prototype.getItem;
+const originalStorageSetItem = Storage.prototype.setItem;
+const originalStorageRemoveItem = Storage.prototype.removeItem;
+
+// Override Storage.prototype methods to use our store
+Storage.prototype.getItem = function (key) {
+  return localStorageStore[key] ?? null;
+};
+
+Storage.prototype.setItem = function (key, value) {
+  localStorageStore[key] = String(value);
+};
+
+Storage.prototype.removeItem = function (key) {
+  delete localStorageStore[key];
+};
+
+// Create localStorage mock that calls through Storage.prototype
+const localStorageMock = {
+  getItem(key) {
+    return Storage.prototype.getItem.call(this, key);
+  },
+  setItem(key, value) {
+    return Storage.prototype.setItem.call(this, key, value);
+  },
+  removeItem(key) {
+    return Storage.prototype.removeItem.call(this, key);
+  },
+  clear() {
+    localStorageStore = {};
+  },
+  get length() {
+    return Object.keys(localStorageStore).length;
+  },
+  key(index) {
+    return Object.keys(localStorageStore)[index] ?? null;
+  },
+};
+
+Object.defineProperty(window, "localStorage", {
+  value: localStorageMock,
+  writable: true,
+});
+
+// Reset localStorage before each test
+beforeEach(() => {
+  localStorageStore = {};
+});
 
 // Automatically cleanup after each test
 afterEach(() => {
@@ -17,7 +71,7 @@ afterEach(() => {
 });
 
 // Mock window.matchMedia for components that use media queries
-Object.defineProperty(window, 'matchMedia', {
+Object.defineProperty(window, "matchMedia", {
   writable: true,
   value: vi.fn().mockImplementation((query) => ({
     matches: false,
@@ -41,7 +95,7 @@ class MockIntersectionObserver {
   disconnect() {}
 }
 
-Object.defineProperty(window, 'IntersectionObserver', {
+Object.defineProperty(window, "IntersectionObserver", {
   writable: true,
   value: MockIntersectionObserver,
 });
@@ -53,22 +107,22 @@ class MockResizeObserver {
   disconnect() {}
 }
 
-Object.defineProperty(window, 'ResizeObserver', {
+Object.defineProperty(window, "ResizeObserver", {
   writable: true,
   value: MockResizeObserver,
 });
 
 // Mock scrollTo
-Object.defineProperty(window, 'scrollTo', {
+Object.defineProperty(window, "scrollTo", {
   writable: true,
   value: vi.fn(),
 });
 
 // Mock clipboard API
-Object.defineProperty(navigator, 'clipboard', {
+Object.defineProperty(navigator, "clipboard", {
   writable: true,
   value: {
     writeText: vi.fn().mockResolvedValue(undefined),
-    readText: vi.fn().mockResolvedValue(''),
+    readText: vi.fn().mockResolvedValue(""),
   },
 });

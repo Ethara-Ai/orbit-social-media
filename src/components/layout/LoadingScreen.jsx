@@ -23,7 +23,7 @@ const LoadingScreen = () => {
           className="mb-8"
         >
           <motion.div
-            className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-orange-500 to-amber-500 rounded-2xl flex items-center justify-center shadow-2xl shadow-orange-500/30"
+            className="w-20 h-20 mx-auto mb-6 bg-linear-to-br from-orange-500 to-amber-500 rounded-2xl flex items-center justify-center shadow-2xl shadow-orange-500/30"
             animate={{
               rotate: [0, 5, -5, 0],
             }}

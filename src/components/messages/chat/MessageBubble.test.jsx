@@ -141,9 +141,9 @@ describe("MessageBubble", () => {
       expect(bubble).toBeInTheDocument();
     });
 
-    it("should have shadow-sm class for received messages", () => {
+    it("should have shadow-xs class for received messages", () => {
       const { container } = render(<MessageBubble message={receivedMessage} />);
-      const bubble = container.querySelector(".shadow-sm");
+      const bubble = container.querySelector(".shadow-xs");
       expect(bubble).toBeInTheDocument();
     });
   });

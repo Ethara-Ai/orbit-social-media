@@ -175,7 +175,7 @@ const TheaterContent = ({ selectedPost }) => {
           />
 
           {/* Gradient Overlay for Title */}
-          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-3 sm:p-6">
+          <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/90 via-black/50 to-transparent p-3 sm:p-6">
             <h2 className="text-white text-lg sm:text-2xl font-bold mb-1 sm:mb-2">
               {selectedPost.title}
             </h2>
@@ -199,7 +199,7 @@ const TheaterActionBar = ({
 }) => {
   return (
     <motion.div
-      className="bg-gradient-to-t from-slate-950 via-slate-950/95 to-transparent"
+      className="bg-linear-to-t from-slate-950 via-slate-950/95 to-transparent"
       initial={{ y: 50, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ delay: 0.15 }}

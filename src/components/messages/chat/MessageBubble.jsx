@@ -15,7 +15,7 @@ const MessageBubble = ({ message }) => {
         className={`max-w-[75%] rounded-2xl px-4 py-2.5 transition-colors ${
           isSent
             ? "bg-orange-500 text-white rounded-br-md"
-            : "bg-white dark:bg-slate-700 text-slate-800 dark:text-slate-100 shadow-sm rounded-bl-md"
+            : "bg-white dark:bg-slate-700 text-slate-800 dark:text-slate-100 shadow-xs rounded-bl-md"
         }`}
       >
         {attachment && <MessageAttachment src={attachment} isSent={isSent} />}

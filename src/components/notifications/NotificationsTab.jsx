@@ -77,7 +77,7 @@ const NotificationItem = ({ notification, index, onClick }) => {
 
   return (
     <motion.div
-      className={`bg-white dark:bg-slate-800 rounded-xl p-4 shadow-sm border cursor-pointer transition-all duration-300 ${
+      className={`bg-white dark:bg-slate-800 rounded-xl p-4 shadow-xs border cursor-pointer transition-all duration-300 ${
         isUnread
           ? "border-orange-200 dark:border-orange-500/30 bg-orange-50/30 dark:bg-orange-500/10"
           : "border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700/50"
@@ -113,7 +113,7 @@ const NotificationIconBadge = ({ type }) => {
 
   return (
     <div
-      className={`absolute -bottom-1 -right-1 rounded-full p-1.5 shadow-sm ${bgClass}`}
+      className={`absolute -bottom-1 -right-1 rounded-full p-1.5 shadow-xs ${bgClass}`}
     >
       {icon}
     </div>

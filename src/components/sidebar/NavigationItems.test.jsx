@@ -108,7 +108,7 @@ describe("NavigationItems", () => {
       expect(exploreButton).toHaveClass("text-slate-600");
     });
 
-    it("should apply shadow class to active tab", () => {
+    it("should apply shadow-sm class to active tab", () => {
       render(<NavigationItems {...defaultProps} activeTab="feed" />);
       const feedButton = screen.getByText("Feed").closest("button");
       expect(feedButton).toHaveClass("shadow-lg");

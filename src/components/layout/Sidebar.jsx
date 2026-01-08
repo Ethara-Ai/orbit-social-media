@@ -137,7 +137,7 @@ const MobileSidebarHeader = ({ onClose }) => {
   return (
     <div className="flex items-center justify-between p-4 border-b border-slate-100 dark:border-slate-700 transition-colors">
       <div className="flex items-center gap-2">
-        <div className="w-8 h-8 bg-gradient-to-br from-orange-500 to-amber-500 rounded-lg flex items-center justify-center">
+        <div className="w-8 h-8 bg-linear-to-br from-orange-500 to-amber-500 rounded-lg flex items-center justify-center">
           <span className="text-white font-bold">O</span>
         </div>
         <span className="font-bold text-slate-900 dark:text-white transition-colors">
