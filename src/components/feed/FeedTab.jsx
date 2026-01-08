@@ -7,22 +7,12 @@ const FeedTab = () => {
   const { posts } = useFeed();
 
   return (
-    <div className="max-w-2xl mx-auto w-full px-0 max-w-[100vw] overflow-x-hidden">
-      {/* Feed Header */}
-      <div className="mb-3">
-        <h1 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white transition-colors">
-          Your Orbit
-        </h1>
-        <p className="text-slate-500 dark:text-slate-400 text-xs sm:text-sm mt-1 transition-colors">
-          See what's happening in your network
-        </p>
-      </div>
-
-      {/* Create Post Section - uses hooks internally */}
+    <div className="max-w-2xl mx-auto w-full px-0 py-1.5 max-w-[100vw] overflow-x-hidden">
+      {/* Create Post Section - Now includes header internally */}
       <CreatePost />
 
       {/* Posts List - PostCard uses hooks internally */}
-      <div className="space-y-2.5 sm:space-y-3">
+      <div className="space-y-4 mt-4">
         {posts.map((post, index) => (
           <PostCard key={post.id} post={post} index={index} />
         ))}

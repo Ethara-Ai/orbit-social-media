@@ -21,15 +21,14 @@ const PostActions = ({
   };
 
   return (
-    <div className="px-3 sm:px-3.5 py-2 sm:py-2.5 border-t border-slate-100 dark:border-slate-700 transition-colors">
+    <div className="px-4 py-3 border-t border-slate-100 dark:border-slate-700 transition-colors">
       <div className="flex items-center gap-3 sm:gap-4">
         <motion.button
           onClick={handleLike}
-          className={`flex items-center gap-1 sm:gap-2 cursor-pointer transition-colors ${
-            isLiked
+          className={`flex items-center gap-1 sm:gap-2 cursor-pointer transition-colors ${isLiked
               ? "text-rose-500"
               : "text-slate-500 dark:text-slate-400 hover:text-rose-500"
-          }`}
+            }`}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >

@@ -24,16 +24,25 @@ const CreatePost = () => {
 
   return (
     <motion.div
-      className="bg-white dark:bg-slate-800 rounded-lg shadow-sm border border-slate-200 dark:border-slate-700 p-2.5 sm:p-3 mb-3 w-full max-w-[100vw] overflow-hidden transition-colors duration-300"
+      className="bg-white dark:bg-slate-800 rounded-lg shadow-sm border border-slate-200 dark:border-slate-700 p-3 w-full max-w-[100vw] overflow-hidden transition-colors duration-300"
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: 0.1 }}
     >
-      <div className="flex gap-2 sm:gap-2.5">
+      <div className="mb-2.5">
+        <h1 className="text-base font-bold text-slate-900 dark:text-white transition-colors">
+          Your Orbit
+        </h1>
+        <p className="text-slate-500 dark:text-slate-400 text-xs mt-0.5 transition-colors">
+          See what's happening in your network
+        </p>
+      </div>
+
+      <div className="flex gap-2.5">
         <img
           src={currentUserAvatar || "/placeholder.svg"}
           alt={currentUser.name}
-          className="w-10 h-10 rounded-full object-cover shrink-0"
+          className="w-9 h-9 rounded-full object-cover shrink-0"
           onError={(e) => {
             e.target.src =
               "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=50&h=50&fit=crop&crop=face";
@@ -63,9 +72,10 @@ const CreatePost = () => {
                 className="p-1.5 sm:p-2 text-slate-500 dark:text-slate-400 hover:text-emerald-500 dark:hover:text-emerald-400 hover:bg-slate-100 dark:hover:bg-slate-600 rounded-full transition-colors cursor-pointer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+
                 title="Add photo"
               >
-                <Camera className="w-5 h-5 sm:w-6 sm:h-6" />
+                <Camera className="w-5 h-5" />
               </motion.button>
 
               <motion.button

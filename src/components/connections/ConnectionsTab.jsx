@@ -17,10 +17,10 @@ const ConnectionsTab = () => {
         <div className="max-w-4xl mx-auto w-full px-4 py-6">
             {/* Page Header */}
             <div className="mb-8">
-                <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
+                <h1 className="text-[20px] font-bold text-slate-900 dark:text-white mb-2">
                     Connections
                 </h1>
-                <p className="text-slate-600 dark:text-slate-400">
+                <p className="text-[14px] text-slate-600 dark:text-slate-400">
                     Manage your network and discover new connections
                 </p>
             </div>
@@ -30,7 +30,7 @@ const ConnectionsTab = () => {
                 <div className="flex items-center justify-between mb-6">
                     <div className="flex items-center gap-2">
                         <Users className="w-6 h-6 text-slate-700 dark:text-slate-300" />
-                        <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+                        <h2 className="text-[20px] font-bold text-slate-900 dark:text-white">
                             My Connections
                         </h2>
                     </div>
@@ -94,7 +94,7 @@ const ConnectionsTab = () => {
             <div>
                 <div className="flex items-center gap-2 mb-6">
                     <UserPlus className="w-6 h-6 text-slate-700 dark:text-slate-300" />
-                    <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+                    <h2 className="text-[20px] font-bold text-slate-900 dark:text-white">
                         People You May Know
                     </h2>
                 </div>

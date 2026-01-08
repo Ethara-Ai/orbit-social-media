@@ -21,7 +21,7 @@ const PostContent = ({ content, image }) => {
     <>
       {/* Post Content */}
       {content && (
-        <div className="px-3 sm:px-3.5 pb-2 sm:pb-2.5">
+        <div className="px-4 pb-3">
           <p className="text-slate-700 dark:text-slate-300 text-xs sm:text-sm leading-relaxed transition-colors">
             {content}
           </p>
@@ -30,11 +30,10 @@ const PostContent = ({ content, image }) => {
 
       {/* Post Image */}
       {image && (
-        <div className="px-3 sm:px-3.5 pb-2 sm:pb-2.5">
+        <div className="px-4 pb-3">
           <div
-            className={`relative w-full rounded-md sm:rounded-lg overflow-hidden bg-slate-100 dark:bg-slate-900 ${
-              isPortrait ? "max-w-md mx-auto" : ""
-            }`}
+            className={`relative w-full rounded-md sm:rounded-lg overflow-hidden bg-slate-100 dark:bg-slate-900 ${isPortrait ? "max-w-md mx-auto" : ""
+              }`}
           >
             <img
               src={image || "/placeholder.svg"}

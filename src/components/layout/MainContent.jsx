@@ -109,7 +109,7 @@ const MainContent = () => {
   };
 
   return (
-    <main className="w-full min-w-0 bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-700 min-h-[calc(100vh-7rem)]">
+    <main className="w-full min-w-0 min-h-[calc(100vh-7rem)]">
       {/* Feed Tab */}
       <div className={getTabWrapperClass(TABS.FEED)}>
         <div
@@ -117,7 +117,7 @@ const MainContent = () => {
           onScroll={createScrollHandler(TABS.FEED)}
           className={scrollContainerClass}
         >
-          <div className="p-4 w-full">
+          <div className="w-full">
             <Suspense fallback={<TabLoadingFallback />}>
               {activeTab === TABS.FEED ? (
                 <motion.div
@@ -142,7 +142,7 @@ const MainContent = () => {
           onScroll={createScrollHandler(TABS.EXPLORE)}
           className={scrollContainerClass}
         >
-          <div className="p-4 w-full">
+          <div className="w-full">
             <Suspense fallback={<TabLoadingFallback />}>
               {activeTab === TABS.EXPLORE ? (
                 <motion.div
@@ -167,7 +167,7 @@ const MainContent = () => {
           onScroll={createScrollHandler(TABS.MESSAGES)}
           className={scrollContainerClass}
         >
-          <div className="p-4 w-full">
+          <div className="w-full">
             <Suspense fallback={<TabLoadingFallback />}>
               {activeTab === TABS.MESSAGES ? (
                 <motion.div
@@ -192,7 +192,7 @@ const MainContent = () => {
           onScroll={createScrollHandler(TABS.NOTIFICATIONS)}
           className={scrollContainerClass}
         >
-          <div className="p-4 w-full">
+          <div className="w-full">
             <Suspense fallback={<TabLoadingFallback />}>
               {activeTab === TABS.NOTIFICATIONS ? (
                 <motion.div
@@ -217,7 +217,7 @@ const MainContent = () => {
           onScroll={createScrollHandler(TABS.CONNECTIONS)}
           className={scrollContainerClass}
         >
-          <div className="p-4 w-full">
+          <div className="w-full">
             <Suspense fallback={<TabLoadingFallback />}>
               {activeTab === TABS.CONNECTIONS ? (
                 <motion.div

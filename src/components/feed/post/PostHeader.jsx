@@ -2,7 +2,7 @@ import Avatar from "../../common/Avatar";
 
 const PostHeader = ({ user, timestamp }) => {
   return (
-    <div className="p-3 sm:p-3.5 pb-2 sm:pb-2.5">
+    <div className="px-4 py-3">
       <div className="flex items-center gap-2 sm:gap-2.5">
         <Avatar
           src={user.avatar}
