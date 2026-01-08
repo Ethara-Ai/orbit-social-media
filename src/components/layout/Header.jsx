@@ -58,11 +58,10 @@ const Header = () => {
           {/* Connections Button */}
           <motion.button
             onClick={() => setActiveTab("connections")}
-            className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center transition-all order-2 ${
-              activeTab === "connections"
+            className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center transition-all order-2 cursor-pointer ${activeTab === "connections"
                 ? "bg-orange-500 text-white shadow-lg shadow-orange-500/25"
                 : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700"
-            }`}
+              }`}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             aria-label="Connections"
@@ -73,7 +72,7 @@ const Header = () => {
           {/* Theme Toggle Button */}
           <motion.button
             onClick={toggleTheme}
-            className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center justify-center transition-colors duration-300 order-3"
+            className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center justify-center transition-colors duration-300 order-3 cursor-pointer"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             aria-label={
