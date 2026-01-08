@@ -79,10 +79,10 @@ describe("PostContent", () => {
       expect(image).toHaveAttribute("alt", "Post content");
     });
 
-    it("should have object-cover class", () => {
+    it("should have object-contain class", () => {
       render(<PostContent {...defaultProps} />);
       const image = screen.getByRole("img");
-      expect(image).toHaveClass("object-cover");
+      expect(image).toHaveClass("object-contain");
     });
 
     it("should have w-full class", () => {
@@ -206,28 +206,36 @@ describe("PostContent", () => {
   });
 
   describe("responsive image classes", () => {
-    it("should have h-48 height class", () => {
+    it("should have h-auto height class", () => {
       render(<PostContent {...defaultProps} />);
       const image = screen.getByRole("img");
-      expect(image).toHaveClass("h-48");
+      expect(image).toHaveClass("h-auto");
     });
 
-    it("should have sm:h-64 height class", () => {
+    it("should have max-h-[70vh] height class", () => {
       render(<PostContent {...defaultProps} />);
       const image = screen.getByRole("img");
-      expect(image).toHaveClass("sm:h-64");
-    });
-
-    it("should have md:h-80 height class", () => {
-      render(<PostContent {...defaultProps} />);
-      const image = screen.getByRole("img");
-      expect(image).toHaveClass("md:h-80");
+      expect(image).toHaveClass("max-h-[70vh]");
     });
 
     it("should have sm:rounded-xl class", () => {
       render(<PostContent {...defaultProps} />);
       const image = screen.getByRole("img");
       expect(image).toHaveClass("sm:rounded-xl");
+    });
+  });
+
+  describe("image container", () => {
+    it("should have overflow-hidden class on image wrapper", () => {
+      const { container } = render(<PostContent {...defaultProps} />);
+      const imageWrapper = container.querySelector(".overflow-hidden");
+      expect(imageWrapper).toBeInTheDocument();
+    });
+
+    it("should have background color for letterboxing", () => {
+      const { container } = render(<PostContent {...defaultProps} />);
+      const imageWrapper = container.querySelector(".bg-slate-100");
+      expect(imageWrapper).toBeInTheDocument();
     });
   });
 

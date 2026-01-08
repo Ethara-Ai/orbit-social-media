@@ -85,11 +85,11 @@ const CreatePost = () => {
           </div>
 
           {selectedImage && (
-            <div className="mt-2 sm:mt-3 relative">
+            <div className="mt-2 sm:mt-3 relative rounded-lg sm:rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-900">
               <img
                 src={selectedImage}
                 alt="Selected"
-                className="w-full max-h-48 sm:max-h-64 object-cover rounded-lg sm:rounded-xl"
+                className="w-full h-auto max-h-64 sm:max-h-80 object-contain"
               />
               <button
                 onClick={removeSelectedMedia}
