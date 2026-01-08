@@ -9,6 +9,7 @@ import {
   MobileNavOverlay,
   RightSidebar,
   CopyNotificationPopup,
+  MobileSidebar,
 } from "./components/layout";
 
 // ============================================================================
@@ -30,6 +31,9 @@ export default function SocialMediaDashboard() {
 
       {/* Mobile Nav Overlay */}
       <MobileNavOverlay />
+
+      {/* Mobile Sidebar Navigation */}
+      <MobileSidebar />
 
       {/* Main Layout - LinkedIn-style centered container */}
       <div className="pt-14 sm:pt-16 min-h-screen">

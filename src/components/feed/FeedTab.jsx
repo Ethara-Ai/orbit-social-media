@@ -9,7 +9,7 @@ const FeedTab = () => {
   return (
     <div className="max-w-2xl mx-auto w-full px-0 max-w-[100vw] overflow-x-hidden">
       {/* Feed Header */}
-      <div className="mb-4 sm:mb-6">
+      <div className="mb-4">
         <h1 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white transition-colors">
           Your Orbit
         </h1>

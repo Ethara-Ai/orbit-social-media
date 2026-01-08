@@ -24,7 +24,7 @@ const CreatePost = () => {
 
   return (
     <motion.div
-      className="bg-white dark:bg-slate-800 rounded-xl sm:rounded-2xl shadow-xs border border-slate-200 dark:border-slate-700 p-3 sm:p-4 mb-4 sm:mb-6 w-full max-w-[100vw] overflow-hidden transition-colors duration-300"
+      className="bg-white dark:bg-slate-800 rounded-lg shadow-sm border border-slate-200 dark:border-slate-700 p-3 mb-4 w-full max-w-[100vw] overflow-hidden transition-colors duration-300"
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: 0.1 }}
@@ -33,24 +33,24 @@ const CreatePost = () => {
         <img
           src={currentUserAvatar || "/placeholder.svg"}
           alt={currentUser.name}
-          className="w-9 h-9 sm:w-11 sm:h-11 rounded-full object-cover shrink-0"
+          className="w-10 h-10 rounded-full object-cover shrink-0"
           onError={(e) => {
             e.target.src =
               "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=50&h=50&fit=crop&crop=face";
           }}
         />
         <div className="flex-1 min-w-0">
-          <div className="relative bg-slate-50 dark:bg-slate-700/50 rounded-lg sm:rounded-xl focus-within:ring-2 focus-within:ring-orange-500 focus-within:bg-white dark:focus-within:bg-slate-700 transition-all">
+          <div className="relative bg-slate-100 dark:bg-slate-700/50 rounded-full focus-within:ring-1 focus-within:ring-orange-500/50 focus-within:bg-white dark:focus-within:bg-slate-800 transition-all">
             <textarea
               placeholder="Share something with your orbit..."
               value={newPostContent}
               onChange={(e) => setNewPostContent(e.target.value)}
-              className="w-full p-2 sm:p-3 pb-10 sm:pb-12 bg-transparent border-0 rounded-lg sm:rounded-xl resize-none focus:outline-hidden text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 text-sm transition-colors"
-              rows={2}
+              className="w-full pl-3 py-3 pr-36 bg-transparent border-0 rounded-full resize-none focus:outline-hidden text-slate-900 dark:text-white placeholder-slate-500 text-sm transition-colors"
+              rows={1}
             />
 
             {/* Action buttons inside input field */}
-            <div className="absolute bottom-2 right-2 sm:bottom-3 sm:right-3 flex items-center gap-1.5 sm:gap-2">
+            <div className="absolute top-1/2 -translate-y-1/2 right-2 flex items-center gap-2">
               <input
                 type="file"
                 id="image-upload"

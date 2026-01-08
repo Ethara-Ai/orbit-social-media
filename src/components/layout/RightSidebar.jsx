@@ -4,17 +4,9 @@ import { motion } from "framer-motion";
 import { useUser, useMessages, useUI } from "../../context/AppContext";
 import { TABS } from "../../utils/constants";
 import ActiveNowSection from "./RightSidebar/ActiveNowSection";
-import SuggestedUsersSection from "./RightSidebar/SuggestedUsersSection";
 
 const RightSidebar = () => {
-  const {
-    activeOnlineFriends,
-    friends,
-    suggestedUsers,
-    connectionRequests,
-    sendConnectionRequest,
-    handleViewProfile,
-  } = useUser();
+  const { activeOnlineFriends, friends } = useUser();
   const {
     startConversation,
     pendingNavigateToMessages,
@@ -44,24 +36,10 @@ const RightSidebar = () => {
           friends={friends}
           startConversation={startConversation}
         />
-
-        {/* Suggested Connections */}
-        <SuggestedUsersSection
-          suggestedUsers={suggestedUsers}
-          connectionRequests={connectionRequests}
-          sendConnectionRequest={sendConnectionRequest}
-          handleViewProfile={handleViewProfile}
-        />
-
-        {/* Footer */}
-        <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-700 transition-colors">
-          <p className="text-xs text-slate-400 dark:text-slate-500 text-center transition-colors">
-            © 2026 Orbit. Connect • Discover • Thrive
-          </p>
-        </div>
       </div>
     </motion.aside>
   );
 };
 
 export default RightSidebar;
+
