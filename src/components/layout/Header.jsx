@@ -21,7 +21,7 @@ const Header = () => {
         {/* Logo - Clickable on mobile to open sidebar */}
         <motion.button
           onClick={() => setShowMobileNav(!showMobileNav)}
-          className="flex items-center gap-2 lg:pointer-events-none shrink-0 cursor-pointer"
+          className="flex items-center gap-2 lg:pointer-events-none shrink-0 cursor-pointer min-w-11 min-h-11 lg:min-w-0 lg:min-h-0 justify-center lg:justify-start"
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >
@@ -37,11 +37,11 @@ const Header = () => {
         <div className="flex-1" />
 
         {/* User Actions */}
-        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+        <div className="flex items-center gap-1 sm:gap-3 shrink-0">
           {/* User Profile - Clickable to navigate to profile */}
           <motion.button
             onClick={() => setActiveTab("profile")}
-            className="flex items-center gap-2 sm:gap-3 order-1 cursor-pointer"
+            className="flex items-center gap-2 sm:gap-3 order-1 cursor-pointer min-w-11 min-h-11 lg:min-w-0 lg:min-h-0 justify-center lg:justify-end"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
@@ -63,7 +63,7 @@ const Header = () => {
           {/* Connections Button */}
           <motion.button
             onClick={() => setActiveTab("connections")}
-            className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center transition-all order-2 cursor-pointer ${
+            className={`min-w-11 min-h-11 sm:min-w-0 sm:min-h-0 w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center transition-all order-2 cursor-pointer ${
               activeTab === "connections"
                 ? "bg-orange-500 text-white shadow-lg shadow-orange-500/25"
                 : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700"
@@ -78,7 +78,7 @@ const Header = () => {
           {/* Theme Toggle Button */}
           <motion.button
             onClick={toggleTheme}
-            className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center justify-center transition-colors duration-300 order-3 cursor-pointer"
+            className="relative min-w-11 min-h-11 sm:min-w-0 sm:min-h-0 w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center justify-center transition-colors duration-300 order-3 cursor-pointer"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             aria-label={
