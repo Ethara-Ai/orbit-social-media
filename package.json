@@ -1,12 +1,21 @@
 {
-  "name": "socialtubb-app",
+  "name": "orbit-social-media",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ethara-AI/orbit-social-media.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Ethara-AI/orbit-social-media/issues"
+  },
+  "homepage": "https://components.ethara.ai/orbit-social-media",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "preview": "vite preview",
     "test": "vitest",
     "test:run": "vitest run",
