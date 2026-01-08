@@ -102,16 +102,16 @@ const MainContent = () => {
 
   // Common scroll container styles
   const scrollContainerClass =
-    "h-[calc(100vh-3.5rem)] sm:h-[calc(100vh-4rem)] overflow-y-auto overflow-x-hidden custom-scrollbar";
+    "overflow-y-auto overflow-x-hidden custom-scrollbar";
 
   // Tab wrapper styles - keeps tab mounted but hidden when not active
   const getTabWrapperClass = (tabId) => {
     const isActive = activeTab === tabId;
-    return `absolute inset-0 ${isActive ? "visible z-10" : "invisible z-0"}`;
+    return isActive ? "block" : "hidden";
   };
 
   return (
-    <main className="flex-1 w-full min-w-0 lg:ml-64 xl:mr-80 overflow-hidden relative">
+    <main className="w-full min-w-0 overflow-hidden bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-700 min-h-[calc(100vh-7rem)]">
       {/* Feed Tab */}
       <div className={getTabWrapperClass(TABS.FEED)}>
         <div
@@ -119,7 +119,7 @@ const MainContent = () => {
           onScroll={createScrollHandler(TABS.FEED)}
           className={scrollContainerClass}
         >
-          <div className="p-2 sm:p-4 lg:p-6 w-full max-w-full">
+          <div className="p-4 w-full">
             <Suspense fallback={<TabLoadingFallback />}>
               {activeTab === TABS.FEED ? (
                 <motion.div
@@ -144,7 +144,7 @@ const MainContent = () => {
           onScroll={createScrollHandler(TABS.EXPLORE)}
           className={scrollContainerClass}
         >
-          <div className="p-2 sm:p-4 lg:p-6 w-full max-w-full">
+          <div className="p-4 w-full">
             <Suspense fallback={<TabLoadingFallback />}>
               {activeTab === TABS.EXPLORE ? (
                 <motion.div
@@ -169,7 +169,7 @@ const MainContent = () => {
           onScroll={createScrollHandler(TABS.MESSAGES)}
           className={scrollContainerClass}
         >
-          <div className="p-2 sm:p-4 lg:p-6 w-full max-w-full">
+          <div className="p-4 w-full">
             <Suspense fallback={<TabLoadingFallback />}>
               {activeTab === TABS.MESSAGES ? (
                 <motion.div
@@ -194,7 +194,7 @@ const MainContent = () => {
           onScroll={createScrollHandler(TABS.NOTIFICATIONS)}
           className={scrollContainerClass}
         >
-          <div className="p-2 sm:p-4 lg:p-6 w-full max-w-full">
+          <div className="p-4 w-full">
             <Suspense fallback={<TabLoadingFallback />}>
               {activeTab === TABS.NOTIFICATIONS ? (
                 <motion.div
@@ -219,7 +219,7 @@ const MainContent = () => {
           onScroll={createScrollHandler(TABS.CONNECTIONS)}
           className={scrollContainerClass}
         >
-          <div className="p-2 sm:p-4 lg:p-6 w-full max-w-full">
+          <div className="p-4 w-full">
             <Suspense fallback={<TabLoadingFallback />}>
               {activeTab === TABS.CONNECTIONS ? (
                 <motion.div

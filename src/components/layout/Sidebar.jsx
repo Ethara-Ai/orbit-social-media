@@ -11,16 +11,13 @@ import {
 } from "../../context/AppContext";
 
 const Sidebar = () => {
-  const { currentUser, currentUserAvatar, friends } = useUser();
+  const { currentUser, currentUserAvatar } = useUser();
   const {
     activeTab,
     setActiveTab,
     showMobileNav,
     setShowMobileNav,
-    showFriends,
-    setShowFriends,
     setShowCurrentUserModal,
-    isTheaterModeOpen,
   } = useUI();
   const { totalUnreadMessages } = useMessages();
   const { notificationCount, markNotificationsAsRead } = useNotifications();
@@ -47,25 +44,29 @@ const Sidebar = () => {
 
   return (
     <>
-      {/* Desktop Sidebar - Hidden when theater mode is open */}
-      <motion.aside
-        className="fixed left-0 top-16 bottom-0 w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-700 z-30 hidden lg:flex flex-col transition-colors duration-300"
-        initial={{ x: -20, opacity: 0 }}
-        animate={{
-          x: isTheaterModeOpen ? -280 : 0,
-          opacity: isTheaterModeOpen ? 0 : 1,
-        }}
-        transition={{ duration: 0.3 }}
-      >
-        <div className="flex-1 overflow-y-auto custom-scrollbar p-4">
-          {/* User Profile Card */}
+      {/* Desktop Sidebar */}
+      <div className="space-y-4">
+        {/* User Profile Card Section */}
+        <motion.div
+          className="bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-700 p-4 transition-colors duration-300"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+        >
           <UserProfileCard
             user={currentUser}
             avatar={currentUserAvatar}
             onClick={handleOpenCurrentUserModal}
           />
+        </motion.div>
 
-          {/* Navigation */}
+        {/* Navigation Section */}
+        <motion.div
+          className="bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-700 p-3 transition-colors duration-300"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, delay: 0.1 }}
+        >
           <NavigationItems
             navItems={navItems}
             activeTab={activeTab}
@@ -74,10 +75,8 @@ const Sidebar = () => {
             totalUnreadMessages={totalUnreadMessages}
             markNotificationsAsRead={markNotificationsAsRead}
           />
-
-
-        </div>
-      </motion.aside>
+        </motion.div>
+      </div>
 
       {/* Mobile Sidebar */}
       <AnimatePresence>
@@ -92,7 +91,7 @@ const Sidebar = () => {
             {/* Mobile Header */}
             <MobileSidebarHeader onClose={() => setShowMobileNav(false)} />
 
-            <div className="flex-1 overflow-y-auto custom-scrollbar p-4 min-h-0">
+            <div className="flex-1 overflow-y-auto custom-scrollbar px-3 py-4 min-h-0">
               {/* User Profile Card */}
               <UserProfileCard
                 user={currentUser}
@@ -101,19 +100,19 @@ const Sidebar = () => {
                 animated={false}
               />
 
-              {/* Navigation */}
-              <NavigationItems
-                navItems={navItems}
-                activeTab={activeTab}
-                setActiveTab={setActiveTab}
-                notificationCount={notificationCount}
-                totalUnreadMessages={totalUnreadMessages}
-                markNotificationsAsRead={markNotificationsAsRead}
-                onNavigate={handleMobileNavigate}
-                isMobile={true}
-              />
-
-
+              {/* Navigation with Separator */}
+              <div className="border-t border-slate-100 dark:border-slate-700 pt-2">
+                <NavigationItems
+                  navItems={navItems}
+                  activeTab={activeTab}
+                  setActiveTab={setActiveTab}
+                  notificationCount={notificationCount}
+                  totalUnreadMessages={totalUnreadMessages}
+                  markNotificationsAsRead={markNotificationsAsRead}
+                  onNavigate={handleMobileNavigate}
+                  isMobile={true}
+                />
+              </div>
             </div>
           </motion.aside>
         )}

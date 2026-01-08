@@ -23,7 +23,7 @@ const NavigationItems = ({
   };
 
   return (
-    <nav className="space-y-1 mb-6">
+    <nav className="space-y-0.5 py-2">
       {navItems.map((item) => {
         const IconComponent = item.icon;
         const isActive = activeTab === item.id;
@@ -36,22 +36,22 @@ const NavigationItems = ({
           <motion.button
             key={item.id}
             onClick={() => handleNavClick(item)}
-            className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all cursor-pointer ${
-              isActive
-                ? "bg-orange-500 text-white shadow-lg shadow-orange-500/25"
-                : "text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
-            }`}
-            whileHover={!isMobile ? { scale: 1.01, x: 2 } : undefined}
-            whileTap={isMobile ? { scale: 0.98 } : { scale: 0.99 }}
+            className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all cursor-pointer ${isActive
+                ? "bg-orange-500 text-white shadow-sm"
+                : "text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
+              }`}
+            whileHover={!isMobile && !isActive ? { x: 2 } : undefined}
+            whileTap={{ scale: 0.99 }}
           >
-            <IconComponent className="w-5 h-5" />
-            <span className="font-medium text-sm">{item.label}</span>
+            <IconComponent className="w-5 h-5 flex-shrink-0" />
+            <span className="font-medium text-sm flex-1 text-left">
+              {item.label}
+            </span>
 
             {showNotificationBadge && (
               <Badge
                 count={notificationCount}
                 variant={isActive ? "light" : "danger"}
-                className="ml-auto"
               />
             )}
 
@@ -59,7 +59,6 @@ const NavigationItems = ({
               <Badge
                 count={totalUnreadMessages}
                 variant={isActive ? "light" : "primary"}
-                className="ml-auto"
               />
             )}
           </motion.button>

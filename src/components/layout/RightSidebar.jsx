@@ -20,7 +20,7 @@ const RightSidebar = () => {
     pendingNavigateToMessages,
     clearPendingNavigation,
   } = useMessages();
-  const { setActiveTab, isTheaterModeOpen } = useUI();
+  const { setActiveTab } = useUI();
 
   // Handle navigation to messages tab when a conversation is started
   useEffect(() => {
@@ -32,15 +32,12 @@ const RightSidebar = () => {
 
   return (
     <motion.aside
-      className="fixed right-0 top-16 bottom-0 w-80 hidden xl:block border-l border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 overflow-y-auto custom-scrollbar transition-colors duration-300"
-      initial={{ x: 0, opacity: 1 }}
-      animate={{
-        x: isTheaterModeOpen ? 320 : 0,
-        opacity: isTheaterModeOpen ? 0 : 1,
-      }}
-      transition={{ duration: 0.3 }}
+      className="w-full bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-700 transition-colors duration-300"
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3, delay: 0.1 }}
     >
-      <div className="p-6">
+      <div className="p-4">
         {/* Active Now Section */}
         <ActiveNowSection
           activeOnlineFriends={activeOnlineFriends}
@@ -57,7 +54,7 @@ const RightSidebar = () => {
         />
 
         {/* Footer */}
-        <div className="mt-8 pt-6 border-t border-slate-100 dark:border-slate-700 transition-colors">
+        <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-700 transition-colors">
           <p className="text-xs text-slate-400 dark:text-slate-500 text-center transition-colors">
             © 2026 Orbit. Connect • Discover • Thrive
           </p>
