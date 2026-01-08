@@ -3,28 +3,11 @@ import { motion } from "framer-motion";
 import { Heart, MessageCircle, UserPlus, User, Bell, Users } from "../icons";
 import Avatar from "../common/Avatar";
 import EmptyState from "../common/EmptyState";
-import { useNotifications, useUser } from "../../context/AppContext";
+import { useNotifications } from "../../context/AppContext";
 
 const NotificationsTab = () => {
   // Access notifications state directly from context
   const { notifications, setNotifications } = useNotifications();
-
-  // Access user actions from context
-  const { handleViewProfile } = useUser();
-
-  // Mark a single notification as read
-  const handleNotificationClick = (notification) => {
-    if (!notification.isRead) {
-      setNotifications((prev) =>
-        prev.map((n) =>
-          n.id === notification.id ? { ...n, isRead: true } : n,
-        ),
-      );
-    }
-    if (handleViewProfile) {
-      handleViewProfile(notification.user);
-    }
-  };
 
   return (
     <div className="max-w-2xl mx-auto w-full">
@@ -39,7 +22,6 @@ const NotificationsTab = () => {
               key={notification.id}
               notification={notification}
               index={index}
-              onClick={() => handleNotificationClick(notification)}
             />
           ))
         ) : (
@@ -72,24 +54,19 @@ const NotificationsHeader = () => {
   );
 };
 
-const NotificationItem = ({ notification, index, onClick }) => {
+const NotificationItem = ({ notification, index }) => {
   const isUnread = !notification.isRead;
 
   return (
     <motion.div
-      role="button"
-      tabIndex={0}
-      className={`bg-white dark:bg-slate-800 rounded-xl p-4 shadow-xs border cursor-pointer transition-all duration-300 ${
+      className={`bg-white dark:bg-slate-800 rounded-xl p-4 shadow-xs border cursor-default transition-all duration-300 ${
         isUnread
           ? "border-orange-200 dark:border-orange-500/30 bg-orange-50/30 dark:bg-orange-500/10"
-          : "border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700/50"
+          : "border-slate-200 dark:border-slate-700"
       }`}
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: index * 0.05 }}
-      whileHover={{ x: 2 }}
-      onClick={onClick}
-      onKeyDown={(e) => e.key === "Enter" && onClick()}
     >
       <div className="flex items-center gap-4">
         {/* Avatar with Icon Badge */}
