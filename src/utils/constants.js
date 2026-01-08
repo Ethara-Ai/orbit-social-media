@@ -11,6 +11,7 @@ export const TABS = {
   EXPLORE: "explore",
   MESSAGES: "messages",
   NOTIFICATIONS: "notifications",
+  CONNECTIONS: "connections",
 };
 
 /**

@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Home, Search, MessageCircle, Bell, X } from "../icons";
 import UserProfileCard from "../sidebar/UserProfileCard";
 import NavigationItems from "../sidebar/NavigationItems";
-import ConnectionsList from "../sidebar/ConnectionsList";
 import {
   useUser,
   useUI,
@@ -76,12 +75,7 @@ const Sidebar = () => {
             markNotificationsAsRead={markNotificationsAsRead}
           />
 
-          {/* Connections Section */}
-          <ConnectionsList
-            friends={friends}
-            showFriends={showFriends}
-            setShowFriends={setShowFriends}
-          />
+
         </div>
       </motion.aside>
 
@@ -119,12 +113,7 @@ const Sidebar = () => {
                 isMobile={true}
               />
 
-              {/* Connections Section */}
-              <ConnectionsList
-                friends={friends}
-                showFriends={showFriends}
-                setShowFriends={setShowFriends}
-              />
+
             </div>
           </motion.aside>
         )}

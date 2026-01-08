@@ -12,6 +12,7 @@ const MessagesTab = lazy(() => import("../messages/MessagesTab"));
 const NotificationsTab = lazy(
   () => import("../notifications/NotificationsTab"),
 );
+const ConnectionsTab = lazy(() => import("../connections/ConnectionsTab"));
 
 /**
  * TabLoadingFallback - Skeleton loader shown while tab components load
@@ -205,6 +206,31 @@ const MainContent = () => {
                 </motion.div>
               ) : (
                 <NotificationsTab />
+              )}
+            </Suspense>
+          </div>
+        </div>
+      </div>
+
+      {/* Connections Tab */}
+      <div className={getTabWrapperClass(TABS.CONNECTIONS)}>
+        <div
+          ref={registerScrollContainer(TABS.CONNECTIONS)}
+          onScroll={createScrollHandler(TABS.CONNECTIONS)}
+          className={scrollContainerClass}
+        >
+          <div className="p-2 sm:p-4 lg:p-6 w-full max-w-full">
+            <Suspense fallback={<TabLoadingFallback />}>
+              {activeTab === TABS.CONNECTIONS ? (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <ConnectionsTab />
+                </motion.div>
+              ) : (
+                <ConnectionsTab />
               )}
             </Suspense>
           </div>
