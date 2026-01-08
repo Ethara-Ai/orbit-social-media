@@ -45,8 +45,8 @@ const NotificationsTab = () => {
         ) : (
           <EmptyState
             icon={Bell}
-            title="No activity yet"
-            description="When there's activity in your orbit, it'll show up here"
+            title="No notifications yet"
+            description="When there's any update in your orbit, it'll show up here"
           />
         )}
       </div>
@@ -63,7 +63,7 @@ const NotificationsHeader = () => {
   return (
     <div className="mb-6">
       <h1 className="text-2xl font-bold text-slate-900 dark:text-white transition-colors">
-        Activity
+        Notifications
       </h1>
       <p className="text-slate-500 dark:text-slate-400 text-sm mt-1 transition-colors">
         Stay updated with your latest interactions
@@ -77,11 +77,10 @@ const NotificationItem = ({ notification, index, onClick }) => {
 
   return (
     <motion.div
-      className={`bg-white dark:bg-slate-800 rounded-xl p-4 shadow-xs border cursor-pointer transition-all duration-300 ${
-        isUnread
+      className={`bg-white dark:bg-slate-800 rounded-xl p-4 shadow-xs border cursor-pointer transition-all duration-300 ${isUnread
           ? "border-orange-200 dark:border-orange-500/30 bg-orange-50/30 dark:bg-orange-500/10"
           : "border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700/50"
-      }`}
+        }`}
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: index * 0.05 }}
@@ -152,7 +151,7 @@ const NotificationsFooter = ({ count }) => {
       transition={{ delay: 0.3 }}
     >
       <p className="text-slate-400 dark:text-slate-500 text-sm transition-colors">
-        Showing {count} activit{count !== 1 ? "ies" : "y"}
+        Showing {count} notification{count !== 1 ? "s" : ""}
       </p>
     </motion.div>
   );

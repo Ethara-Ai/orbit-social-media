@@ -26,7 +26,7 @@ const ConnectionsList = ({
             transition={{ duration: 0.3, ease: "easeInOut" }}
             className="overflow-hidden"
           >
-            <div className="space-y-1 py-2 max-h-60 sm:max-h-72 overflow-y-auto custom-scrollbar">
+            <div className="space-y-0.5 py-1.5 max-h-60 sm:max-h-72 overflow-y-auto custom-scrollbar">
               {friends.map((friend, index) => (
                 <ConnectionItem
                   key={friend.id}
@@ -78,7 +78,7 @@ const ConnectionItem = ({ friend, index, onClick }) => {
 
   return (
     <motion.div
-      className="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors cursor-default mx-2"
+      className="flex items-center gap-2 p-1.5 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors cursor-default mx-2"
       initial={{ x: -10, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       transition={{ delay: index * 0.03 }}
@@ -87,13 +87,13 @@ const ConnectionItem = ({ friend, index, onClick }) => {
       <Avatar
         src={friend.avatar}
         alt={friend.name}
-        size="md"
+        size="sm"
         isOnline={friend.isOnline}
         showStatus={true}
-        className="w-9 h-9"
+        className="w-7 h-7"
       />
       <div className="flex-1 min-w-0">
-        <p className="font-medium text-slate-900 dark:text-white truncate text-sm transition-colors">
+        <p className="font-medium text-slate-900 dark:text-white truncate text-xs transition-colors">
           {friend.name}
         </p>
         <p className="text-xs text-slate-500 dark:text-slate-400 truncate transition-colors">

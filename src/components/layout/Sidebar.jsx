@@ -24,7 +24,7 @@ const Sidebar = () => {
     { id: "feed", label: "Home", icon: Home },
     { id: "explore", label: "Discover", icon: Search },
     { id: "messages", label: "Chats", icon: MessageCircle },
-    { id: "notifications", label: "Activity", icon: Bell },
+    { id: "notifications", label: "Notifications", icon: Bell },
   ];
 
   const handleOpenCurrentUserModal = () => {

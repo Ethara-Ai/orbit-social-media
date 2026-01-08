@@ -64,7 +64,7 @@ export const generateFriendRequestNotification = (user) => {
 };
 
 /**
- * Generate a random notification (either friend request or connection activity)
+ * Generate a random notification (either friend request or connection notifications)
  * @param {Array} friends - List of user's friends/connections
  * @param {Array} suggestedUsers - List of suggested users
  * @param {number} friendRequestChance - Probability of friend request (0-1), default 0.3

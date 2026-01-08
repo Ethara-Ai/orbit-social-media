@@ -90,9 +90,9 @@ class MockIntersectionObserver {
   constructor(callback) {
     this.callback = callback;
   }
-  observe() {}
-  unobserve() {}
-  disconnect() {}
+  observe() { }
+  unobserve() { }
+  disconnect() { }
 }
 
 Object.defineProperty(window, "IntersectionObserver", {
@@ -102,9 +102,9 @@ Object.defineProperty(window, "IntersectionObserver", {
 
 // Mock ResizeObserver
 class MockResizeObserver {
-  observe() {}
-  unobserve() {}
-  disconnect() {}
+  observe() { }
+  unobserve() { }
+  disconnect() { }
 }
 
 Object.defineProperty(window, "ResizeObserver", {
