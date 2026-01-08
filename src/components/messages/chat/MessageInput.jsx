@@ -64,7 +64,7 @@ const MessageInput = ({
           value={messageText}
           onChange={(e) => setMessageText(e.target.value)}
           onKeyDown={handleKeyDown}
-          className="flex-1 min-w-0 h-9 sm:h-11 px-3 sm:px-4 bg-slate-100 dark:bg-slate-800 border-0 rounded-full text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:bg-white dark:focus:bg-slate-700 transition-all"
+          className="flex-1 min-w-0 h-9 sm:h-11 px-3 sm:px-4 bg-slate-100 dark:bg-slate-800 border-0 rounded-full text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-hidden focus:ring-2 focus:ring-orange-500 focus:bg-white dark:focus:bg-slate-700 transition-all"
         />
 
         {/* Send Button */}

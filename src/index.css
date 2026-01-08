@@ -1,91 +1,257 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-/* Reset and base styles */
-*,
-*::before,
-*::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+    --font-raleway: Raleway, sans-serif;
+
+    /* v3-compatible shadow scale */
+    --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
 }
 
-:root {
-    font-family:
-        "Inter",
-        "Raleway",
-        system-ui,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Roboto,
-        Oxygen,
-        Ubuntu,
-        Cantarell,
-        "Open Sans",
-        "Helvetica Neue",
-        sans-serif;
-    line-height: 1.5;
-    font-weight: 400;
-    font-synthesis: none;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%;
-    text-size-adjust: 100%;
-}
+/*
+  Base layer: Reset and foundational styles
+  These have the lowest specificity and won't override utilities
+*/
+@layer base {
+    /* Default border color for v3 compatibility */
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentcolor);
+    }
 
-html {
-    height: 100%;
-    width: 100%;
-    overflow-x: hidden;
-    -webkit-overflow-scrolling: touch;
-}
+    :root {
+        font-family:
+            "Inter",
+            "Raleway",
+            system-ui,
+            -apple-system,
+            BlinkMacSystemFont,
+            "Segoe UI",
+            Roboto,
+            Oxygen,
+            Ubuntu,
+            Cantarell,
+            "Open Sans",
+            "Helvetica Neue",
+            sans-serif;
+        line-height: 1.5;
+        font-weight: 400;
+        font-synthesis: none;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+    }
 
-body {
-    height: 100%;
-    width: 100%;
-    min-width: 320px;
-    max-width: 100vw;
-    overflow-x: hidden;
-    position: relative;
-}
+    html {
+        height: 100%;
+        width: 100%;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
+        transition: background-color 0.2s ease-in-out;
+    }
 
-#root {
-    height: 100%;
-    width: 100%;
-    max-width: 100vw;
-    overflow-x: hidden;
-    position: relative;
-}
+    body {
+        height: 100%;
+        width: 100%;
+        min-width: 320px;
+        max-width: 100vw;
+        overflow-x: hidden;
+        position: relative;
+        scrollbar-width: thin;
+        scrollbar-color: #f97316 #f1f5f9;
+    }
 
-/* Prevent horizontal overflow on all elements */
-img,
-video,
-iframe,
-canvas,
-svg {
-    max-width: 100%;
-    height: auto;
-}
+    #root {
+        height: 100%;
+        width: 100%;
+        max-width: 100vw;
+        overflow-x: hidden;
+        position: relative;
+    }
 
-/* Fix input zoom on iOS */
-input,
-textarea,
-select {
-    font-size: 16px;
-}
+    /* Prevent horizontal overflow on non-image elements */
+    iframe,
+    canvas,
+    svg {
+        max-width: 100%;
+    }
 
-@media (min-width: 768px) {
+    /* Fix input zoom on iOS */
     input,
     textarea,
     select {
-        font-size: inherit;
+        font-size: 16px;
+    }
+
+    @media (min-width: 768px) {
+        input,
+        textarea,
+        select {
+            font-size: inherit;
+        }
+    }
+
+    /* Tap highlight removal for mobile */
+    button,
+    a,
+    [role="button"] {
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    /* Focus visible for accessibility */
+    :focus-visible {
+        outline: 2px solid #f97316;
+        outline-offset: 2px;
+    }
+
+    /* Remove default focus outline */
+    :focus:not(:focus-visible) {
+        outline: none;
+    }
+
+    /* Dark mode base styles */
+    .dark {
+        color-scheme: dark;
+    }
+
+    .dark body {
+        background-color: #020617;
+        scrollbar-color: #f97316 #1e293b;
+    }
+
+    /* Safe area insets for notched devices */
+    @supports (padding: max(0px)) {
+        body {
+            padding-left: max(0px, env(safe-area-inset-left));
+            padding-right: max(0px, env(safe-area-inset-right));
+        }
     }
 }
 
+/*
+  Utilities layer: Custom utility classes
+  These integrate properly with Tailwind's utility layer
+*/
+@layer utilities {
+    /* Hide scrollbar utility */
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+
+    .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    /* Custom scrollbar for specific containers */
+    .custom-scrollbar {
+        scrollbar-width: thin;
+        scrollbar-color: #cbd5e1 transparent;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 10px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+    }
+
+    /* Dark mode custom scrollbar */
+    .dark .custom-scrollbar {
+        scrollbar-color: #475569 transparent;
+    }
+
+    .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #475569;
+    }
+
+    .dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: #64748b;
+    }
+
+    /* Utility to contain content */
+    .contain-layout {
+        contain: layout;
+    }
+
+    .contain-paint {
+        contain: paint;
+    }
+
+    /* Fix for 100vh on mobile browsers */
+    .min-h-screen-safe {
+        min-height: 100vh;
+        min-height: -webkit-fill-available;
+    }
+
+    /* Line clamp utilities */
+    .line-clamp-1 {
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .line-clamp-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .line-clamp-3 {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    /* Animation for skeleton loaders */
+    .animate-shimmer {
+        background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+        background-size: 200% 100%;
+        animation: shimmer 1.5s infinite;
+    }
+}
+
+/*
+  Keyframes must be outside @layer
+*/
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+/*
+  Scrollbar styles (pseudo-elements, outside layers for browser compatibility)
+*/
 /* Global scrollbar styling */
 ::-webkit-scrollbar {
     width: 6px;
@@ -142,202 +308,16 @@ body::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(to bottom, #ea580c, #c2410c);
 }
 
-body {
-    scrollbar-width: thin;
-    scrollbar-color: #f97316 #f1f5f9;
-}
-
 /* Dark mode body scrollbar */
 .dark body::-webkit-scrollbar-track,
 html.dark body::-webkit-scrollbar-track {
     background: #1e293b;
 }
 
-.dark body,
-html.dark body {
-    scrollbar-color: #f97316 #1e293b;
-}
-
-/* Hide scrollbar utility */
-.scrollbar-hide::-webkit-scrollbar {
-    display: none;
-}
-
-.scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
-
-/* Custom scrollbar for specific containers */
-.custom-scrollbar::-webkit-scrollbar {
-    width: 6px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
-    border-radius: 10px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: #94a3b8;
-}
-
-.custom-scrollbar {
-    scrollbar-width: thin;
-    scrollbar-color: #cbd5e1 transparent;
-}
-
-/* Dark mode custom scrollbar */
-.dark .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: #475569;
-}
-
-.dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: #64748b;
-}
-
-.dark .custom-scrollbar {
-    scrollbar-color: #475569 transparent;
-}
-
-/* Mobile-specific fixes */
-@media (max-width: 639px) {
-    /* Prevent any element from causing horizontal scroll */
-    body,
-    #root,
-    main,
-    div,
-    section,
-    article,
-    aside,
-    header,
-    footer,
-    nav {
-        max-width: 100vw;
-    }
-
-    /* Fix for fixed positioned elements on mobile */
-    .fixed {
-        max-width: 100vw;
-    }
-
-    /* Ensure proper touch scrolling */
-    .overflow-y-auto,
-    .overflow-auto {
-        -webkit-overflow-scrolling: touch;
-    }
-}
-
-/* Utility to contain content */
-.contain-layout {
-    contain: layout;
-}
-
-.contain-paint {
-    contain: paint;
-}
-
-/* Safe area insets for notched devices */
-@supports (padding: max(0px)) {
-    body {
-        padding-left: max(0px, env(safe-area-inset-left));
-        padding-right: max(0px, env(safe-area-inset-right));
-    }
-}
-
-/* Fix for 100vh on mobile browsers */
-.min-h-screen-safe {
-    min-height: 100vh;
-    min-height: -webkit-fill-available;
-}
-
-/* Prevent text selection on UI elements */
-.select-none {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
-/* Tap highlight removal for mobile */
-button,
-a,
-[role="button"] {
-    -webkit-tap-highlight-color: transparent;
-}
-
-/* Line clamp utilities */
-.line-clamp-1 {
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-
-.line-clamp-2 {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-
-.line-clamp-3 {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-
-/* Animation for skeleton loaders */
-@keyframes shimmer {
-    0% {
-        background-position: -200% 0;
-    }
-    100% {
-        background-position: 200% 0;
-    }
-}
-
-.animate-shimmer {
-    background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
-    background-size: 200% 100%;
-    animation: shimmer 1.5s infinite;
-}
-
-/* Focus visible for accessibility */
-:focus-visible {
-    outline: 2px solid #f97316;
-    outline-offset: 2px;
-}
-
-/* Remove default focus outline */
-:focus:not(:focus-visible) {
-    outline: none;
-}
-
-/* Dark mode transition for smooth theme switching */
-html {
-    transition: background-color 0.2s ease-in-out;
-}
-
-/* Dark mode base styles */
-.dark {
-    color-scheme: dark;
-}
-
-.dark body {
-    background-color: #020617;
-}
-
-/* ============================================
-   Mobile Overlay Optimization
-   ============================================ */
-
-/* Disable backdrop-blur on mobile to prevent full-screen blur issues */
+/*
+  Mobile Overlay Optimization
+  These need higher specificity, so they stay outside layers
+*/
 @media (max-width: 1023px) {
     .backdrop-blur-sm {
         backdrop-filter: none !important;
@@ -345,11 +325,23 @@ html {
     }
 }
 
-/* Fallback for devices with poor backdrop-filter support */
 @supports not (backdrop-filter: blur(4px)) {
     .backdrop-blur-sm {
         backdrop-filter: none;
         -webkit-backdrop-filter: none;
         background-color: rgba(0, 0, 0, 0.6);
+    }
+}
+
+/*
+  Mobile-specific max-width constraints
+  Using @layer to not override utilities
+*/
+@layer base {
+    @media (max-width: 639px) {
+        body,
+        #root {
+            max-width: 100vw;
+        }
     }
 }

@@ -88,33 +88,33 @@ describe("Avatar", () => {
     });
   });
 
-  describe("ring styles", () => {
-    it("should not have ring classes by default", () => {
+  describe("ring-3 styles", () => {
+    it("should not have ring-3 classes by default", () => {
       render(<Avatar {...defaultProps} />);
       const img = screen.getByRole("img");
       expect(img).not.toHaveClass("ring-2");
     });
 
-    it("should apply ring classes when ring is true", () => {
+    it("should apply ring-3 classes when ring-3 is true", () => {
       render(<Avatar {...defaultProps} ring={true} />);
       const img = screen.getByRole("img");
       expect(img).toHaveClass("ring-2");
       expect(img).toHaveClass("shadow-md");
     });
 
-    it("should apply white ring color by default", () => {
+    it("should apply white ring-3 color by default", () => {
       render(<Avatar {...defaultProps} ring={true} />);
       const img = screen.getByRole("img");
       expect(img).toHaveClass("ring-white");
     });
 
-    it("should apply slate ring color", () => {
+    it("should apply slate ring-3 color", () => {
       render(<Avatar {...defaultProps} ring={true} ringColor="slate" />);
       const img = screen.getByRole("img");
       expect(img).toHaveClass("ring-slate-100");
     });
 
-    it("should apply orange ring color", () => {
+    it("should apply orange ring-3 color", () => {
       render(<Avatar {...defaultProps} ring={true} ringColor="orange" />);
       const img = screen.getByRole("img");
       expect(img).toHaveClass("ring-orange-500/50");

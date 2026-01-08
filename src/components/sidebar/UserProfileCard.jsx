@@ -22,7 +22,7 @@ const UserProfileCard = ({
 
   return (
     <CardWrapper
-      className="bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-800 dark:to-slate-800/80 rounded-2xl p-4 mb-6 cursor-pointer border border-slate-200/50 dark:border-slate-700/50 transition-colors duration-300"
+      className="bg-linear-to-br from-slate-50 to-slate-100 dark:from-slate-800 dark:to-slate-800/80 rounded-2xl p-4 mb-6 cursor-pointer border border-slate-200/50 dark:border-slate-700/50 transition-colors duration-300"
       onClick={onClick}
       {...cardProps}
     >

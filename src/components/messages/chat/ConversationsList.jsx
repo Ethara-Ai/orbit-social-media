@@ -75,7 +75,7 @@ const ConversationsHeader = ({ searchQuery, setSearchQuery }) => {
           placeholder="Search chats..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full h-9 sm:h-10 pl-9 sm:pl-10 pr-3 sm:pr-4 bg-slate-100 dark:bg-slate-800 border-0 rounded-full text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:bg-white dark:focus:bg-slate-700 transition-all"
+          className="w-full h-9 sm:h-10 pl-9 sm:pl-10 pr-3 sm:pr-4 bg-slate-100 dark:bg-slate-800 border-0 rounded-full text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-hidden focus:ring-2 focus:ring-orange-500 focus:bg-white dark:focus:bg-slate-700 transition-all"
         />
         <Search className="absolute left-3 sm:left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 dark:text-slate-500" />
       </div>

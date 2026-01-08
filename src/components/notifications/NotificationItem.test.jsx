@@ -338,10 +338,10 @@ describe("NotificationItem", () => {
       expect(container).toHaveClass("rounded-xl");
     });
 
-    it("should have shadow-sm class", () => {
+    it("should have shadow-xs class", () => {
       render(<NotificationItem {...defaultProps} />);
       const container = screen.getByTestId("motion-div");
-      expect(container).toHaveClass("shadow-sm");
+      expect(container).toHaveClass("shadow-xs");
     });
 
     it("should have border class", () => {
@@ -460,9 +460,9 @@ describe("NotificationItem", () => {
       expect(badge).toBeInTheDocument();
     });
 
-    it("should have badge with shadow", () => {
+    it("should have badge with shadow-sm", () => {
       render(<NotificationItem {...defaultProps} />);
-      const badge = document.querySelector(".shadow-sm");
+      const badge = document.querySelector(".shadow-xs");
       expect(badge).toBeInTheDocument();
     });
   });

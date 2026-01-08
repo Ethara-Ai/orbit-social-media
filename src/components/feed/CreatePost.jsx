@@ -24,7 +24,7 @@ const CreatePost = () => {
 
   return (
     <motion.div
-      className="bg-white dark:bg-slate-800 rounded-xl sm:rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 p-3 sm:p-4 mb-4 sm:mb-6 w-full max-w-[100vw] overflow-hidden transition-colors duration-300"
+      className="bg-white dark:bg-slate-800 rounded-xl sm:rounded-2xl shadow-xs border border-slate-200 dark:border-slate-700 p-3 sm:p-4 mb-4 sm:mb-6 w-full max-w-[100vw] overflow-hidden transition-colors duration-300"
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: 0.1 }}
@@ -45,7 +45,7 @@ const CreatePost = () => {
               placeholder="Share something with your orbit..."
               value={newPostContent}
               onChange={(e) => setNewPostContent(e.target.value)}
-              className="w-full p-2 sm:p-3 pb-10 sm:pb-12 bg-transparent border-0 rounded-lg sm:rounded-xl resize-none focus:outline-none text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 text-sm transition-colors"
+              className="w-full p-2 sm:p-3 pb-10 sm:pb-12 bg-transparent border-0 rounded-lg sm:rounded-xl resize-none focus:outline-hidden text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 text-sm transition-colors"
               rows={2}
             />
 

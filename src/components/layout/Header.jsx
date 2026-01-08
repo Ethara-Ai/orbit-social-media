@@ -15,7 +15,7 @@ const Header = () => {
 
   return (
     <header className="fixed top-0 left-0 right-0 h-14 sm:h-16 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 z-40 px-2 sm:px-4 lg:px-6 w-full max-w-[100vw] transition-colors duration-300">
-      <div className="h-full max-w-screen-2xl mx-auto flex items-center justify-between gap-2">
+      <div className="h-full max-w-(--breakpoint-2xl) mx-auto flex items-center justify-between gap-2">
         {/* Logo - Clickable on mobile to open sidebar */}
         <motion.button
           onClick={() => setShowMobileNav(!showMobileNav)}
@@ -23,7 +23,7 @@ const Header = () => {
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >
-          <div className="w-8 h-8 sm:w-9 sm:h-9 bg-gradient-to-br from-orange-500 to-amber-500 rounded-xl flex items-center justify-center shadow-lg shadow-orange-500/25">
+          <div className="w-8 h-8 sm:w-9 sm:h-9 bg-linear-to-br from-orange-500 to-amber-500 rounded-xl flex items-center justify-center shadow-lg shadow-orange-500/25">
             <span className="text-white font-bold text-base sm:text-lg">O</span>
           </div>
           <span className="text-xl font-bold text-slate-900 dark:text-white hidden sm:block transition-colors">

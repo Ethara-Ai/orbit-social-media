@@ -68,7 +68,7 @@ describe("ActionButton", () => {
       expect(button).toHaveClass("text-white");
     });
 
-    it("should apply outline variant classes", () => {
+    it("should apply outline-solid variant classes", () => {
       render(<ActionButton variant="outline">Outline</ActionButton>);
       const button = screen.getByRole("button");
       expect(button).toHaveClass("border");
@@ -119,44 +119,44 @@ describe("ActionButton", () => {
     });
   });
 
-  describe("rounded styles", () => {
-    it("should apply full rounded by default", () => {
+  describe("rounded-sm styles", () => {
+    it("should apply full rounded-sm by default", () => {
       render(<ActionButton>Rounded</ActionButton>);
       const button = screen.getByRole("button");
       expect(button).toHaveClass("rounded-full");
     });
 
-    it("should apply no rounded when set to none", () => {
+    it("should apply no rounded-sm when set to none", () => {
       render(<ActionButton rounded="none">No Rounded</ActionButton>);
       const button = screen.getByRole("button");
       expect(button).toHaveClass("rounded-none");
     });
 
-    it("should apply small rounded", () => {
+    it("should apply small rounded-sm", () => {
       render(<ActionButton rounded="sm">Small Rounded</ActionButton>);
       const button = screen.getByRole("button");
-      expect(button).toHaveClass("rounded-sm");
+      expect(button).toHaveClass("rounded-xs");
     });
 
-    it("should apply medium rounded", () => {
+    it("should apply medium rounded-sm", () => {
       render(<ActionButton rounded="md">Medium Rounded</ActionButton>);
       const button = screen.getByRole("button");
       expect(button).toHaveClass("rounded-md");
     });
 
-    it("should apply large rounded", () => {
+    it("should apply large rounded-sm", () => {
       render(<ActionButton rounded="lg">Large Rounded</ActionButton>);
       const button = screen.getByRole("button");
       expect(button).toHaveClass("rounded-lg");
     });
 
-    it("should apply xl rounded", () => {
+    it("should apply xl rounded-sm", () => {
       render(<ActionButton rounded="xl">XL Rounded</ActionButton>);
       const button = screen.getByRole("button");
       expect(button).toHaveClass("rounded-xl");
     });
 
-    it("should apply 2xl rounded", () => {
+    it("should apply 2xl rounded-sm", () => {
       render(<ActionButton rounded="2xl">2XL Rounded</ActionButton>);
       const button = screen.getByRole("button");
       expect(button).toHaveClass("rounded-2xl");

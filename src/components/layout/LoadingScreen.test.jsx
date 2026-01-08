@@ -39,7 +39,7 @@ describe("LoadingScreen", () => {
   describe("logo styling", () => {
     it("should have gradient background on logo container", () => {
       const { container } = render(<LoadingScreen />);
-      const logoContainer = container.querySelector(".bg-gradient-to-br");
+      const logoContainer = container.querySelector(".bg-linear-to-br");
       expect(logoContainer).toBeInTheDocument();
     });
 
@@ -55,13 +55,13 @@ describe("LoadingScreen", () => {
       expect(logoContainer).toBeInTheDocument();
     });
 
-    it("should have rounded corners on logo", () => {
+    it("should have rounded-sm corners on logo", () => {
       const { container } = render(<LoadingScreen />);
       const logoContainer = container.querySelector(".rounded-2xl");
       expect(logoContainer).toBeInTheDocument();
     });
 
-    it("should have shadow on logo", () => {
+    it("should have shadow-sm on logo", () => {
       const { container } = render(<LoadingScreen />);
       const logoContainer = container.querySelector(".shadow-2xl");
       expect(logoContainer).toBeInTheDocument();
@@ -218,19 +218,19 @@ describe("LoadingScreen", () => {
       expect(patternContainer).toBeInTheDocument();
     });
 
-    it("should have orange background blur element", () => {
+    it("should have orange background blur-sm element", () => {
       const { container } = render(<LoadingScreen />);
       const orangeBlur = container.querySelector(".bg-orange-200");
       expect(orangeBlur).toBeInTheDocument();
     });
 
-    it("should have amber background blur element", () => {
+    it("should have amber background blur-sm element", () => {
       const { container } = render(<LoadingScreen />);
       const amberBlur = container.querySelector(".bg-amber-200");
       expect(amberBlur).toBeInTheDocument();
     });
 
-    it("should have blur effect on background elements", () => {
+    it("should have blur-sm effect on background elements", () => {
       const { container } = render(<LoadingScreen />);
       const blurElements = container.querySelectorAll(".blur-3xl");
       expect(blurElements.length).toBeGreaterThan(0);
@@ -242,7 +242,7 @@ describe("LoadingScreen", () => {
       expect(animatedElements.length).toBeGreaterThan(0);
     });
 
-    it("should have rounded background elements", () => {
+    it("should have rounded-sm background elements", () => {
       const { container } = render(<LoadingScreen />);
       const patternContainer = container.querySelector(".absolute.inset-0");
       const roundedElements =

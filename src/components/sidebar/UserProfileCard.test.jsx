@@ -239,7 +239,7 @@ describe("UserProfileCard", () => {
       const { container } = render(
         <UserProfileCard user={mockUser} avatar={mockAvatar} />,
       );
-      const card = container.querySelector(".bg-gradient-to-br");
+      const card = container.querySelector(".bg-linear-to-br");
       expect(card).toBeInTheDocument();
     });
 
@@ -327,7 +327,7 @@ describe("UserProfileCard", () => {
       expect(statItems.length).toBeGreaterThan(0);
     });
 
-    it("should have rounded corners on stat items", () => {
+    it("should have rounded-sm corners on stat items", () => {
       const { container } = render(
         <UserProfileCard user={mockUser} avatar={mockAvatar} />,
       );
