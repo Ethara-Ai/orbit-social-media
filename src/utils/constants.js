@@ -52,7 +52,7 @@ export const MAX_NOTIFICATIONS = 20;
 /**
  * Number of active online friends to display
  */
-export const MAX_ACTIVE_FRIENDS = 5;
+export const MAX_ACTIVE_FRIENDS = 6;
 
 /**
  * Number of suggested users to display
