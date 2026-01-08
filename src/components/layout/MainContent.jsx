@@ -100,9 +100,7 @@ const MainContent = () => {
     }
   }, [isLeavingMessagesTab, cleanupEmptyConvos]);
 
-  // Common scroll container styles
-  const scrollContainerClass =
-    "overflow-y-auto overflow-x-hidden custom-scrollbar";
+  const scrollContainerClass = "custom-scrollbar";
 
   // Tab wrapper styles - keeps tab mounted but hidden when not active
   const getTabWrapperClass = (tabId) => {
@@ -111,7 +109,7 @@ const MainContent = () => {
   };
 
   return (
-    <main className="w-full min-w-0 overflow-hidden bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-700 min-h-[calc(100vh-7rem)]">
+    <main className="w-full min-w-0 bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-700 min-h-[calc(100vh-7rem)]">
       {/* Feed Tab */}
       <div className={getTabWrapperClass(TABS.FEED)}>
         <div

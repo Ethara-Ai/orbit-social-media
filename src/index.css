@@ -60,6 +60,7 @@
         height: 100%;
         width: 100%;
         overflow-x: hidden;
+        overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
         transition: background-color 0.2s ease-in-out;
     }
