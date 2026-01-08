@@ -113,7 +113,7 @@ const ConnectionsTab = () => {
             >
               <button
                 type="button"
-                className="shrink-0 bg-transparent border-0 p-0"
+                className="shrink-0 bg-transparent border-0 p-0 cursor-pointer"
                 onClick={() => handleViewProfile(user)}
               >
                 <img
@@ -125,7 +125,7 @@ const ConnectionsTab = () => {
               <div className="flex-1 min-w-0">
                 <button
                   type="button"
-                  className="font-medium text-sm text-slate-900 dark:text-white truncate hover:text-orange-600 dark:hover:text-orange-400 transition-colors bg-transparent border-0 p-0 text-left"
+                  className="font-medium text-sm text-slate-900 dark:text-white truncate hover:text-orange-600 dark:hover:text-orange-400 transition-colors bg-transparent border-0 p-0 text-left cursor-pointer"
                   onClick={() => handleViewProfile(user)}
                 >
                   {user.name}
@@ -139,7 +139,7 @@ const ConnectionsTab = () => {
                 className={`shrink-0 px-3 py-1.5 rounded-md font-medium text-xs transition-all ${
                   connectionRequests.includes(user.id)
                     ? "bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-400 cursor-default"
-                    : "bg-orange-500 hover:bg-orange-600 text-white shadow-sm"
+                    : "bg-orange-500 hover:bg-orange-600 text-white shadow-sm cursor-pointer"
                 }`}
                 whileHover={{
                   scale: connectionRequests.includes(user.id) ? 1 : 1.02,

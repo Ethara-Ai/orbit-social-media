@@ -36,7 +36,7 @@ const NavigationItems = ({
           <motion.button
             key={item.id}
             onClick={() => handleNavClick(item)}
-            className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg transition-all ${
+            className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg transition-all cursor-pointer ${
               isActive
                 ? "bg-orange-500 text-white shadow-sm"
                 : "text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"

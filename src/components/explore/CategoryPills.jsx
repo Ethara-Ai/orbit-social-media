@@ -73,6 +73,7 @@ const CategoryPill = ({
     text-sm
     font-medium
     transition-all
+    cursor-pointer
   `;
 
   const activeClasses = isActive

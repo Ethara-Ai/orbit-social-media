@@ -78,7 +78,7 @@ const PostComments = ({
           <motion.button
             onClick={handleSubmit}
             disabled={!newComment[postId]?.trim()}
-            className="bg-orange-500 hover:bg-orange-600 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full font-medium text-xs sm:text-sm disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-orange-500 transition-colors shrink-0"
+            className="bg-orange-500 hover:bg-orange-600 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full font-medium text-xs sm:text-sm cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-orange-500 transition-colors shrink-0"
             whileHover={{
               scale: newComment[postId]?.trim() ? 1.02 : 1,
             }}

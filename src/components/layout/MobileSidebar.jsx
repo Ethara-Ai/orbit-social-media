@@ -107,7 +107,7 @@ const MobileSidebarHeader = ({ onClose }) => {
       </div>
       <motion.button
         onClick={onClose}
-        className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+        className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
       >

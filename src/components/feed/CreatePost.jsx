@@ -26,12 +26,16 @@ const CreatePost = () => {
   useEffect(() => {
     const textarea = textareaRef.current;
     if (textarea) {
-      // Reset to minimum height first
-      textarea.style.height = "30px";
-      // Only expand if content overflows
-      if (textarea.scrollHeight > 30) {
-        textarea.style.height = `${Math.min(textarea.scrollHeight, 120)}px`;
-      }
+      // Reset to minimum height first to calculate proper scrollHeight
+      textarea.style.height = "auto";
+      // Calculate new height based on content, with min and max bounds
+      const minHeight = 40; // Minimum height in pixels
+      const maxHeight = 150; // Maximum height before scrolling
+      const newHeight = Math.max(
+        minHeight,
+        Math.min(textarea.scrollHeight, maxHeight),
+      );
+      textarea.style.height = `${newHeight}px`;
     }
   }, [newPostContent]);
 
@@ -62,14 +66,22 @@ const CreatePost = () => {
         />
         <div className="flex-1 min-w-0">
           {/* Text Input Area with inline buttons */}
-          <div className="flex items-center gap-2 bg-slate-100 dark:bg-slate-700/50 rounded-full focus-within:ring-1 focus-within:ring-orange-500/50 focus-within:bg-white dark:focus-within:bg-slate-800 transition-all px-3 py-1.5">
+          <div className="group relative bg-slate-100 dark:bg-slate-700/50 rounded-2xl focus-within:ring-1 focus-within:ring-orange-500/50 focus-within:bg-white dark:focus-within:bg-slate-800 transition-all border border-transparent focus-within:border-slate-200 dark:focus-within:border-slate-600">
+            {/* Textarea with proper padding to avoid overlap with buttons */}
             <textarea
               ref={textareaRef}
               placeholder="Share something..."
               value={newPostContent}
               onChange={handleTextChange}
-              className="flex-1 bg-transparent border-0 resize-none focus:outline-hidden text-slate-900 dark:text-white placeholder-slate-500 text-xs sm:text-sm leading-tight overflow-hidden py-2"
-              style={{ height: "30px", maxHeight: "120px" }}
+              className="block w-full bg-transparent border-0 resize-none focus:outline-hidden text-slate-900 dark:text-white placeholder-slate-500 text-xs sm:text-sm leading-normal pl-3 sm:pl-4 pr-[95px] sm:pr-[105px] py-2.5 sm:py-3 scrollbar-hide"
+              style={{
+                minHeight: "40px",
+                maxHeight: "150px",
+                overflowY: "auto",
+                wordBreak: "break-word",
+                overflowWrap: "break-word",
+                whiteSpace: "pre-wrap",
+              }}
               rows={1}
             />
 
@@ -80,13 +92,16 @@ const CreatePost = () => {
               onChange={handleImageUpload}
               className="hidden"
             />
-            <div className="flex items-center gap-1 shrink-0">
+
+            {/* Action buttons positioned absolutely to avoid text overlap */}
+            <div className="absolute right-1.5 sm:right-2 bottom-1.5 sm:bottom-2 flex items-center gap-0.5 sm:gap-1">
               <motion.button
                 onClick={() => document.getElementById("image-upload")?.click()}
-                className="p-1 text-slate-500 dark:text-slate-400 hover:text-emerald-500 dark:hover:text-emerald-400 rounded-full transition-colors"
+                className="p-1.5 sm:p-2 text-slate-500 dark:text-slate-400 hover:text-emerald-500 dark:hover:text-emerald-400 rounded-full transition-colors cursor-pointer bg-slate-100 dark:bg-slate-700/50 group-focus-within:bg-white dark:group-focus-within:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-600"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 title="Add photo"
+                type="button"
               >
                 <Camera className="w-4 h-4" />
               </motion.button>
@@ -94,13 +109,14 @@ const CreatePost = () => {
               <motion.button
                 onClick={handleCreatePost}
                 disabled={!newPostContent.trim() && !selectedImage}
-                className="bg-orange-500 hover:bg-orange-600 text-white px-2.5 py-1 rounded-full font-semibold text-[10px] sm:text-[11px] transition-colors disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-orange-500"
+                className="bg-orange-500 hover:bg-orange-600 text-white px-2.5 sm:px-3 py-1.5 sm:py-1.5 rounded-full font-semibold text-[10px] sm:text-[11px] transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-orange-500 whitespace-nowrap"
                 whileHover={{
                   scale: newPostContent.trim() || selectedImage ? 1.02 : 1,
                 }}
                 whileTap={{
                   scale: newPostContent.trim() || selectedImage ? 0.98 : 1,
                 }}
+                type="button"
               >
                 Share
               </motion.button>
@@ -117,7 +133,8 @@ const CreatePost = () => {
               />
               <button
                 onClick={removeSelectedMedia}
-                className="absolute top-1.5 right-1.5 sm:top-2 sm:right-2 bg-slate-900/80 text-white rounded-full p-1 sm:p-1.5 hover:bg-slate-900 transition-colors"
+                className="absolute top-1.5 right-1.5 sm:top-2 sm:right-2 bg-slate-900/80 text-white rounded-full p-1 sm:p-1.5 hover:bg-slate-900 transition-colors cursor-pointer"
+                type="button"
               >
                 <X className="w-3 h-3 sm:w-4 sm:h-4" />
               </button>

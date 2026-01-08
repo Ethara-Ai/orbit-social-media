@@ -180,10 +180,10 @@ const ProfileTab = () => {
       prev.map((post) =>
         post.id === postId
           ? {
-            ...post,
-            isLiked: !post.isLiked,
-            likes: post.isLiked ? post.likes - 1 : post.likes + 1,
-          }
+              ...post,
+              isLiked: !post.isLiked,
+              likes: post.isLiked ? post.likes - 1 : post.likes + 1,
+            }
           : post,
       ),
     );
@@ -319,7 +319,7 @@ const ProfileTab = () => {
           >
             <motion.button
               onClick={handleShareProfile}
-              className="flex items-center gap-2 px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+              className="flex items-center gap-2 px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors cursor-pointer"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
@@ -378,10 +378,11 @@ const ProfileTab = () => {
             <motion.button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`px-4 py-2 text-sm font-medium transition-colors relative ${activeTab === tab.id
+              className={`px-4 py-2 text-sm font-medium transition-colors relative cursor-pointer ${
+                activeTab === tab.id
                   ? "text-orange-500"
                   : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
-                }`}
+              }`}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
@@ -458,16 +459,18 @@ const ProfileTab = () => {
                     <div className="p-3 flex items-center gap-4 border-t border-slate-100 dark:border-slate-700">
                       <motion.button
                         onClick={() => handleLike(post.id)}
-                        className={`flex items-center gap-1.5 ${post.isLiked
+                        className={`flex items-center gap-1.5 cursor-pointer ${
+                          post.isLiked
                             ? "text-rose-500"
                             : "text-slate-500 dark:text-slate-400 hover:text-rose-500"
-                          }`}
+                        }`}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                       >
                         <Heart
-                          className={`w-5 h-5 ${post.isLiked ? "fill-current" : ""
-                            }`}
+                          className={`w-5 h-5 ${
+                            post.isLiked ? "fill-current" : ""
+                          }`}
                         />
                         <span className="text-sm font-medium">
                           {post.likes}
@@ -476,10 +479,11 @@ const ProfileTab = () => {
 
                       <motion.button
                         onClick={() => handleCommentToggle(post.id)}
-                        className={`flex items-center gap-1.5 ${profilePostComments[post.id]
+                        className={`flex items-center gap-1.5 cursor-pointer ${
+                          profilePostComments[post.id]
                             ? "text-blue-500"
                             : "text-slate-500 dark:text-slate-400 hover:text-blue-500"
-                          }`}
+                        }`}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                       >
@@ -564,7 +568,7 @@ const ProfileTab = () => {
                                 <motion.button
                                   onClick={() => handleAddComment(post.id)}
                                   disabled={!newComment[post.id]?.trim()}
-                                  className="px-3 py-1.5 bg-orange-500 text-white rounded-full text-xs font-semibold hover:bg-orange-600 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                                  className="px-3 py-1.5 bg-orange-500 text-white rounded-full text-xs font-semibold hover:bg-orange-600 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
                                   whileHover={{ scale: 1.02 }}
                                   whileTap={{ scale: 0.98 }}
                                 >

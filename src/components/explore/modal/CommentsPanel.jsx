@@ -45,7 +45,7 @@ const CommentsPanelHeader = ({ onClose }) => {
       </h3>
       <button
         onClick={onClose}
-        className="p-1 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-full transition-colors"
+        className="p-1 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-full transition-colors cursor-pointer"
       >
         <X className="w-5 h-5 text-slate-500 dark:text-slate-400" />
       </button>
@@ -122,7 +122,7 @@ const CommentInput = ({
           <motion.button
             onClick={onAddComment}
             disabled={!commentText.trim()}
-            className="shrink-0 bg-orange-500 hover:bg-orange-600 text-white px-3 sm:px-4 py-2 rounded-full font-medium text-sm disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-orange-500 transition-colors whitespace-nowrap"
+            className="shrink-0 bg-orange-500 hover:bg-orange-600 text-white px-3 sm:px-4 py-2 rounded-full font-medium text-sm cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-orange-500 transition-colors whitespace-nowrap"
             whileHover={{
               scale: commentText.trim() ? 1.02 : 1,
             }}

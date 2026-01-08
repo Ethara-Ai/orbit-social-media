@@ -106,7 +106,7 @@ const TheaterHeader = ({ selectedPost, onClose }) => {
     >
       <button
         onClick={onClose}
-        className="flex items-center gap-1 sm:gap-2 text-white/70 hover:text-white transition-colors"
+        className="flex items-center gap-1 sm:gap-2 text-white/70 hover:text-white transition-colors cursor-pointer"
       >
         <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
         <span className="text-xs sm:text-sm font-medium">Back</span>
@@ -243,7 +243,7 @@ const ActionButton = ({
   return (
     <motion.button
       onClick={onClick}
-      className={`flex items-center gap-1.5 sm:gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full transition-all ${
+      className={`flex items-center gap-1.5 sm:gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full transition-all cursor-pointer ${
         isActive ? activeClassName : "bg-white/10 text-white hover:bg-white/20"
       }`}
       whileHover={{ scale: 1.05 }}

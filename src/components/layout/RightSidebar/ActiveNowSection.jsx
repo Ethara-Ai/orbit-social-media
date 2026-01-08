@@ -68,7 +68,7 @@ const ActiveNowSection = ({
               </p>
             </div>
             <motion.button
-              className="text-slate-400 dark:text-slate-500 hover:text-orange-500 dark:hover:text-orange-400 transition-colors p-1"
+              className="text-slate-400 dark:text-slate-500 hover:text-orange-500 dark:hover:text-orange-400 transition-colors p-1 cursor-pointer"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={(e) => {
