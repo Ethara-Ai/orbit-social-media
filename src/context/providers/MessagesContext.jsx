@@ -138,38 +138,6 @@ export function MessagesProvider({ children }) {
     // Clear input for current conversation
     setMessageText((prev) => ({ ...prev, [activeConversation]: "" }));
     setMessageAttachment((prev) => ({ ...prev, [activeConversation]: null }));
-
-    // Generate smart response after delay
-    const savedConversationId = activeConversation;
-    setTimeout(() => {
-      const smartResponse = generateSmartResponse(
-        currentMessageText,
-        !!currentAttachment,
-      );
-
-      const responseMessage = createMessage({
-        text: smartResponse,
-        isSent: false,
-      });
-
-      setConversations((prev) => {
-        const isStillViewing =
-          activeConversationRef.current === savedConversationId;
-
-        const updated = prev.map((conv) => {
-          if (conv.id !== savedConversationId) return conv;
-          return {
-            ...conv,
-            messages: [...conv.messages, responseMessage],
-            lastMessage: responseMessage.text,
-            lastMessageTime: "Just now",
-            unreadCount: isStillViewing ? 0 : conv.unreadCount + 1,
-          };
-        });
-
-        return moveConversationToTop(updated, savedConversationId);
-      });
-    }, SMART_RESPONSE_DELAY);
   }, [activeConversation, messageText, messageAttachment]);
 
   const handleClearAllChat = useCallback(() => {
