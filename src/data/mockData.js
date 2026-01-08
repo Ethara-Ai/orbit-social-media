@@ -264,7 +264,7 @@ export const createMockPosts = (friendsList) => [
     content:
       "Just deployed a new decentralized identity solution on the blockchain! 🔐 After months of research and development, we're finally live. This could revolutionize how we handle digital identity verification. What are your thoughts on self-sovereign identity?",
     image:
-      "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=1920&h=1080&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=3840&h=2160&fit=crop&q=80",
     likes: 312,
     comments: 3,
     shares: 47,
@@ -320,7 +320,7 @@ export const createMockPosts = (friendsList) => [
     content:
       "Thrilled to announce our Series A funding! 🚀 Building sustainable tech solutions for emerging markets has been an incredible journey. Grateful for our amazing team and investors who believe in our vision. The future is collaborative!",
     image:
-      "https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=1920&h=1080&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1920&h=1080&fit=crop&q=80",
     likes: 423,
     comments: 3,
     shares: 89,
