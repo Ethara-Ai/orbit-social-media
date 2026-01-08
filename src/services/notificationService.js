@@ -5,20 +5,20 @@
 
 // Notification types
 export const NOTIFICATION_TYPES = {
-  LIKE: 'like',
-  COMMENT: 'comment',
-  FOLLOW: 'follow',
-  MENTION: 'mention',
-  FRIEND_REQUEST: 'friend_request',
+  LIKE: "like",
+  COMMENT: "comment",
+  FOLLOW: "follow",
+  MENTION: "mention",
+  FRIEND_REQUEST: "friend_request",
 };
 
 // Action messages for different notification types
 const ACTION_MESSAGES = [
-  'liked your post',
-  'commented on your photo',
-  'shared your content',
-  'mentioned you',
-  'reacted to your story',
+  "liked your post",
+  "commented on your photo",
+  "shared your content",
+  "mentioned you",
+  "reacted to your story",
 ];
 
 /**
@@ -38,8 +38,9 @@ export const generateConnectionNotification = (user) => {
     id: Date.now().toString(),
     type: types[Math.floor(Math.random() * types.length)],
     user,
-    message: ACTION_MESSAGES[Math.floor(Math.random() * ACTION_MESSAGES.length)],
-    timestamp: 'now',
+    message:
+      ACTION_MESSAGES[Math.floor(Math.random() * ACTION_MESSAGES.length)],
+    timestamp: "now",
     isRead: false,
     isConnection: true,
   };
@@ -55,8 +56,8 @@ export const generateFriendRequestNotification = (user) => {
     id: Date.now().toString(),
     type: NOTIFICATION_TYPES.FRIEND_REQUEST,
     user,
-    message: 'sent you a connection request',
-    timestamp: 'now',
+    message: "sent you a connection request",
+    timestamp: "now",
     isRead: false,
     isConnection: false,
   };
@@ -72,12 +73,13 @@ export const generateFriendRequestNotification = (user) => {
 export const generateRandomNotification = (
   friends,
   suggestedUsers,
-  friendRequestChance = 0.3
+  friendRequestChance = 0.3,
 ) => {
   const isFriendRequest = Math.random() < friendRequestChance;
 
   if (isFriendRequest && suggestedUsers.length > 0) {
-    const randomUser = suggestedUsers[Math.floor(Math.random() * suggestedUsers.length)];
+    const randomUser =
+      suggestedUsers[Math.floor(Math.random() * suggestedUsers.length)];
     return generateFriendRequestNotification(randomUser);
   }
 
@@ -102,6 +104,20 @@ export const markAllAsRead = (notifications) => {
 };
 
 /**
+ * Mark a single notification as read by ID
+ * @param {Array} notifications - Current notifications array
+ * @param {string} notificationId - ID of the notification to mark as read
+ * @returns {Array} Updated notifications array with the specified notification marked as read
+ */
+export const markAsRead = (notifications, notificationId) => {
+  return notifications.map((notification) =>
+    notification.id === notificationId
+      ? { ...notification, isRead: true }
+      : notification,
+  );
+};
+
+/**
  * Count unread notifications
  * @param {Array} notifications - Current notifications array
  * @returns {number} Count of unread notifications
@@ -117,7 +133,11 @@ export const countUnread = (notifications) => {
  * @param {number} maxNotifications - Maximum notifications to keep, default 20
  * @returns {Array} Updated notifications array
  */
-export const addNotification = (notifications, newNotification, maxNotifications = 20) => {
+export const addNotification = (
+  notifications,
+  newNotification,
+  maxNotifications = 20,
+) => {
   return [newNotification, ...notifications.slice(0, maxNotifications - 1)];
 };
 
@@ -129,37 +149,39 @@ export const addNotification = (notifications, newNotification, maxNotifications
 export const getNotificationIconConfig = (type) => {
   const configs = {
     [NOTIFICATION_TYPES.LIKE]: {
-      iconName: 'Heart',
-      iconColor: 'text-rose-500',
-      bgClass: 'bg-rose-50',
+      iconName: "Heart",
+      iconColor: "text-rose-500",
+      bgClass: "bg-rose-50",
     },
     [NOTIFICATION_TYPES.COMMENT]: {
-      iconName: 'MessageCircle',
-      iconColor: 'text-blue-500',
-      bgClass: 'bg-blue-50',
+      iconName: "MessageCircle",
+      iconColor: "text-blue-500",
+      bgClass: "bg-blue-50",
     },
     [NOTIFICATION_TYPES.FOLLOW]: {
-      iconName: 'UserPlus',
-      iconColor: 'text-emerald-500',
-      bgClass: 'bg-emerald-50',
+      iconName: "UserPlus",
+      iconColor: "text-emerald-500",
+      bgClass: "bg-emerald-50",
     },
     [NOTIFICATION_TYPES.MENTION]: {
-      iconName: 'User',
-      iconColor: 'text-orange-500',
-      bgClass: 'bg-orange-50',
+      iconName: "User",
+      iconColor: "text-orange-500",
+      bgClass: "bg-orange-50",
     },
     [NOTIFICATION_TYPES.FRIEND_REQUEST]: {
-      iconName: 'Users',
-      iconColor: 'text-purple-500',
-      bgClass: 'bg-purple-50',
+      iconName: "Users",
+      iconColor: "text-purple-500",
+      bgClass: "bg-purple-50",
     },
   };
 
-  return configs[type] || {
-    iconName: 'Bell',
-    iconColor: 'text-slate-400',
-    bgClass: 'bg-slate-50',
-  };
+  return (
+    configs[type] || {
+      iconName: "Bell",
+      iconColor: "text-slate-400",
+      bgClass: "bg-slate-50",
+    }
+  );
 };
 
 export default {
@@ -168,6 +190,7 @@ export default {
   generateFriendRequestNotification,
   generateRandomNotification,
   markAllAsRead,
+  markAsRead,
   countUnread,
   addNotification,
   getNotificationIconConfig,

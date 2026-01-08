@@ -7,10 +7,24 @@ import { useNotifications, useUser } from "../../context/AppContext";
 
 const NotificationsTab = () => {
   // Access notifications state directly from context
-  const { notifications } = useNotifications();
+  const { notifications, setNotifications } = useNotifications();
 
   // Access user actions from context
   const { handleViewProfile } = useUser();
+
+  // Mark a single notification as read
+  const handleNotificationClick = (notification) => {
+    if (!notification.isRead) {
+      setNotifications((prev) =>
+        prev.map((n) =>
+          n.id === notification.id ? { ...n, isRead: true } : n,
+        ),
+      );
+    }
+    if (handleViewProfile) {
+      handleViewProfile(notification.user);
+    }
+  };
 
   return (
     <div className="max-w-2xl mx-auto w-full">
@@ -25,9 +39,7 @@ const NotificationsTab = () => {
               key={notification.id}
               notification={notification}
               index={index}
-              onClick={() =>
-                handleViewProfile && handleViewProfile(notification.user)
-              }
+              onClick={() => handleNotificationClick(notification)}
             />
           ))
         ) : (

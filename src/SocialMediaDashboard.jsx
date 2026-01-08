@@ -9,7 +9,6 @@ import {
   MobileNavOverlay,
   RightSidebar,
   CopyNotificationPopup,
-  NotificationPopup,
 } from "./components/layout";
 
 // ============================================================================
@@ -46,9 +45,6 @@ export default function SocialMediaDashboard() {
 
       {/* Copy Notification Popup */}
       <CopyNotificationPopup />
-
-      {/* Notification Popup */}
-      <NotificationPopup />
     </div>
   );
 }

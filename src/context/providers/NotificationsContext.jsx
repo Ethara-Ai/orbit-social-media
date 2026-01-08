@@ -26,7 +26,6 @@ import {
 // Import Utils
 import {
   NOTIFICATION_INTERVAL,
-  NOTIFICATION_POPUP_DURATION,
   MAX_NOTIFICATIONS,
   FRIEND_REQUEST_PROBABILITY,
 } from "../../utils/constants";
@@ -57,8 +56,6 @@ export function NotificationsProvider({ children }) {
   const [notificationCount, setNotificationCount] = useState(() =>
     countUnread(mockNotifications),
   );
-  const [showNotificationPopup, setShowNotificationPopup] = useState(false);
-  const [latestNotification, setLatestNotification] = useState(null);
 
   // ==========================================================================
   // Effects
@@ -83,13 +80,6 @@ export function NotificationsProvider({ children }) {
           setNotificationCount(countUnread(updated));
           return updated;
         });
-
-        setLatestNotification(newNotification);
-        setShowNotificationPopup(true);
-
-        setTimeout(() => {
-          setShowNotificationPopup(false);
-        }, NOTIFICATION_POPUP_DURATION);
       }
     }, NOTIFICATION_INTERVAL);
 
@@ -110,8 +100,14 @@ export function NotificationsProvider({ children }) {
     setNotificationCount(0);
   }, []);
 
-  const dismissNotificationPopup = useCallback(() => {
-    setShowNotificationPopup(false);
+  const markNotificationAsRead = useCallback((notificationId) => {
+    setNotifications((prev) =>
+      prev.map((notification) =>
+        notification.id === notificationId
+          ? { ...notification, isRead: true }
+          : notification,
+      ),
+    );
   }, []);
 
   // ==========================================================================
@@ -123,24 +119,18 @@ export function NotificationsProvider({ children }) {
       // Data
       notifications,
       notificationCount,
-      showNotificationPopup,
-      latestNotification,
       // Setters
       setNotifications,
       setNotificationCount,
-      setShowNotificationPopup,
-      setLatestNotification,
       // Actions
       markNotificationsAsRead,
-      dismissNotificationPopup,
+      markNotificationAsRead,
     }),
     [
       notifications,
       notificationCount,
-      showNotificationPopup,
-      latestNotification,
       markNotificationsAsRead,
-      dismissNotificationPopup,
+      markNotificationAsRead,
     ],
   );
 
