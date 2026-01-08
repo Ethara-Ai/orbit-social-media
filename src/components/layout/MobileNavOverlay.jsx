@@ -9,10 +9,21 @@ const MobileNavOverlay = () => {
     <AnimatePresence>
       {showMobileNav && (
         <motion.div
-          className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 lg:hidden"
+          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+          style={{
+            // Use backdrop-filter with GPU optimization hints
+            backdropFilter: "blur(4px)",
+            WebkitBackdropFilter: "blur(4px)",
+            // Optimize rendering performance on mobile
+            willChange: "opacity",
+            contain: "strict",
+            // Prevent overflow issues causing blur bleed
+            isolation: "isolate",
+          }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
           onClick={closeMobileNav}
         />
       )}

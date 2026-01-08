@@ -27,9 +27,19 @@ const TheaterModal = ({
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      {/* Backdrop with blur */}
+      {/* Backdrop with blur - optimized for mobile performance */}
       <motion.div
-        className="absolute inset-0 bg-slate-950/95 backdrop-blur-sm"
+        className="absolute inset-0 bg-slate-950/95"
+        style={{
+          // Use backdrop-filter with GPU optimization hints
+          backdropFilter: "blur(4px)",
+          WebkitBackdropFilter: "blur(4px)",
+          // Optimize rendering performance on mobile
+          willChange: "opacity",
+          contain: "strict",
+          // Prevent overflow issues causing blur bleed
+          isolation: "isolate",
+        }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
