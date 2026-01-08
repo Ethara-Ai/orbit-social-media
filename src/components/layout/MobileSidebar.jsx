@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Home, Search, MessageCircle, Bell, X, User } from "../icons";
 import UserProfileCard from "../sidebar/UserProfileCard";
 import NavigationItems from "../sidebar/NavigationItems";
+import ProfileAnalytics from "../sidebar/ProfileAnalytics";
 import {
   useUser,
   useUI,
@@ -54,7 +55,7 @@ const MobileSidebar = () => {
           {/* Mobile Header */}
           <MobileSidebarHeader onClose={() => setShowMobileNav(false)} />
 
-          <div className="flex-1 overflow-y-auto custom-scrollbar px-3 py-4 min-h-0">
+          <div className="flex-1 overflow-y-auto custom-scrollbar px-3 py-4 min-h-0 space-y-3">
             {/* User Profile Card */}
             <UserProfileCard
               user={{
@@ -73,6 +74,9 @@ const MobileSidebar = () => {
               }}
               animated={false}
             />
+
+            {/* Profile Analytics Section */}
+            <ProfileAnalytics />
 
             {/* Navigation with Separator */}
             <div className="border-t border-slate-100 dark:border-slate-700 pt-2">
