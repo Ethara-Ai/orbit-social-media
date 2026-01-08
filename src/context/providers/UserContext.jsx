@@ -12,7 +12,7 @@ import { currentUser, friends, suggestedUsers } from "../../data/mockData";
 
 // Import Utils
 import { shuffleArray } from "../../utils/helpers";
-import { MAX_ACTIVE_FRIENDS } from "../../utils/constants";
+import { MAX_ACTIVE_FRIENDS, PROFILE_DATA } from "../../utils/constants";
 
 // ============================================================================
 // Context Definition
@@ -30,7 +30,7 @@ export function UserProvider({ children }) {
   // User State
   // ==========================================================================
   const [currentUserAvatar, setCurrentUserAvatar] = useState(
-    currentUser.avatar,
+    PROFILE_DATA.avatar,
   );
   const [currentUserCover, setCurrentUserCover] = useState(null);
   const [currentUserDetails, setCurrentUserDetails] = useState({

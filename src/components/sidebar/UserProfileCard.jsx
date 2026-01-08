@@ -44,13 +44,11 @@ const UserProfileCard = ({
         </p>
       </div>
 
-      {/* Stats Section with Separator */}
+      {/* Stats Section */}
       <div className="border-t border-slate-100 dark:border-slate-700 pt-3">
-        <div className="flex justify-around">
+        <div className="flex justify-between px-1">
           <StatItem label="Posts" value={stats.posts} />
-          <div className="w-px bg-slate-100 dark:bg-slate-700" />
           <StatItem label="Followers" value={stats.followers} />
-          <div className="w-px bg-slate-100 dark:bg-slate-700" />
           <StatItem label="Following" value={stats.following} />
         </div>
       </div>
@@ -59,13 +57,11 @@ const UserProfileCard = ({
 };
 
 const StatItem = ({ label, value }) => (
-  <div className="text-center px-1.5">
-    <div className="text-xs font-bold text-slate-900 dark:text-white">
+  <div className="flex flex-col items-center">
+    <span className="text-[16px] font-bold text-slate-900 dark:text-white">
       {value}
-    </div>
-    <div className="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5">
-      {label}
-    </div>
+    </span>
+    <span className="text-xs text-slate-500 dark:text-slate-400">{label}</span>
   </div>
 );
 

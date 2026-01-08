@@ -68,7 +68,7 @@ const CreatePost = () => {
               placeholder="Share something..."
               value={newPostContent}
               onChange={handleTextChange}
-              className="flex-1 bg-transparent border-0 resize-none focus:outline-hidden text-slate-900 dark:text-white placeholder-slate-500 text-xs sm:text-sm leading-tight overflow-hidden py-0.5"
+              className="flex-1 bg-transparent border-0 resize-none focus:outline-hidden text-slate-900 dark:text-white placeholder-slate-500 text-xs sm:text-sm leading-tight overflow-hidden py-2"
               style={{ height: "30px", maxHeight: "120px" }}
               rows={1}
             />
@@ -83,7 +83,7 @@ const CreatePost = () => {
             <div className="flex items-center gap-1 shrink-0">
               <motion.button
                 onClick={() => document.getElementById("image-upload")?.click()}
-                className="p-1 text-slate-500 dark:text-slate-400 hover:text-emerald-500 dark:hover:text-emerald-400 rounded-full transition-colors cursor-pointer"
+                className="p-1 text-slate-500 dark:text-slate-400 hover:text-emerald-500 dark:hover:text-emerald-400 rounded-full transition-colors"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 title="Add photo"
@@ -117,7 +117,7 @@ const CreatePost = () => {
               />
               <button
                 onClick={removeSelectedMedia}
-                className="absolute top-1.5 right-1.5 sm:top-2 sm:right-2 bg-slate-900/80 text-white rounded-full p-1 sm:p-1.5 hover:bg-slate-900 transition-colors cursor-pointer"
+                className="absolute top-1.5 right-1.5 sm:top-2 sm:right-2 bg-slate-900/80 text-white rounded-full p-1 sm:p-1.5 hover:bg-slate-900 transition-colors"
               >
                 <X className="w-3 h-3 sm:w-4 sm:h-4" />
               </button>

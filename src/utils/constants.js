@@ -72,6 +72,83 @@ export const DEFAULT_AVATAR_URL =
   "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=50&h=50&fit=crop&crop=face";
 
 /**
+ * Static profile data
+ */
+export const PROFILE_DATA = {
+  name: "Jordan Mitchell",
+  username: "@jordanm",
+  avatar:
+    "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=faces",
+  cover:
+    "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1200&h=400&fit=crop",
+  profession: "Creative Director",
+  location: "Austin, TX",
+  bio: "Creative Director passionate about design, technology, and creating meaningful experiences. Let's connect and build something amazing together! 🚀",
+  followers: 16,
+  following: 16,
+};
+
+/**
+ * Mock profile posts data
+ */
+export const INITIAL_PROFILE_POSTS = [
+  {
+    id: "p1",
+    image:
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=600&fit=crop",
+    likes: 234,
+    comments: 18,
+    caption: "Mountain vibes ⛰️",
+    isLiked: false,
+  },
+  {
+    id: "p2",
+    image:
+      "https://images.unsplash.com/photo-1682687220742-aba13b6e50ba?w=600&h=600&fit=crop",
+    likes: 456,
+    comments: 32,
+    caption: "Golden hour magic ✨",
+    isLiked: false,
+  },
+  {
+    id: "p3",
+    image:
+      "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=600&h=600&fit=crop",
+    likes: 189,
+    comments: 24,
+    caption: "Exploring new horizons 🌅",
+    isLiked: false,
+  },
+  {
+    id: "p4",
+    image:
+      "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=600&h=600&fit=crop",
+    likes: 312,
+    comments: 28,
+    caption: "Nature's beauty 🌲",
+    isLiked: false,
+  },
+  {
+    id: "p5",
+    image:
+      "https://images.unsplash.com/photo-1433086966358-54859d0ed716?w=600&h=600&fit=crop",
+    likes: 278,
+    comments: 15,
+    caption: "Waterfall adventures 💧",
+    isLiked: false,
+  },
+  {
+    id: "p6",
+    image:
+      "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=600&h=600&fit=crop",
+    likes: 198,
+    comments: 21,
+    caption: "Misty mornings 🌫️",
+    isLiked: false,
+  },
+];
+
+/**
  * Animation variants for consistent animations
  */
 export const ANIMATION_VARIANTS = {
@@ -177,6 +254,8 @@ export default {
   MAX_SUGGESTED_USERS,
   FRIEND_REQUEST_PROBABILITY,
   DEFAULT_AVATAR_URL,
+  PROFILE_DATA,
+  INITIAL_PROFILE_POSTS,
   ANIMATION_VARIANTS,
   TRANSITIONS,
   BREAKPOINTS,

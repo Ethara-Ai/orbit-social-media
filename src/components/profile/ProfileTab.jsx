@@ -2,19 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useUser, useFeed } from "../../context/AppContext";
 import { Heart, MessageCircle, Briefcase, MapPin, Share2 } from "../icons";
-
-// Static profile data
-const PROFILE_DATA = {
-  name: "Jordan Mitchell",
-  username: "@jordanm",
-  avatar:
-    "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face",
-  cover:
-    "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1200&h=400&fit=crop",
-  profession: "Creative Director",
-  location: "Austin, TX",
-  bio: "Creative Director passionate about design, technology, and creating meaningful experiences. Let's connect and build something amazing together! 🚀",
-};
+import { PROFILE_DATA, INITIAL_PROFILE_POSTS } from "../../utils/constants";
 
 // Mock comments for profile posts
 const profilePostMockComments = {
@@ -142,71 +130,13 @@ const profilePostMockComments = {
   ],
 };
 
-// Mock profile posts data
-const initialProfilePosts = [
-  {
-    id: "p1",
-    image:
-      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=600&fit=crop",
-    likes: 234,
-    comments: 18,
-    caption: "Mountain vibes ⛰️",
-    isLiked: false,
-  },
-  {
-    id: "p2",
-    image:
-      "https://images.unsplash.com/photo-1682687220742-aba13b6e50ba?w=600&h=600&fit=crop",
-    likes: 456,
-    comments: 32,
-    caption: "Golden hour magic ✨",
-    isLiked: false,
-  },
-  {
-    id: "p3",
-    image:
-      "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=600&h=600&fit=crop",
-    likes: 189,
-    comments: 24,
-    caption: "Exploring new horizons 🌅",
-    isLiked: false,
-  },
-  {
-    id: "p4",
-    image:
-      "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=600&h=600&fit=crop",
-    likes: 312,
-    comments: 28,
-    caption: "Nature's beauty 🌲",
-    isLiked: false,
-  },
-  {
-    id: "p5",
-    image:
-      "https://images.unsplash.com/photo-1433086966358-54859d0ed716?w=600&h=600&fit=crop",
-    likes: 278,
-    comments: 15,
-    caption: "Waterfall adventures 💧",
-    isLiked: false,
-  },
-  {
-    id: "p6",
-    image:
-      "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=600&h=600&fit=crop",
-    likes: 198,
-    comments: 21,
-    caption: "Misty mornings 🌫️",
-    isLiked: false,
-  },
-];
-
 const ProfileTab = () => {
   const { currentUser, profilePostComments, toggleProfilePostComments } =
     useUser();
   const { posts: feedPosts } = useFeed();
 
   const [activeTab, setActiveTab] = useState("posts");
-  const [profilePosts, setProfilePosts] = useState(initialProfilePosts);
+  const [profilePosts, setProfilePosts] = useState(INITIAL_PROFILE_POSTS);
   const [showCopyPopup, setShowCopyPopup] = useState(false);
   const [newComment, setNewComment] = useState({});
   const [profileComments, setProfileComments] = useState(
@@ -235,8 +165,8 @@ const ProfileTab = () => {
 
   const stats = {
     posts: allUserPosts.length,
-    followers: "24.7K",
-    following: 318,
+    followers: PROFILE_DATA.followers,
+    following: PROFILE_DATA.following,
   };
 
   const tabs = [
@@ -250,10 +180,10 @@ const ProfileTab = () => {
       prev.map((post) =>
         post.id === postId
           ? {
-              ...post,
-              isLiked: !post.isLiked,
-              likes: post.isLiked ? post.likes - 1 : post.likes + 1,
-            }
+            ...post,
+            isLiked: !post.isLiked,
+            likes: post.isLiked ? post.likes - 1 : post.likes + 1,
+          }
           : post,
       ),
     );
@@ -411,34 +341,34 @@ const ProfileTab = () => {
 
         {/* Stats */}
         <motion.div
-          className="flex gap-6 mt-4 py-4 border-b border-slate-200 dark:border-slate-700"
+          className="flex items-center gap-6 sm:gap-8 mt-5 py-2"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
         >
-          <div className="text-center">
-            <p className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
+          <div className="flex flex-col sm:flex-row sm:items-baseline gap-0.5 sm:gap-1.5">
+            <span className="text-[16px] font-bold text-slate-900 dark:text-white">
               {stats.posts}
-            </p>
-            <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+            </span>
+            <span className="text-sm sm:text-base text-slate-600 dark:text-slate-400">
               Posts
-            </p>
+            </span>
           </div>
-          <div className="text-center">
-            <p className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
+          <div className="flex flex-col sm:flex-row sm:items-baseline gap-0.5 sm:gap-1.5">
+            <span className="text-[16px] font-bold text-slate-900 dark:text-white">
               {stats.followers}
-            </p>
-            <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+            </span>
+            <span className="text-sm sm:text-base text-slate-600 dark:text-slate-400">
               Followers
-            </p>
+            </span>
           </div>
-          <div className="text-center">
-            <p className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
+          <div className="flex flex-col sm:flex-row sm:items-baseline gap-0.5 sm:gap-1.5">
+            <span className="text-[16px] font-bold text-slate-900 dark:text-white">
               {stats.following}
-            </p>
-            <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+            </span>
+            <span className="text-sm sm:text-base text-slate-600 dark:text-slate-400">
               Following
-            </p>
+            </span>
           </div>
         </motion.div>
 
@@ -448,11 +378,10 @@ const ProfileTab = () => {
             <motion.button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`px-4 py-2 text-sm font-medium transition-colors relative ${
-                activeTab === tab.id
+              className={`px-4 py-2 text-sm font-medium transition-colors relative ${activeTab === tab.id
                   ? "text-orange-500"
                   : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
-              }`}
+                }`}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
@@ -529,18 +458,16 @@ const ProfileTab = () => {
                     <div className="p-3 flex items-center gap-4 border-t border-slate-100 dark:border-slate-700">
                       <motion.button
                         onClick={() => handleLike(post.id)}
-                        className={`flex items-center gap-1.5 ${
-                          post.isLiked
+                        className={`flex items-center gap-1.5 ${post.isLiked
                             ? "text-rose-500"
                             : "text-slate-500 dark:text-slate-400 hover:text-rose-500"
-                        }`}
+                          }`}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                       >
                         <Heart
-                          className={`w-5 h-5 ${
-                            post.isLiked ? "fill-current" : ""
-                          }`}
+                          className={`w-5 h-5 ${post.isLiked ? "fill-current" : ""
+                            }`}
                         />
                         <span className="text-sm font-medium">
                           {post.likes}
@@ -549,11 +476,10 @@ const ProfileTab = () => {
 
                       <motion.button
                         onClick={() => handleCommentToggle(post.id)}
-                        className={`flex items-center gap-1.5 ${
-                          profilePostComments[post.id]
+                        className={`flex items-center gap-1.5 ${profilePostComments[post.id]
                             ? "text-blue-500"
                             : "text-slate-500 dark:text-slate-400 hover:text-blue-500"
-                        }`}
+                          }`}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                       >

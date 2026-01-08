@@ -47,7 +47,7 @@ const ConnectionsHeader = ({ friendsCount, showFriends, setShowFriends }) => {
   return (
     <motion.button
       onClick={() => setShowFriends(!showFriends)}
-      className="w-full flex items-center justify-between px-4 py-3 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+      className="w-full flex items-center justify-between px-4 py-3 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
       whileHover={{ scale: 1.01 }}
     >
       <div className="flex items-center gap-2">
@@ -78,7 +78,7 @@ const ConnectionItem = ({ friend, index, onClick }) => {
 
   return (
     <motion.div
-      className="flex items-center gap-2 p-1.5 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors cursor-default mx-2"
+      className="flex items-center gap-2 p-1.5 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors cursor-pointer mx-2"
       initial={{ x: -10, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       transition={{ delay: index * 0.03 }}

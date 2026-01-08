@@ -4,7 +4,7 @@ const RegularPostsGrid = ({ posts, onPostClick }) => {
   return (
     <>
       <div className="mb-6">
-        <h2 className="text-lg font-semibold text-slate-900 mb-4">
+        <h2 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
           Browse All
         </h2>
       </div>

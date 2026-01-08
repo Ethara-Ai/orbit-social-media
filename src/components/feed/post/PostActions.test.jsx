@@ -133,10 +133,10 @@ describe("PostActions", () => {
       expect(likeButton).toHaveClass("text-slate-500");
     });
 
-    it("should have cursor-pointer class", () => {
+    it("should have transition-colors class", () => {
       render(<PostActions {...defaultProps} />);
       const likeButton = screen.getAllByTestId("motion-button")[0];
-      expect(likeButton).toHaveClass("cursor-pointer");
+      expect(likeButton).toHaveClass("transition-colors");
     });
 
     it("should have transition-colors class", () => {
@@ -173,10 +173,10 @@ describe("PostActions", () => {
       expect(commentButton).toHaveClass("text-slate-500");
     });
 
-    it("should have cursor-pointer class", () => {
+    it("should have transition-colors class", () => {
       render(<PostActions {...defaultProps} />);
       const commentButton = screen.getAllByTestId("motion-button")[1];
-      expect(commentButton).toHaveClass("cursor-pointer");
+      expect(commentButton).toHaveClass("transition-colors");
     });
 
     it("should have transition-colors class", () => {

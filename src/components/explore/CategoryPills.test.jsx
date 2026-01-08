@@ -193,10 +193,10 @@ describe("CategoryPills", () => {
       expect(forYouButton).toHaveClass("transition-all");
     });
 
-    it("should apply cursor-pointer to buttons", () => {
+    it("should have transition-all class on buttons", () => {
       render(<CategoryPills {...defaultProps} />);
       const forYouButton = screen.getByText("For You").closest("button");
-      expect(forYouButton).toHaveClass("cursor-pointer");
+      expect(forYouButton).toHaveClass("transition-all");
     });
 
     it("should apply font-medium to buttons", () => {

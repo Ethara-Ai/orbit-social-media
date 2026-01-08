@@ -324,10 +324,10 @@ describe("ActionButton", () => {
       expect(button).toHaveClass("transition-colors");
     });
 
-    it("should have cursor-pointer class", () => {
-      render(<ActionButton>Button</ActionButton>);
+    it("should have cursor-not-allowed class when disabled", () => {
+      render(<ActionButton disabled>Button</ActionButton>);
       const button = screen.getByRole("button");
-      expect(button).toHaveClass("cursor-pointer");
+      expect(button).toHaveClass("disabled:cursor-not-allowed");
     });
 
     it("should have flex layout classes", () => {

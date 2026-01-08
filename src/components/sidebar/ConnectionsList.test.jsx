@@ -386,10 +386,10 @@ describe("ConnectionsList", () => {
       expect(button).toHaveClass("transition-colors");
     });
 
-    it("should have cursor-pointer class", () => {
+    it("should have transition-colors class", () => {
       render(<ConnectionsList {...defaultProps} />);
       const button = screen.getByTestId("motion-button");
-      expect(button).toHaveClass("cursor-pointer");
+      expect(button).toHaveClass("transition-colors");
     });
   });
 
@@ -535,12 +535,12 @@ describe("ConnectionsList", () => {
       expect(friendItems.length).toBeGreaterThan(0);
     });
 
-    it("should have cursor-pointer class on friend item", () => {
+    it("should have cursor-pointer class on connection item", () => {
       const { container } = render(
         <ConnectionsList {...defaultProps} showFriends={true} />,
       );
-      const friendItems = container.querySelectorAll(".cursor-pointer");
-      expect(friendItems.length).toBeGreaterThan(0);
+      const connectionItems = container.querySelectorAll(".cursor-pointer");
+      expect(connectionItems.length).toBeGreaterThan(0);
     });
   });
 

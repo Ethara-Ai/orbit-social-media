@@ -15,7 +15,7 @@ const ActionButton = ({
   ...props
 }) => {
   const baseStyles =
-    "font-medium transition-colors cursor-pointer disabled:cursor-not-allowed";
+    "font-medium transition-colors disabled:cursor-not-allowed";
 
   const variants = {
     primary:

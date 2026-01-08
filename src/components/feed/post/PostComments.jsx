@@ -1,3 +1,4 @@
+import { useRef, useEffect } from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import Avatar from "../../common/Avatar";
@@ -12,6 +13,20 @@ const PostComments = ({
   onAddComment,
 }) => {
   const postComments = comments.filter((comment) => comment.postId === postId);
+  const commentsContainerRef = useRef(null);
+
+  const scrollToBottom = () => {
+    if (commentsContainerRef.current) {
+      commentsContainerRef.current.scrollTo({
+        top: commentsContainerRef.current.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [postComments]);
 
   const handleCommentChange = (e) => {
     setNewComment((prev) => ({
@@ -34,7 +49,10 @@ const PostComments = ({
   return (
     <div className="p-2 sm:p-4 bg-slate-50 dark:bg-slate-800/50 transition-colors">
       {/* Comments List */}
-      <div className="space-y-2 sm:space-y-3 mb-3 sm:mb-4 max-h-60 sm:max-h-72 overflow-y-auto custom-scrollbar">
+      <div
+        ref={commentsContainerRef}
+        className="space-y-2 sm:space-y-3 mb-3 sm:mb-4 max-h-60 sm:max-h-72 overflow-y-auto custom-scrollbar"
+      >
         {postComments.map((comment, idx) => (
           <CommentItem key={comment.id} comment={comment} index={idx} />
         ))}

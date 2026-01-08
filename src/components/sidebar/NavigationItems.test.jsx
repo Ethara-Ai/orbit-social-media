@@ -360,10 +360,10 @@ describe("NavigationItems", () => {
       expect(button).toHaveClass("transition-all");
     });
 
-    it("should have cursor-pointer class on buttons", () => {
+    it("should have transition-all class on buttons", () => {
       render(<NavigationItems {...defaultProps} />);
       const button = screen.getByText("Feed").closest("button");
-      expect(button).toHaveClass("cursor-pointer");
+      expect(button).toHaveClass("transition-all");
     });
   });
 

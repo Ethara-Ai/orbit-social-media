@@ -7,9 +7,12 @@ import {
   useUI,
   useMessages,
   useNotifications,
+  useFeed,
 } from "../../context/AppContext";
+import { INITIAL_PROFILE_POSTS, PROFILE_DATA } from "../../utils/constants";
 
 const MobileSidebar = () => {
+  const { posts } = useFeed();
   const { currentUser, currentUserAvatar, currentUserDetails } = useUser();
   const {
     activeTab,
@@ -61,6 +64,13 @@ const MobileSidebar = () => {
               }}
               avatar={currentUserAvatar}
               onClick={handleNavigateToProfile}
+              stats={{
+                posts:
+                  posts.filter((p) => p.user.id === currentUser.id).length +
+                  INITIAL_PROFILE_POSTS.length,
+                followers: PROFILE_DATA.followers,
+                following: PROFILE_DATA.following,
+              }}
               animated={false}
             />
 
