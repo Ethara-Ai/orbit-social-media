@@ -12,6 +12,8 @@ const NotificationItem = ({ notification, index, onClick }) => {
 
   return (
     <motion.div
+      role="button"
+      tabIndex={0}
       className={`bg-white rounded-xl p-4 shadow-xs border cursor-pointer transition-all ${
         !notification.isRead
           ? "border-orange-200 bg-orange-50/30"
@@ -22,6 +24,7 @@ const NotificationItem = ({ notification, index, onClick }) => {
       transition={{ delay: index * 0.05 }}
       whileHover={{ x: 2 }}
       onClick={handleClick}
+      onKeyDown={(e) => e.key === "Enter" && handleClick()}
     >
       <div className="flex items-center gap-4">
         <NotificationAvatar

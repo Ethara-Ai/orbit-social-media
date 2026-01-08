@@ -78,11 +78,14 @@ const ConnectionItem = ({ friend, index, onClick }) => {
 
   return (
     <motion.div
+      role="button"
+      tabIndex={0}
       className="flex items-center gap-2 p-1.5 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors cursor-pointer mx-2"
       initial={{ x: -10, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       transition={{ delay: index * 0.03 }}
       onClick={handleClick}
+      onKeyDown={(e) => e.key === "Enter" && handleClick()}
     >
       <Avatar
         src={friend.avatar}

@@ -16,15 +16,21 @@ const ConversationsList = ({
   const handleConversationClick = (conversation) => {
     // If clicking on a different conversation, check if current one is empty and remove it
     if (activeConversation && activeConversation !== conversation.id) {
-      const currentConv = conversations.find((c) => c.id === activeConversation);
+      const currentConv = conversations.find(
+        (c) => c.id === activeConversation,
+      );
       if (currentConv && currentConv.messages.length === 0) {
-        setConversations((prevConversations) => prevConversations.filter((conv) => conv.id !== activeConversation));
+        setConversations((prevConversations) =>
+          prevConversations.filter((conv) => conv.id !== activeConversation),
+        );
       }
     }
 
     setActiveConversation(conversation.id);
     setConversations((prevConversations) =>
-      prevConversations.map((conv) => (conv.id === conversation.id ? { ...conv, unreadCount: 0 } : conv)),
+      prevConversations.map((conv) =>
+        conv.id === conversation.id ? { ...conv, unreadCount: 0 } : conv,
+      ),
     );
   };
 
@@ -35,7 +41,10 @@ const ConversationsList = ({
       }`}
     >
       {/* Header */}
-      <ConversationsHeader searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+      <ConversationsHeader
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+      />
 
       {/* Conversations */}
       <div className="flex-1 overflow-y-auto custom-scrollbar">
@@ -79,7 +88,10 @@ const ConversationItem = ({ conversation, isActive, onClick }) => {
 
   return (
     <motion.div
+      role="button"
+      tabIndex={0}
       onClick={onClick}
+      onKeyDown={(e) => e.key === "Enter" && onClick()}
       className={`flex items-center gap-2 sm:gap-3 p-3 sm:p-4 cursor-pointer transition-all border-b border-slate-50 dark:border-slate-800 ${
         isActive
           ? "bg-orange-50 dark:bg-orange-500/10"
@@ -101,14 +113,18 @@ const ConversationItem = ({ conversation, isActive, onClick }) => {
         <div className="flex justify-between items-center mb-0.5">
           <h3
             className={`text-sm truncate transition-colors ${
-              hasUnread ? "font-bold text-slate-900 dark:text-white" : "font-semibold text-slate-900 dark:text-white"
+              hasUnread
+                ? "font-bold text-slate-900 dark:text-white"
+                : "font-semibold text-slate-900 dark:text-white"
             }`}
           >
             {conversation.user.name}
           </h3>
           <span
             className={`text-xs shrink-0 transition-colors ${
-              hasUnread ? "text-orange-600 dark:text-orange-400 font-semibold" : "text-slate-400 dark:text-slate-500"
+              hasUnread
+                ? "text-orange-600 dark:text-orange-400 font-semibold"
+                : "text-slate-400 dark:text-slate-500"
             }`}
           >
             {conversation.lastMessageTime}
@@ -116,7 +132,9 @@ const ConversationItem = ({ conversation, isActive, onClick }) => {
         </div>
         <p
           className={`text-xs truncate transition-colors ${
-            hasUnread ? "text-slate-800 dark:text-slate-200 font-semibold" : "text-slate-500 dark:text-slate-400"
+            hasUnread
+              ? "text-slate-800 dark:text-slate-200 font-semibold"
+              : "text-slate-500 dark:text-slate-400"
           }`}
         >
           {conversation.lastMessage}
@@ -139,7 +157,9 @@ const EmptySearchState = () => {
   return (
     <div className="text-center py-8 sm:py-12 px-4">
       <Search className="w-8 h-8 sm:w-10 sm:h-10 text-slate-300 dark:text-slate-600 mx-auto mb-2 sm:mb-3" />
-      <p className="text-slate-500 dark:text-slate-400 text-xs sm:text-sm transition-colors">No chats found</p>
+      <p className="text-slate-500 dark:text-slate-400 text-xs sm:text-sm transition-colors">
+        No chats found
+      </p>
     </div>
   );
 };

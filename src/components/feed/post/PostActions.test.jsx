@@ -138,12 +138,6 @@ describe("PostActions", () => {
       const likeButton = screen.getAllByTestId("motion-button")[0];
       expect(likeButton).toHaveClass("transition-colors");
     });
-
-    it("should have transition-colors class", () => {
-      render(<PostActions {...defaultProps} />);
-      const likeButton = screen.getAllByTestId("motion-button")[0];
-      expect(likeButton).toHaveClass("transition-colors");
-    });
   });
 
   describe("comment button", () => {
@@ -171,12 +165,6 @@ describe("PostActions", () => {
       render(<PostActions {...defaultProps} />);
       const commentButton = screen.getAllByTestId("motion-button")[1];
       expect(commentButton).toHaveClass("text-slate-500");
-    });
-
-    it("should have transition-colors class", () => {
-      render(<PostActions {...defaultProps} />);
-      const commentButton = screen.getAllByTestId("motion-button")[1];
-      expect(commentButton).toHaveClass("transition-colors");
     });
 
     it("should have transition-colors class", () => {

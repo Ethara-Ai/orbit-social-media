@@ -37,12 +37,15 @@ const ActiveNowSection = ({
         {activeOnlineFriends.map((friend, index) => (
           <motion.div
             key={friend.id}
+            role="button"
+            tabIndex={0}
             className="flex items-center gap-2.5 p-2.5 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg cursor-pointer transition-colors"
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: index * 0.05 }}
             whileHover={{ x: -2 }}
             onClick={() => startConversation(friend)}
+            onKeyDown={(e) => e.key === "Enter" && startConversation(friend)}
           >
             <div className="relative">
               <img

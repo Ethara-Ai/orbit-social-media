@@ -16,12 +16,15 @@ const FeaturedPostCard = ({ post, index, onClick }) => {
 
   return (
     <motion.article
+      role="button"
+      tabIndex={0}
       className="relative rounded-2xl overflow-hidden cursor-pointer group h-64"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.1 }}
       whileHover={{ scale: 1.01 }}
       onClick={() => onClick(post)}
+      onKeyDown={(e) => e.key === "Enter" && onClick(post)}
     >
       {/* Background Image */}
       <img

@@ -59,7 +59,10 @@ const ProfileAnalytics = () => {
 
         {/* Likes and Comments */}
         <div
+          role="button"
+          tabIndex={0}
           onClick={() => setActiveTab("notifications")}
+          onKeyDown={(e) => e.key === "Enter" && setActiveTab("notifications")}
           className="flex items-center justify-between px-4 py-0.5 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors cursor-pointer group"
         >
           <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-200 transition-colors">

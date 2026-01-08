@@ -25,10 +25,11 @@ const PostActions = ({
       <div className="flex items-center gap-3 sm:gap-4">
         <motion.button
           onClick={handleLike}
-          className={`flex items-center gap-1 sm:gap-2 transition-colors cursor-pointer ${isLiked
+          className={`flex items-center gap-1 sm:gap-2 transition-colors ${
+            isLiked
               ? "text-rose-500"
               : "text-slate-500 dark:text-slate-400 hover:text-rose-500"
-            }`}
+          }`}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
@@ -40,7 +41,7 @@ const PostActions = ({
 
         <motion.button
           onClick={handleComment}
-          className="flex items-center gap-1 sm:gap-2 text-slate-500 dark:text-slate-400 hover:text-blue-500 dark:hover:text-blue-400 transition-colors cursor-pointer"
+          className="flex items-center gap-1 sm:gap-2 text-slate-500 dark:text-slate-400 hover:text-blue-500 dark:hover:text-blue-400 transition-colors"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >

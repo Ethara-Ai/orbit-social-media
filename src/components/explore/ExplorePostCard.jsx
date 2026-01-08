@@ -15,11 +15,14 @@ const ExplorePostCard = ({ post, index, onClick }) => {
 
   return (
     <motion.article
+      role="button"
+      tabIndex={0}
       className="bg-white dark:bg-slate-800 rounded-xl overflow-hidden cursor-pointer group border border-slate-100 dark:border-slate-700 hover:border-slate-200 dark:hover:border-slate-600 hover:shadow-lg dark:hover:shadow-slate-900/50 transition-all duration-300"
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ delay: index * 0.03 }}
       onClick={handleClick}
+      onKeyDown={(e) => e.key === "Enter" && handleClick()}
     >
       {/* Image Section */}
       <div className="relative aspect-square overflow-hidden">

@@ -5,11 +5,14 @@ import Avatar from "../common/Avatar";
 const FriendItem = ({ friend, index, onClick }) => {
   return (
     <motion.div
+      role="button"
+      tabIndex={0}
       className="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-50 transition-colors cursor-pointer mx-2"
       initial={{ x: -10, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       transition={{ delay: index * 0.03 }}
       onClick={() => onClick && onClick(friend)}
+      onKeyDown={(e) => e.key === "Enter" && onClick && onClick(friend)}
     >
       <Avatar
         src={friend.avatar}

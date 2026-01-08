@@ -16,11 +16,14 @@ const SuggestedUsersSection = ({
         {suggestedUsers.slice(0, 3).map((user, index) => (
           <motion.div
             key={user.id}
+            role="button"
+            tabIndex={0}
             className="flex items-center gap-3 p-3 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-xl cursor-pointer transition-colors"
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: (index + 5) * 0.1 }}
             onClick={() => handleViewProfile(user)}
+            onKeyDown={(e) => e.key === "Enter" && handleViewProfile(user)}
           >
             <img
               src={user.avatar || "/placeholder.svg"}
