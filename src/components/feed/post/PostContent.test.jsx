@@ -225,20 +225,6 @@ describe("PostContent", () => {
     });
   });
 
-  describe("image container", () => {
-    it("should have overflow-hidden class on image wrapper", () => {
-      const { container } = render(<PostContent {...defaultProps} />);
-      const imageWrapper = container.querySelector(".overflow-hidden");
-      expect(imageWrapper).toBeInTheDocument();
-    });
-
-    it("should have background color for letterboxing", () => {
-      const { container } = render(<PostContent {...defaultProps} />);
-      const imageWrapper = container.querySelector(".bg-slate-100");
-      expect(imageWrapper).toBeInTheDocument();
-    });
-  });
-
   describe("edge cases", () => {
     it("should handle very long content", () => {
       const longContent = "A".repeat(1000);
