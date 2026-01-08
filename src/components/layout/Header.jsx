@@ -24,8 +24,8 @@ const Header = () => {
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >
-          <div className="w-10 h-10 sm:w-9 sm:h-9 bg-linear-to-br from-orange-500 to-amber-500 rounded-xl flex items-center justify-center shadow-lg shadow-orange-500/25">
-            <span className="text-white font-bold text-lg sm:text-lg">O</span>
+          <div className="w-10 h-10 bg-linear-to-br from-orange-500 to-amber-500 rounded-xl flex items-center justify-center shadow-lg shadow-orange-500/25">
+            <span className="text-white font-bold text-lg">O</span>
           </div>
           <span className="text-xl font-bold text-slate-900 dark:text-white hidden sm:block transition-colors">
             Orbit

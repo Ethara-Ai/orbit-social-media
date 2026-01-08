@@ -1,4 +1,4 @@
-import { AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Home, Search, MessageCircle, Bell, X, User } from "../icons";
 import UserProfileCard from "../sidebar/UserProfileCard";
 import NavigationItems from "../sidebar/NavigationItems";

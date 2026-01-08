@@ -25,7 +25,7 @@ export default function SocialMediaDashboard() {
   }
 
   return (
-    <div className="min-h-screen lg:h-screen w-full bg-slate-100 dark:bg-slate-950 font-['Inter',sans-serif] transition-colors duration-300 lg:overflow-hidden flex flex-col">
+    <div className="min-h-screen lg:h-screen w-full bg-slate-100 dark:bg-slate-950 font-['Urbanist',sans-serif] transition-colors duration-300 lg:overflow-hidden flex flex-col">
       {/* Header - Fixed at top */}
       <Header />
 
