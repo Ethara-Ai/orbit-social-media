@@ -28,7 +28,11 @@ import {
   NOTIFICATION_INTERVAL,
   MAX_NOTIFICATIONS,
   FRIEND_REQUEST_PROBABILITY,
+  TABS,
 } from "../../utils/constants";
+
+// Import UI Context to check active tab
+import { useUI } from "./UIContext";
 
 // ============================================================================
 // Context Definition
@@ -61,6 +65,9 @@ export function NotificationsProvider({ children }) {
   // Effects
   // ==========================================================================
 
+  // Get active tab from UI context to check if user is on notifications tab
+  const { activeTab } = useUI();
+
   // Auto-generate notifications
   useEffect(() => {
     const interval = setInterval(() => {
@@ -71,20 +78,29 @@ export function NotificationsProvider({ children }) {
       );
 
       if (newNotification) {
+        // If user is on notifications tab, mark new notification as read immediately
+        const isOnNotificationsTab = activeTab === TABS.NOTIFICATIONS;
+        const notificationToAdd = isOnNotificationsTab
+          ? { ...newNotification, isRead: true }
+          : newNotification;
+
         setNotifications((prev) => {
           const updated = addNotification(
             prev,
-            newNotification,
+            notificationToAdd,
             MAX_NOTIFICATIONS,
           );
-          setNotificationCount(countUnread(updated));
+          // Only update count if user is NOT on notifications tab
+          if (!isOnNotificationsTab) {
+            setNotificationCount(countUnread(updated));
+          }
           return updated;
         });
       }
     }, NOTIFICATION_INTERVAL);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [activeTab]);
 
   // Update notification count when notifications change
   useEffect(() => {
