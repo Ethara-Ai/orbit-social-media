@@ -2,10 +2,10 @@
 
 A modern, feature-rich social media dashboard built with React 19, featuring a beautiful UI with smooth animations, modular architecture, and a fully interactive experience.
 
-![React](https://img.shields.io/badge/React-19.2.0-61DAFB?style=flat-square&logo=react)
-![Vite](https://img.shields.io/badge/Vite-7.2.4-646CFF?style=flat-square&logo=vite)
-![TailwindCSS](https://img.shields.io/badge/Tailwind-3.4.19-38B2AC?style=flat-square&logo=tailwind-css)
-![Framer Motion](https://img.shields.io/badge/Framer_Motion-12.24.3-FF0055?style=flat-square&logo=framer)
+![React](https://img.shields.io/badge/React-19.2.3-61DAFB?style=flat-square&logo=react)
+![Vite](https://img.shields.io/badge/Vite-7.3.1-646CFF?style=flat-square&logo=vite)
+![TailwindCSS](https://img.shields.io/badge/Tailwind-4.1.18-38B2AC?style=flat-square&logo=tailwind-css)
+![Framer Motion](https://img.shields.io/badge/Framer_Motion-12.24.8-FF0055?style=flat-square&logo=framer)
 ![Vitest](https://img.shields.io/badge/Vitest-4.0.16-6E9F18?style=flat-square&logo=vitest)
 
 ## Overview
@@ -21,8 +21,9 @@ Orbit is a fully functional social media dashboard prototype that simulates a re
 - Expandable comments section
 
 ### Discover (Explore)
-- Browse posts by categories
-- Featured and trending posts
+- Browse posts by categories with pill-style filters
+- Featured and trending posts sections
+- Regular posts grid layout
 - Theater mode for immersive post viewing
 - Slide-in comments panel
 
@@ -44,6 +45,16 @@ Orbit is a fully functional social media dashboard prototype that simulates a re
 - Mark as read functionality
 - Notification badges with live counts
 
+### Connections
+- View and manage connections
+- Connection requests
+- User profile browsing
+
+### Profile
+- User profile view
+- Profile analytics
+- Activity overview
+
 ### Active Now
 - See online friends
 - Quick-start conversations
@@ -58,13 +69,13 @@ Orbit is a fully functional social media dashboard prototype that simulates a re
 
 | Technology | Purpose |
 |------------|---------|
-| **React 19** | UI Framework |
-| **Vite 7** | Build Tool & Dev Server |
-| **Tailwind CSS 3** | Utility-first Styling |
-| **Framer Motion** | Animations & Transitions |
-| **Vitest** | Unit Testing Framework |
+| **React 19.2.3** | UI Framework |
+| **Vite 7.3.1** | Build Tool & Dev Server |
+| **Tailwind CSS 4.1.18** | Utility-first Styling |
+| **Framer Motion 12.24.8** | Animations & Transitions |
+| **Vitest 4.0.16** | Unit Testing Framework |
 | **Testing Library** | Component Testing |
-| **ESLint** | Code Linting |
+| **ESLint 9** | Code Linting |
 | **GitHub Actions** | CI/CD Pipeline |
 | **AWS S3** | Static Hosting |
 
@@ -79,6 +90,7 @@ This project follows **high cohesion** and **low coupling** principles:
 - **Thin Orchestrators** - Layout components delegate to child components via hooks
 - **No Prop Drilling** - Tab components access their data directly via context hooks
 - **Colocated Tests** - Test files live alongside the components they test
+- **Error Boundaries** - Isolate failures within individual features
 
 ### Context Architecture
 
@@ -109,51 +121,101 @@ Business logic is extracted into dedicated services:
 ```
 src/
 ├── components/
-│   ├── common/              # Reusable UI components
-│   │   ├── Avatar.jsx
-│   │   ├── Avatar.test.jsx      # Colocated test
-│   │   ├── Badge.jsx
-│   │   ├── Badge.test.jsx
+│   ├── common/                  # Reusable UI components
 │   │   ├── ActionButton.jsx
 │   │   ├── ActionButton.test.jsx
+│   │   ├── Avatar.jsx
+│   │   ├── Avatar.test.jsx
+│   │   ├── Badge.jsx
+│   │   ├── Badge.test.jsx
 │   │   ├── EmptyState.jsx
-│   │   └── EmptyState.test.jsx
-│   ├── layout/              # Layout components
+│   │   ├── EmptyState.test.jsx
+│   │   ├── ErrorBoundary.jsx
+│   │   └── index.js
+│   ├── layout/                  # Layout components
 │   │   ├── Header.jsx
 │   │   ├── Sidebar.jsx
+│   │   ├── MobileSidebar.jsx
 │   │   ├── MainContent.jsx
 │   │   ├── RightSidebar.jsx
 │   │   ├── LoadingScreen.jsx
 │   │   ├── LoadingScreen.test.jsx
 │   │   ├── MobileNavOverlay.jsx
 │   │   ├── RightSidebar/
-│   │   └── popups/
-│   ├── feed/                # Feed tab components
+│   │   │   ├── ActiveNowSection.jsx
+│   │   │   ├── SuggestedUsersSection.jsx
+│   │   │   └── index.js
+│   │   ├── popups/
+│   │   │   ├── CopyNotificationPopup.jsx
+│   │   │   ├── NotificationPopup.jsx
+│   │   │   └── index.js
+│   │   └── index.js
+│   ├── feed/                    # Feed tab components
 │   │   ├── FeedTab.jsx
 │   │   ├── PostCard.jsx
 │   │   ├── CreatePost.jsx
 │   │   └── post/
-│   ├── messages/            # Messages tab components
+│   │       ├── PostActions.jsx
+│   │       ├── PostActions.test.jsx
+│   │       ├── PostComments.jsx
+│   │       ├── PostContent.jsx
+│   │       ├── PostContent.test.jsx
+│   │       ├── PostHeader.jsx
+│   │       ├── PostHeader.test.jsx
+│   │       └── index.js
+│   ├── messages/                # Messages tab components
 │   │   ├── MessagesTab.jsx
 │   │   └── chat/
-│   ├── notifications/       # Notifications tab components
-│   │   └── NotificationsTab.jsx
-│   ├── explore/             # Explore tab components
+│   │       ├── ActiveChat.jsx
+│   │       ├── ChatHeader.jsx
+│   │       ├── ConversationsList.jsx
+│   │       ├── EmptyChatState.jsx
+│   │       ├── MessageBubble.jsx
+│   │       ├── MessageBubble.test.jsx
+│   │       ├── MessageInput.jsx
+│   │       ├── MessagesList.jsx
+│   │       └── index.js
+│   ├── notifications/           # Notifications tab components
+│   │   ├── NotificationsTab.jsx
+│   │   ├── NotificationItem.jsx
+│   │   ├── NotificationItem.test.jsx
+│   │   └── index.js
+│   ├── explore/                 # Explore tab components
 │   │   ├── ExploreTab.jsx
 │   │   ├── ExploreHeader.jsx
 │   │   ├── ExploreHeader.test.jsx
-│   │   └── modal/
-│   ├── sidebar/             # Sidebar subcomponents
+│   │   ├── CategoryPills.jsx
+│   │   ├── CategoryPills.test.jsx
+│   │   ├── ExplorePostCard.jsx
+│   │   ├── ExplorePostCard.test.jsx
+│   │   ├── FeaturedPostCard.jsx
+│   │   ├── FeaturedSection.jsx
+│   │   ├── RegularPostsGrid.jsx
+│   │   ├── modal/
+│   │   │   ├── CommentsPanel.jsx
+│   │   │   ├── TheaterModal.jsx
+│   │   │   └── index.js
+│   │   └── index.js
+│   ├── connections/             # Connections tab components
+│   │   └── ConnectionsTab.jsx
+│   ├── profile/                 # Profile components
+│   │   └── ProfileTab.jsx
+│   ├── sidebar/                 # Sidebar subcomponents
+│   │   ├── ConnectionsList.jsx
+│   │   ├── ConnectionsList.test.jsx
 │   │   ├── FriendItem.jsx
 │   │   ├── FriendItem.test.jsx
+│   │   ├── NavigationItems.jsx
+│   │   ├── NavigationItems.test.jsx
+│   │   ├── ProfileAnalytics.jsx
 │   │   ├── UserProfileCard.jsx
-│   │   └── UserProfileCard.test.jsx
-│   ├── profile/             # Profile components
-│   └── icons/               # SVG icon components
+│   │   └── index.js
+│   ├── icons.jsx                # SVG icon components
+│   └── index.js
 │
 ├── context/
-│   ├── AppContext.jsx       # Thin composer - composes all providers
-│   └── providers/           # Domain-specific context providers
+│   ├── AppContext.jsx           # Thin composer - composes all providers
+│   └── providers/               # Domain-specific context providers
 │       ├── UserContext.jsx
 │       ├── FeedContext.jsx
 │       ├── MessagesContext.jsx
@@ -162,45 +224,50 @@ src/
 │       ├── UIContext.jsx
 │       └── index.js
 │
-├── services/                # Business logic layer
+├── services/                    # Business logic layer
 │   ├── postService.js
 │   ├── messageService.js
 │   ├── conversationService.js
 │   ├── notificationService.js
 │   └── index.js
 │
-├── hooks/                   # Custom React hooks
+├── hooks/                       # Custom React hooks
 │   ├── useClickOutside.js
-│   ├── useClickOutside.test.js  # Colocated test
+│   ├── useClickOutside.test.js
 │   ├── useDebounce.js
 │   ├── useDebounce.test.js
 │   ├── useLocalStorage.js
 │   ├── useLocalStorage.test.js
 │   ├── useMediaQuery.js
+│   ├── useMediaQuery.test.js
+│   ├── useScrollPosition.js
+│   ├── useScrollPosition.test.js
 │   ├── useScrollToBottom.js
+│   ├── useScrollToBottom.test.js
 │   └── index.js
 │
-├── utils/                   # Utilities and constants
+├── utils/                       # Utilities and constants
 │   ├── constants.js
 │   ├── helpers.js
-│   ├── helpers.test.js          # Colocated test
+│   ├── helpers.test.js
 │   └── index.js
 │
-├── test/                    # Test configuration
-│   └── setup.js             # Vitest setup file
+├── test/                        # Test configuration
+│   └── setup.js                 # Vitest setup file
 │
 ├── data/
-│   └── mockData.js          # Mock data generators
+│   └── mockData.js              # Mock data generators
 │
-├── App.jsx                  # App entry with AppProvider
-├── SocialMediaDashboard.jsx # Main dashboard component
-├── main.jsx                 # Application entry point
-└── index.css                # Global styles
+├── App.jsx                      # App entry with AppProvider
+├── App.css                      # App-specific styles
+├── SocialMediaDashboard.jsx     # Main dashboard component
+├── main.jsx                     # Application entry point
+└── index.css                    # Global styles
 
 .github/
 └── workflows/
-    ├── deploy.yml           # CI/CD pipeline for AWS S3
-    └── pr-check.yml         # PR validation workflow
+    ├── deploy.yml               # CI/CD pipeline for AWS S3
+    └── pr-check.yml             # PR validation workflow
 ```
 
 ## Getting Started
@@ -214,8 +281,8 @@ src/
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
-   cd socialtubb-app
+   git clone https://github.com/Ethara-AI/orbit-social-media.git
+   cd orbit-social-media
    ```
 
 2. **Install dependencies**
@@ -246,6 +313,7 @@ src/
 | `npm run build` | Build for production |
 | `npm run preview` | Preview production build |
 | `npm run lint` | Run ESLint |
+| `npm run lint:fix` | Run ESLint with auto-fix |
 | `npm run test` | Run tests in watch mode |
 | `npm run test:run` | Run tests once |
 | `npm run test:coverage` | Run tests with coverage report |
@@ -298,8 +366,8 @@ Coverage reports are generated in the `coverage/` directory and uploaded as arti
 ```bash
 # Application Settings
 VITE_APP_ENV=development          # development | staging | production
-VITE_APP_NAME=SocialTubb          # Application name
-VITE_APP_VERSION=0.0.0            # Application version
+VITE_APP_NAME=Orbit               # Application name
+VITE_APP_VERSION=0.0.1            # Application version
 
 # API Configuration
 VITE_API_BASE_URL=http://localhost:3000/api
@@ -370,14 +438,18 @@ Configure these secrets in your repository settings:
 3. **Create an IAM user** with S3 and CloudFront permissions
 4. **Add secrets** to GitHub repository settings
 
+For detailed AWS setup instructions, see [AWS Setup Guide](docs/AWS_SETUP.md).
+
 ## Design Features
 
 - **Responsive Design** - Works seamlessly on desktop, tablet, and mobile
+- **Mobile Navigation** - Dedicated mobile sidebar and navigation overlay
 - **Smooth Animations** - Powered by Framer Motion for fluid transitions
 - **Modern UI** - Clean, minimalist design with orange/amber color scheme
 - **Custom Scrollbars** - Styled scrollbars with orange gradient thumb
 - **Loading States** - Elegant loading screen with pulsing logo animation
 - **Dark Overlays** - Theater mode for immersive content viewing
+- **Copy Notifications** - Toast feedback for clipboard actions
 
 ## Smart Features
 
@@ -397,11 +469,11 @@ The messaging system includes a smart response generator that analyzes your mess
 
 | Metric | Value |
 |--------|-------|
-| Test Files | 12 |
-| Test Cases | 483 |
-| Components | 40+ |
-| Custom Hooks | 6 |
+| Test Files | 23 |
+| Components | 50+ |
+| Custom Hooks | 7 |
 | Context Providers | 6 |
+| Services | 4 |
 
 ## Contributing
 
@@ -426,4 +498,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 <div align="center">
   <p><strong>Connect - Discover - Thrive</strong></p>
+  <p>
+    <a href="https://github.com/Ethara-AI/orbit-social-media">GitHub</a> •
+    <a href="https://components.ethara.ai/orbit-social-media">Live Demo</a>
+  </p>
 </div>
