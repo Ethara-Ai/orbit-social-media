@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Home, Search, MessageCircle, Bell } from "../icons";
 import UserProfileCard from "../sidebar/UserProfileCard";
 import NavigationItems from "../sidebar/NavigationItems";
+import ProfileAnalytics from "../sidebar/ProfileAnalytics";
 import {
   useUser,
   useUI,
@@ -12,11 +13,7 @@ import {
 
 const Sidebar = () => {
   const { currentUser, currentUserAvatar } = useUser();
-  const {
-    activeTab,
-    setActiveTab,
-    setShowCurrentUserModal,
-  } = useUI();
+  const { activeTab, setActiveTab, setShowCurrentUserModal } = useUI();
   const { totalUnreadMessages } = useMessages();
   const { notificationCount, markNotificationsAsRead } = useNotifications();
 
@@ -46,6 +43,10 @@ const Sidebar = () => {
           onClick={handleOpenCurrentUserModal}
         />
       </motion.div>
+
+      {/* Navigation Section */}
+      {/* Profile Analytics Section */}
+      <ProfileAnalytics />
 
       {/* Navigation Section */}
       <motion.div
