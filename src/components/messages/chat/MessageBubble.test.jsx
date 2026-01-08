@@ -199,10 +199,10 @@ describe("MessageBubble", () => {
       expect(image).toHaveAttribute("alt", "Attachment");
     });
 
-    it("should have max-w-48 class", () => {
+    it("should have max-w-xs class", () => {
       render(<MessageBubble message={messageWithAttachment} />);
       const image = screen.getByRole("img");
-      expect(image).toHaveClass("max-w-48");
+      expect(image).toHaveClass("max-w-xs");
     });
 
     it("should have h-auto class", () => {
@@ -211,10 +211,10 @@ describe("MessageBubble", () => {
       expect(image).toHaveClass("h-auto");
     });
 
-    it("should have rounded-lg class", () => {
+    it("should have rounded-xl class", () => {
       render(<MessageBubble message={messageWithAttachment} />);
       const image = screen.getByRole("img");
-      expect(image).toHaveClass("rounded-lg");
+      expect(image).toHaveClass("rounded-xl");
     });
 
     it("should have object-cover class", () => {
@@ -223,28 +223,28 @@ describe("MessageBubble", () => {
       expect(image).toHaveClass("object-cover");
     });
 
-    it("should have orange border for sent message attachment", () => {
+    it("should have w-full class for full width within bubble", () => {
       render(<MessageBubble message={messageWithAttachment} />);
       const image = screen.getByRole("img");
-      expect(image).toHaveClass("border-orange-400/30");
+      expect(image).toHaveClass("w-full");
     });
 
-    it("should have slate border for received message attachment", () => {
-      const receivedWithAttachment = {
-        ...messageWithAttachment,
-        isSent: false,
-      };
-      render(<MessageBubble message={receivedWithAttachment} />);
-      const image = screen.getByRole("img");
-      expect(image).toHaveClass("border-slate-100");
-    });
-
-    it("should have mb-2 class on attachment container", () => {
+    it("should have mb-1 class on attachment container when text is present", () => {
       const { container } = render(
         <MessageBubble message={messageWithAttachment} />,
       );
-      const attachmentContainer = container.querySelector(".mb-2");
+      const attachmentContainer = container.querySelector(".mb-1");
       expect(attachmentContainer).toBeInTheDocument();
+    });
+
+    it("should not have margin on attachment container when no text", () => {
+      const attachmentOnly = {
+        ...messageWithAttachment,
+        text: "",
+      };
+      const { container } = render(<MessageBubble message={attachmentOnly} />);
+      const attachmentContainer = container.querySelector(".mb-1");
+      expect(attachmentContainer).not.toBeInTheDocument();
     });
   });
 
@@ -340,14 +340,14 @@ describe("MessageBubble", () => {
       expect(timestamp).toHaveClass("dark:text-slate-500");
     });
 
-    it("should have dark mode border class for received attachment", () => {
+    it("should have rounded-xl class for received attachment", () => {
       const receivedWithAttachment = {
         ...messageWithAttachment,
         isSent: false,
       };
       render(<MessageBubble message={receivedWithAttachment} />);
       const image = screen.getByRole("img");
-      expect(image).toHaveClass("dark:border-slate-600");
+      expect(image).toHaveClass("rounded-xl");
     });
   });
 
