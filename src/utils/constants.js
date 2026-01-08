@@ -12,6 +12,7 @@ export const TABS = {
   MESSAGES: "messages",
   NOTIFICATIONS: "notifications",
   CONNECTIONS: "connections",
+  PROFILE: "profile",
 };
 
 /**

@@ -38,9 +38,14 @@ const Header = () => {
 
         {/* User Actions */}
         <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-          {/* User Profile */}
-          <motion.div className="flex items-center gap-2 sm:gap-3 cursor-default order-1">
-            <div className="hidden lg:block">
+          {/* User Profile - Clickable to navigate to profile */}
+          <motion.button
+            onClick={() => setActiveTab("profile")}
+            className="flex items-center gap-2 sm:gap-3 cursor-pointer order-1"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            <div className="hidden lg:block text-right">
               <p className="text-sm font-semibold text-slate-900 dark:text-white transition-colors">
                 {currentUser.name}
               </p>
@@ -51,17 +56,18 @@ const Header = () => {
             <img
               src={currentUser.avatar || "/placeholder.svg"}
               alt={currentUser.name}
-              className="w-8 h-8 sm:w-9 sm:h-9 rounded-full object-cover ring-2 ring-slate-100 dark:ring-slate-700"
+              className="w-8 h-8 sm:w-9 sm:h-9 rounded-full object-cover ring-2 ring-slate-100 dark:ring-slate-700 hover:ring-orange-500 transition-all"
             />
-          </motion.div>
+          </motion.button>
 
           {/* Connections Button */}
           <motion.button
             onClick={() => setActiveTab("connections")}
-            className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center transition-all order-2 cursor-pointer ${activeTab === "connections"
+            className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center transition-all order-2 cursor-pointer ${
+              activeTab === "connections"
                 ? "bg-orange-500 text-white shadow-lg shadow-orange-500/25"
                 : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700"
-              }`}
+            }`}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             aria-label="Connections"

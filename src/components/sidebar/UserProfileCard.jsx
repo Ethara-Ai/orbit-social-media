@@ -13,10 +13,19 @@ const UserProfileCard = ({
   animated = true,
 }) => {
   const CardWrapper = animated ? motion.div : "div";
-  const cardProps = {};
+  const cardProps = animated
+    ? {
+        onClick,
+        whileHover: onClick ? { scale: 1.02 } : undefined,
+        whileTap: onClick ? { scale: 0.98 } : undefined,
+      }
+    : { onClick };
 
   return (
-    <CardWrapper className="cursor-default" {...cardProps}>
+    <CardWrapper
+      className={onClick ? "cursor-pointer" : "cursor-default"}
+      {...cardProps}
+    >
       {/* User Info Section - Centered */}
       <div className="flex flex-col items-center text-center pb-3">
         <Avatar

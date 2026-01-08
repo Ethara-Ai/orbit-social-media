@@ -13,6 +13,7 @@ const NotificationsTab = lazy(
   () => import("../notifications/NotificationsTab"),
 );
 const ConnectionsTab = lazy(() => import("../connections/ConnectionsTab"));
+const ProfileTab = lazy(() => import("../profile/ProfileTab"));
 
 /**
  * TabLoadingFallback - Skeleton loader shown while tab components load
@@ -229,6 +230,31 @@ const MainContent = () => {
                 </motion.div>
               ) : (
                 <ConnectionsTab />
+              )}
+            </Suspense>
+          </div>
+        </div>
+      </div>
+
+      {/* Profile Tab */}
+      <div className={getTabWrapperClass(TABS.PROFILE)}>
+        <div
+          ref={registerScrollContainer(TABS.PROFILE)}
+          onScroll={createScrollHandler(TABS.PROFILE)}
+          className={scrollContainerClass}
+        >
+          <div className="w-full">
+            <Suspense fallback={<TabLoadingFallback />}>
+              {activeTab === TABS.PROFILE ? (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <ProfileTab />
+                </motion.div>
+              ) : (
+                <ProfileTab />
               )}
             </Suspense>
           </div>

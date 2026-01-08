@@ -1,3 +1,4 @@
+import { useRef, useEffect } from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { Camera, X } from "../icons";
@@ -18,8 +19,28 @@ const CreatePost = () => {
   // Access user data from context
   const { currentUser, currentUserAvatar } = useUser();
 
+  // Ref for auto-resizing textarea
+  const textareaRef = useRef(null);
+
+  // Auto-resize textarea based on content
+  useEffect(() => {
+    const textarea = textareaRef.current;
+    if (textarea) {
+      // Reset to minimum height first
+      textarea.style.height = "30px";
+      // Only expand if content overflows
+      if (textarea.scrollHeight > 30) {
+        textarea.style.height = `${Math.min(textarea.scrollHeight, 120)}px`;
+      }
+    }
+  }, [newPostContent]);
+
   const removeSelectedMedia = () => {
     setSelectedImage(null);
+  };
+
+  const handleTextChange = (e) => {
+    setNewPostContent(e.target.value);
   };
 
   return (
@@ -29,15 +50,6 @@ const CreatePost = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: 0.1 }}
     >
-      <div className="mb-2.5">
-        <h1 className="text-base font-bold text-slate-900 dark:text-white transition-colors">
-          Your Orbit
-        </h1>
-        <p className="text-slate-500 dark:text-slate-400 text-xs mt-0.5 transition-colors">
-          See what's happening in your network
-        </p>
-      </div>
-
       <div className="flex gap-2.5">
         <img
           src={currentUserAvatar || "/placeholder.svg"}
@@ -48,39 +60,41 @@ const CreatePost = () => {
               "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=50&h=50&fit=crop&crop=face";
           }}
         />
-        <div className="flex-1 min-w-0 overflow-hidden">
-          <div className="relative bg-slate-100 dark:bg-slate-700/50 rounded-full focus-within:ring-1 focus-within:ring-orange-500/50 focus-within:bg-white dark:focus-within:bg-slate-800 transition-all">
+        <div className="flex-1 min-w-0">
+          {/* Text Input Area with inline buttons */}
+          <div className="flex items-center gap-2 bg-slate-100 dark:bg-slate-700/50 rounded-full focus-within:ring-1 focus-within:ring-orange-500/50 focus-within:bg-white dark:focus-within:bg-slate-800 transition-all px-3 py-1.5">
             <textarea
+              ref={textareaRef}
               placeholder="Share something..."
               value={newPostContent}
-              onChange={(e) => setNewPostContent(e.target.value)}
-              className="w-full pl-3 py-2.5 sm:py-3 pr-20 sm:pr-28 bg-transparent border-0 rounded-full resize-none focus:outline-hidden text-slate-900 dark:text-white placeholder-slate-500 text-xs sm:text-sm transition-colors truncate"
+              onChange={handleTextChange}
+              className="flex-1 bg-transparent border-0 resize-none focus:outline-hidden text-slate-900 dark:text-white placeholder-slate-500 text-xs sm:text-sm leading-tight overflow-hidden py-0.5"
+              style={{ height: "30px", maxHeight: "120px" }}
               rows={1}
             />
 
-            {/* Action buttons inside input field */}
-            <div className="absolute top-1/2 -translate-y-1/2 right-1.5 sm:right-2 flex items-center gap-1 sm:gap-2">
-              <input
-                type="file"
-                id="image-upload"
-                accept="image/*"
-                onChange={handleImageUpload}
-                className="hidden"
-              />
+            <input
+              type="file"
+              id="image-upload"
+              accept="image/*"
+              onChange={handleImageUpload}
+              className="hidden"
+            />
+            <div className="flex items-center gap-1 shrink-0">
               <motion.button
                 onClick={() => document.getElementById("image-upload")?.click()}
-                className="p-1.5 text-slate-500 dark:text-slate-400 hover:text-emerald-500 dark:hover:text-emerald-400 hover:bg-slate-100 dark:hover:bg-slate-600 rounded-full transition-colors cursor-pointer"
+                className="p-1 text-slate-500 dark:text-slate-400 hover:text-emerald-500 dark:hover:text-emerald-400 rounded-full transition-colors cursor-pointer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 title="Add photo"
               >
-                <Camera className="w-4 h-4 sm:w-5 sm:h-5" />
+                <Camera className="w-4 h-4" />
               </motion.button>
 
               <motion.button
                 onClick={handleCreatePost}
                 disabled={!newPostContent.trim() && !selectedImage}
-                className="bg-orange-500 hover:bg-orange-600 text-white px-2.5 sm:px-3 py-1.5 rounded-full font-semibold text-[11px] sm:text-xs transition-colors disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-orange-500"
+                className="bg-orange-500 hover:bg-orange-600 text-white px-2.5 py-1 rounded-full font-semibold text-[10px] sm:text-[11px] transition-colors disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-orange-500"
                 whileHover={{
                   scale: newPostContent.trim() || selectedImage ? 1.02 : 1,
                 }}
@@ -93,6 +107,7 @@ const CreatePost = () => {
             </div>
           </div>
 
+          {/* Selected Image Preview */}
           {selectedImage && (
             <div className="mt-2 sm:mt-3 relative rounded-lg sm:rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-900">
               <img

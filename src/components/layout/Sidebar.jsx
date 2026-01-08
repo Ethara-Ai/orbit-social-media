@@ -24,8 +24,8 @@ const Sidebar = () => {
     { id: "notifications", label: "Notifications", icon: Bell },
   ];
 
-  const handleOpenCurrentUserModal = () => {
-    setShowCurrentUserModal(true);
+  const handleNavigateToProfile = () => {
+    setActiveTab("profile");
   };
 
   return (
@@ -40,7 +40,7 @@ const Sidebar = () => {
         <UserProfileCard
           user={currentUser}
           avatar={currentUserAvatar}
-          onClick={handleOpenCurrentUserModal}
+          onClick={handleNavigateToProfile}
         />
       </motion.div>
 
