@@ -264,7 +264,7 @@ export const createMockPosts = (friendsList) => [
     content:
       "Just deployed a new decentralized identity solution on the blockchain! 🔐 After months of research and development, we're finally live. This could revolutionize how we handle digital identity verification. What are your thoughts on self-sovereign identity?",
     image:
-      "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=3840&h=2160&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1639762681057-408e52192e55?w=7680&h=4320&fit=crop&q=100",
     likes: 312,
     comments: 3,
     shares: 47,
