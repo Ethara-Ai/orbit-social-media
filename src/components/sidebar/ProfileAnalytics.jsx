@@ -31,7 +31,7 @@ const ProfileAnalytics = () => {
     >
       <div className="flex flex-col py-2 -mx-3">
         {/* Profile Viewers */}
-        <div className="flex items-center justify-between px-4 py-1 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors cursor-pointer group">
+        <div className="flex items-center justify-between px-4 py-1 transition-colors cursor-default group">
           <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-200 transition-colors">
             Profile viewers
           </p>
@@ -41,7 +41,7 @@ const ProfileAnalytics = () => {
         </div>
 
         {/* Post Impressions */}
-        <div className="flex items-center justify-between px-4 py-1 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors cursor-pointer group">
+        <div className="flex items-center justify-between px-4 py-1 transition-colors cursor-default group">
           <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-200 transition-colors">
             Post impressions
           </p>

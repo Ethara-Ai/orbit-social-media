@@ -41,9 +41,7 @@ const Header = () => {
         <div className="flex items-center gap-2 sm:gap-3 shrink-0">
           {/* User Profile */}
           <motion.div
-            className="flex items-center gap-2 sm:gap-3 cursor-pointer order-1"
-            whileHover={{ scale: 1.02 }}
-            onClick={() => setShowCurrentUserModal(true)}
+            className="flex items-center gap-2 sm:gap-3 cursor-default order-1"
           >
             <div className="hidden lg:block">
               <p className="text-sm font-semibold text-slate-900 dark:text-white transition-colors">
