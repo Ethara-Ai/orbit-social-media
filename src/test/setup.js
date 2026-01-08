@@ -16,9 +16,9 @@ import { afterEach, beforeEach, vi } from "vitest";
 let localStorageStore = {};
 
 // Store original Storage.prototype methods
-const originalStorageGetItem = Storage.prototype.getItem;
-const originalStorageSetItem = Storage.prototype.setItem;
-const originalStorageRemoveItem = Storage.prototype.removeItem;
+const _originalStorageGetItem = Storage.prototype.getItem;
+const _originalStorageSetItem = Storage.prototype.setItem;
+const _originalStorageRemoveItem = Storage.prototype.removeItem;
 
 // Override Storage.prototype methods to use our store
 Storage.prototype.getItem = function (key) {
@@ -90,9 +90,9 @@ class MockIntersectionObserver {
   constructor(callback) {
     this.callback = callback;
   }
-  observe() { }
-  unobserve() { }
-  disconnect() { }
+  observe() {}
+  unobserve() {}
+  disconnect() {}
 }
 
 Object.defineProperty(window, "IntersectionObserver", {
@@ -102,9 +102,9 @@ Object.defineProperty(window, "IntersectionObserver", {
 
 // Mock ResizeObserver
 class MockResizeObserver {
-  observe() { }
-  unobserve() { }
-  disconnect() { }
+  observe() {}
+  unobserve() {}
+  disconnect() {}
 }
 
 Object.defineProperty(window, "ResizeObserver", {

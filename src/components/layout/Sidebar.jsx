@@ -9,7 +9,6 @@ import {
   useUser,
   useUI,
   useMessages,
-
   useNotifications,
   useFeed,
 } from "../../context/AppContext";
@@ -17,7 +16,7 @@ import {
 const Sidebar = () => {
   const { currentUser, currentUserAvatar, currentUserDetails } = useUser();
   const { posts } = useFeed();
-  const { activeTab, setActiveTab, setShowCurrentUserModal } = useUI();
+  const { activeTab, setActiveTab } = useUI();
   const { totalUnreadMessages } = useMessages();
   const { notificationCount, markNotificationsAsRead } = useNotifications();
 

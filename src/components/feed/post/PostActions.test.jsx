@@ -257,28 +257,16 @@ describe("PostActions", () => {
   });
 
   describe("container styling", () => {
-    it("should have px-3 padding class", () => {
+    it("should have px-4 padding class", () => {
       const { container } = render(<PostActions {...defaultProps} />);
       const wrapper = container.firstChild;
-      expect(wrapper).toHaveClass("px-3");
+      expect(wrapper).toHaveClass("px-4");
     });
 
-    it("should have sm:px-4 padding class", () => {
+    it("should have py-3 padding class", () => {
       const { container } = render(<PostActions {...defaultProps} />);
       const wrapper = container.firstChild;
-      expect(wrapper).toHaveClass("sm:px-4");
-    });
-
-    it("should have py-2 padding class", () => {
-      const { container } = render(<PostActions {...defaultProps} />);
-      const wrapper = container.firstChild;
-      expect(wrapper).toHaveClass("py-2");
-    });
-
-    it("should have sm:py-3 padding class", () => {
-      const { container } = render(<PostActions {...defaultProps} />);
-      const wrapper = container.firstChild;
-      expect(wrapper).toHaveClass("sm:py-3");
+      expect(wrapper).toHaveClass("py-3");
     });
 
     it("should have border-t class", () => {
@@ -319,15 +307,15 @@ describe("PostActions", () => {
       expect(flexContainer).toBeInTheDocument();
     });
 
-    it("should have gap-4 class", () => {
+    it("should have gap-3 class", () => {
       const { container } = render(<PostActions {...defaultProps} />);
-      const flexContainer = container.querySelector(".gap-4");
+      const flexContainer = container.querySelector(".gap-3");
       expect(flexContainer).toBeInTheDocument();
     });
 
-    it("should have sm:gap-6 class", () => {
+    it("should have sm:gap-4 class", () => {
       const { container } = render(<PostActions {...defaultProps} />);
-      const flexContainer = container.querySelector(".sm\\:gap-6");
+      const flexContainer = container.querySelector(".sm\\:gap-4");
       expect(flexContainer).toBeInTheDocument();
     });
   });

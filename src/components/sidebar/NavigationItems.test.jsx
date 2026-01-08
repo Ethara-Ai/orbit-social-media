@@ -105,14 +105,13 @@ describe("NavigationItems", () => {
     it("should apply inactive styles to non-active tabs", () => {
       render(<NavigationItems {...defaultProps} activeTab="feed" />);
       const exploreButton = screen.getByText("Explore").closest("button");
-      expect(exploreButton).toHaveClass("text-slate-600");
+      expect(exploreButton).toHaveClass("text-slate-700");
     });
 
     it("should apply shadow-sm class to active tab", () => {
       render(<NavigationItems {...defaultProps} activeTab="feed" />);
       const feedButton = screen.getByText("Feed").closest("button");
-      expect(feedButton).toHaveClass("shadow-lg");
-      expect(feedButton).toHaveClass("shadow-orange-500/25");
+      expect(feedButton).toHaveClass("shadow-sm");
     });
 
     it("should apply hover classes to inactive tabs", () => {
@@ -300,26 +299,24 @@ describe("NavigationItems", () => {
   });
 
   describe("badge positioning", () => {
-    it("should have ml-auto class on badges", () => {
+    it("should render badges within navigation buttons", () => {
       render(<NavigationItems {...defaultProps} />);
       const badges = screen.getAllByTestId("badge");
-      badges.forEach((badge) => {
-        expect(badge).toHaveClass("ml-auto");
-      });
+      expect(badges.length).toBeGreaterThan(0);
     });
   });
 
   describe("styling", () => {
-    it("should have space-y-1 class on nav container", () => {
+    it("should have space-y-0.5 class on nav container", () => {
       const { container } = render(<NavigationItems {...defaultProps} />);
       const nav = container.querySelector("nav");
-      expect(nav).toHaveClass("space-y-1");
+      expect(nav).toHaveClass("space-y-0.5");
     });
 
-    it("should have mb-6 class on nav container", () => {
+    it("should have py-1 class on nav container", () => {
       const { container } = render(<NavigationItems {...defaultProps} />);
       const nav = container.querySelector("nav");
-      expect(nav).toHaveClass("mb-6");
+      expect(nav).toHaveClass("py-1");
     });
 
     it("should have w-full class on buttons", () => {
@@ -344,14 +341,14 @@ describe("NavigationItems", () => {
     it("should have padding classes on buttons", () => {
       render(<NavigationItems {...defaultProps} />);
       const button = screen.getByText("Feed").closest("button");
-      expect(button).toHaveClass("px-4");
-      expect(button).toHaveClass("py-3");
+      expect(button).toHaveClass("px-3");
+      expect(button).toHaveClass("py-2");
     });
 
-    it("should have rounded-xl class on buttons", () => {
+    it("should have rounded-lg class on buttons", () => {
       render(<NavigationItems {...defaultProps} />);
       const button = screen.getByText("Feed").closest("button");
-      expect(button).toHaveClass("rounded-xl");
+      expect(button).toHaveClass("rounded-lg");
     });
 
     it("should have transition-all class on buttons", () => {

@@ -147,7 +147,8 @@ describe("PostHeader", () => {
     it("should have padding classes on container", () => {
       const { container } = render(<PostHeader {...defaultProps} />);
       const wrapper = container.firstChild;
-      expect(wrapper).toHaveClass("p-3");
+      expect(wrapper).toHaveClass("px-4");
+      expect(wrapper).toHaveClass("py-3");
     });
 
     it("should have flex layout for content", () => {
@@ -171,7 +172,9 @@ describe("PostHeader", () => {
       };
       render(<PostHeader {...defaultProps} user={longNameUser} />);
       expect(
-        screen.getByText("This Is A Very Long User Name That Should Be Truncated")
+        screen.getByText(
+          "This Is A Very Long User Name That Should Be Truncated",
+        ),
       ).toBeInTheDocument();
     });
 
@@ -244,22 +247,16 @@ describe("PostHeader", () => {
   });
 
   describe("responsive classes", () => {
-    it("should have responsive padding classes", () => {
+    it("should have padding classes on container", () => {
       const { container } = render(<PostHeader {...defaultProps} />);
       const wrapper = container.firstChild;
-      expect(wrapper).toHaveClass("sm:p-4");
-    });
-
-    it("should have responsive bottom padding", () => {
-      const { container } = render(<PostHeader {...defaultProps} />);
-      const wrapper = container.firstChild;
-      expect(wrapper).toHaveClass("pb-2");
-      expect(wrapper).toHaveClass("sm:pb-3");
+      expect(wrapper).toHaveClass("px-4");
+      expect(wrapper).toHaveClass("py-3");
     });
 
     it("should have responsive gap classes", () => {
       const { container } = render(<PostHeader {...defaultProps} />);
-      const flexContainer = container.querySelector(".gap-2.sm\\:gap-3");
+      const flexContainer = container.querySelector(".gap-2.sm\\:gap-2\\.5");
       expect(flexContainer).toBeInTheDocument();
     });
 

@@ -13,10 +13,7 @@ import {
 import { friends, createInitialConversations } from "../../data/mockData";
 
 // Import Services
-import {
-  generateSmartResponse,
-  createMessage,
-} from "../../services/messageService";
+import { createMessage } from "../../services/messageService";
 import {
   findConversationById,
   getOrCreateConversation,

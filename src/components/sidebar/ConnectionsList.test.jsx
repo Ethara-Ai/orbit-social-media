@@ -498,16 +498,16 @@ describe("ConnectionsList", () => {
         <ConnectionsList {...defaultProps} showFriends={true} />,
       );
       const friendItems = container.querySelectorAll(
-        ".flex.items-center.gap-3",
+        ".flex.items-center.gap-2",
       );
       expect(friendItems.length).toBeGreaterThan(0);
     });
 
-    it("should have gap-3 class on friend item", () => {
+    it("should have gap-2 class on friend item", () => {
       const { container } = render(
         <ConnectionsList {...defaultProps} showFriends={true} />,
       );
-      const friendItems = container.querySelectorAll(".gap-3");
+      const friendItems = container.querySelectorAll(".gap-2");
       expect(friendItems.length).toBeGreaterThan(0);
     });
 
@@ -569,10 +569,10 @@ describe("ConnectionsList", () => {
       expect(name).toHaveClass("truncate");
     });
 
-    it("should have text-sm class", () => {
+    it("should have text-xs class", () => {
       render(<ConnectionsList {...defaultProps} showFriends={true} />);
       const name = screen.getByText("Alice Smith");
-      expect(name).toHaveClass("text-sm");
+      expect(name).toHaveClass("text-xs");
     });
 
     it("should have transition-colors class", () => {
@@ -733,7 +733,7 @@ describe("ConnectionsList", () => {
       render(<ConnectionsList {...defaultProps} showFriends={true} />);
       const avatars = screen.getAllByTestId("avatar");
       avatars.forEach((avatar) => {
-        expect(avatar).toHaveAttribute("data-size", "md");
+        expect(avatar).toHaveAttribute("data-size", "sm");
       });
     });
 

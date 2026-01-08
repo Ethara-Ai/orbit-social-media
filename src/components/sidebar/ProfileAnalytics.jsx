@@ -1,28 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { useUI } from "../../context/AppContext";
 import { Eye, BarChart3 } from "../icons";
 
 const ProfileAnalytics = () => {
   const { setActiveTab } = useUI();
-  const [profileViewers, setProfileViewers] = useState(0);
-  const [postImpressions, setPostImpressions] = useState(0);
-  const [likesAndComments, setLikesAndComments] = useState(0);
-
-  // Generate random values on mount
-  useEffect(() => {
-    // Generate random profile viewers between 50 and 500
-    const viewers = Math.floor(Math.random() * 451) + 50;
-    setProfileViewers(viewers);
-
-    // Generate random post impressions between 200 and 2000
-    const impressions = Math.floor(Math.random() * 1801) + 200;
-    setPostImpressions(impressions);
-
-    // Generate random likes and comments
-    const likes = Math.floor(Math.random() * 901) + 100;
-    setLikesAndComments(likes);
-  }, []);
+  // Initialize with random values using function initializers to avoid useEffect
+  const [profileViewers] = useState(() => Math.floor(Math.random() * 451) + 50);
+  const [postImpressions] = useState(
+    () => Math.floor(Math.random() * 1801) + 200,
+  );
+  const [likesAndComments] = useState(
+    () => Math.floor(Math.random() * 901) + 100,
+  );
 
   // Format large numbers with commas
   const formatNumber = (num) => {

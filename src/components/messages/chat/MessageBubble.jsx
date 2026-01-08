@@ -40,7 +40,7 @@ const MessageBubble = ({ message }) => {
   );
 };
 
-const MessageAttachment = ({ src, isSent, hasText }) => {
+const MessageAttachment = ({ src, hasText }) => {
   const handleImageError = (e) => {
     e.target.src =
       "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=600&h=400&fit=crop";

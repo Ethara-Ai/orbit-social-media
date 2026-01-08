@@ -91,10 +91,10 @@ describe("PostContent", () => {
       expect(image).toHaveClass("w-full");
     });
 
-    it("should have rounded-lg class", () => {
+    it("should have rounded-md class", () => {
       render(<PostContent {...defaultProps} />);
       const image = screen.getByRole("img");
-      expect(image).toHaveClass("rounded-lg");
+      expect(image).toHaveClass("rounded-md");
     });
   });
 
@@ -164,44 +164,32 @@ describe("PostContent", () => {
   });
 
   describe("container styling", () => {
-    it("should have px-3 padding class for content container", () => {
+    it("should have px-4 padding class for content container", () => {
       const { container } = render(<PostContent content="Test" image={null} />);
       const contentWrapper = container.firstChild;
-      expect(contentWrapper).toHaveClass("px-3");
+      expect(contentWrapper).toHaveClass("px-4");
     });
 
-    it("should have sm:px-4 padding class for content container", () => {
+    it("should have pb-3 padding class for content container", () => {
       const { container } = render(<PostContent content="Test" image={null} />);
       const contentWrapper = container.firstChild;
-      expect(contentWrapper).toHaveClass("sm:px-4");
+      expect(contentWrapper).toHaveClass("pb-3");
     });
 
-    it("should have pb-2 padding class for content container", () => {
-      const { container } = render(<PostContent content="Test" image={null} />);
-      const contentWrapper = container.firstChild;
-      expect(contentWrapper).toHaveClass("pb-2");
-    });
-
-    it("should have sm:pb-3 padding class for content container", () => {
-      const { container } = render(<PostContent content="Test" image={null} />);
-      const contentWrapper = container.firstChild;
-      expect(contentWrapper).toHaveClass("sm:pb-3");
-    });
-
-    it("should have px-3 padding class for image container", () => {
+    it("should have px-4 padding class for image container", () => {
       const { container } = render(
         <PostContent content={null} image="https://example.com/image.jpg" />,
       );
       const imageWrapper = container.firstChild;
-      expect(imageWrapper).toHaveClass("px-3");
+      expect(imageWrapper).toHaveClass("px-4");
     });
 
-    it("should have sm:px-4 padding class for image container", () => {
+    it("should have pb-3 padding class for image container", () => {
       const { container } = render(
         <PostContent content={null} image="https://example.com/image.jpg" />,
       );
       const imageWrapper = container.firstChild;
-      expect(imageWrapper).toHaveClass("sm:px-4");
+      expect(imageWrapper).toHaveClass("pb-3");
     });
   });
 
@@ -218,10 +206,10 @@ describe("PostContent", () => {
       expect(image).toHaveClass("max-h-[70vh]");
     });
 
-    it("should have sm:rounded-xl class", () => {
+    it("should have sm:rounded-lg class", () => {
       render(<PostContent {...defaultProps} />);
       const image = screen.getByRole("img");
-      expect(image).toHaveClass("sm:rounded-xl");
+      expect(image).toHaveClass("sm:rounded-lg");
     });
   });
 

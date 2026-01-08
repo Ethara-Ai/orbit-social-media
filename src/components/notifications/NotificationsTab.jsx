@@ -7,7 +7,7 @@ import { useNotifications } from "../../context/AppContext";
 
 const NotificationsTab = () => {
   // Access notifications state directly from context
-  const { notifications, setNotifications } = useNotifications();
+  const { notifications } = useNotifications();
 
   return (
     <div className="max-w-2xl mx-auto w-full">

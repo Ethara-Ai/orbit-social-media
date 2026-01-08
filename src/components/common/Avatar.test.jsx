@@ -48,43 +48,43 @@ describe("Avatar", () => {
     it("should apply medium size classes by default", () => {
       render(<Avatar {...defaultProps} />);
       const img = screen.getByRole("img");
-      expect(img).toHaveClass("w-10");
-      expect(img).toHaveClass("h-10");
+      expect(img).toHaveClass("w-9");
+      expect(img).toHaveClass("h-9");
     });
 
     it("should apply extra small size classes", () => {
       render(<Avatar {...defaultProps} size="xs" />);
       const img = screen.getByRole("img");
-      expect(img).toHaveClass("w-5");
-      expect(img).toHaveClass("h-5");
+      expect(img).toHaveClass("w-4");
+      expect(img).toHaveClass("h-4");
     });
 
     it("should apply small size classes", () => {
       render(<Avatar {...defaultProps} size="sm" />);
       const img = screen.getByRole("img");
-      expect(img).toHaveClass("w-8");
-      expect(img).toHaveClass("h-8");
+      expect(img).toHaveClass("w-7");
+      expect(img).toHaveClass("h-7");
     });
 
     it("should apply large size classes", () => {
       render(<Avatar {...defaultProps} size="lg" />);
       const img = screen.getByRole("img");
-      expect(img).toHaveClass("w-11");
-      expect(img).toHaveClass("h-11");
+      expect(img).toHaveClass("w-10");
+      expect(img).toHaveClass("h-10");
     });
 
     it("should apply extra large size classes", () => {
       render(<Avatar {...defaultProps} size="xl" />);
       const img = screen.getByRole("img");
-      expect(img).toHaveClass("w-12");
-      expect(img).toHaveClass("h-12");
+      expect(img).toHaveClass("w-11");
+      expect(img).toHaveClass("h-11");
     });
 
     it("should apply 2xl size classes", () => {
       render(<Avatar {...defaultProps} size="2xl" />);
       const img = screen.getByRole("img");
-      expect(img).toHaveClass("w-14");
-      expect(img).toHaveClass("h-14");
+      expect(img).toHaveClass("w-12");
+      expect(img).toHaveClass("h-12");
     });
   });
 
@@ -156,8 +156,8 @@ describe("Avatar", () => {
         />,
       );
       const statusIndicator = container.querySelector(".bg-emerald-400");
-      expect(statusIndicator).toHaveClass("w-2.5");
-      expect(statusIndicator).toHaveClass("h-2.5");
+      expect(statusIndicator).toHaveClass("w-2");
+      expect(statusIndicator).toHaveClass("h-2");
     });
 
     it("should apply correct status size classes for lg avatar", () => {
@@ -170,8 +170,8 @@ describe("Avatar", () => {
         />,
       );
       const statusIndicator = container.querySelector(".bg-emerald-400");
-      expect(statusIndicator).toHaveClass("w-3.5");
-      expect(statusIndicator).toHaveClass("h-3.5");
+      expect(statusIndicator).toHaveClass("w-3");
+      expect(statusIndicator).toHaveClass("h-3");
     });
 
     it("should position status indicator at bottom-right", () => {
@@ -289,8 +289,8 @@ describe("Avatar", () => {
       expect(img).toHaveAttribute("alt", "John Doe");
 
       // Check size
-      expect(img).toHaveClass("w-11");
-      expect(img).toHaveClass("h-11");
+      expect(img).toHaveClass("w-10");
+      expect(img).toHaveClass("h-10");
 
       // Check ring
       expect(img).toHaveClass("ring-2");
@@ -301,7 +301,7 @@ describe("Avatar", () => {
 
       // Check status indicator
       expect(statusIndicator).toBeInTheDocument();
-      expect(statusIndicator).toHaveClass("w-3.5");
+      expect(statusIndicator).toHaveClass("w-3");
 
       // Check click handler
       fireEvent.click(avatarContainer);
@@ -314,8 +314,8 @@ describe("Avatar", () => {
 
       expect(img).toHaveAttribute("src", "/placeholder.svg");
       expect(img).toHaveAttribute("alt", "User avatar");
-      expect(img).toHaveClass("w-10");
-      expect(img).toHaveClass("h-10");
+      expect(img).toHaveClass("w-9");
+      expect(img).toHaveClass("h-9");
       expect(img).toHaveClass("rounded-full");
     });
   });

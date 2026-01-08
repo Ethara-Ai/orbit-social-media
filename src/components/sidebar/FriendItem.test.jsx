@@ -338,9 +338,9 @@ describe("FriendItem", () => {
   describe("avatar props", () => {
     it("should pass correct size to Avatar", () => {
       render(<FriendItem friend={mockOnlineFriend} index={0} />);
-      // Avatar with size "md" should have w-10 h-10 classes
+      // Avatar with size "md" should have w-9 h-9 classes
       const avatar = screen.getByAltText("Alice Johnson");
-      expect(avatar).toHaveClass("w-10", "h-10");
+      expect(avatar).toHaveClass("w-9", "h-9");
     });
 
     it("should pass showStatus as true to Avatar", () => {

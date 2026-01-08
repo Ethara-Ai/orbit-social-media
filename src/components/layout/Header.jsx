@@ -4,13 +4,12 @@ import { useUser, useUI } from "../../context/AppContext";
 import { Sun, Moon, Users } from "../icons";
 
 const Header = () => {
-  const { currentUser, currentUserAvatar, currentUserDetails } = useUser();
+  const { currentUserAvatar, currentUserDetails } = useUser();
   const {
     activeTab,
     setActiveTab,
     showMobileNav,
     setShowMobileNav,
-    setShowCurrentUserModal,
     isDarkMode,
     toggleTheme,
   } = useUI();

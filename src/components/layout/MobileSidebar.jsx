@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import { Home, Search, MessageCircle, Bell, X, User } from "../icons";
 import UserProfileCard from "../sidebar/UserProfileCard";
 import NavigationItems from "../sidebar/NavigationItems";
@@ -15,13 +15,7 @@ import { INITIAL_PROFILE_POSTS, PROFILE_DATA } from "../../utils/constants";
 const MobileSidebar = () => {
   const { posts } = useFeed();
   const { currentUser, currentUserAvatar, currentUserDetails } = useUser();
-  const {
-    activeTab,
-    setActiveTab,
-    showMobileNav,
-    setShowMobileNav,
-    setShowCurrentUserModal,
-  } = useUI();
+  const { activeTab, setActiveTab, showMobileNav, setShowMobileNav } = useUI();
   const { totalUnreadMessages } = useMessages();
   const { notificationCount, markNotificationsAsRead } = useNotifications();
 
