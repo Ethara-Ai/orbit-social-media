@@ -3,13 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Avatar from "../../common/Avatar";
 import { MoreHorizontal, X } from "../../icons";
 
-const ChatHeader = ({
-  conversation,
-  onBack,
-  showDropdown,
-  setShowDropdown,
-  onClearChat,
-}) => {
+const ChatHeader = ({ conversation, onBack, showDropdown, setShowDropdown, onClearChat }) => {
   return (
     <div className="p-2 sm:p-4 border-b border-slate-100 dark:border-slate-700 flex items-center gap-2 sm:gap-3 bg-white dark:bg-slate-900 transition-colors">
       {/* Back Button (Mobile) */}
@@ -24,12 +18,7 @@ const ChatHeader = ({
           stroke="currentColor"
           viewBox="0 0 24 24"
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M15 19l-7-7 7-7"
-          />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
         </svg>
       </motion.button>
 
@@ -67,7 +56,7 @@ const ChatHeader = ({
               initial={{ opacity: 0, scale: 0.95, y: -5 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: -5 }}
-              className="absolute right-0 top-full mt-1 bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 py-1 z-50 min-w-[140px] transition-colors"
+              className="absolute right-0 top-full mt-1 bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 py-1 z-50 min-w-35 transition-colors"
             >
               <button
                 onClick={onClearChat}
