@@ -2,8 +2,8 @@ import Avatar from "../../common/Avatar";
 
 const PostHeader = ({ user, timestamp }) => {
   return (
-    <div className="p-3 sm:p-4 pb-2 sm:pb-3">
-      <div className="flex items-center gap-2 sm:gap-3">
+    <div className="p-3 sm:p-3.5 pb-2 sm:pb-2.5">
+      <div className="flex items-center gap-2 sm:gap-2.5">
         <Avatar
           src={user.avatar}
           alt={user.name}
@@ -18,7 +18,9 @@ const PostHeader = ({ user, timestamp }) => {
               {user.name}
             </h3>
           </div>
-          <p className="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 transition-colors">{timestamp}</p>
+          <p className="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 transition-colors">
+            {timestamp}
+          </p>
         </div>
       </div>
     </div>

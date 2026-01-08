@@ -24,12 +24,12 @@ const CreatePost = () => {
 
   return (
     <motion.div
-      className="bg-white dark:bg-slate-800 rounded-lg shadow-sm border border-slate-200 dark:border-slate-700 p-3 mb-4 w-full max-w-[100vw] overflow-hidden transition-colors duration-300"
+      className="bg-white dark:bg-slate-800 rounded-lg shadow-sm border border-slate-200 dark:border-slate-700 p-2.5 sm:p-3 mb-3 w-full max-w-[100vw] overflow-hidden transition-colors duration-300"
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: 0.1 }}
     >
-      <div className="flex gap-2 sm:gap-3">
+      <div className="flex gap-2 sm:gap-2.5">
         <img
           src={currentUserAvatar || "/placeholder.svg"}
           alt={currentUser.name}

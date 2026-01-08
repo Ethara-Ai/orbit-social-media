@@ -29,7 +29,7 @@ const RightSidebar = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3, delay: 0.1 }}
     >
-      <div className="p-4">
+      <div className="p-3">
         {/* Active Now Section */}
         <ActiveNowSection
           activeOnlineFriends={activeOnlineFriends}
@@ -42,4 +42,3 @@ const RightSidebar = () => {
 };
 
 export default RightSidebar;
-

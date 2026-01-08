@@ -29,10 +29,10 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-3">
       {/* User Profile Card Section */}
       <motion.div
-        className="bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-700 p-4 transition-colors duration-300"
+        className="bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-700 p-3 transition-colors duration-300"
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}

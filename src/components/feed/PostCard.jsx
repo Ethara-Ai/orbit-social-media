@@ -28,7 +28,7 @@ const PostCard = ({ post, index }) => {
   return (
     <motion.article
       data-post-id={post.id}
-      className="bg-white dark:bg-slate-800 rounded-xl sm:rounded-2xl shadow-xs border border-slate-200 dark:border-slate-700 overflow-hidden cursor-pointer max-w-[100vw] transition-colors duration-300"
+      className="bg-white dark:bg-slate-800 rounded-lg sm:rounded-xl shadow-xs border border-slate-200 dark:border-slate-700 overflow-hidden cursor-pointer max-w-[100vw] transition-colors duration-300"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{
@@ -36,7 +36,7 @@ const PostCard = ({ post, index }) => {
         duration: 0.4,
       }}
       whileHover={{
-        boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
+        boxShadow: "0 4px 16px rgba(0,0,0,0.06)",
         transition: { duration: 0.2 },
       }}
       onClick={() => handlePostClick(post.id)}

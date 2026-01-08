@@ -38,23 +38,23 @@ export default function SocialMediaDashboard() {
       {/* Main Layout - LinkedIn-style centered container */}
       <div className="pt-14 sm:pt-16 min-h-screen">
         {/* Centered Container */}
-        <div className="max-w-[1400px] mx-auto px-4 lg:px-6">
+        <div className="max-w-[1280px] mx-auto px-4 lg:px-5">
           {/* Three Column Layout - Centered */}
-          <div className="flex justify-center gap-6 py-4">
+          <div className="flex justify-center gap-5 py-3">
             {/* Left Sidebar - Sticky */}
-            <div className="hidden lg:block w-[225px] flex-shrink-0">
+            <div className="hidden lg:block w-[210px] flex-shrink-0">
               <div className="sticky top-20">
                 <Sidebar />
               </div>
             </div>
 
             {/* Main Content Area - Fixed Width */}
-            <div className="w-full lg:w-[550px] xl:w-[600px] flex-shrink-0 min-w-0">
+            <div className="w-full lg:w-[520px] xl:w-[580px] flex-shrink-0 min-w-0">
               <MainContent />
             </div>
 
             {/* Right Sidebar - Sticky */}
-            <div className="hidden xl:block w-[300px] flex-shrink-0">
+            <div className="hidden xl:block w-[280px] flex-shrink-0">
               <div className="sticky top-20">
                 <RightSidebar />
               </div>
