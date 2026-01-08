@@ -10,7 +10,7 @@ import {
 } from "../../context/AppContext";
 
 const MobileSidebar = () => {
-  const { currentUser, currentUserAvatar } = useUser();
+  const { currentUser, currentUserAvatar, currentUserDetails } = useUser();
   const {
     activeTab,
     setActiveTab,
@@ -54,7 +54,11 @@ const MobileSidebar = () => {
           <div className="flex-1 overflow-y-auto custom-scrollbar px-3 py-4 min-h-0">
             {/* User Profile Card */}
             <UserProfileCard
-              user={currentUser}
+              user={{
+                ...currentUser,
+                name: currentUserDetails.name,
+                profession: currentUserDetails.profession,
+              }}
               avatar={currentUserAvatar}
               onClick={handleNavigateToProfile}
               animated={false}

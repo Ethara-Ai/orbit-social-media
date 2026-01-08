@@ -12,7 +12,7 @@ import {
 } from "../../context/AppContext";
 
 const Sidebar = () => {
-  const { currentUser, currentUserAvatar } = useUser();
+  const { currentUser, currentUserAvatar, currentUserDetails } = useUser();
   const { activeTab, setActiveTab, setShowCurrentUserModal } = useUI();
   const { totalUnreadMessages } = useMessages();
   const { notificationCount, markNotificationsAsRead } = useNotifications();
@@ -38,7 +38,11 @@ const Sidebar = () => {
         transition={{ duration: 0.3 }}
       >
         <UserProfileCard
-          user={currentUser}
+          user={{
+            ...currentUser,
+            name: currentUserDetails.name,
+            profession: currentUserDetails.profession,
+          }}
           avatar={currentUserAvatar}
           onClick={handleNavigateToProfile}
         />

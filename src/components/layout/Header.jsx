@@ -4,7 +4,7 @@ import { useUser, useUI } from "../../context/AppContext";
 import { Sun, Moon, Users } from "../icons";
 
 const Header = () => {
-  const { currentUser } = useUser();
+  const { currentUser, currentUserAvatar, currentUserDetails } = useUser();
   const {
     activeTab,
     setActiveTab,
@@ -47,15 +47,15 @@ const Header = () => {
           >
             <div className="hidden lg:block text-right">
               <p className="text-sm font-semibold text-slate-900 dark:text-white transition-colors">
-                {currentUser.name}
+                {currentUserDetails.name}
               </p>
               <p className="text-xs text-slate-500 dark:text-slate-400 transition-colors">
-                {currentUser.profession}
+                {currentUserDetails.profession}
               </p>
             </div>
             <img
-              src={currentUser.avatar || "/placeholder.svg"}
-              alt={currentUser.name}
+              src={currentUserAvatar || "/placeholder.svg"}
+              alt={currentUserDetails.name}
               className="w-8 h-8 sm:w-9 sm:h-9 rounded-full object-cover ring-2 ring-slate-100 dark:ring-slate-700 hover:ring-orange-500 transition-all"
             />
           </motion.button>
