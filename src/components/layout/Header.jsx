@@ -55,18 +55,17 @@ const Header = () => {
             <img
               src={currentUserAvatar || "/placeholder.svg"}
               alt={currentUserDetails.name}
-              className="w-8 h-8 sm:w-9 sm:h-9 rounded-full object-cover ring-2 ring-slate-100 dark:ring-slate-700 hover:ring-orange-500 transition-all"
+              className="w-8 h-8 sm:w-9 sm:h-9 rounded-full object-cover ring-2 ring-slate-100 dark:ring-slate-700 transition-all"
             />
           </motion.button>
 
           {/* Connections Button */}
           <motion.button
             onClick={() => setActiveTab("connections")}
-            className={`min-w-11 min-h-11 sm:min-w-0 sm:min-h-0 w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center transition-all order-2 cursor-pointer ${
-              activeTab === "connections"
+            className={`min-w-11 min-h-11 sm:min-w-0 sm:min-h-0 w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center transition-all order-2 cursor-pointer ${activeTab === "connections"
                 ? "bg-orange-500 text-white shadow-lg shadow-orange-500/25"
                 : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700"
-            }`}
+              }`}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             aria-label="Connections"
