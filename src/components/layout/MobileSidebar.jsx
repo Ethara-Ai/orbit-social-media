@@ -11,7 +11,11 @@ import {
   useNotifications,
   useFeed,
 } from "../../context/AppContext";
-import { INITIAL_PROFILE_POSTS, PROFILE_DATA } from "../../utils/constants";
+import {
+  INITIAL_PROFILE_POSTS,
+  PROFILE_DATA,
+  BORDER_RADIUS,
+} from "../../utils/constants";
 
 const MobileSidebar = () => {
   const { posts } = useFeed();
@@ -97,7 +101,7 @@ const MobileSidebarHeader = ({ onClose }) => {
   return (
     <div className="flex items-center justify-between p-4 border-b border-slate-100 dark:border-slate-700 transition-colors">
       <div className="flex items-center gap-2">
-        <div className="w-8 h-8 bg-linear-to-br from-orange-500 to-amber-500 rounded-lg flex items-center justify-center">
+        <div className={`w-8 h-8 bg-linear-to-br from-orange-500 to-amber-500 ${BORDER_RADIUS.cardSmall} flex items-center justify-center`}>
           <span className="text-white font-bold">O</span>
         </div>
         <span className="font-bold text-slate-900 dark:text-white transition-colors">
@@ -106,7 +110,7 @@ const MobileSidebarHeader = ({ onClose }) => {
       </div>
       <motion.button
         onClick={onClose}
-        className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+        className={`p-2 ${BORDER_RADIUS.cardSmall} hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer`}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
       >

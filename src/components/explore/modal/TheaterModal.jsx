@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, Fire, Heart, MessageCircle } from "../../icons";
 import Avatar from "../../common/Avatar";
 import CommentsPanel from "./CommentsPanel";
+import { BORDER_RADIUS } from "../../../utils/constants";
 
 const TheaterModal = ({
   selectedPost,
@@ -134,11 +135,15 @@ const TheaterHeader = ({ selectedPost, onClose }) => {
 
       {/* Category Badge */}
       <div className="flex items-center gap-1 sm:gap-2">
-        <span className="px-2 sm:px-3 py-0.5 sm:py-1 bg-white/10 rounded-full text-white/70 text-[10px] sm:text-xs font-medium">
+        <span
+          className={`px-2 sm:px-3 py-0.5 sm:py-1 bg-white/10 ${BORDER_RADIUS.badge} text-white/70 text-[10px] sm:text-xs font-medium`}
+        >
           {selectedPost.category}
         </span>
         {selectedPost.isPopular && (
-          <span className="px-2 sm:px-3 py-0.5 sm:py-1 bg-orange-500/20 text-orange-400 rounded-full text-[10px] sm:text-xs font-medium flex items-center gap-1">
+          <span
+            className={`px-2 sm:px-3 py-0.5 sm:py-1 bg-orange-500/20 text-orange-400 ${BORDER_RADIUS.badge} text-[10px] sm:text-xs font-medium flex items-center gap-1`}
+          >
             <Fire className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
             <span className="hidden sm:inline">Trending</span>
           </span>
@@ -166,7 +171,9 @@ const TheaterContent = ({ selectedPost }) => {
         }}
       >
         {/* Main Image Card */}
-        <div className="relative rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl">
+        <div
+          className="relative rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl"
+        >
           <img
             src={selectedPost.image}
             alt={selectedPost.title}
@@ -243,9 +250,8 @@ const ActionButton = ({
   return (
     <motion.button
       onClick={onClick}
-      className={`flex items-center gap-1.5 sm:gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full transition-all cursor-pointer ${
-        isActive ? activeClassName : "bg-white/10 text-white hover:bg-white/20"
-      }`}
+      className={`flex items-center gap-1.5 sm:gap-2 px-4 sm:px-5 py-2 sm:py-2.5 ${BORDER_RADIUS.button} transition-all cursor-pointer ${isActive ? activeClassName : "bg-white/10 text-white hover:bg-white/20"
+        }`}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
     >

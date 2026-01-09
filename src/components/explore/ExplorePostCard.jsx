@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import { Heart, Zap } from "../icons";
 import Avatar from "../common/Avatar";
+import { BORDER_RADIUS } from "../../utils/constants";
 
 const ExplorePostCard = ({ post, index, onClick }) => {
   const handleClick = () => {
@@ -17,7 +18,7 @@ const ExplorePostCard = ({ post, index, onClick }) => {
     <motion.article
       role="button"
       tabIndex={0}
-      className="bg-white dark:bg-slate-800 rounded-xl overflow-hidden cursor-pointer group border border-slate-100 dark:border-slate-700 hover:border-slate-200 dark:hover:border-slate-600 hover:shadow-lg dark:hover:shadow-slate-900/50 transition-all duration-300"
+      className={`bg-white dark:bg-slate-800 ${BORDER_RADIUS.card} overflow-hidden cursor-pointer group border border-slate-100 dark:border-slate-700 hover:border-slate-200 dark:hover:border-slate-600 hover:shadow-lg dark:hover:shadow-slate-900/50 transition-all duration-300`}
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ delay: index * 0.03 }}
@@ -58,7 +59,9 @@ const ExplorePostCard = ({ post, index, onClick }) => {
 
 const NewBadge = () => {
   return (
-    <div className="absolute top-2 left-2 bg-emerald-500 text-white text-[10px] px-2 py-0.5 rounded-full flex items-center gap-1 font-medium">
+    <div
+      className={`absolute top-2 left-2 bg-emerald-500 text-white text-[10px] px-2 py-0.5 ${BORDER_RADIUS.badge} flex items-center gap-1 font-medium`}
+    >
       <Zap className="w-2.5 h-2.5" />
       New
     </div>

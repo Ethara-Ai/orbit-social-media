@@ -1,5 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
+import { BORDER_RADIUS } from "../../utils/constants";
 
 const EmptyState = ({
   icon: Icon,
@@ -17,7 +18,9 @@ const EmptyState = ({
       transition={{ delay: 0.2 }}
     >
       {Icon && (
-        <div className="w-16 h-16 mx-auto mb-4 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center transition-colors">
+        <div
+          className={`w-16 h-16 mx-auto mb-4 bg-slate-100 dark:bg-slate-800 ${BORDER_RADIUS.badge} flex items-center justify-center transition-colors`}
+        >
           <Icon className={iconClassName} />
         </div>
       )}
@@ -34,7 +37,7 @@ const EmptyState = ({
       {action && actionLabel && (
         <motion.button
           onClick={action}
-          className="mt-4 px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white text-sm font-medium rounded-full transition-colors"
+          className={`mt-4 px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white text-sm font-medium ${BORDER_RADIUS.button} transition-colors`}
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >

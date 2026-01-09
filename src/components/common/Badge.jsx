@@ -1,5 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
+import { BORDER_RADIUS } from "../../utils/constants";
 
 const Badge = ({
   count,
@@ -24,7 +25,7 @@ const Badge = ({
     lg: "text-sm px-2.5 py-1 min-w-[24px]",
   };
 
-  const baseClasses = `rounded-full text-center font-semibold ${variants[variant]} ${sizes[size]} ${className}`;
+  const baseClasses = `${BORDER_RADIUS.badge} text-center font-semibold ${variants[variant]} ${sizes[size]} ${className}`;
 
   if (animate) {
     return (

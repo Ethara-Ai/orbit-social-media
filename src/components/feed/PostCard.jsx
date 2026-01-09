@@ -1,6 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
 import { usePostCard } from "../../hooks";
+import { BORDER_RADIUS } from "../../utils/constants";
 import PostHeader from "./post/PostHeader";
 import PostContent from "./post/PostContent";
 import PostActions from "./post/PostActions";
@@ -26,7 +27,7 @@ const PostCard = ({ post, index }) => {
   return (
     <motion.article
       data-post-id={post.id}
-      className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden max-w-[100vw] transition-colors duration-300"
+      className={`bg-white dark:bg-slate-800 ${BORDER_RADIUS.card} shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden max-w-[100vw] transition-colors duration-300`}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{

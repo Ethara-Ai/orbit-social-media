@@ -2,6 +2,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Users, ChevronDown } from "../icons";
 import Avatar from "../common/Avatar";
+import { BORDER_RADIUS } from "../../utils/constants";
 
 const ConnectionsList = ({
   friends,
@@ -47,7 +48,7 @@ const ConnectionsHeader = ({ friendsCount, showFriends, setShowFriends }) => {
   return (
     <motion.button
       onClick={() => setShowFriends(!showFriends)}
-      className="w-full flex items-center justify-between px-4 py-3 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+      className={`w-full flex items-center justify-between px-4 py-3 ${BORDER_RADIUS.card} hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors`}
       whileHover={{ scale: 1.01 }}
     >
       <div className="flex items-center gap-2">
@@ -55,7 +56,7 @@ const ConnectionsHeader = ({ friendsCount, showFriends, setShowFriends }) => {
         <span className="font-medium text-sm text-slate-700 dark:text-slate-300 transition-colors">
           Connections
         </span>
-        <span className="text-xs text-slate-400 dark:text-slate-500 bg-slate-100 dark:bg-slate-700 px-2 py-0.5 rounded-full transition-colors">
+        <span className={`text-xs text-slate-400 dark:text-slate-500 bg-slate-100 dark:bg-slate-700 px-2 py-0.5 ${BORDER_RADIUS.badge} transition-colors`}>
           {friendsCount}
         </span>
       </div>
@@ -80,7 +81,7 @@ const ConnectionItem = ({ friend, index, onClick }) => {
     <motion.div
       role="button"
       tabIndex={0}
-      className="flex items-center gap-2 p-1.5 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors cursor-pointer mx-2"
+      className={`flex items-center gap-2 p-1.5 ${BORDER_RADIUS.cardSmall} hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors cursor-pointer mx-2`}
       initial={{ x: -10, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       transition={{ delay: index * 0.03 }}

@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Users, UserPlus } from "../icons";
 import { useUser } from "../../context/AppContext";
 import Avatar from "../common/Avatar";
+import { BORDER_RADIUS } from "../../utils/constants";
 
 const ConnectionsTab = () => {
   const {
@@ -16,7 +17,9 @@ const ConnectionsTab = () => {
   return (
     <div className="max-w-4xl mx-auto w-full px-4 pb-6 space-y-6">
       {/* Container 1: Connections (Page Header + My Connections) */}
-      <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg overflow-hidden">
+      <div
+        className={`bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 ${BORDER_RADIUS.cardSmall} overflow-hidden`}
+      >
         {/* Page Header */}
         <div className="px-4 pt-4 pb-3 border-b border-slate-100 dark:border-slate-700">
           <h1 className="text-[20px] font-bold text-slate-900 dark:text-white mb-1">
@@ -35,7 +38,9 @@ const ConnectionsTab = () => {
               My Connections
             </h2>
           </div>
-          <span className="text-sm text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-700 px-3 py-1 rounded-full">
+          <span
+            className={`text-sm text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-700 px-3 py-1 ${BORDER_RADIUS.badge}`}
+          >
             {friends.length} connections
           </span>
         </div>
@@ -75,7 +80,9 @@ const ConnectionsTab = () => {
                 <div className="shrink-0">
                   {friend.isOnline ? (
                     <span className="inline-flex items-center gap-1 text-xs text-green-600 dark:text-green-400 font-medium">
-                      <span className="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
+                      <span
+                        className={`w-1.5 h-1.5 bg-green-500 ${BORDER_RADIUS.badge}`}
+                      ></span>
                       Online
                     </span>
                   ) : (
@@ -98,7 +105,9 @@ const ConnectionsTab = () => {
       </div>
 
       {/* Container 2: People You May Know */}
-      <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg overflow-hidden">
+      <div
+        className={`bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 ${BORDER_RADIUS.cardSmall} overflow-hidden`}
+      >
         {/* Section Header */}
         <div className="flex items-center gap-2 px-4 py-3 border-b border-slate-100 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50">
           <UserPlus className="w-5 h-5 text-slate-700 dark:text-slate-300" />
@@ -126,7 +135,7 @@ const ConnectionsTab = () => {
                   <img
                     src={user.avatar || "/placeholder.svg"}
                     alt={user.name}
-                    className="w-8 h-8 rounded-full object-cover"
+                    className={`w-8 h-8 ${BORDER_RADIUS.avatar} object-cover`}
                   />
                 </button>
                 <div className="flex-1 min-w-0">
@@ -143,7 +152,7 @@ const ConnectionsTab = () => {
                 </div>
                 <motion.button
                   onClick={() => sendConnectionRequest(user.id)}
-                  className={`shrink-0 px-3 py-1.5 rounded-md font-medium text-xs transition-all ${
+                  className={`shrink-0 px-3 py-1.5 ${BORDER_RADIUS.cardSmall} font-medium text-xs transition-all ${
                     connectionRequests.includes(user.id)
                       ? "bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-400 cursor-default"
                       : "bg-orange-500 hover:bg-orange-600 text-white shadow-sm cursor-pointer"

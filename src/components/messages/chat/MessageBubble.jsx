@@ -1,5 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
+import { BORDER_RADIUS } from "../../../utils/constants";
 
 const MessageBubble = ({ message }) => {
   const { text, timestamp, isSent, attachment } = message;
@@ -13,7 +14,7 @@ const MessageBubble = ({ message }) => {
       transition={{ duration: 0.2 }}
     >
       <div
-        className={`max-w-[75%] rounded-2xl overflow-hidden transition-colors ${
+        className={`max-w-[75%] ${BORDER_RADIUS.cardLarge} overflow-hidden transition-colors ${
           isSent
             ? "bg-orange-500 text-white rounded-br-md"
             : "bg-white dark:bg-slate-700 text-slate-800 dark:text-slate-100 shadow-xs rounded-bl-md"
@@ -51,9 +52,7 @@ const MessageAttachment = ({ src, hasText }) => {
       <img
         src={src}
         alt="Attachment"
-        className={`w-full max-w-xs h-auto object-cover ${
-          hasText ? "rounded-xl" : "rounded-xl"
-        }`}
+        className={`w-full max-w-xs h-auto object-cover ${BORDER_RADIUS.card}`}
         onError={handleImageError}
       />
     </div>

@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Camera, X } from "../icons";
 import { useFeed } from "../../context/AppContext";
 import { useUser } from "../../context/AppContext";
+import { BORDER_RADIUS } from "../../utils/constants";
 
 const CreatePost = () => {
   // Access state and actions directly from context
@@ -49,7 +50,7 @@ const CreatePost = () => {
 
   return (
     <motion.div
-      className="bg-white dark:bg-slate-800 rounded-lg shadow-sm border border-slate-200 dark:border-slate-700 p-3 w-full max-w-[100vw] overflow-hidden transition-colors duration-300"
+      className={`bg-white dark:bg-slate-800 ${BORDER_RADIUS.cardSmall} shadow-sm border border-slate-200 dark:border-slate-700 p-3 w-full max-w-[100vw] overflow-hidden transition-colors duration-300`}
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: 0.1 }}
@@ -58,7 +59,7 @@ const CreatePost = () => {
         <img
           src={currentUserAvatar || "/placeholder.svg"}
           alt={currentUser.name}
-          className="w-9 h-9 rounded-full object-cover shrink-0"
+          className={`w-9 h-9 ${BORDER_RADIUS.avatar} object-cover shrink-0`}
           onError={(e) => {
             e.target.src =
               "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=50&h=50&fit=crop&crop=face";
@@ -66,7 +67,9 @@ const CreatePost = () => {
         />
         <div className="flex-1 min-w-0">
           {/* Text Input Area with inline buttons */}
-          <div className="group relative bg-slate-100 dark:bg-slate-700/50 rounded-2xl focus-within:ring-1 focus-within:ring-orange-500/50 focus-within:bg-white dark:focus-within:bg-slate-800 transition-all border border-transparent focus-within:border-slate-200 dark:focus-within:border-slate-600">
+          <div
+            className={`group relative bg-slate-100 dark:bg-slate-700/50 ${BORDER_RADIUS.cardLarge} focus-within:ring-1 focus-within:ring-orange-500/50 focus-within:bg-white dark:focus-within:bg-slate-800 transition-all border border-transparent focus-within:border-slate-200 dark:focus-within:border-slate-600`}
+          >
             {/* Textarea with proper padding to avoid overlap with buttons */}
             <textarea
               ref={textareaRef}
@@ -97,7 +100,7 @@ const CreatePost = () => {
             <div className="absolute right-1.5 sm:right-2 bottom-1.5 sm:bottom-2 flex items-center gap-0.5 sm:gap-1">
               <motion.button
                 onClick={() => document.getElementById("image-upload")?.click()}
-                className="p-1.5 sm:p-2 text-slate-500 dark:text-slate-400 hover:text-emerald-500 dark:hover:text-emerald-400 rounded-full transition-colors cursor-pointer bg-slate-100 dark:bg-slate-700/50 group-focus-within:bg-white dark:group-focus-within:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-600"
+                className={`p-1.5 sm:p-2 text-slate-500 dark:text-slate-400 hover:text-emerald-500 dark:hover:text-emerald-400 ${BORDER_RADIUS.button} transition-colors cursor-pointer bg-slate-100 dark:bg-slate-700/50 group-focus-within:bg-white dark:group-focus-within:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-600`}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 title="Add photo"
@@ -109,7 +112,7 @@ const CreatePost = () => {
               <motion.button
                 onClick={handleCreatePost}
                 disabled={!newPostContent.trim() && !selectedImage}
-                className="bg-orange-500 hover:bg-orange-600 text-white px-2.5 sm:px-3 py-1.5 sm:py-1.5 rounded-full font-semibold text-[10px] sm:text-[11px] transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-orange-500 whitespace-nowrap"
+                className={`bg-orange-500 hover:bg-orange-600 text-white px-2.5 sm:px-3 py-1.5 sm:py-1.5 ${BORDER_RADIUS.button} font-semibold text-[10px] sm:text-[11px] transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-orange-500 whitespace-nowrap`}
                 whileHover={{
                   scale: newPostContent.trim() || selectedImage ? 1.02 : 1,
                 }}
@@ -125,7 +128,9 @@ const CreatePost = () => {
 
           {/* Selected Image Preview */}
           {selectedImage && (
-            <div className="mt-2 sm:mt-3 relative rounded-lg sm:rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-900">
+            <div
+              className="mt-2 sm:mt-3 relative rounded-lg sm:rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-900"
+            >
               <img
                 src={selectedImage}
                 alt="Selected"
@@ -133,7 +138,7 @@ const CreatePost = () => {
               />
               <button
                 onClick={removeSelectedMedia}
-                className="absolute top-1.5 right-1.5 sm:top-2 sm:right-2 bg-slate-900/80 text-white rounded-full p-1 sm:p-1.5 hover:bg-slate-900 transition-colors cursor-pointer"
+                className={`absolute top-1.5 right-1.5 sm:top-2 sm:right-2 bg-slate-900/80 text-white ${BORDER_RADIUS.button} p-1 sm:p-1.5 hover:bg-slate-900 transition-colors cursor-pointer`}
                 type="button"
               >
                 <X className="w-3 h-3 sm:w-4 sm:h-4" />

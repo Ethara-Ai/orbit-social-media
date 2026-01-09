@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import { Heart, MessageCircle, UserPlus, User, Bell, Users } from "../icons";
 import Avatar from "../common/Avatar";
+import { BORDER_RADIUS } from "../../utils/constants";
 
 const NotificationItem = ({ notification, index, onClick }) => {
   const handleClick = () => {
@@ -14,11 +15,10 @@ const NotificationItem = ({ notification, index, onClick }) => {
     <motion.div
       role="button"
       tabIndex={0}
-      className={`bg-white rounded-xl p-4 shadow-xs border cursor-pointer transition-all ${
-        !notification.isRead
-          ? "border-orange-200 bg-orange-50/30"
-          : "border-slate-200 hover:bg-slate-50"
-      }`}
+      className={`bg-white ${BORDER_RADIUS.card} p-4 shadow-xs border cursor-pointer transition-all ${!notification.isRead
+        ? "border-orange-200 bg-orange-50/30"
+        : "border-slate-200 hover:bg-slate-50"
+        }`}
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: index * 0.05 }}
@@ -52,7 +52,7 @@ const NotificationBadge = ({ type }) => {
 
   return (
     <div
-      className={`absolute -bottom-1 -right-1 rounded-full p-1.5 shadow-xs ${bgClass}`}
+      className={`absolute -bottom-0.5 -right-0.5 ${BORDER_RADIUS.badge} p-1 shadow-xs ${bgClass}`}
     >
       {icon}
     </div>
@@ -75,34 +75,34 @@ const NotificationContent = ({ notification }) => {
 };
 
 const UnreadIndicator = () => {
-  return <span className="w-2 h-2 bg-orange-500 rounded-full" />;
+  return <span className={`w-2 h-2 bg-orange-500 ${BORDER_RADIUS.badge}`} />;
 };
 
 const getNotificationConfig = (type) => {
   const configs = {
     like: {
-      icon: <Heart className="w-4 h-4 text-rose-500" />,
-      bgClass: "bg-rose-50",
+      icon: <Heart className="w-3 h-3 text-rose-500" />,
+      bgClass: "bg-rose-100 dark:bg-rose-900",
     },
     comment: {
-      icon: <MessageCircle className="w-4 h-4 text-blue-500" />,
-      bgClass: "bg-blue-50",
+      icon: <MessageCircle className="w-3 h-3 text-blue-500" />,
+      bgClass: "bg-blue-100 dark:bg-blue-900",
     },
     follow: {
-      icon: <UserPlus className="w-4 h-4 text-emerald-500" />,
-      bgClass: "bg-emerald-50",
+      icon: <UserPlus className="w-3 h-3 text-emerald-500" />,
+      bgClass: "bg-emerald-100 dark:bg-emerald-900",
     },
     mention: {
-      icon: <User className="w-4 h-4 text-orange-500" />,
-      bgClass: "bg-orange-50",
+      icon: <User className="w-3 h-3 text-orange-500" />,
+      bgClass: "bg-orange-100 dark:bg-orange-900",
     },
     friend_request: {
-      icon: <Users className="w-4 h-4 text-purple-500" />,
-      bgClass: "bg-purple-50",
+      icon: <Users className="w-3 h-3 text-purple-500" />,
+      bgClass: "bg-purple-100 dark:bg-purple-900",
     },
     default: {
-      icon: <Bell className="w-4 h-4 text-slate-400" />,
-      bgClass: "bg-slate-50",
+      icon: <Bell className="w-3 h-3 text-slate-400" />,
+      bgClass: "bg-slate-100 dark:bg-slate-700",
     },
   };
 

@@ -92,6 +92,19 @@ export function NotificationsProvider({ children }) {
           : newNotification;
 
         setNotifications((prev) => {
+          // Check for duplicates - prevent same user + same type + same message
+          const isDuplicate = prev.some(
+            (n) =>
+              n.user.id === notificationToAdd.user.id &&
+              n.type === notificationToAdd.type &&
+              n.message === notificationToAdd.message,
+          );
+
+          // Skip adding if it's a duplicate
+          if (isDuplicate) {
+            return prev;
+          }
+
           const updated = addNotification(
             prev,
             notificationToAdd,

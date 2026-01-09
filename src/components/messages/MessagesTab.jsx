@@ -2,6 +2,7 @@ import { useRef, useEffect, useState } from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
 import { useMessages } from "../../context/AppContext";
+import { BORDER_RADIUS } from "../../utils/constants";
 import ConversationsList from "./chat/ConversationsList";
 import ActiveChat from "./chat/ActiveChat";
 import EmptyChatState from "./chat/EmptyChatState";
@@ -41,14 +42,14 @@ const MessagesTab = () => {
 
   const filteredConversations = searchQuery.trim()
     ? conversations.filter(
-        (conversation) =>
-          conversation.user.name
-            .toLowerCase()
-            .includes(searchQuery.toLowerCase()) ||
-          conversation.lastMessage
-            .toLowerCase()
-            .includes(searchQuery.toLowerCase()),
-      )
+      (conversation) =>
+        conversation.user.name
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase()) ||
+        conversation.lastMessage
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase()),
+    )
     : conversations;
 
   const activeConversationData = conversations.find(
@@ -89,7 +90,9 @@ const MessagesTab = () => {
 
   return (
     <div className="max-w-5xl mx-auto w-full overflow-x-hidden px-0">
-      <div className="bg-white dark:bg-slate-900 sm:rounded-2xl shadow-xs border-0 sm:border border-slate-200 dark:border-slate-800 overflow-hidden h-[calc(100dvh-5rem)] sm:h-[calc(100dvh-6rem)] lg:h-[calc(100vh-7rem)] transition-colors duration-200">
+      <div
+        className="bg-white dark:bg-slate-900 rounded-xl sm:rounded-2xl shadow-xs border-0 sm:border border-slate-200 dark:border-slate-800 overflow-hidden h-[calc(100dvh-5rem)] sm:h-[calc(100dvh-6rem)] lg:h-[calc(100vh-7rem)] transition-colors duration-200"
+      >
         <div className="flex h-full min-h-0">
           {/* Conversations List */}
           <ConversationsList
@@ -136,7 +139,7 @@ const MessagesTab = () => {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 50 }}
-            className="fixed bottom-6 left-1/2 -translate-x-1/2 bg-slate-900 dark:bg-slate-700 text-white px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl shadow-2xl z-50 text-sm sm:text-base whitespace-nowrap"
+            className={`fixed bottom-6 left-1/2 -translate-x-1/2 bg-slate-900 dark:bg-slate-700 text-white px-4 sm:px-5 py-2.5 sm:py-3 ${BORDER_RADIUS.card} shadow-2xl z-50 text-sm sm:text-base whitespace-nowrap`}
           >
             Chat is already empty
           </motion.div>

@@ -2,6 +2,7 @@ import { useRef, useEffect } from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import Avatar from "../../common/Avatar";
+import { BORDER_RADIUS } from "../../../utils/constants";
 
 const PostComments = ({
   postId,
@@ -73,12 +74,12 @@ const PostComments = ({
             value={newComment[postId] || ""}
             onChange={handleCommentChange}
             onKeyDown={handleKeyDown}
-            className="flex-1 min-w-0 px-3 sm:px-4 py-1.5 sm:py-2 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-full text-xs sm:text-sm focus:outline-hidden focus:ring-2 focus:ring-orange-500 focus:border-transparent text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 transition-colors"
+            className={`flex-1 min-w-0 px-3 sm:px-4 py-1.5 sm:py-2 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 ${BORDER_RADIUS.input} text-xs sm:text-sm focus:outline-hidden focus:ring-2 focus:ring-orange-500 focus:border-transparent text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 transition-colors`}
           />
           <motion.button
             onClick={handleSubmit}
             disabled={!newComment[postId]?.trim()}
-            className="bg-orange-500 hover:bg-orange-600 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full font-medium text-xs sm:text-sm cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-orange-500 transition-colors shrink-0"
+            className={`bg-orange-500 hover:bg-orange-600 text-white px-3 sm:px-4 py-1.5 sm:py-2 ${BORDER_RADIUS.button} font-medium text-xs sm:text-sm cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-orange-500 transition-colors shrink-0`}
             whileHover={{
               scale: newComment[postId]?.trim() ? 1.02 : 1,
             }}
@@ -108,7 +109,9 @@ const CommentItem = ({ comment, index }) => {
         size="sm"
         className="w-6 h-6 sm:w-8 sm:h-8 shrink-0"
       />
-      <div className="flex-1 min-w-0 bg-white dark:bg-slate-700 rounded-lg sm:rounded-xl p-2 sm:p-3 shadow-xs transition-colors">
+      <div
+        className={`flex-1 min-w-0 bg-white dark:bg-slate-700 ${BORDER_RADIUS.commentBubble} p-2 sm:p-3 shadow-xs transition-colors`}
+      >
         <div className="flex items-center gap-1 sm:gap-2 mb-0.5 sm:mb-1">
           <span className="font-semibold text-slate-900 dark:text-white text-xs sm:text-sm truncate transition-colors">
             {comment.user.name}

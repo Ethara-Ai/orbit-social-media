@@ -2,6 +2,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import Avatar from "../../common/Avatar";
 import { MoreHorizontal, X } from "../../icons";
+import { BORDER_RADIUS } from "../../../utils/constants";
 
 const ChatHeader = ({
   conversation,
@@ -15,7 +16,7 @@ const ChatHeader = ({
       {/* Back Button (Mobile) */}
       <motion.button
         onClick={onBack}
-        className="sm:hidden p-1.5 sm:p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors shrink-0 cursor-pointer"
+        className={`sm:hidden p-1.5 sm:p-2 ${BORDER_RADIUS.cardSmall} hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors shrink-0 cursor-pointer`}
         whileTap={{ scale: 0.95 }}
       >
         <svg
@@ -55,7 +56,7 @@ const ChatHeader = ({
       <div className="relative chat-dropdown-container shrink-0">
         <motion.button
           onClick={() => setShowDropdown(!showDropdown)}
-          className="p-1.5 sm:p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+          className={`p-1.5 sm:p-2 ${BORDER_RADIUS.cardSmall} hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer`}
           whileTap={{ scale: 0.95 }}
         >
           <MoreHorizontal className="w-4 h-4 sm:w-5 sm:h-5 text-slate-500 dark:text-slate-400" />
@@ -67,7 +68,7 @@ const ChatHeader = ({
               initial={{ opacity: 0, scale: 0.95, y: -5 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: -5 }}
-              className="absolute right-0 top-full mt-1 bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 py-1 z-50 min-w-35 transition-colors"
+              className={`absolute right-0 top-full mt-1 bg-white dark:bg-slate-800 ${BORDER_RADIUS.dropdown} shadow-lg border border-slate-200 dark:border-slate-700 py-1 z-50 min-w-35 transition-colors`}
             >
               <button
                 onClick={onClearChat}

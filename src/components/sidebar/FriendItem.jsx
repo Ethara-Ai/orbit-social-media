@@ -1,13 +1,14 @@
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import Avatar from "../common/Avatar";
+import { BORDER_RADIUS } from "../../utils/constants";
 
 const FriendItem = ({ friend, index, onClick }) => {
   return (
     <motion.div
       role="button"
       tabIndex={0}
-      className="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-50 transition-colors cursor-pointer mx-2"
+      className={`flex items-center gap-3 p-2 ${BORDER_RADIUS.cardSmall} hover:bg-slate-50 transition-colors cursor-pointer mx-2`}
       initial={{ x: -10, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       transition={{ delay: index * 0.03 }}

@@ -1,11 +1,12 @@
 import MessageBubble from "./MessageBubble";
+import { BORDER_RADIUS } from "../../../utils/constants";
 
 const MessagesList = ({ messages, messagesEndRef, user }) => {
   return (
     <div className="flex-1 p-2 sm:p-4 overflow-y-auto custom-scrollbar bg-slate-50">
       {messages.length === 0 ? (
         <div className="flex flex-col items-center justify-center h-full text-center px-4">
-          <div className="w-16 h-16 sm:w-20 sm:h-20 mb-4 rounded-full overflow-hidden border-2 border-orange-100">
+          <div className={`w-16 h-16 sm:w-20 sm:h-20 mb-4 ${BORDER_RADIUS.avatar} overflow-hidden border-2 border-orange-100`}>
             <img
               src={user?.avatar}
               alt={user?.name}

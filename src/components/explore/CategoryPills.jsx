@@ -10,6 +10,7 @@ import {
   Music,
   BookOpen,
 } from "../icons";
+import { BORDER_RADIUS } from "../../utils/constants";
 
 const categoryIcons = {
   Code,
@@ -69,7 +70,7 @@ const CategoryPill = ({
     gap-2
     px-4
     py-2.5
-    rounded-xl
+    ${BORDER_RADIUS.card}
     text-sm
     font-medium
     transition-all

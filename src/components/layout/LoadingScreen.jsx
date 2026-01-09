@@ -1,14 +1,15 @@
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
+import { BORDER_RADIUS } from "../../utils/constants";
 
 const LoadingScreen = () => {
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 font-['Inter',sans-serif] flex items-center justify-center relative overflow-hidden transition-colors duration-300">
       {/* Subtle background pattern */}
       <div className="absolute inset-0 opacity-30 dark:opacity-20">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-orange-200 dark:bg-orange-500 rounded-full blur-3xl animate-pulse"></div>
+        <div className={`absolute top-1/4 left-1/4 w-96 h-96 bg-orange-200 dark:bg-orange-500 ${BORDER_RADIUS.badge} blur-3xl animate-pulse`}></div>
         <div
-          className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-amber-200 dark:bg-amber-500 rounded-full blur-3xl animate-pulse"
+          className={`absolute bottom-1/4 right-1/4 w-80 h-80 bg-amber-200 dark:bg-amber-500 ${BORDER_RADIUS.badge} blur-3xl animate-pulse`}
           style={{ animationDelay: "1s" }}
         ></div>
       </div>
@@ -23,7 +24,7 @@ const LoadingScreen = () => {
           className="mb-8"
         >
           <motion.div
-            className="w-20 h-20 mx-auto mb-6 bg-linear-to-br from-orange-500 to-amber-500 rounded-2xl flex items-center justify-center shadow-2xl shadow-orange-500/30"
+            className={`w-20 h-20 mx-auto mb-6 bg-linear-to-br from-orange-500 to-amber-500 ${BORDER_RADIUS.cardLarge} flex items-center justify-center shadow-2xl shadow-orange-500/30`}
             animate={{
               rotate: [0, 5, -5, 0],
             }}
@@ -67,7 +68,7 @@ const LoadingScreen = () => {
             {[0, 1, 2].map((i) => (
               <motion.div
                 key={i}
-                className="w-3 h-3 bg-orange-500 rounded-full"
+                className={`w-3 h-3 bg-orange-500 ${BORDER_RADIUS.badge}`}
                 animate={{
                   scale: [1, 1.3, 1],
                   opacity: [0.5, 1, 0.5],

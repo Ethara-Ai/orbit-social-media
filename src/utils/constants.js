@@ -233,6 +233,35 @@ export const Z_INDEX = {
 };
 
 /**
+ * Border radius design tokens for consistent rounded corners
+ */
+export const BORDER_RADIUS = {
+  // Base values (Tailwind class equivalents)
+  none: "rounded-none",
+  sm: "rounded-sm",
+  base: "rounded",
+  md: "rounded-md",
+  lg: "rounded-lg",
+  xl: "rounded-xl",
+  "2xl": "rounded-2xl",
+  "3xl": "rounded-3xl",
+  full: "rounded-full",
+
+  // Semantic tokens for specific use cases
+  card: "rounded-xl", // Standard card border-radius
+  cardLarge: "rounded-2xl", // Large cards (featured content, theater mode)
+  cardSmall: "rounded-lg", // Small cards and compact components
+  button: "rounded-full", // Buttons and interactive elements
+  input: "rounded-full", // Input fields and text areas
+  badge: "rounded-full", // Badges and pills
+  avatar: "rounded-full", // Avatar images
+  modal: "rounded-2xl", // Modal dialogs
+  dropdown: "rounded-xl", // Dropdown menus and popovers
+  image: "rounded-lg", // Standalone images
+  commentBubble: "rounded-lg sm:rounded-xl", // Comment bubbles with responsive sizing
+};
+
+/**
  * App metadata
  */
 export const APP_CONFIG = {
@@ -260,5 +289,6 @@ export default {
   TRANSITIONS,
   BREAKPOINTS,
   Z_INDEX,
+  BORDER_RADIUS,
   APP_CONFIG,
 };

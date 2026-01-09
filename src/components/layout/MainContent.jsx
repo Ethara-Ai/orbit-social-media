@@ -2,7 +2,7 @@ import { lazy, Suspense, useEffect } from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { useUI, useMessages } from "../../context/AppContext";
-import { TABS } from "../../utils/constants";
+import { TABS, BORDER_RADIUS } from "../../utils/constants";
 
 // Lazy load tab components for better initial bundle size
 const FeedTab = lazy(() => import("../feed/FeedTab"));
@@ -28,9 +28,13 @@ const TabLoadingFallback = () => (
     {/* Content skeleton */}
     <div className="space-y-4">
       {/* Card skeleton 1 */}
-      <div className="bg-white dark:bg-slate-800 rounded-xl p-4 border border-slate-200 dark:border-slate-700">
+      <div
+        className={`bg-white dark:bg-slate-800 ${BORDER_RADIUS.card} p-4 border border-slate-200 dark:border-slate-700`}
+      >
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-10 h-10 bg-slate-200 dark:bg-slate-700 rounded-full" />
+          <div
+            className={`w-10 h-10 bg-slate-200 dark:bg-slate-700 ${BORDER_RADIUS.avatar}`}
+          />
           <div className="flex-1">
             <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded-sm w-32 mb-2" />
             <div className="h-3 bg-slate-200 dark:bg-slate-700 rounded-sm w-24" />
@@ -43,9 +47,13 @@ const TabLoadingFallback = () => (
       </div>
 
       {/* Card skeleton 2 */}
-      <div className="bg-white dark:bg-slate-800 rounded-xl p-4 border border-slate-200 dark:border-slate-700">
+      <div
+        className={`bg-white dark:bg-slate-800 ${BORDER_RADIUS.card} p-4 border border-slate-200 dark:border-slate-700`}
+      >
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-10 h-10 bg-slate-200 dark:bg-slate-700 rounded-full" />
+          <div
+            className={`w-10 h-10 bg-slate-200 dark:bg-slate-700 ${BORDER_RADIUS.avatar}`}
+          />
           <div className="flex-1">
             <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded-sm w-40 mb-2" />
             <div className="h-3 bg-slate-200 dark:bg-slate-700 rounded-sm w-20" />
@@ -59,9 +67,13 @@ const TabLoadingFallback = () => (
       </div>
 
       {/* Card skeleton 3 */}
-      <div className="bg-white dark:bg-slate-800 rounded-xl p-4 border border-slate-200 dark:border-slate-700">
+      <div
+        className={`bg-white dark:bg-slate-800 ${BORDER_RADIUS.card} p-4 border border-slate-200 dark:border-slate-700`}
+      >
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-10 h-10 bg-slate-200 dark:bg-slate-700 rounded-full" />
+          <div
+            className={`w-10 h-10 bg-slate-200 dark:bg-slate-700 ${BORDER_RADIUS.avatar}`}
+          />
           <div className="flex-1">
             <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded-sm w-36 mb-2" />
             <div className="h-3 bg-slate-200 dark:bg-slate-700 rounded-sm w-28" />

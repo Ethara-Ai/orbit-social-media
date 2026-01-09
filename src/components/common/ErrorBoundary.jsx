@@ -1,4 +1,5 @@
 import { Component } from "react";
+import { BORDER_RADIUS } from "../../utils/constants";
 
 /**
  * ErrorBoundary Component
@@ -107,11 +108,15 @@ function DefaultErrorFallback({ error, errorInfo, resetError }) {
 
   return (
     <div className="min-h-50 flex items-center justify-center p-6">
-      <div className="max-w-md w-full bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-red-200 dark:border-red-900/50 overflow-hidden transition-colors duration-300">
+      <div
+        className={`max-w-md w-full bg-white dark:bg-slate-800 ${BORDER_RADIUS.card} shadow-lg border border-red-200 dark:border-red-900/50 overflow-hidden transition-colors duration-300`}
+      >
         {/* Header */}
         <div className="bg-red-50 dark:bg-red-900/20 px-6 py-4 border-b border-red-100 dark:border-red-900/30">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-red-100 dark:bg-red-900/40 flex items-center justify-center">
+            <div
+              className={`w-10 h-10 ${BORDER_RADIUS.badge} bg-red-100 dark:bg-red-900/40 flex items-center justify-center`}
+            >
               <svg
                 className="w-5 h-5 text-red-600 dark:text-red-400"
                 fill="none"
@@ -150,7 +155,9 @@ function DefaultErrorFallback({ error, errorInfo, resetError }) {
               <summary className="text-xs text-slate-500 dark:text-slate-400 cursor-pointer hover:text-slate-700 dark:hover:text-slate-200 transition-colors">
                 Show error details (dev only)
               </summary>
-              <div className="mt-2 p-3 bg-slate-100 dark:bg-slate-900 rounded-lg overflow-auto max-h-40">
+              <div
+                className={`mt-2 p-3 bg-slate-100 dark:bg-slate-900 ${BORDER_RADIUS.cardSmall} overflow-auto max-h-40`}
+              >
                 <pre className="text-xs text-red-600 dark:text-red-400 whitespace-pre-wrap wrap-break-word">
                   {error.toString()}
                 </pre>
@@ -167,13 +174,13 @@ function DefaultErrorFallback({ error, errorInfo, resetError }) {
           <div className="flex gap-3">
             <button
               onClick={resetError}
-              className="flex-1 px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white text-sm font-medium rounded-lg transition-colors duration-200 focus:outline-hidden focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 dark:focus:ring-offset-slate-800"
+              className={`flex-1 px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white text-sm font-medium ${BORDER_RADIUS.cardSmall} transition-colors duration-200 focus:outline-hidden focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 dark:focus:ring-offset-slate-800`}
             >
               Try Again
             </button>
             <button
               onClick={() => window.location.reload()}
-              className="flex-1 px-4 py-2 bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 text-sm font-medium rounded-lg transition-colors duration-200 focus:outline-hidden focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 dark:focus:ring-offset-slate-800"
+              className={`flex-1 px-4 py-2 bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 text-sm font-medium ${BORDER_RADIUS.cardSmall} transition-colors duration-200 focus:outline-hidden focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 dark:focus:ring-offset-slate-800`}
             >
               Refresh Page
             </button>

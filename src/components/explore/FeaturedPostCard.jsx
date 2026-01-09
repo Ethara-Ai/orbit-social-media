@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import { Heart } from "../icons";
 import Avatar from "../common/Avatar";
+import { BORDER_RADIUS } from "../../utils/constants";
 
 const FeaturedPostCard = ({ post, index, onClick }) => {
   const handleImageError = (e) => {
@@ -18,7 +19,7 @@ const FeaturedPostCard = ({ post, index, onClick }) => {
     <motion.article
       role="button"
       tabIndex={0}
-      className="relative rounded-2xl overflow-hidden cursor-pointer group h-64"
+      className={`relative ${BORDER_RADIUS.cardLarge} overflow-hidden cursor-pointer group h-64`}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.1 }}
@@ -44,7 +45,7 @@ const FeaturedPostCard = ({ post, index, onClick }) => {
           <img
             src={post.user.avatar || "/placeholder.svg"}
             alt={post.user.name}
-            className="w-8 h-8 rounded-full object-cover ring-2 ring-white/30"
+            className={`w-8 h-8 ${BORDER_RADIUS.avatar} object-cover ring-2 ring-white/30`}
             onError={handleAvatarError}
           />
           <span className="text-white text-sm font-medium">
