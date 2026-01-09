@@ -101,7 +101,7 @@ export const INITIAL_PROFILE_POSTS = [
     id: 'p1',
     image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=600&fit=crop',
     likes: 234,
-    comments: 18,
+    comments: 2,
     caption: 'Mountain vibes ⛰️',
     isLiked: false,
   },
