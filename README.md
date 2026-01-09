@@ -77,7 +77,7 @@ Orbit is a fully functional social media dashboard prototype that simulates a re
 | **Testing Library** | Component Testing |
 | **ESLint 9** | Code Linting |
 | **GitHub Actions** | CI/CD Pipeline |
-| **AWS S3** | Static Hosting |
+| **SSH Deployment** | Production Server |
 
 ## Architecture
 
@@ -393,24 +393,22 @@ VITE_MAINTENANCE_MODE=false
 
 ## CI/CD Pipeline
 
-This project uses **GitHub Actions** for continuous integration and deployment to **AWS S3**.
+This project uses **GitHub Actions** for continuous integration and SSH-based deployment to production.
 
 ### Workflows
 
 #### 1. CI/CD Pipeline (`deploy.yml`)
 
-Triggered on push to `main`/`master` branches:
+Triggered on push to `main` branch:
 
 ```
-Test -> Build -> Deploy to S3
+Lint -> Test -> Build -> Deploy via SSH
 ```
 
 - Runs ESLint
 - Runs all unit tests
-- Generates coverage reports
 - Builds production bundle
-- Deploys to AWS S3
-- Invalidates CloudFront cache (optional)
+- Deploys to production server via SSH
 
 #### 2. PR Checks (`pr-check.yml`)
 
@@ -426,19 +424,18 @@ Configure these secrets in your repository settings:
 
 | Secret | Description |
 |--------|-------------|
-| `AWS_ACCESS_KEY_ID` | AWS IAM access key |
-| `AWS_SECRET_ACCESS_KEY` | AWS IAM secret key |
-| `AWS_S3_BUCKET` | S3 bucket name |
-| `AWS_CLOUDFRONT_DISTRIBUTION_ID` | CloudFront distribution ID (optional) |
+| `SSH_HOST` | Server IP address or hostname |
+| `SSH_USER` | SSH username (e.g., `ubuntu`) |
+| `SSH_PRIVATE_KEY` | SSH private key for authentication |
 
-### AWS Setup
+### Server Setup
 
-1. **Create an S3 bucket** with static website hosting enabled
-2. **Configure bucket policy** for public read access
-3. **Create an IAM user** with S3 and CloudFront permissions
-4. **Add secrets** to GitHub repository settings
+1. **Set up a Linux server** with SSH access
+2. **Install Node.js 20+** on the server
+3. **Create a deployment script** on the server
+4. **Add SSH secrets** to GitHub repository settings
 
-For detailed AWS setup instructions, see [AWS Setup Guide](docs/AWS_SETUP.md).
+For detailed setup instructions, see [Deployment Setup Guide](docs/DEPLOYMENT.MD).
 
 ## Design Features
 

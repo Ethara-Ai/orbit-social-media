@@ -350,7 +350,7 @@ This ensures code quality before merging to main.
     ├── deploy.yml      # Production deployment via SSH
     └── pr-check.yml    # PR validation checks
 docs/
-└── AWS_SETUP.md        # This file (deployment guide)
+└── DEPLOYMENT.MD       # This file (deployment guide)
 ```
 
 ---
