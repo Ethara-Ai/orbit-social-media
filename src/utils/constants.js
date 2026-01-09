@@ -66,6 +66,12 @@ export const MAX_SUGGESTED_USERS = 3;
 export const FRIEND_REQUEST_PROBABILITY = 0.3;
 
 /**
+ * Textarea dimensions for CreatePost component
+ */
+export const TEXTAREA_MIN_HEIGHT = 40;
+export const TEXTAREA_MAX_HEIGHT = 150;
+
+/**
  * Default avatar fallback URL
  */
 export const DEFAULT_AVATAR_URL =
@@ -275,6 +281,8 @@ export default {
   MAX_ACTIVE_FRIENDS,
   MAX_SUGGESTED_USERS,
   FRIEND_REQUEST_PROBABILITY,
+  TEXTAREA_MIN_HEIGHT,
+  TEXTAREA_MAX_HEIGHT,
   DEFAULT_AVATAR_URL,
   PROFILE_DATA,
   INITIAL_PROFILE_POSTS,

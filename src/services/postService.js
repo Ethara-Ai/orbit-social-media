@@ -223,7 +223,10 @@ export const copyPostUrlToClipboard = async (postId) => {
     await navigator.clipboard.writeText(url);
     return true;
   } catch (err) {
-    console.error('Failed to copy link:', err);
+    // Only log errors in development mode
+    if (import.meta.env.DEV) {
+      console.error('Failed to copy link:', err);
+    }
     return false;
   }
 };

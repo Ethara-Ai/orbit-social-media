@@ -1,5 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
+import PropTypes from 'prop-types';
 
 const ActionButton = ({
   children,
@@ -75,6 +76,29 @@ const ActionButton = ({
       {Icon && iconPosition === 'right' && <Icon className={iconSizes[size]} />}
     </motion.button>
   );
+};
+
+ActionButton.propTypes = {
+  /** Button content */
+  children: PropTypes.node,
+  /** Click handler function */
+  onClick: PropTypes.func,
+  /** Whether button is disabled */
+  disabled: PropTypes.bool,
+  /** Button style variant */
+  variant: PropTypes.oneOf(['primary', 'secondary', 'ghost', 'danger', 'success', 'outline']),
+  /** Button size */
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl']),
+  /** Additional CSS classes */
+  className: PropTypes.string,
+  /** Icon component to display */
+  icon: PropTypes.elementType,
+  /** Position of the icon relative to text */
+  iconPosition: PropTypes.oneOf(['left', 'right']),
+  /** Whether button should take full width */
+  fullWidth: PropTypes.bool,
+  /** Border radius style */
+  rounded: PropTypes.oneOf(['none', 'sm', 'md', 'lg', 'xl', '2xl', 'full']),
 };
 
 export default ActionButton;

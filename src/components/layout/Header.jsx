@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useUser, useUI } from '../../context/AppContext';
 import { Sun, Moon, Users } from '../icons';
 import { BORDER_RADIUS } from '../../utils/constants';
+import { createImageErrorHandler } from '../../utils/fileUtils';
 
 const Header = () => {
   const { currentUserAvatar, currentUserDetails } = useUser();
@@ -90,6 +91,7 @@ const Header = () => {
                   alt=""
                   aria-hidden="true"
                   className={`w-10 h-10 ${BORDER_RADIUS.avatar} object-cover ring-2 ring-slate-100 dark:ring-slate-700 transition-all`}
+                  onError={createImageErrorHandler()}
                 />
               </motion.button>
 
@@ -172,6 +174,7 @@ const Header = () => {
                 alt=""
                 aria-hidden="true"
                 className={`w-9 h-9 sm:w-10 sm:h-10 ${BORDER_RADIUS.avatar} object-cover ring-2 ring-slate-100 dark:ring-slate-700 transition-all`}
+                onError={createImageErrorHandler()}
               />
             </motion.button>
 

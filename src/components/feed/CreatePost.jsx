@@ -4,7 +4,8 @@ import { motion } from 'framer-motion';
 import { Camera, X } from '../icons';
 import { useFeed, useUser } from '../../context/AppContext';
 import { useFeedActions } from '../../hooks/useFeedActions';
-import { BORDER_RADIUS } from '../../utils/constants';
+import { createImageErrorHandler } from '../../utils/fileUtils';
+import { BORDER_RADIUS, TEXTAREA_MIN_HEIGHT, TEXTAREA_MAX_HEIGHT } from '../../utils/constants';
 
 const CreatePost = () => {
   // Access state from context
@@ -26,9 +27,10 @@ const CreatePost = () => {
       // Reset to minimum height first to calculate proper scrollHeight
       textarea.style.height = 'auto';
       // Calculate new height based on content, with min and max bounds
-      const minHeight = 40; // Minimum height in pixels
-      const maxHeight = 150; // Maximum height before scrolling
-      const newHeight = Math.max(minHeight, Math.min(textarea.scrollHeight, maxHeight));
+      const newHeight = Math.max(
+        TEXTAREA_MIN_HEIGHT,
+        Math.min(textarea.scrollHeight, TEXTAREA_MAX_HEIGHT)
+      );
       textarea.style.height = `${newHeight}px`;
     }
   }, [newPostContent]);
@@ -53,10 +55,7 @@ const CreatePost = () => {
           src={currentUserAvatar || '/placeholder.svg'}
           alt={currentUser.name}
           className={`w-9 h-9 sm:w-10 sm:h-10 ${BORDER_RADIUS.avatar} object-cover shrink-0`}
-          onError={(e) => {
-            e.target.src =
-              'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=50&h=50&fit=crop&crop=face';
-          }}
+          onError={createImageErrorHandler()}
         />
         <div className="flex-1 min-w-0">
           {/* Text Input Area with inline buttons */}
@@ -71,8 +70,8 @@ const CreatePost = () => {
               onChange={handleTextChange}
               className="block w-full bg-transparent border-0 resize-none focus:outline-hidden text-slate-900 dark:text-white placeholder-slate-500 text-xs sm:text-sm leading-normal pl-3 sm:pl-4 pr-24 sm:pr-26 py-2.5 sm:py-3 scrollbar-hide"
               style={{
-                minHeight: '40px',
-                maxHeight: '150px',
+                minHeight: `${TEXTAREA_MIN_HEIGHT}px`,
+                maxHeight: `${TEXTAREA_MAX_HEIGHT}px`,
                 overflowY: 'auto',
                 wordBreak: 'break-word',
                 overflowWrap: 'break-word',

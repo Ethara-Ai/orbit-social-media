@@ -99,13 +99,12 @@ export function NotificationsProvider({ children }) {
       }
     }, NOTIFICATION_INTERVAL);
 
+    // Cleanup interval on unmount to prevent memory leaks
     return () => clearInterval(interval);
   }, [activeTab]);
 
-  // Update notification count when notifications change
-  useEffect(() => {
-    setNotificationCount(countUnread(notifications));
-  }, [notifications]);
+  // Note: Notification count is updated inline during notification generation
+  // This effect is redundant and has been removed to improve performance
 
   // ==========================================================================
   // Notifications Handlers
