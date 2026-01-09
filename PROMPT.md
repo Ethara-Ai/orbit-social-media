@@ -1,0 +1,9 @@
+Build a social networking dashboard named Orbit using React, Vite, Tailwind CSS, and Framer Motion. Structure the codebase with feature-based folder organization and manage state through six domain-specific React Context providers (User, Feed, Messages, Notifications, Explore, UI), each exposing methods via custom hooks to avoid prop drilling.
+
+Extract business logic into a dedicated service layer (postService, messageService, conversationService, notificationService) keeping UI components lightweight. Implement reusable hooks for click-outside detection, debouncing, localStorage persistence, media queries, and scroll handling. Use ErrorBoundary components to isolate failures.
+
+Design the interface with: a collapsible left sidebar showing user profile, navigation, analytics, and friends list; a main content area with six tab views (Home feed, Discover/Explore, Messages, Notifications, Connections, Profile); and a right sidebar displaying online contacts and suggested users. The Home feed supports post creation with likes, comments, and shares. Discover includes category filtering, featured posts, and a theater mode for immersive viewing. Messages features smart contextual auto-responses, typing indicators, and image attachments. Notifications auto-generates alerts every 60 seconds simulating social interactions.
+
+Style with an orange/amber color scheme, card-based layouts, Framer Motion animations, custom scrollbars, and responsive design for desktop, tablet, and mobile. Colocate tests with components using Vitest and React Testing Library. Configure GitHub Actions for CI/CD deployment to AWS S3.
+
+Seed with mock data including user profiles, friends with availability states, posts with comments, chat conversations, notifications, and suggested users so the app feels complete on first load.
