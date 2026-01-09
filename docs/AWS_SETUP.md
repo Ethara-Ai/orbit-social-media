@@ -1,123 +1,149 @@
-# AWS S3 Deployment Setup Guide
+# Production Deployment Setup Guide
 
-This guide explains how to set up AWS S3 for hosting your React application and configure GitHub Actions for automated deployments.
+This guide explains how to set up SSH-based deployment for your React application and configure GitHub Actions for automated deployments.
 
 ## Prerequisites
 
-- AWS Account
-- AWS CLI installed locally (optional, for testing)
+- Linux server (Ubuntu recommended) with SSH access
+- Node.js 20+ installed on the server
 - GitHub repository with admin access
+- Domain name (optional)
 
 ---
 
-## Step 1: Create an S3 Bucket
+## Deployment Architecture
 
-### 1.1 Create the Bucket
-
-1. Go to [AWS S3 Console](https://s3.console.aws.amazon.com/)
-2. Click **Create bucket**
-3. Configure:
-   - **Bucket name**: `your-app-name` (must be globally unique)
-   - **AWS Region**: Choose your preferred region (e.g., `us-east-1`)
-   - **Object Ownership**: ACLs disabled (recommended)
-   - **Block Public Access**: Uncheck "Block all public access" (for static hosting)
-   - Acknowledge the warning about public access
-4. Click **Create bucket**
-
-### 1.2 Enable Static Website Hosting
-
-1. Go to your bucket → **Properties** tab
-2. Scroll to **Static website hosting**
-3. Click **Edit**
-4. Configure:
-   - **Static website hosting**: Enable
-   - **Hosting type**: Host a static website
-   - **Index document**: `index.html`
-   - **Error document**: `index.html` (for SPA routing)
-5. Click **Save changes**
-6. Note the **Bucket website endpoint** (e.g., `http://your-bucket.s3-website-us-east-1.amazonaws.com`)
-
-### 1.3 Add Bucket Policy for Public Access
-
-1. Go to your bucket → **Permissions** tab
-2. Scroll to **Bucket policy** → Click **Edit**
-3. Add this policy (replace `YOUR-BUCKET-NAME`):
-
-```json
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Sid": "PublicReadGetObject",
-            "Effect": "Allow",
-            "Principal": "*",
-            "Action": "s3:GetObject",
-            "Resource": "arn:aws:s3:::YOUR-BUCKET-NAME/*"
-        }
-    ]
-}
+```
+GitHub (push to main) → GitHub Actions → SSH → Remote Server → Deploy Script
 ```
 
-4. Click **Save changes**
+The deployment workflow:
+1. Code is pushed to the `main` branch
+2. GitHub Actions triggers the deployment workflow
+3. Connects to the production server via SSH
+4. Executes the deployment script on the server
 
 ---
 
-## Step 2: Create IAM User for GitHub Actions
+## Step 1: Server Setup
 
-### 2.1 Create IAM Policy
+### 1.1 Create Deployment Directory
 
-1. Go to [IAM Console](https://console.aws.amazon.com/iam/) → **Policies** → **Create policy**
-2. Select **JSON** tab and paste:
+```bash
+# SSH into your server
+ssh ubuntu@your-server-ip
 
-```json
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Sid": "S3DeploymentAccess",
-            "Effect": "Allow",
-            "Action": [
-                "s3:PutObject",
-                "s3:GetObject",
-                "s3:DeleteObject",
-                "s3:ListBucket",
-                "s3:GetBucketLocation"
-            ],
-            "Resource": [
-                "arn:aws:s3:::YOUR-BUCKET-NAME",
-                "arn:aws:s3:::YOUR-BUCKET-NAME/*"
-            ]
-        }
-    ]
-}
+# Create project directory
+sudo mkdir -p /home/ubuntu/ethara-ai-prod/orbit-social-media
+sudo chown -R ubuntu:ubuntu /home/ubuntu/ethara-ai-prod
 ```
 
-3. Click **Next**
-4. Name: `S3-Deployment-Policy`
-5. Click **Create policy**
+### 1.2 Install Dependencies
 
-### 2.2 Create IAM User
+```bash
+# Install Node.js 20
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+sudo apt-get install -y nodejs
 
-1. Go to **IAM Console** → **Users** → **Create user**
-2. **User name**: `github-actions-deployer`
-3. Click **Next**
-4. **Permissions**:
-   - Select **Attach policies directly**
-   - Search and select `S3-Deployment-Policy`
-5. Click **Next** → **Create user**
+# Verify installation
+node --version
+npm --version
 
-### 2.3 Create Access Keys
+# Install PM2 for process management (optional)
+sudo npm install -g pm2
+```
 
-1. Click on the user `github-actions-deployer`
-2. Go to **Security credentials** tab
-3. Scroll to **Access keys** → **Create access key**
-4. Select **Application running outside AWS**
-5. Click **Next** → **Create access key**
-6. **IMPORTANT**: Save the:
-   - **Access key ID**
-   - **Secret access key**
-   
-   ⚠️ You won't be able to see the secret key again!
+### 1.3 Clone the Repository
+
+```bash
+cd /home/ubuntu/ethara-ai-prod
+git clone https://github.com/Ethara-AI/orbit-social-media.git
+cd orbit-social-media
+npm install
+npm run build
+```
+
+### 1.4 Create Deployment Script
+
+Create the deployment script at `/home/ubuntu/ethara-ai-prod/orbit-social-media/deploy.sh`:
+
+```bash
+#!/bin/bash
+
+# Exit on error
+set -e
+
+# Navigate to project directory
+cd /home/ubuntu/ethara-ai-prod/orbit-social-media
+
+# Pull latest changes
+git pull origin main
+
+# Install dependencies
+npm ci
+
+# Run tests (optional)
+# npm run test:run
+
+# Build the application
+npm run build
+
+# Restart the server (if using a Node.js server)
+# pm2 restart orbit-social-media
+
+echo "Deployment completed successfully!"
+```
+
+Make the script executable:
+
+```bash
+sudo chmod +x /home/ubuntu/ethara-ai-prod/orbit-social-media/deploy.sh
+```
+
+### 1.5 Configure Sudoers (for passwordless sudo)
+
+The deployment script runs with `sudo`, so configure passwordless execution:
+
+```bash
+sudo visudo
+```
+
+Add this line at the end:
+
+```
+ubuntu ALL=(ALL) NOPASSWD: /home/ubuntu/ethara-ai-prod/orbit-social-media/deploy.sh
+```
+
+---
+
+## Step 2: Set Up SSH Keys
+
+### 2.1 Generate SSH Key Pair (on your local machine)
+
+```bash
+# Generate a new SSH key pair for GitHub Actions
+ssh-keygen -t ed25519 -C "github-actions-deploy" -f ~/.ssh/github_actions_deploy
+
+# This creates:
+# - ~/.ssh/github_actions_deploy (private key)
+# - ~/.ssh/github_actions_deploy.pub (public key)
+```
+
+### 2.2 Add Public Key to Server
+
+```bash
+# Copy the public key to your server
+ssh-copy-id -i ~/.ssh/github_actions_deploy.pub ubuntu@your-server-ip
+
+# Or manually add to ~/.ssh/authorized_keys on the server
+cat ~/.ssh/github_actions_deploy.pub >> ~/.ssh/authorized_keys
+```
+
+### 2.3 Test SSH Connection
+
+```bash
+ssh -i ~/.ssh/github_actions_deploy ubuntu@your-server-ip
+```
 
 ---
 
@@ -129,26 +155,50 @@ This guide explains how to set up AWS S3 for hosting your React application and 
 
 | Secret Name | Value |
 |-------------|-------|
-| `AWS_ACCESS_KEY_ID` | Your IAM user Access Key ID |
-| `AWS_SECRET_ACCESS_KEY` | Your IAM user Secret Access Key |
-| `AWS_S3_BUCKET` | Your S3 bucket name (e.g., `my-react-app`) |
+| `SSH_HOST` | Your server IP address or hostname |
+| `SSH_USER` | SSH username (e.g., `ubuntu`) |
+| `SSH_PRIVATE_KEY` | Contents of the private key file |
 
-### Optional Secrets (for CloudFront)
+### Getting the Private Key
 
-| Secret Name | Value |
-|-------------|-------|
-| `AWS_CLOUDFRONT_DISTRIBUTION_ID` | Your CloudFront distribution ID |
+```bash
+# Display the private key content
+cat ~/.ssh/github_actions_deploy
+
+# Copy the entire output including:
+# -----BEGIN OPENSSH PRIVATE KEY-----
+# ... key content ...
+# -----END OPENSSH PRIVATE KEY-----
+```
 
 ---
 
-## Step 4: Update AWS Region (if needed)
+## Step 4: GitHub Actions Workflow
 
-If your S3 bucket is not in `us-east-1`, update the region in `.github/workflows/deploy.yml`:
+The deployment workflow is located at `.github/workflows/deploy.yml`:
 
 ```yaml
-env:
-  NODE_VERSION: '20'
-  AWS_REGION: 'your-region'  # e.g., 'eu-west-1', 'ap-southeast-1'
+name: Deploy to Production
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:  # Manual trigger button
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: sudo /home/ubuntu/ethara-ai-prod/orbit-social-media/deploy.sh
 ```
 
 ---
@@ -158,72 +208,68 @@ env:
 1. Push a commit to the `main` branch
 2. Go to **Actions** tab in GitHub
 3. Watch the workflow run
-4. Once complete, visit your S3 website endpoint
+4. Check your server for the deployed changes
+
+### Manual Trigger
+
+You can also trigger the deployment manually:
+1. Go to **Actions** tab
+2. Select **Deploy to Production** workflow
+3. Click **Run workflow**
 
 ---
 
-## Optional: Set Up CloudFront CDN
+## Step 6: Web Server Configuration (Nginx)
 
-For better performance and HTTPS support, set up CloudFront:
+### 6.1 Install Nginx
 
-### 5.1 Create CloudFront Distribution
+```bash
+sudo apt update
+sudo apt install nginx
+```
 
-1. Go to [CloudFront Console](https://console.aws.amazon.com/cloudfront/)
-2. Click **Create distribution**
-3. Configure:
-   - **Origin domain**: Select your S3 bucket website endpoint
-   - **Origin path**: Leave empty
-   - **Viewer protocol policy**: Redirect HTTP to HTTPS
-   - **Allowed HTTP methods**: GET, HEAD
-   - **Cache policy**: CachingOptimized
-   - **Default root object**: `index.html`
-4. Click **Create distribution**
+### 6.2 Configure Nginx for SPA
 
-### 5.2 Configure Error Pages (for SPA)
+Create `/etc/nginx/sites-available/orbit-social-media`:
 
-1. Go to your distribution → **Error pages** tab
-2. Click **Create custom error response**
-3. Configure:
-   - **HTTP error code**: 403
-   - **Customize error response**: Yes
-   - **Response page path**: `/index.html`
-   - **HTTP Response code**: 200
-4. Repeat for error code **404**
+```nginx
+server {
+    listen 80;
+    server_name your-domain.com;
+    root /home/ubuntu/ethara-ai-prod/orbit-social-media/dist;
+    index index.html;
 
-### 5.3 Update IAM Policy for CloudFront
+    # Gzip compression
+    gzip on;
+    gzip_types text/plain text/css application/json application/javascript text/xml application/xml;
 
-Add CloudFront permissions to your IAM policy:
+    # SPA routing - serve index.html for all routes
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
 
-```json
-{
-    "Sid": "CloudFrontInvalidation",
-    "Effect": "Allow",
-    "Action": "cloudfront:CreateInvalidation",
-    "Resource": "arn:aws:cloudfront::YOUR-ACCOUNT-ID:distribution/YOUR-DISTRIBUTION-ID"
+    # Cache static assets
+    location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2)$ {
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+    }
 }
 ```
 
-### 5.4 Add CloudFront Secret
+Enable the site:
 
-Add `AWS_CLOUDFRONT_DISTRIBUTION_ID` to your GitHub secrets.
+```bash
+sudo ln -s /etc/nginx/sites-available/orbit-social-media /etc/nginx/sites-enabled/
+sudo nginx -t
+sudo systemctl reload nginx
+```
 
----
+### 6.3 SSL with Let's Encrypt (Optional)
 
-## Optional: Custom Domain Setup
-
-### Using Route 53
-
-1. Register/transfer domain to Route 53
-2. Create hosted zone
-3. Create CloudFront distribution with custom domain
-4. Request ACM certificate in `us-east-1`
-5. Add CNAME or Alias record pointing to CloudFront
-
-### Using External DNS
-
-1. Create CloudFront distribution
-2. Request ACM certificate
-3. Add CNAME record with your DNS provider pointing to CloudFront domain
+```bash
+sudo apt install certbot python3-certbot-nginx
+sudo certbot --nginx -d your-domain.com
+```
 
 ---
 
@@ -231,63 +277,68 @@ Add `AWS_CLOUDFRONT_DISTRIBUTION_ID` to your GitHub secrets.
 
 ### Common Issues
 
-**1. Access Denied on S3**
-- Check bucket policy allows public read
-- Verify "Block Public Access" settings are disabled
+**1. SSH Connection Failed**
+- Verify SSH_HOST is correct (IP or hostname)
+- Check SSH_USER matches the server user
+- Ensure the private key is complete (including headers)
+- Verify the public key is in `~/.ssh/authorized_keys` on the server
 
-**2. 403 Error on Website**
-- Ensure static website hosting is enabled
-- Check index document is set to `index.html`
+**2. Permission Denied on Deploy Script**
+- Ensure the script is executable: `chmod +x deploy.sh`
+- Check sudoers configuration for passwordless sudo
+- Verify the path in the workflow matches the script location
 
-**3. GitHub Actions Failing**
-- Verify all secrets are correctly set
-- Check IAM policy has correct bucket ARN
-- Ensure AWS region matches bucket region
+**3. Git Pull Fails**
+- Ensure the repository is cloned with HTTPS or deploy key
+- Check if there are uncommitted changes on the server
 
-**4. SPA Routes Return 404**
-- Set error document to `index.html`
-- For CloudFront, configure custom error responses
+**4. Build Fails on Server**
+- Verify Node.js version matches local development
+- Check if all dependencies are installed
+- Review disk space availability
 
-### Useful AWS CLI Commands
+**5. 404 Errors on Routes**
+- Ensure Nginx is configured with `try_files` for SPA routing
+- Verify the `dist` folder path is correct
+
+### Useful Commands
 
 ```bash
-# Test S3 access
-aws s3 ls s3://your-bucket-name
+# Check deployment script manually
+sudo /home/ubuntu/ethara-ai-prod/orbit-social-media/deploy.sh
 
-# Manual deploy
-aws s3 sync dist/ s3://your-bucket-name --delete
+# View Nginx error logs
+sudo tail -f /var/log/nginx/error.log
 
-# Invalidate CloudFront cache
-aws cloudfront create-invalidation --distribution-id YOUR_ID --paths "/*"
+# Check Nginx status
+sudo systemctl status nginx
+
+# Test Nginx configuration
+sudo nginx -t
 ```
-
----
-
-## Cost Estimation
-
-For a small to medium traffic website:
-
-| Service | Estimated Cost |
-|---------|----------------|
-| S3 Storage | ~$0.023/GB/month |
-| S3 Requests | ~$0.0004/1000 GET requests |
-| CloudFront | ~$0.085/GB (first 10TB) |
-| Route 53 | ~$0.50/hosted zone/month |
-
-**Free Tier** (12 months):
-- S3: 5GB storage, 20,000 GET requests
-- CloudFront: 1TB data transfer, 10M requests
 
 ---
 
 ## Security Best Practices
 
-1. ✅ Use IAM user with minimal permissions
-2. ✅ Never commit AWS credentials to code
-3. ✅ Rotate access keys periodically
-4. ✅ Enable CloudTrail for auditing
-5. ✅ Use CloudFront for HTTPS
-6. ✅ Consider using OIDC instead of access keys (advanced)
+1. **Use dedicated deploy keys** - Don't reuse personal SSH keys
+2. **Restrict SSH key permissions** - Only allow specific commands if possible
+3. **Keep server updated** - Regular security patches
+4. **Use HTTPS** - Set up SSL certificates
+5. **Firewall configuration** - Only open necessary ports (22, 80, 443)
+6. **Rotate keys periodically** - Update SSH keys regularly
+
+---
+
+## PR Checks Workflow
+
+The PR validation workflow (`.github/workflows/pr-check.yml`) runs on pull requests:
+
+- **Lint**: ESLint code quality checks
+- **Test**: Unit tests with coverage report
+- **Build**: Verify the application builds successfully
+
+This ensures code quality before merging to main.
 
 ---
 
@@ -296,10 +347,10 @@ For a small to medium traffic website:
 ```
 .github/
 └── workflows/
-    ├── deploy.yml      # Main CI/CD pipeline
+    ├── deploy.yml      # Production deployment via SSH
     └── pr-check.yml    # PR validation checks
 docs/
-└── AWS_SETUP.md        # This file
+└── AWS_SETUP.md        # This file (deployment guide)
 ```
 
 ---
@@ -307,6 +358,7 @@ docs/
 ## Support
 
 For issues with:
-- **AWS**: [AWS Documentation](https://docs.aws.amazon.com/)
+- **Server Setup**: Check your hosting provider's documentation
 - **GitHub Actions**: [GitHub Actions Docs](https://docs.github.com/en/actions)
+- **Nginx**: [Nginx Documentation](https://nginx.org/en/docs/)
 - **This Project**: Open an issue in the repository
