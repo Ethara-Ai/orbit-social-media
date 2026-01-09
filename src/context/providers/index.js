@@ -12,6 +12,11 @@ export { UserProvider, useUser } from './UserContext';
 export { FeedProvider, useFeed } from './FeedContext';
 
 // ============================================================================
+// Posts Context (Unified Post Management)
+// ============================================================================
+export { PostsProvider, usePosts } from './PostsContext';
+
+// ============================================================================
 // Messages Context
 // ============================================================================
 export { MessagesProvider, useMessages } from './MessagesContext';

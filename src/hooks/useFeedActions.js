@@ -8,11 +8,10 @@
  */
 
 import { useCallback } from 'react';
-import { useFeed, useUser } from '../context/AppContext';
+import { useFeed, useUser, usePosts } from '../context/AppContext';
 import { useNotificationPopup } from '../context/providers/ui';
 import {
   createPost,
-  toggleLikeById,
   incrementSharesById,
   incrementCommentsById,
   createComment,
@@ -47,18 +46,22 @@ export const useFeedActions = () => {
   // Access user data from UserContext to ensure we use the latest profile info
   const { currentUserAvatar, currentUserDetails } = useUser();
 
+  // Access unified post actions from PostsContext for synced data across feed and explore
+  const { togglePostLike, incrementPostComments } = usePosts();
+
   // Access notification popup from focused UI context
   // This properly handles timeout cleanup and prevents memory leaks
   const { showCopyNotificationWithTimeout } = useNotificationPopup();
 
   /**
    * Handle like action on a post
+   * Uses unified togglePostLike to sync across feed and explore
    */
   const handleLike = useCallback(
     (postId) => {
-      setPosts((prev) => toggleLikeById(prev, postId));
+      togglePostLike(postId);
     },
-    [setPosts]
+    [togglePostLike]
   );
 
   /**
@@ -97,7 +100,12 @@ export const useFeedActions = () => {
         [postId]: [...(prev[postId] || []), newCommentObj],
       }));
 
+      // Update comments count in unified posts state
+      incrementPostComments(postId);
+
+      // Also update local feed posts for immediate UI update
       setPosts((prev) => incrementCommentsById(prev, postId));
+
       setNewComment((prev) => ({ ...prev, [postId]: '' }));
     },
     [
@@ -108,6 +116,7 @@ export const useFeedActions = () => {
       setComments,
       setPosts,
       setNewComment,
+      incrementPostComments,
     ]
   );
 

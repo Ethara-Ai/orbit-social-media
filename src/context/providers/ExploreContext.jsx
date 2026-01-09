@@ -4,8 +4,8 @@ import { createContext, useContext, useState, useMemo, useCallback } from 'react
 // Import Data
 import { exploreRepository } from '../../data/repositories';
 
-// Import Services
-import { toggleLikeById } from '../../services/postService';
+// Import PostsContext for unified post management
+import { usePosts } from './PostsContext';
 
 // ============================================================================
 // Context Definition
@@ -28,15 +28,18 @@ ExploreContext.displayName = 'ExploreContext';
 
 export function ExploreProvider({ children }) {
   // ==========================================================================
+  // Get unified posts from PostsContext
+  // ==========================================================================
+  const { explorePosts, togglePostLike } = usePosts();
+
+  // ==========================================================================
   // Initialize Data from Repository
   // ==========================================================================
-  const initialExplorePosts = useMemo(() => exploreRepository.getPosts(), []);
   const exploreCategories = useMemo(() => exploreRepository.getCategories(), []);
 
   // ==========================================================================
   // Explore State
   // ==========================================================================
-  const [explorePostsState, setExplorePostsState] = useState(initialExplorePosts);
   const [activeExploreCategory, setActiveExploreCategory] = useState(null);
   const [showExploreModal, setShowExploreModal] = useState(false);
   const [selectedExplorePost, setSelectedExplorePost] = useState(null);
@@ -45,9 +48,12 @@ export function ExploreProvider({ children }) {
   // Explore Handlers
   // ==========================================================================
 
-  const handleExploreLike = useCallback((postId) => {
-    setExplorePostsState((prev) => toggleLikeById(prev, postId));
-  }, []);
+  const handleExploreLike = useCallback(
+    (postId) => {
+      togglePostLike(postId);
+    },
+    [togglePostLike]
+  );
 
   const handleExplorePostClick = useCallback((post) => {
     console.log('View explore post:', post?.title);
@@ -77,7 +83,7 @@ export function ExploreProvider({ children }) {
   const contextValue = useMemo(
     () => ({
       // Read-only Data
-      explorePosts: explorePostsState,
+      explorePosts,
       exploreCategories,
       activeExploreCategory,
       showExploreModal,
@@ -90,7 +96,7 @@ export function ExploreProvider({ children }) {
       closeExploreModal,
     }),
     [
-      explorePostsState,
+      explorePosts,
       exploreCategories,
       activeExploreCategory,
       showExploreModal,

@@ -93,8 +93,6 @@ export function MessagesProvider({ children }) {
       activeConversation,
       activeConversationRef,
       messageText,
-      activeConversationRef,
-      messageText,
       messageAttachments,
       showChatDropdown,
       showEmptyChatPopup,

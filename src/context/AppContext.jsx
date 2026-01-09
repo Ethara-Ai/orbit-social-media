@@ -3,6 +3,8 @@ import { useRef, useEffect } from 'react';
 import {
   UserProvider,
   useUser,
+  PostsProvider,
+  usePosts,
   FeedProvider,
   useFeed,
   MessagesProvider,
@@ -51,9 +53,11 @@ export function AppProvider({ children }) {
       <NotificationsProvider>
         <MessagesProvider>
           <UserProvider>
-            <FeedProvider>
-              <ExploreProvider>{children}</ExploreProvider>
-            </FeedProvider>
+            <PostsProvider>
+              <FeedProvider>
+                <ExploreProvider>{children}</ExploreProvider>
+              </FeedProvider>
+            </PostsProvider>
           </UserProvider>
         </MessagesProvider>
       </NotificationsProvider>
@@ -65,7 +69,7 @@ export function AppProvider({ children }) {
 // Re-export all domain-specific hooks for backward compatibility
 // ============================================================================
 
-export { useUser, useFeed, useMessages, useNotifications, useExplore, useUI };
+export { useUser, usePosts, useFeed, useMessages, useNotifications, useExplore, useUI };
 
 // ============================================================================
 // Re-export focused UI hooks (recommended for better performance)

@@ -4,6 +4,7 @@ import { createContext, useContext, useState, useMemo } from 'react';
 // Import Data
 import { currentUser } from '../../data/mockData';
 import postRepository from '../../data/repositories/PostRepository';
+import { usePosts } from './PostsContext';
 
 // ============================================================================
 // Context Definition
@@ -29,9 +30,13 @@ FeedContext.displayName = 'FeedContext';
 
 export function FeedProvider({ children }) {
   // ==========================================================================
+  // Get unified posts from PostsContext
+  // ==========================================================================
+  const { feedPosts: posts, setFeedPosts: setPosts } = usePosts();
+
+  // ==========================================================================
   // Initialize Data from Repository
   // ==========================================================================
-  const initialPosts = useMemo(() => postRepository.getPosts(), []);
   const initialComments = useMemo(() => {
     const commentsArray = postRepository.getComments();
     // Convert array to object grouped by postId
@@ -48,7 +53,6 @@ export function FeedProvider({ children }) {
   // ==========================================================================
   // Feed State
   // ==========================================================================
-  const [posts, setPosts] = useState(initialPosts);
   const [comments, setComments] = useState(initialComments);
   const [showComments, setShowComments] = useState([]);
   const [newComment, setNewComment] = useState({});
@@ -76,7 +80,6 @@ export function FeedProvider({ children }) {
       showComments,
       newComment,
       newPostContent,
-      newPostContent,
       selectedImages,
       selectedPost,
 
@@ -89,7 +92,16 @@ export function FeedProvider({ children }) {
       setSelectedImages,
       setSelectedPost,
     }),
-    [posts, comments, showComments, newComment, newPostContent, selectedImages, selectedPost]
+    [
+      posts,
+      comments,
+      showComments,
+      newComment,
+      newPostContent,
+      selectedImages,
+      selectedPost,
+      setPosts,
+    ]
   );
 
   return <FeedContext.Provider value={contextValue}>{children}</FeedContext.Provider>;
