@@ -1,5 +1,5 @@
 /* eslint-disable react-refresh/only-export-components */
-import { createContext, useContext, useState, useMemo, useCallback } from 'react';
+import { createContext, useContext, useState, useMemo } from 'react';
 
 // Import Data
 import { currentUser } from '../../data/mockData';
@@ -13,14 +13,17 @@ const FeedContext = createContext(null);
 
 // ============================================================================
 // Feed Provider
-// Self-contained provider managing feed-related state
-// Business logic extracted to useFeedActions hook
+// Pure state management provider - no business logic
 //
-// Encapsulation Strategy:
-// - Form-related setters (setNewComment, setNewPostContent, setSelectedImage)
-//   are exposed for controlled input components
-// - Critical state setters (setPosts, setComments, etc.) are kept internal
-//   and only accessible through actions for better encapsulation
+// Responsibilities:
+// - Initialize and manage feed state (posts, comments, etc.)
+// - Expose state and setters for components and action hooks
+// - Keep business logic in separate action hooks (useFeedActions)
+//
+// Design Principle:
+// This provider follows the principle of separation of concerns by managing
+// ONLY state. Business logic is delegated to action hooks that consume this
+// context and provide methods to components.
 // ============================================================================
 
 export function FeedProvider({ children }) {
@@ -53,109 +56,14 @@ export function FeedProvider({ children }) {
   const [selectedPost, setSelectedPost] = useState(null);
 
   // ==========================================================================
-  // Feed Action Handlers (Business Logic)
-  // ==========================================================================
-  const handleLike = useCallback((postId) => {
-    setPosts((prev) =>
-      prev.map((post) =>
-        post.id === postId
-          ? {
-              ...post,
-              isLiked: !post.isLiked,
-              likes: post.isLiked ? post.likes - 1 : post.likes + 1,
-            }
-          : post
-      )
-    );
-  }, []);
-
-  const handleComment = useCallback((postId) => {
-    setShowComments((prev) =>
-      prev.includes(postId) ? prev.filter((id) => id !== postId) : [...prev, postId]
-    );
-  }, []);
-
-  const handleAddComment = useCallback(
-    (postId) => {
-      const commentText = newComment[postId]?.trim();
-      if (!commentText) return;
-
-      const newCommentObj = {
-        id: `c${Date.now()}`,
-        user: currentUser,
-        content: commentText,
-        timestamp: 'Just now',
-        postId,
-      };
-
-      setComments((prev) => ({
-        ...prev,
-        [postId]: [...(prev[postId] || []), newCommentObj],
-      }));
-
-      setPosts((prev) =>
-        prev.map((post) =>
-          post.id === postId ? { ...post, comments: (post.comments || 0) + 1 } : post
-        )
-      );
-
-      setNewComment((prev) => ({ ...prev, [postId]: '' }));
-    },
-    [newComment]
-  );
-
-  const handleShare = useCallback(() => {
-    // Copy to clipboard functionality handled separately
-  }, []);
-
-  const handleCreatePost = useCallback(() => {
-    if (!newPostContent.trim() && !selectedImage) return;
-
-    const newPost = {
-      id: `p${Date.now()}`,
-      user: currentUser,
-      content: newPostContent,
-      image: selectedImage,
-      likes: 0,
-      comments: 0,
-      shares: 0,
-      timestamp: 'Just now',
-      isLiked: false,
-      category: 'General',
-    };
-
-    setPosts((prev) => [newPost, ...prev]);
-    setNewPostContent('');
-    setSelectedImage(null);
-  }, [newPostContent, selectedImage]);
-
-  const handleImageUpload = useCallback((e) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setSelectedImage(reader.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  }, []);
-
-  const handlePostClick = useCallback(
-    (postId) => {
-      const post = posts.find((p) => p.id === postId);
-      if (post) {
-        setSelectedPost(post);
-      }
-    },
-    [posts]
-  );
-
-  const clearSelectedPost = useCallback(() => {
-    setSelectedPost(null);
-  }, []);
-
-  // ==========================================================================
   // Context Value
+  //
+  // Exposes:
+  // - Read-only data (currentUser, posts, comments, etc.)
+  // - All state setters for maximum flexibility
+  //
+  // Business logic is NOT included here - components should use
+  // useFeedActions hook which consumes this context
   // ==========================================================================
 
   const contextValue = useMemo(
@@ -170,37 +78,16 @@ export function FeedProvider({ children }) {
       selectedImage,
       selectedPost,
 
-      // Form Setters (for controlled inputs)
+      // State Setters
+      setPosts,
+      setComments,
+      setShowComments,
       setNewComment,
       setNewPostContent,
       setSelectedImage,
-      // Actions (encapsulate complex state changes)
-      handleLike,
-      handleComment,
-      handleAddComment,
-      handleShare,
-      handleCreatePost,
-      handleImageUpload,
-      handlePostClick,
-      clearSelectedPost,
+      setSelectedPost,
     }),
-    [
-      posts,
-      comments,
-      showComments,
-      newComment,
-      newPostContent,
-      selectedImage,
-      selectedPost,
-      handleLike,
-      handleComment,
-      handleAddComment,
-      handleShare,
-      handleCreatePost,
-      handleImageUpload,
-      handlePostClick,
-      clearSelectedPost,
-    ]
+    [posts, comments, showComments, newComment, newPostContent, selectedImage, selectedPost]
   );
 
   return <FeedContext.Provider value={contextValue}>{children}</FeedContext.Provider>;

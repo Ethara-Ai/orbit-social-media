@@ -1,14 +1,15 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState } from 'react';
 // eslint-disable-next-line no-unused-vars
-import { motion, AnimatePresence } from "framer-motion";
-import { useMessages } from "../../context/AppContext";
-import { BORDER_RADIUS } from "../../utils/constants";
-import ConversationsList from "./chat/ConversationsList";
-import ActiveChat from "./chat/ActiveChat";
-import EmptyChatState from "./chat/EmptyChatState";
+import { motion, AnimatePresence } from 'framer-motion';
+import { useMessages } from '../../context/AppContext';
+import { useMessagesActions } from '../../hooks/useMessagesActions';
+import { BORDER_RADIUS } from '../../utils/constants';
+import ConversationsList from './chat/ConversationsList';
+import ActiveChat from './chat/ActiveChat';
+import EmptyChatState from './chat/EmptyChatState';
 
 const MessagesTab = () => {
-  // Access messages state and actions directly from context
+  // Access messages state from context
   const {
     conversations,
     activeConversation,
@@ -21,17 +22,21 @@ const MessagesTab = () => {
     showChatDropdown,
     setShowChatDropdown,
     showEmptyChatPopup,
+  } = useMessages();
+
+  // Access messages actions from hook
+  const {
     handleSendMessage,
     handleClearAllChat,
     handleAttachmentUpload,
     handleBackToConversationList,
-  } = useMessages();
+  } = useMessagesActions();
 
   const messagesEndRef = useRef(null);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   useEffect(() => {
@@ -42,28 +47,20 @@ const MessagesTab = () => {
 
   const filteredConversations = searchQuery.trim()
     ? conversations.filter(
-      (conversation) =>
-        conversation.user.name
-          .toLowerCase()
-          .includes(searchQuery.toLowerCase()) ||
-        conversation.lastMessage
-          .toLowerCase()
-          .includes(searchQuery.toLowerCase()),
-    )
+        (conversation) =>
+          conversation.user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          conversation.lastMessage.toLowerCase().includes(searchQuery.toLowerCase())
+      )
     : conversations;
 
-  const activeConversationData = conversations.find(
-    (conv) => conv.id === activeConversation,
-  );
+  const activeConversationData = conversations.find((conv) => conv.id === activeConversation);
 
   const handleBackToList = () => {
     handleBackToConversationList();
   };
 
   // Get current message text and attachment for active conversation
-  const currentMessageText = activeConversation
-    ? messageText[activeConversation] || ""
-    : "";
+  const currentMessageText = activeConversation ? messageText[activeConversation] || '' : '';
   const currentMessageAttachment = activeConversation
     ? messageAttachment[activeConversation] || null
     : null;
@@ -90,9 +87,7 @@ const MessagesTab = () => {
 
   return (
     <div className="max-w-5xl mx-auto w-full overflow-x-hidden px-0">
-      <div
-        className="bg-white dark:bg-slate-900 rounded-lg sm:rounded-xl shadow-xs border-0 sm:border border-slate-200 dark:border-slate-800 overflow-hidden h-[calc(100dvh-5rem)] sm:h-[calc(100dvh-6rem)] lg:h-[calc(100vh-7rem)] transition-colors duration-200"
-      >
+      <div className="bg-white dark:bg-slate-900 rounded-lg sm:rounded-xl shadow-xs border-0 sm:border border-slate-200 dark:border-slate-800 overflow-hidden h-[calc(100dvh-5rem)] sm:h-[calc(100dvh-6rem)] lg:h-[calc(100vh-7rem)] transition-colors duration-200">
         <div className="flex h-full min-h-0">
           {/* Conversations List */}
           <ConversationsList
@@ -107,9 +102,7 @@ const MessagesTab = () => {
           />
 
           {/* Active Conversation */}
-          <div
-            className={`flex-1 flex flex-col ${activeConversation ? "flex" : "hidden sm:flex"}`}
-          >
+          <div className={`flex-1 flex flex-col ${activeConversation ? 'flex' : 'hidden sm:flex'}`}>
             {activeConversationData ? (
               <ActiveChat
                 conversation={activeConversationData}

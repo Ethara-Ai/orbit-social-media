@@ -1,21 +1,17 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect } from 'react';
 // eslint-disable-next-line no-unused-vars
-import { motion } from "framer-motion";
-import { Camera, X } from "../icons";
-import { useFeed } from "../../context/AppContext";
-import { useUser } from "../../context/AppContext";
-import { BORDER_RADIUS } from "../../utils/constants";
+import { motion } from 'framer-motion';
+import { Camera, X } from '../icons';
+import { useFeed, useUser } from '../../context/AppContext';
+import { useFeedActions } from '../../hooks/useFeedActions';
+import { BORDER_RADIUS } from '../../utils/constants';
 
 const CreatePost = () => {
-  // Access state and actions directly from context
-  const {
-    newPostContent,
-    setNewPostContent,
-    selectedImage,
-    setSelectedImage,
-    handleCreatePost,
-    handleImageUpload,
-  } = useFeed();
+  // Access state from context
+  const { newPostContent, setNewPostContent, selectedImage, setSelectedImage } = useFeed();
+
+  // Access actions from hook
+  const { handleCreatePost, handleImageUpload } = useFeedActions();
 
   // Access user data from context
   const { currentUser, currentUserAvatar } = useUser();
@@ -28,14 +24,11 @@ const CreatePost = () => {
     const textarea = textareaRef.current;
     if (textarea) {
       // Reset to minimum height first to calculate proper scrollHeight
-      textarea.style.height = "auto";
+      textarea.style.height = 'auto';
       // Calculate new height based on content, with min and max bounds
       const minHeight = 40; // Minimum height in pixels
       const maxHeight = 150; // Maximum height before scrolling
-      const newHeight = Math.max(
-        minHeight,
-        Math.min(textarea.scrollHeight, maxHeight),
-      );
+      const newHeight = Math.max(minHeight, Math.min(textarea.scrollHeight, maxHeight));
       textarea.style.height = `${newHeight}px`;
     }
   }, [newPostContent]);
@@ -57,12 +50,12 @@ const CreatePost = () => {
     >
       <div className="flex gap-2.5 items-center">
         <img
-          src={currentUserAvatar || "/placeholder.svg"}
+          src={currentUserAvatar || '/placeholder.svg'}
           alt={currentUser.name}
           className={`w-9 h-9 sm:w-10 sm:h-10 ${BORDER_RADIUS.avatar} object-cover shrink-0`}
           onError={(e) => {
             e.target.src =
-              "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=50&h=50&fit=crop&crop=face";
+              'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=50&h=50&fit=crop&crop=face';
           }}
         />
         <div className="flex-1 min-w-0">
@@ -78,12 +71,12 @@ const CreatePost = () => {
               onChange={handleTextChange}
               className="block w-full bg-transparent border-0 resize-none focus:outline-hidden text-slate-900 dark:text-white placeholder-slate-500 text-xs sm:text-sm leading-normal pl-3 sm:pl-4 pr-24 sm:pr-26 py-2.5 sm:py-3 scrollbar-hide"
               style={{
-                minHeight: "40px",
-                maxHeight: "150px",
-                overflowY: "auto",
-                wordBreak: "break-word",
-                overflowWrap: "break-word",
-                whiteSpace: "pre-wrap",
+                minHeight: '40px',
+                maxHeight: '150px',
+                overflowY: 'auto',
+                wordBreak: 'break-word',
+                overflowWrap: 'break-word',
+                whiteSpace: 'pre-wrap',
               }}
               rows={1}
             />
@@ -99,7 +92,7 @@ const CreatePost = () => {
             {/* Action buttons positioned absolutely and vertically centered */}
             <div className="absolute right-1.5 sm:right-2 top-1/2 -translate-y-1/2 flex items-center gap-0.5 sm:gap-1">
               <motion.button
-                onClick={() => document.getElementById("image-upload")?.click()}
+                onClick={() => document.getElementById('image-upload')?.click()}
                 className={`p-1.5 sm:p-2 text-slate-500 dark:text-slate-400 hover:text-emerald-500 dark:hover:text-emerald-400 ${BORDER_RADIUS.button} transition-colors cursor-pointer bg-slate-100 dark:bg-slate-700/50 group-focus-within:bg-white dark:group-focus-within:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-600`}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -128,9 +121,7 @@ const CreatePost = () => {
 
           {/* Selected Image Preview */}
           {selectedImage && (
-            <div
-              className="mt-2 sm:mt-3 relative rounded-lg sm:rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-900"
-            >
+            <div className="mt-2 sm:mt-3 relative rounded-lg sm:rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-900">
               <img
                 src={selectedImage}
                 alt="Selected"

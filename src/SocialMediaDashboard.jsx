@@ -1,4 +1,4 @@
-import { useUI } from "./context/AppContext";
+import { useUI } from './context/AppContext';
 
 // Import Layout Components
 import {
@@ -10,7 +10,7 @@ import {
   RightSidebar,
   CopyNotificationPopup,
   MobileSidebar,
-} from "./components/layout";
+} from './components/layout';
 
 // ============================================================================
 // Main Dashboard Component

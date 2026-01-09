@@ -83,33 +83,47 @@ Orbit is a fully functional social media dashboard prototype that simulates a re
 
 > **For comprehensive architecture documentation, see [ARCHITECTURE.md](docs/ARCHITECTURE.md)**
 
+**Architectural Overview:** This codebase achieves **high cohesion** and **low coupling** through strict separation of concerns. Contexts manage only state and expose setters. Business logic lives in action hooks that consume contexts and provide methods to components. Services contain pure functions with zero React dependencies. This architecture ensures components are decoupled from implementation details, business logic is testable in isolation, and state management is predictable.
+
 ### Design Principles
 
-This project follows **high cohesion** and **low coupling** principles:
+This project follows **high cohesion** and **low coupling** principles with strict separation of concerns:
 
-- **Domain-Specific Contexts** - State is organized by feature domain, not by component
-- **Repository Pattern** - Data initialization and access are separated from state management
-- **Service Layer** - Business logic is extracted into reusable, pure service functions
-- **Action Hooks** - Complex business logic handlers are extracted from contexts into dedicated hooks
-- **Facade Hooks** - Components with multiple context dependencies use facade hooks for simplified interfaces
-- **Domain-Specific Utils** - Utility functions are organized by purpose (time, array, file, string, DOM, etc.)
-- **Thin Orchestrators** - Layout components delegate to child components via hooks
-- **No Prop Drilling** - Tab components access their data directly via context hooks
+#### State Management (Contexts)
+- **Pure State Providers** - Contexts manage ONLY state, no business logic
+- **Domain-Specific Separation** - State is organized by feature domain (User, Feed, Messages, etc.)
+- **Exposed Setters** - State setters are exposed for maximum flexibility
+- **No Action Methods** - Business logic is NOT included in context providers
+
+#### Business Logic (Hooks & Services)
+- **Action Hooks** - Business logic consumes context state/setters and provides methods to components
+- **Service Layer** - Pure functions for complex operations (posts, conversations, notifications)
+- **Repository Pattern** - Data initialization separated from state management
+- **Facade Hooks** - Simplified interfaces for components with multiple dependencies
+
+#### Component Architecture
+- **Thin Orchestrators** - Layout components delegate to child components
+- **No Prop Drilling** - Components access data via context hooks and actions via action hooks
+- **Domain-Specific Utils** - Utility functions organized by purpose (time, array, file, string, DOM, etc.)
 - **Colocated Tests** - Test files live alongside the components they test
 - **Error Boundaries** - Isolate failures within individual features
 
 ### Context Architecture
 
+**Pure State Management** - Contexts provide state and setters ONLY, no business logic.
+
 The application state is split into 6 domain-specific contexts:
 
-| Context | Responsibility |
-|---------|----------------|
-| `UserContext` | User profile, friends, connections, suggested users |
-| `FeedContext` | Posts, comments, likes, shares, post creation |
-| `MessagesContext` | Conversations, chat state, message sending |
-| `NotificationsContext` | Notifications, badges, auto-generation |
-| `ExploreContext` | Explore posts, categories, theater modal |
-| `UIContext` | Tabs, modals, loading states, mobile navigation |
+| Context | State Responsibility | Exposed Setters |
+|---------|---------------------|-----------------|
+| `UserContext` | User profile, friends, connections, suggested users | All state setters for user-related operations |
+| `FeedContext` | Posts, comments, form state (newPostContent, selectedImage, etc.) | All state setters for feed-related operations |
+| `MessagesContext` | Conversations, active conversation, message text/attachments | All state setters for messaging operations |
+| `NotificationsContext` | Notifications, read state, badges | State setters for notification management |
+| `ExploreContext` | Explore posts, categories, filters, theater modal | State setters for explore operations |
+| `UIContext` | Active tab, modals, loading states, mobile navigation | State setters for UI state changes |
+
+**Design Principle:** Components consume contexts for state access, then use **action hooks** (which also consume contexts) to perform business logic operations.
 
 ### Data Layer
 
@@ -138,20 +152,36 @@ Business logic is extracted into dedicated, pure service functions:
 
 #### Action Hooks
 
-Complex business logic handlers are extracted from contexts:
+**Business Logic Layer** - Action hooks consume contexts to access state/setters, then provide business logic methods to components.
 
-| Hook | Purpose |
-|------|---------|
-| `useFeedActions` | Feed operations (like, comment, share, create post) |
-| `useMessagesActions` | Messaging operations (send, clear, attachments) |
+| Hook | Consumes | Provides |
+|------|----------|----------|
+| `useFeedActions` | `FeedContext`, `UIContext` | Feed operations (like, comment, share, create post, image upload) |
+| `useMessagesActions` | `MessagesContext` | Messaging operations (send, clear, attachments, start conversation, cleanup) |
+
+**Architecture Pattern:**
+```
+Component → Action Hook → Context (State + Setters) + Services (Pure Functions)
+```
+
+This ensures:
+- ✅ **Decoupled** - Business logic is separate from state management
+- ✅ **Testable** - Action hooks can be tested independently
+- ✅ **Reusable** - Multiple components can use the same action hooks
+- ✅ **Maintainable** - Changes to business logic don't affect state structure
 
 #### Facade Hooks
 
-Simplified interfaces for components with multiple context dependencies:
+**Simplified Interfaces** - Facade hooks consolidate multiple dependencies into a single interface.
 
-| Hook | Purpose |
-|------|---------|
-| `usePostCard` | Consolidates feed and user context for PostCard component |
+| Hook | Consolidates | Purpose |
+|------|--------------|---------|
+| `usePostCard` | `FeedContext` + `useFeedActions` + `UserContext` | Provides all data and actions needed by PostCard component |
+
+**Benefits:**
+- Reduces import statements in components
+- Provides a stable interface even if underlying dependencies change
+- Simplifies component testing by reducing mock setup
 
 #### Utility Hooks
 

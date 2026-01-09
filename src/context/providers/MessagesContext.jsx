@@ -1,21 +1,11 @@
 /* eslint-disable react-refresh/only-export-components */
-import {
-  createContext,
-  useContext,
-  useState,
-  useMemo,
-  useEffect,
-  useRef,
-} from "react";
+import { createContext, useContext, useState, useMemo, useEffect, useRef } from 'react';
 
 // Import Data
-import { conversationRepository } from "../../data/repositories";
+import { conversationRepository } from '../../data/repositories';
 
 // Import Services
-import { getTotalUnreadCount } from "../../services/conversationService";
-
-// Import Hooks
-import { useMessagesActions } from "../../hooks/useMessagesActions";
+import { getTotalUnreadCount } from '../../services/conversationService';
 
 // ============================================================================
 // Context Definition
@@ -25,25 +15,24 @@ const MessagesContext = createContext(null);
 
 // ============================================================================
 // Messages Provider
-// Self-contained provider managing messages-related state
-// Business logic extracted to useMessagesActions hook
+// Pure state management provider - no business logic
 //
-// Encapsulation Strategy:
-// - Messaging interface setters (setActiveConversation, setConversations,
-//   setMessageText, setMessageAttachment, setShowChatDropdown) are exposed
-//   to support the complex messaging UI interaction patterns
-// - Internal UI setters (setShowEmptyChatPopup, setPendingNavigateToMessages)
-//   are kept internal and only accessible through actions
+// Responsibilities:
+// - Initialize and manage messages state (conversations, active conversation, etc.)
+// - Expose state and setters for components and action hooks
+// - Keep business logic in separate action hooks (useMessagesActions)
+//
+// Design Principle:
+// This provider follows the principle of separation of concerns by managing
+// ONLY state. Business logic is delegated to action hooks that consume this
+// context and provide methods to components.
 // ============================================================================
 
 export function MessagesProvider({ children }) {
   // ==========================================================================
   // Initialize Data from Repository
   // ==========================================================================
-  const initialConversations = useMemo(
-    () => conversationRepository.getConversations(),
-    [],
-  );
+  const initialConversations = useMemo(() => conversationRepository.getConversations(), []);
 
   // ==========================================================================
   // Messages State
@@ -54,8 +43,7 @@ export function MessagesProvider({ children }) {
   const [messageAttachment, setMessageAttachment] = useState({});
   const [showChatDropdown, setShowChatDropdown] = useState(false);
   const [showEmptyChatPopup, setShowEmptyChatPopup] = useState(false);
-  const [pendingNavigateToMessages, setPendingNavigateToMessages] =
-    useState(false);
+  const [pendingNavigateToMessages, setPendingNavigateToMessages] = useState(false);
   const activeConversationRef = useRef(activeConversation);
 
   // Keep ref in sync with state for async operations
@@ -66,20 +54,17 @@ export function MessagesProvider({ children }) {
   // Click outside handler for chat dropdown
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (
-        showChatDropdown &&
-        !event.target.closest(".chat-dropdown-container")
-      ) {
+      if (showChatDropdown && !event.target.closest('.chat-dropdown-container')) {
         setShowChatDropdown(false);
       }
     };
 
     if (showChatDropdown) {
-      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener('mousedown', handleClickOutside);
     }
 
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [showChatDropdown]);
 
@@ -87,47 +72,17 @@ export function MessagesProvider({ children }) {
   // Computed Values
   // ==========================================================================
 
-  const totalUnreadMessages = useMemo(
-    () => getTotalUnreadCount(conversations),
-    [conversations],
-  );
-
-  // ==========================================================================
-  // Messages Action Handlers (Business Logic)
-  // ==========================================================================
-  const {
-    handleSendMessage,
-    handleClearAllChat,
-    handleAttachmentUpload,
-    startConversation,
-    clearPendingNavigation,
-    handleBackToConversationList,
-    cleanupEmptyConvos,
-  } = useMessagesActions({
-    conversations,
-    activeConversation,
-    messageText,
-    messageAttachment,
-    setConversations,
-    setActiveConversation,
-    setMessageText,
-    setMessageAttachment,
-    setShowChatDropdown,
-    setShowEmptyChatPopup,
-    setPendingNavigateToMessages,
-  });
+  const totalUnreadMessages = useMemo(() => getTotalUnreadCount(conversations), [conversations]);
 
   // ==========================================================================
   // Context Value
   //
-  // Exposed to consumers:
+  // Exposes:
   // - Read-only data (conversations, messageText, etc.)
-  // - Messaging interface setters (for conversation/message state management)
-  // - Actions (encapsulated business logic operations)
+  // - All state setters for maximum flexibility
   //
-  // Kept internal (not exposed):
-  // - setShowEmptyChatPopup (managed by actions)
-  // - setPendingNavigateToMessages (managed by actions)
+  // Business logic is NOT included here - components should use
+  // useMessagesActions hook which consumes this context
   // ==========================================================================
 
   const contextValue = useMemo(
@@ -135,26 +90,22 @@ export function MessagesProvider({ children }) {
       // Read-only Data
       conversations,
       activeConversation,
+      activeConversationRef,
       messageText,
       messageAttachment,
       showChatDropdown,
       showEmptyChatPopup,
       totalUnreadMessages,
       pendingNavigateToMessages,
-      // Messaging Interface Setters (for complex UI state management)
-      setActiveConversation,
+
+      // State Setters
       setConversations,
+      setActiveConversation,
       setMessageText,
       setMessageAttachment,
       setShowChatDropdown,
-      // Actions (encapsulate complex operations)
-      handleSendMessage,
-      handleClearAllChat,
-      handleAttachmentUpload,
-      startConversation,
-      handleBackToConversationList,
-      cleanupEmptyConvos,
-      clearPendingNavigation,
+      setShowEmptyChatPopup,
+      setPendingNavigateToMessages,
     }),
     [
       conversations,
@@ -165,21 +116,10 @@ export function MessagesProvider({ children }) {
       showEmptyChatPopup,
       totalUnreadMessages,
       pendingNavigateToMessages,
-      handleSendMessage,
-      handleClearAllChat,
-      handleAttachmentUpload,
-      startConversation,
-      handleBackToConversationList,
-      cleanupEmptyConvos,
-      clearPendingNavigation,
-    ],
+    ]
   );
 
-  return (
-    <MessagesContext.Provider value={contextValue}>
-      {children}
-    </MessagesContext.Provider>
-  );
+  return <MessagesContext.Provider value={contextValue}>{children}</MessagesContext.Provider>;
 }
 
 // ============================================================================
@@ -189,7 +129,7 @@ export function MessagesProvider({ children }) {
 export function useMessages() {
   const context = useContext(MessagesContext);
   if (!context) {
-    throw new Error("useMessages must be used within a MessagesProvider");
+    throw new Error('useMessages must be used within a MessagesProvider');
   }
   return context;
 }

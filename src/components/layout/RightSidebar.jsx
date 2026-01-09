@@ -1,17 +1,15 @@
-import { useEffect } from "react";
+import { useEffect } from 'react';
 // eslint-disable-next-line no-unused-vars
-import { motion } from "framer-motion";
-import { useUser, useMessages, useUI } from "../../context/AppContext";
-import { TABS, BORDER_RADIUS } from "../../utils/constants";
-import ActiveNowSection from "./RightSidebar/ActiveNowSection";
+import { motion } from 'framer-motion';
+import { useUser, useMessages, useUI } from '../../context/AppContext';
+import { useMessagesActions } from '../../hooks/useMessagesActions';
+import { TABS, BORDER_RADIUS } from '../../utils/constants';
+import ActiveNowSection from './RightSidebar/ActiveNowSection';
 
 const RightSidebar = () => {
   const { activeOnlineFriends, friends } = useUser();
-  const {
-    startConversation,
-    pendingNavigateToMessages,
-    clearPendingNavigation,
-  } = useMessages();
+  const { pendingNavigateToMessages } = useMessages();
+  const { startConversation, clearPendingNavigation } = useMessagesActions();
   const { setActiveTab } = useUI();
 
   // Handle navigation to messages tab when a conversation is started

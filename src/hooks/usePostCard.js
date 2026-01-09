@@ -2,10 +2,15 @@
  * usePostCard Facade Hook
  * Simplifies PostCard component dependencies
  * Provides a single interface for all post card related data and actions
+ *
+ * This facade consolidates multiple dependencies:
+ * - State from FeedContext
+ * - Actions from useFeedActions hook
+ * - User data from UserContext
  */
 
-import { useFeed } from "../context/AppContext";
-import { useUser } from "../context/AppContext";
+import { useFeed, useUser } from '../context/AppContext';
+import { useFeedActions } from './useFeedActions';
 
 /**
  * Facade hook for PostCard component
@@ -14,19 +19,13 @@ import { useUser } from "../context/AppContext";
  * @returns {Object} Object containing all data and actions needed by PostCard
  */
 export const usePostCard = () => {
-  // Access feed state and actions
-  const {
-    comments,
-    showComments,
-    newComment,
-    setNewComment,
-    handleLike,
-    handleComment,
-    handleAddComment,
-    handlePostClick,
-  } = useFeed();
+  // Access feed state from context
+  const { comments, showComments, newComment, setNewComment } = useFeed();
 
-  // Access user data
+  // Access feed actions from hook
+  const { handleLike, handleComment, handleAddComment, handlePostClick } = useFeedActions();
+
+  // Access user data from context
   const { currentUser, currentUserAvatar } = useUser();
 
   // Return consolidated interface
@@ -34,7 +33,7 @@ export const usePostCard = () => {
     // User data
     currentUser,
     currentUserAvatar,
-    // Feed data
+    // Feed state
     comments,
     showComments,
     newComment,

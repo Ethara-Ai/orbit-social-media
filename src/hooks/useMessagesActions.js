@@ -2,10 +2,14 @@
  * useMessagesActions Hook
  * Extracts business logic for messaging operations
  * Decouples action handlers from context state management
+ *
+ * This hook consumes the MessagesContext to access state and setters,
+ * then provides business logic methods to components.
  */
 
-import { useCallback } from "react";
-import { createMessage } from "../services/messageService";
+import { useCallback } from 'react';
+import { useMessages } from '../context/AppContext';
+import { createMessage } from '../services/messageService';
 import {
   findConversationById,
   getOrCreateConversation,
@@ -15,50 +19,40 @@ import {
   cleanupEmptyConversations,
   removeConversation,
   hasMessages,
-} from "../services/conversationService";
-import { processImageFile } from "../utils/fileUtils";
-import { EMPTY_CHAT_POPUP_DURATION } from "../utils/constants";
+} from '../services/conversationService';
+import { processImageFile } from '../utils/fileUtils';
+import { EMPTY_CHAT_POPUP_DURATION } from '../utils/constants';
 
 /**
  * Custom hook for messages action handlers
- * @param {Object} params - Hook parameters
- * @param {Array} params.conversations - Array of conversations
- * @param {string|null} params.activeConversation - Active conversation ID
- * @param {Object} params.messageText - Message text state object
- * @param {Object} params.messageAttachment - Message attachment state object
- * @param {Function} params.setConversations - Function to update conversations state
- * @param {Function} params.setActiveConversation - Function to update active conversation state
- * @param {Function} params.setMessageText - Function to update message text state
- * @param {Function} params.setMessageAttachment - Function to update message attachment state
- * @param {Function} params.setShowChatDropdown - Function to update show chat dropdown state
- * @param {Function} params.setShowEmptyChatPopup - Function to update show empty chat popup state
- * @param {Function} params.setPendingNavigateToMessages - Function to update pending navigation state
+ * Consumes MessagesContext and provides business logic methods
+ *
  * @returns {Object} Object containing all messages action handlers
  */
-export const useMessagesActions = ({
-  conversations,
-  activeConversation,
-  messageText,
-  messageAttachment,
-  setConversations,
-  setActiveConversation,
-  setMessageText,
-  setMessageAttachment,
-  setShowChatDropdown,
-  setShowEmptyChatPopup,
-  setPendingNavigateToMessages,
-}) => {
+export const useMessagesActions = () => {
+  // Access messages state and setters from context
+  const {
+    conversations,
+    activeConversation,
+    messageText,
+    messageAttachment,
+    setConversations,
+    setActiveConversation,
+    setMessageText,
+    setMessageAttachment,
+    setShowChatDropdown,
+    setShowEmptyChatPopup,
+    setPendingNavigateToMessages,
+  } = useMessages();
+
   /**
    * Handle sending a message
    */
   const handleSendMessage = useCallback(() => {
-    const currentMessageText = messageText[activeConversation] || "";
+    const currentMessageText = messageText[activeConversation] || '';
     const currentAttachment = messageAttachment[activeConversation] || null;
 
-    if (
-      (!currentMessageText.trim() && !currentAttachment) ||
-      !activeConversation
-    ) {
+    if ((!currentMessageText.trim() && !currentAttachment) || !activeConversation) {
       return;
     }
 
@@ -71,16 +65,12 @@ export const useMessagesActions = ({
 
     // Update conversation with new message and move to top
     setConversations((prev) => {
-      const updated = addMessageToConversation(
-        prev,
-        activeConversation,
-        newMessage
-      );
+      const updated = addMessageToConversation(prev, activeConversation, newMessage);
       return moveConversationToTop(updated, activeConversation);
     });
 
     // Clear input for current conversation
-    setMessageText((prev) => ({ ...prev, [activeConversation]: "" }));
+    setMessageText((prev) => ({ ...prev, [activeConversation]: '' }));
     setMessageAttachment((prev) => ({ ...prev, [activeConversation]: null }));
   }, [
     activeConversation,
@@ -97,10 +87,7 @@ export const useMessagesActions = ({
   const handleClearAllChat = useCallback(() => {
     if (!activeConversation) return;
 
-    const currentConversation = findConversationById(
-      conversations,
-      activeConversation
-    );
+    const currentConversation = findConversationById(conversations, activeConversation);
 
     if (!hasMessages(currentConversation)) {
       setShowEmptyChatPopup(true);
@@ -109,9 +96,7 @@ export const useMessagesActions = ({
       return;
     }
 
-    setConversations((prev) =>
-      clearConversationMessages(prev, activeConversation)
-    );
+    setConversations((prev) => clearConversationMessages(prev, activeConversation));
     setShowChatDropdown(false);
   }, [
     activeConversation,

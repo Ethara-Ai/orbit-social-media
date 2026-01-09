@@ -2,47 +2,39 @@
  * useFeedActions Hook
  * Extracts business logic for feed operations
  * Decouples action handlers from context state management
+ *
+ * This hook consumes the FeedContext to access state and setters,
+ * then provides business logic methods to components.
  */
 
-import { useCallback } from "react";
+import { useCallback } from 'react';
+import { useFeed, useUI } from '../context/AppContext';
 import {
   createPost,
   toggleLikeById,
   incrementSharesById,
   incrementCommentsById,
-  addPost,
   createComment,
-  addComment,
   toggleCommentVisibility,
   copyPostUrlToClipboard,
-} from "../services/postService";
-import { processImageFile } from "../utils/fileUtils";
-import { COPY_NOTIFICATION_DURATION } from "../utils/constants";
+} from '../services/postService';
+import { processImageFile } from '../utils/fileUtils';
+import { COPY_NOTIFICATION_DURATION } from '../utils/constants';
 
 /**
- * Custom hook for feed action handlers with organized parameter structure
- * @param {Object} params - Hook parameters
- * @param {Object} params.currentUser - Current user object
- * @param {Object} params.state - State values
- * @param {string} params.state.newPostContent - New post content string
- * @param {string|null} params.state.selectedImage - Selected image data URL
- * @param {Object} params.state.newComment - New comment state object
- * @param {Object} params.setState - State setters grouped by domain
- * @param {Function} params.setState.setPosts - Function to update posts state
- * @param {Function} params.setState.setComments - Function to update comments state
- * @param {Function} params.setState.setShowComments - Function to update show comments state
- * @param {Function} params.setState.setNewComment - Function to update new comment state
- * @param {Function} params.setState.setNewPostContent - Function to update new post content state
- * @param {Function} params.setState.setSelectedImage - Function to update selected image state
- * @param {Function} params.setState.setSelectedPost - Function to update selected post state
- * @param {Object} params.ui - UI-related state and setters
- * @param {Function} params.ui.setShowCopyNotification - Function to update copy notification state
+ * Custom hook for feed action handlers
+ * Consumes FeedContext and provides business logic methods
+ *
  * @returns {Object} Object containing all feed action handlers
  */
-export const useFeedActions = ({
-  currentUser,
-  state: { newPostContent, selectedImage, newComment },
-  setState: {
+export const useFeedActions = () => {
+  // Access feed state and setters from context
+  const {
+    currentUser,
+    posts,
+    newComment,
+    newPostContent,
+    selectedImage,
     setPosts,
     setComments,
     setShowComments,
@@ -50,9 +42,11 @@ export const useFeedActions = ({
     setNewPostContent,
     setSelectedImage,
     setSelectedPost,
-  },
-  ui: { setShowCopyNotification },
-}) => {
+  } = useFeed();
+
+  // Access UI state for notifications
+  const { setShowCopyNotification } = useUI();
+
   /**
    * Handle like action on a post
    */
@@ -60,7 +54,7 @@ export const useFeedActions = ({
     (postId) => {
       setPosts((prev) => toggleLikeById(prev, postId));
     },
-    [setPosts],
+    [setPosts]
   );
 
   /**
@@ -70,7 +64,7 @@ export const useFeedActions = ({
     (postId) => {
       setShowComments((prev) => toggleCommentVisibility(prev, postId));
     },
-    [setShowComments],
+    [setShowComments]
   );
 
   /**
@@ -87,11 +81,15 @@ export const useFeedActions = ({
         postId,
       });
 
-      setComments((prev) => addComment(prev, newCommentObj));
+      setComments((prev) => ({
+        ...prev,
+        [postId]: [...(prev[postId] || []), newCommentObj],
+      }));
+
       setPosts((prev) => incrementCommentsById(prev, postId));
-      setNewComment((prev) => ({ ...prev, [postId]: "" }));
+      setNewComment((prev) => ({ ...prev, [postId]: '' }));
     },
-    [newComment, currentUser, setComments, setPosts, setNewComment],
+    [newComment, currentUser, setComments, setPosts, setNewComment]
   );
 
   /**
@@ -102,13 +100,10 @@ export const useFeedActions = ({
       const success = await copyPostUrlToClipboard(postId);
       setPosts((prev) => incrementSharesById(prev, postId));
       setShowCopyNotification(true);
-      setTimeout(
-        () => setShowCopyNotification(false),
-        COPY_NOTIFICATION_DURATION,
-      );
+      setTimeout(() => setShowCopyNotification(false), COPY_NOTIFICATION_DURATION);
       return success;
     },
-    [setPosts, setShowCopyNotification],
+    [setPosts, setShowCopyNotification]
   );
 
   /**
@@ -121,20 +116,13 @@ export const useFeedActions = ({
       user: currentUser,
       content: newPostContent,
       image: selectedImage,
-      category: "Personal",
+      category: 'Personal',
     });
 
-    setPosts((prev) => addPost(prev, newPost));
-    setNewPostContent("");
+    setPosts((prev) => [newPost, ...prev]);
+    setNewPostContent('');
     setSelectedImage(null);
-  }, [
-    newPostContent,
-    selectedImage,
-    currentUser,
-    setPosts,
-    setNewPostContent,
-    setSelectedImage,
-  ]);
+  }, [newPostContent, selectedImage, currentUser, setPosts, setNewPostContent, setSelectedImage]);
 
   /**
    * Handle image upload for new post
@@ -147,7 +135,7 @@ export const useFeedActions = ({
         setSelectedImage(dataUrl);
       }
     },
-    [setSelectedImage],
+    [setSelectedImage]
   );
 
   /**
@@ -155,10 +143,12 @@ export const useFeedActions = ({
    */
   const handlePostClick = useCallback(
     (postId) => {
-      console.log("Post clicked:", postId);
-      setSelectedPost(postId);
+      const post = posts.find((p) => p.id === postId);
+      if (post) {
+        setSelectedPost(post);
+      }
     },
-    [setSelectedPost],
+    [posts, setSelectedPost]
   );
 
   /**

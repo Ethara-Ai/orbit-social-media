@@ -1,18 +1,17 @@
-import { lazy, Suspense, useEffect } from "react";
+import { lazy, Suspense, useEffect } from 'react';
 // eslint-disable-next-line no-unused-vars
-import { motion } from "framer-motion";
-import { useUI, useMessages } from "../../context/AppContext";
-import { TABS, BORDER_RADIUS } from "../../utils/constants";
+import { motion } from 'framer-motion';
+import { useUI } from '../../context/AppContext';
+import { useMessagesActions } from '../../hooks/useMessagesActions';
+import { TABS, BORDER_RADIUS } from '../../utils/constants';
 
 // Lazy load tab components for better initial bundle size
-const FeedTab = lazy(() => import("../feed/FeedTab"));
-const ExploreTab = lazy(() => import("../explore/ExploreTab"));
-const MessagesTab = lazy(() => import("../messages/MessagesTab"));
-const NotificationsTab = lazy(
-  () => import("../notifications/NotificationsTab"),
-);
-const ConnectionsTab = lazy(() => import("../connections/ConnectionsTab"));
-const ProfileTab = lazy(() => import("../profile/ProfileTab"));
+const FeedTab = lazy(() => import('../feed/FeedTab'));
+const ExploreTab = lazy(() => import('../explore/ExploreTab'));
+const MessagesTab = lazy(() => import('../messages/MessagesTab'));
+const NotificationsTab = lazy(() => import('../notifications/NotificationsTab'));
+const ConnectionsTab = lazy(() => import('../connections/ConnectionsTab'));
+const ProfileTab = lazy(() => import('../profile/ProfileTab'));
 
 /**
  * TabLoadingFallback - Skeleton loader shown while tab components load
@@ -32,9 +31,7 @@ const TabLoadingFallback = () => (
         className={`bg-white dark:bg-slate-800 ${BORDER_RADIUS.card} p-4 border border-slate-200 dark:border-slate-700`}
       >
         <div className="flex items-center gap-3 mb-4">
-          <div
-            className={`w-10 h-10 bg-slate-200 dark:bg-slate-700 ${BORDER_RADIUS.avatar}`}
-          />
+          <div className={`w-10 h-10 bg-slate-200 dark:bg-slate-700 ${BORDER_RADIUS.avatar}`} />
           <div className="flex-1">
             <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded-sm w-32 mb-2" />
             <div className="h-3 bg-slate-200 dark:bg-slate-700 rounded-sm w-24" />
@@ -51,9 +48,7 @@ const TabLoadingFallback = () => (
         className={`bg-white dark:bg-slate-800 ${BORDER_RADIUS.card} p-4 border border-slate-200 dark:border-slate-700`}
       >
         <div className="flex items-center gap-3 mb-4">
-          <div
-            className={`w-10 h-10 bg-slate-200 dark:bg-slate-700 ${BORDER_RADIUS.avatar}`}
-          />
+          <div className={`w-10 h-10 bg-slate-200 dark:bg-slate-700 ${BORDER_RADIUS.avatar}`} />
           <div className="flex-1">
             <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded-sm w-40 mb-2" />
             <div className="h-3 bg-slate-200 dark:bg-slate-700 rounded-sm w-20" />
@@ -71,9 +66,7 @@ const TabLoadingFallback = () => (
         className={`bg-white dark:bg-slate-800 ${BORDER_RADIUS.card} p-4 border border-slate-200 dark:border-slate-700`}
       >
         <div className="flex items-center gap-3 mb-4">
-          <div
-            className={`w-10 h-10 bg-slate-200 dark:bg-slate-700 ${BORDER_RADIUS.avatar}`}
-          />
+          <div className={`w-10 h-10 bg-slate-200 dark:bg-slate-700 ${BORDER_RADIUS.avatar}`} />
           <div className="flex-1">
             <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded-sm w-36 mb-2" />
             <div className="h-3 bg-slate-200 dark:bg-slate-700 rounded-sm w-28" />
@@ -99,7 +92,7 @@ const TabLoadingFallback = () => (
  */
 const MainContent = () => {
   const { activeTab, isLeavingMessagesTab } = useUI();
-  const { cleanupEmptyConvos } = useMessages();
+  const { cleanupEmptyConvos } = useMessagesActions();
 
   // Cleanup empty conversations when leaving messages tab
   useEffect(() => {
@@ -111,7 +104,7 @@ const MainContent = () => {
   // Tab wrapper styles - keeps tab mounted but hidden when not active
   const getTabWrapperClass = (tabId) => {
     const isActive = activeTab === tabId;
-    return isActive ? "block" : "hidden";
+    return isActive ? 'block' : 'hidden';
   };
 
   return (
