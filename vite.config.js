@@ -1,5 +1,5 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -12,13 +12,13 @@ export default defineConfig({
   // Build configuration
   build: {
     // Output directory
-    outDir: "dist",
+    outDir: 'dist',
 
     // Generate sourcemaps for debugging (set to false for smaller builds)
     sourcemap: false,
 
     // Minify output
-    minify: "terser",
+    minify: 'terser',
 
     // Terser options for better compression
     terserOptions: {
@@ -33,13 +33,13 @@ export default defineConfig({
       output: {
         manualChunks: {
           // Separate vendor chunks for better caching
-          vendor: ["react", "react-dom"],
-          animations: ["framer-motion"],
+          vendor: ['react', 'react-dom'],
+          animations: ['framer-motion'],
         },
         // Asset file naming with hash for cache busting
-        assetFileNames: "assets/[name]-[hash][extname]",
-        chunkFileNames: "assets/[name]-[hash].js",
-        entryFileNames: "assets/[name]-[hash].js",
+        assetFileNames: 'assets/[name]-[hash][extname]',
+        chunkFileNames: 'assets/[name]-[hash].js',
+        entryFileNames: 'assets/[name]-[hash].js',
       },
     },
 
@@ -63,15 +63,16 @@ export default defineConfig({
   // Resolve aliases (optional, for cleaner imports)
   resolve: {
     alias: {
-      "@": "/src",
-      "@components": "/src/components",
-      "@hooks": "/src/hooks",
-      "@utils": "/src/utils",
-      "@services": "/src/services",
-      "@data": "/src/data",
-      "@context": "/src/context",
-      "@assets": "/src/assets",
+      '@': '/src',
+      '@components': '/src/components',
+      '@hooks': '/src/hooks',
+      '@utils': '/src/utils',
+      '@services': '/src/services',
+      '@data': '/src/data',
+      '@context': '/src/context',
+      '@assets': '/src/assets',
     },
   },
 });
 // restart 2
+
