@@ -2,6 +2,7 @@ import { memo } from 'react';
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
 import Avatar from '../common/Avatar';
+import { BORDER_RADIUS } from '../../utils/constants';
 
 const FriendItem = memo(function FriendItem({ friend, index, onClick }) {
   return (

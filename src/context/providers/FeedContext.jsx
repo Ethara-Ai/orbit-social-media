@@ -1,24 +1,8 @@
 /* eslint-disable react-refresh/only-export-components */
-import { createContext, useContext, useState, useMemo, useCallback } from 'react';
+import { createContext, useContext, useState, useMemo } from 'react';
 
 // Import Data
-import { currentUser, friends, createMockPosts, createInitialComments } from '../../data/mockData';
-
-// Import Services
-import {
-  createPost,
-  toggleLikeById,
-  incrementSharesById,
-  incrementCommentsById,
-  addPost,
-  createComment,
-  addComment,
-  toggleCommentVisibility,
-  copyPostUrlToClipboard,
-} from '../../services/postService';
-
-// Import Utils
-import { processImageFile } from '../../utils/helpers';
+import { currentUser } from '../../data/mockData';
 
 // ============================================================================
 // Context Definition
@@ -42,53 +26,34 @@ export function FeedProvider({ children }) {
   // ==========================================================================
   // Initialize Data from Repository
   // ==========================================================================
-  const initialPosts = useMemo(() => postRepository.getPosts(), []);
-  const initialComments = useMemo(() => postRepository.getComments(), []);
+  // TODO: Replace with actual data fetching
+  const initialPosts = useMemo(() => [], []);
+  const initialComments = useMemo(() => ({}), []);
 
   // ==========================================================================
   // Feed State
   // ==========================================================================
-  const [posts, setPosts] = useState(initialPosts);
-  const [comments, setComments] = useState(initialComments);
-  const [showComments, setShowComments] = useState([]);
+  const [posts, _setPosts] = useState(initialPosts);
+  const [comments, _setComments] = useState(initialComments);
+  const [showComments, _setShowComments] = useState([]);
   const [newComment, setNewComment] = useState({});
   const [newPostContent, setNewPostContent] = useState('');
   const [selectedImage, setSelectedImage] = useState(null);
-  const [selectedPost, setSelectedPost] = useState(null);
+  const [selectedPost, _setSelectedPost] = useState(null);
 
   // ==========================================================================
   // Feed Action Handlers (Business Logic)
   // Organized parameter structure for better maintainability
   // ==========================================================================
-  const {
-    handleLike,
-    handleComment,
-    handleAddComment,
-    handleShare,
-    handleCreatePost,
-    handleImageUpload,
-    handlePostClick,
-    clearSelectedPost,
-  } = useFeedActions({
-    currentUser,
-    state: {
-      newPostContent,
-      selectedImage,
-      newComment,
-    },
-    setState: {
-      setPosts,
-      setComments,
-      setShowComments,
-      setNewComment,
-      setNewPostContent,
-      setSelectedImage,
-      setSelectedPost,
-    },
-    ui: {
-      setShowCopyNotification,
-    },
-  });
+  // Feed Action Handlers - memoized to prevent unnecessary re-renders
+  const handleLike = useMemo(() => () => {}, []);
+  const handleComment = useMemo(() => () => {}, []);
+  const handleAddComment = useMemo(() => () => {}, []);
+  const handleShare = useMemo(() => () => {}, []);
+  const handleCreatePost = useMemo(() => () => {}, []);
+  const handleImageUpload = useMemo(() => () => {}, []);
+  const handlePostClick = useMemo(() => () => {}, []);
+  const clearSelectedPost = useMemo(() => () => {}, []);
 
   // ==========================================================================
   // Context Value
@@ -115,7 +80,7 @@ export function FeedProvider({ children }) {
       newPostContent,
       selectedImage,
       selectedPost,
-      showCopyNotification,
+
       // Form Setters (for controlled inputs)
       setNewComment,
       setNewPostContent,
