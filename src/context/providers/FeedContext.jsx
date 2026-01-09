@@ -2,7 +2,7 @@
 import { createContext, useContext, useState, useMemo, useCallback } from 'react';
 
 // Import Data
-import { currentUser, friends } from '../../data/mockData';
+import { currentUser } from '../../data/mockData';
 import postRepository from '../../data/repositories/PostRepository';
 
 // ============================================================================
@@ -60,10 +60,10 @@ export function FeedProvider({ children }) {
       prev.map((post) =>
         post.id === postId
           ? {
-            ...post,
-            isLiked: !post.isLiked,
-            likes: post.isLiked ? post.likes - 1 : post.likes + 1,
-          }
+              ...post,
+              isLiked: !post.isLiked,
+              likes: post.isLiked ? post.likes - 1 : post.likes + 1,
+            }
           : post
       )
     );
@@ -219,4 +219,3 @@ export function useFeed() {
 }
 
 export default FeedContext;
-

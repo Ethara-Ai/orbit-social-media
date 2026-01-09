@@ -55,11 +55,11 @@ const CreatePost = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: 0.1 }}
     >
-      <div className="flex gap-2.5">
+      <div className="flex gap-2.5 items-center">
         <img
           src={currentUserAvatar || "/placeholder.svg"}
           alt={currentUser.name}
-          className={`w-9 h-9 ${BORDER_RADIUS.avatar} object-cover shrink-0`}
+          className={`w-9 h-9 sm:w-10 sm:h-10 ${BORDER_RADIUS.avatar} object-cover shrink-0`}
           onError={(e) => {
             e.target.src =
               "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=50&h=50&fit=crop&crop=face";
@@ -96,8 +96,8 @@ const CreatePost = () => {
               className="hidden"
             />
 
-            {/* Action buttons positioned absolutely to avoid text overlap */}
-            <div className="absolute right-1.5 sm:right-2 bottom-1.5 sm:bottom-2 flex items-center gap-0.5 sm:gap-1">
+            {/* Action buttons positioned absolutely and vertically centered */}
+            <div className="absolute right-1.5 sm:right-2 top-1/2 -translate-y-1/2 flex items-center gap-0.5 sm:gap-1">
               <motion.button
                 onClick={() => document.getElementById("image-upload")?.click()}
                 className={`p-1.5 sm:p-2 text-slate-500 dark:text-slate-400 hover:text-emerald-500 dark:hover:text-emerald-400 ${BORDER_RADIUS.button} transition-colors cursor-pointer bg-slate-100 dark:bg-slate-700/50 group-focus-within:bg-white dark:group-focus-within:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-600`}

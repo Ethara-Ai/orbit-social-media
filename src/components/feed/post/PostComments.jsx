@@ -1,8 +1,8 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useMemo } from 'react';
 // eslint-disable-next-line no-unused-vars
-import { motion } from "framer-motion";
-import Avatar from "../../common/Avatar";
-import { BORDER_RADIUS } from "../../../utils/constants";
+import { motion } from 'framer-motion';
+import Avatar from '../../common/Avatar';
+import { BORDER_RADIUS } from '../../../utils/constants';
 
 const PostComments = ({
   postId,
@@ -13,14 +13,19 @@ const PostComments = ({
   setNewComment,
   onAddComment,
 }) => {
-  const postComments = comments.filter((comment) => comment.postId === postId);
+  // Support both array and object comment structures
+  const postComments = useMemo(() => {
+    return Array.isArray(comments)
+      ? comments.filter((comment) => comment.postId === postId)
+      : comments[postId] || [];
+  }, [comments, postId]);
   const commentsContainerRef = useRef(null);
 
   const scrollToBottom = () => {
     if (commentsContainerRef.current) {
       commentsContainerRef.current.scrollTo({
         top: commentsContainerRef.current.scrollHeight,
-        behavior: "smooth",
+        behavior: 'smooth',
       });
     }
   };
@@ -37,7 +42,7 @@ const PostComments = ({
   };
 
   const handleKeyDown = (e) => {
-    if (e.key === "Enter" && !e.shiftKey) {
+    if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       onAddComment(postId);
     }
@@ -71,7 +76,7 @@ const PostComments = ({
           <input
             type="text"
             placeholder="Write a comment..."
-            value={newComment[postId] || ""}
+            value={newComment[postId] || ''}
             onChange={handleCommentChange}
             onKeyDown={handleKeyDown}
             className={`flex-1 min-w-0 px-3 sm:px-4 py-1.5 sm:py-2 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 ${BORDER_RADIUS.input} text-xs sm:text-sm focus:outline-hidden focus:ring-2 focus:ring-orange-500 focus:border-transparent text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 transition-colors`}
