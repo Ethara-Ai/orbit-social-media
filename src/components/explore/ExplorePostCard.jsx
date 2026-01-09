@@ -1,16 +1,17 @@
+import { memo } from 'react';
 // eslint-disable-next-line no-unused-vars
-import { motion } from "framer-motion";
-import { Heart, Zap } from "../icons";
-import Avatar from "../common/Avatar";
+import { motion } from 'framer-motion';
+import { Heart, Zap } from '../icons';
+import Avatar from '../common/Avatar';
 
-const ExplorePostCard = ({ post, index, onClick }) => {
+const ExplorePostCard = memo(function ExplorePostCard({ post, index, onClick }) {
   const handleClick = () => {
     onClick(post);
   };
 
   const handleImageError = (e) => {
     e.target.src =
-      "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=600&h=400&fit=crop";
+      'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=600&h=400&fit=crop';
   };
 
   return (
@@ -22,12 +23,12 @@ const ExplorePostCard = ({ post, index, onClick }) => {
       animate={{ opacity: 1, scale: 1 }}
       transition={{ delay: index * 0.03 }}
       onClick={handleClick}
-      onKeyDown={(e) => e.key === "Enter" && handleClick()}
+      onKeyDown={(e) => e.key === 'Enter' && handleClick()}
     >
       {/* Image Section */}
       <div className="relative aspect-square overflow-hidden">
         <img
-          src={post.image || "/placeholder.svg"}
+          src={post.image || '/placeholder.svg'}
           alt={post.title}
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
           onError={handleImageError}
@@ -54,7 +55,7 @@ const ExplorePostCard = ({ post, index, onClick }) => {
       </div>
     </motion.article>
   );
-};
+});
 
 const NewBadge = () => {
   return (
@@ -70,7 +71,7 @@ const HoverOverlay = ({ likes, isLiked }) => {
     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
       <div className="flex items-center gap-4 text-white">
         <span className="flex items-center gap-1">
-          <Heart className={`w-5 h-5 ${isLiked ? "fill-current" : ""}`} />
+          <Heart className={`w-5 h-5 ${isLiked ? 'fill-current' : ''}`} />
           {likes.toLocaleString()}
         </span>
       </div>
@@ -79,3 +80,4 @@ const HoverOverlay = ({ likes, isLiked }) => {
 };
 
 export default ExplorePostCard;
+export { NewBadge, HoverOverlay };

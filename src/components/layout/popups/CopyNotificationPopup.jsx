@@ -1,9 +1,9 @@
 // eslint-disable-next-line no-unused-vars
-import { motion, AnimatePresence } from "framer-motion";
-import { useFeed } from "../../../context/AppContext";
+import { motion, AnimatePresence } from 'framer-motion';
+import { useUI } from '../../../context/AppContext';
 
 const CopyNotificationPopup = () => {
-  const { showCopyNotification } = useFeed();
+  const { showCopyNotification } = useUI();
 
   return (
     <AnimatePresence>
@@ -20,12 +20,7 @@ const CopyNotificationPopup = () => {
             stroke="currentColor"
             viewBox="0 0 24 24"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M5 13l4 4L19 7"
-            />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
           </svg>
           Link copied to clipboard!
         </motion.div>

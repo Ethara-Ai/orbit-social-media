@@ -1,5 +1,6 @@
 // eslint-disable-next-line no-unused-vars
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion';
+import PropTypes from 'prop-types';
 
 const EmptyState = ({
   icon: Icon,
@@ -7,7 +8,7 @@ const EmptyState = ({
   description,
   action,
   actionLabel,
-  iconClassName = "w-8 h-8 text-slate-400 dark:text-slate-500",
+  iconClassName = 'w-8 h-8 text-slate-400 dark:text-slate-500',
 }) => {
   return (
     <motion.div
@@ -43,6 +44,21 @@ const EmptyState = ({
       )}
     </motion.div>
   );
+};
+
+EmptyState.propTypes = {
+  /** Icon component to display */
+  icon: PropTypes.elementType,
+  /** Title text to display */
+  title: PropTypes.string,
+  /** Description text to display */
+  description: PropTypes.string,
+  /** Action handler for the optional button */
+  action: PropTypes.func,
+  /** Label for the action button */
+  actionLabel: PropTypes.string,
+  /** Additional CSS classes for the icon */
+  iconClassName: PropTypes.string,
 };
 
 export default EmptyState;

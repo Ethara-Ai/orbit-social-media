@@ -1,7 +1,8 @@
+import { memo } from 'react';
 // eslint-disable-next-line no-unused-vars
-import { motion } from "framer-motion";
-import { Search } from "../../icons";
-import Avatar from "../../common/Avatar";
+import { motion } from 'framer-motion';
+import { Search } from '../../icons';
+import Avatar from '../../common/Avatar';
 
 const ConversationsList = ({
   conversations,
@@ -16,12 +17,10 @@ const ConversationsList = ({
   const handleConversationClick = (conversation) => {
     // If clicking on a different conversation, check if current one is empty and remove it
     if (activeConversation && activeConversation !== conversation.id) {
-      const currentConv = conversations.find(
-        (c) => c.id === activeConversation,
-      );
+      const currentConv = conversations.find((c) => c.id === activeConversation);
       if (currentConv && currentConv.messages.length === 0) {
         setConversations((prevConversations) =>
-          prevConversations.filter((conv) => conv.id !== activeConversation),
+          prevConversations.filter((conv) => conv.id !== activeConversation)
         );
       }
     }
@@ -29,22 +28,19 @@ const ConversationsList = ({
     setActiveConversation(conversation.id);
     setConversations((prevConversations) =>
       prevConversations.map((conv) =>
-        conv.id === conversation.id ? { ...conv, unreadCount: 0 } : conv,
-      ),
+        conv.id === conversation.id ? { ...conv, unreadCount: 0 } : conv
+      )
     );
   };
 
   return (
     <div
       className={`w-full sm:w-80 border-r border-slate-200 dark:border-slate-700 flex flex-col max-w-[100vw] overflow-x-hidden transition-colors ${
-        isHidden ? "hidden sm:flex" : "flex"
+        isHidden ? 'hidden sm:flex' : 'flex'
       }`}
     >
       {/* Header */}
-      <ConversationsHeader
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-      />
+      <ConversationsHeader searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
 
       {/* Conversations */}
       <div className="flex-1 overflow-y-auto custom-scrollbar">
@@ -83,7 +79,7 @@ const ConversationsHeader = ({ searchQuery, setSearchQuery }) => {
   );
 };
 
-const ConversationItem = ({ conversation, isActive, onClick }) => {
+const ConversationItem = memo(function ConversationItem({ conversation, isActive, onClick }) {
   const hasUnread = conversation.unreadCount > 0;
 
   return (
@@ -91,13 +87,13 @@ const ConversationItem = ({ conversation, isActive, onClick }) => {
       role="button"
       tabIndex={0}
       onClick={onClick}
-      onKeyDown={(e) => e.key === "Enter" && onClick()}
+      onKeyDown={(e) => e.key === 'Enter' && onClick()}
       className={`flex items-center gap-2 sm:gap-3 p-3 sm:p-4 cursor-pointer transition-all border-b border-slate-50 dark:border-slate-800 ${
         isActive
-          ? "bg-orange-50 dark:bg-orange-500/10"
+          ? 'bg-orange-50 dark:bg-orange-500/10'
           : hasUnread
-            ? "bg-orange-50/40 dark:bg-orange-500/5 hover:bg-orange-50/60 dark:hover:bg-orange-500/10"
-            : "hover:bg-slate-50 dark:hover:bg-slate-800"
+            ? 'bg-orange-50/40 dark:bg-orange-500/5 hover:bg-orange-50/60 dark:hover:bg-orange-500/10'
+            : 'hover:bg-slate-50 dark:hover:bg-slate-800'
       }`}
       whileHover={{ x: 2 }}
     >
@@ -114,8 +110,8 @@ const ConversationItem = ({ conversation, isActive, onClick }) => {
           <h3
             className={`text-sm truncate transition-colors ${
               hasUnread
-                ? "font-bold text-slate-900 dark:text-white"
-                : "font-semibold text-slate-900 dark:text-white"
+                ? 'font-bold text-slate-900 dark:text-white'
+                : 'font-semibold text-slate-900 dark:text-white'
             }`}
           >
             {conversation.user.name}
@@ -123,8 +119,8 @@ const ConversationItem = ({ conversation, isActive, onClick }) => {
           <span
             className={`text-xs shrink-0 transition-colors ${
               hasUnread
-                ? "text-orange-600 dark:text-orange-400 font-semibold"
-                : "text-slate-400 dark:text-slate-500"
+                ? 'text-orange-600 dark:text-orange-400 font-semibold'
+                : 'text-slate-400 dark:text-slate-500'
             }`}
           >
             {conversation.lastMessageTime}
@@ -133,8 +129,8 @@ const ConversationItem = ({ conversation, isActive, onClick }) => {
         <p
           className={`text-xs truncate transition-colors ${
             hasUnread
-              ? "text-slate-800 dark:text-slate-200 font-semibold"
-              : "text-slate-500 dark:text-slate-400"
+              ? 'text-slate-800 dark:text-slate-200 font-semibold'
+              : 'text-slate-500 dark:text-slate-400'
           }`}
         >
           {conversation.lastMessage}
@@ -143,12 +139,12 @@ const ConversationItem = ({ conversation, isActive, onClick }) => {
       {hasUnread && <UnreadBadge count={conversation.unreadCount} />}
     </motion.div>
   );
-};
+});
 
 const UnreadBadge = ({ count }) => {
   return (
     <div className="bg-orange-500 text-white text-xs rounded-full min-w-5 h-5 flex items-center justify-center shrink-0 font-bold px-1.5">
-      {count > 99 ? "99+" : count}
+      {count > 99 ? '99+' : count}
     </div>
   );
 };
@@ -165,3 +161,4 @@ const EmptySearchState = () => {
 };
 
 export default ConversationsList;
+export { ConversationsHeader, ConversationItem, UnreadBadge, EmptySearchState };
