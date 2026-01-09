@@ -19,7 +19,7 @@ const ProfileAnalytics = () => {
 
   return (
     <motion.div
-      className={`bg-white dark:bg-slate-900 ${BORDER_RADIUS.cardSmall} border border-slate-200 dark:border-slate-700 p-3 transition-colors duration-300`}
+      className={`bg-white dark:bg-neutral-900 ${BORDER_RADIUS.cardSmall} border border-slate-200 dark:border-neutral-700 p-3 transition-colors duration-300`}
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3, delay: 0.2 }}
@@ -27,7 +27,7 @@ const ProfileAnalytics = () => {
       <div className="flex flex-col py-1 -mx-3">
         {/* Profile Viewers */}
         <div className="flex items-center justify-between px-4 py-0.5 transition-colors group">
-          <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-200 transition-colors">
+          <p className="text-xs font-semibold text-slate-500 dark:text-neutral-400 group-hover:text-slate-900 dark:group-hover:text-slate-200 transition-colors">
             Profile viewers
           </p>
           <p className="text-xs font-bold text-orange-500 dark:text-orange-400">
@@ -37,7 +37,7 @@ const ProfileAnalytics = () => {
 
         {/* Post Impressions */}
         <div className="flex items-center justify-between px-4 py-0.5 transition-colors group">
-          <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-200 transition-colors">
+          <p className="text-xs font-semibold text-slate-500 dark:text-neutral-400 group-hover:text-slate-900 dark:group-hover:text-slate-200 transition-colors">
             Post impressions
           </p>
           <p className="text-xs font-bold text-orange-500 dark:text-orange-400">
@@ -51,9 +51,9 @@ const ProfileAnalytics = () => {
           tabIndex={0}
           onClick={() => setActiveTab('notifications')}
           onKeyDown={(e) => e.key === 'Enter' && setActiveTab('notifications')}
-          className="flex items-center justify-between px-4 py-0.5 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors cursor-pointer group"
+          className="flex items-center justify-between px-4 py-0.5 hover:bg-slate-50 dark:hover:bg-neutral-800 transition-colors cursor-pointer group"
         >
-          <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-200 transition-colors">
+          <p className="text-xs font-semibold text-slate-500 dark:text-neutral-400 group-hover:text-slate-900 dark:group-hover:text-slate-200 transition-colors">
             Likes and comments
           </p>
           <p className="text-xs font-bold text-orange-500 dark:text-orange-400">

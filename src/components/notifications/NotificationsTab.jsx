@@ -44,7 +44,7 @@ const NotificationsHeader = () => {
       <h1 className="text-2xl font-bold text-slate-900 dark:text-white transition-colors">
         Notifications
       </h1>
-      <p className="text-slate-500 dark:text-slate-400 text-sm mt-1 transition-colors">
+      <p className="text-slate-500 dark:text-neutral-400 text-sm mt-1 transition-colors">
         Stay updated with your latest interactions
       </p>
     </div>
@@ -56,10 +56,10 @@ const NotificationItem = memo(function NotificationItem({ notification, index })
 
   return (
     <motion.div
-      className={`bg-white dark:bg-slate-800 ${BORDER_RADIUS.card} p-4 shadow-xs border cursor-default transition-all duration-300 ${
+      className={`bg-white dark:bg-neutral-800 ${BORDER_RADIUS.card} p-4 shadow-xs border cursor-default transition-all duration-300 ${
         isUnread
           ? 'border-orange-200 dark:border-orange-500/30 bg-orange-50/30 dark:bg-orange-500/10'
-          : 'border-slate-200 dark:border-slate-700'
+          : 'border-slate-200 dark:border-neutral-700'
       }`}
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
@@ -106,10 +106,10 @@ const NotificationContent = ({ notification, isUnread }) => {
         </span>
         {isUnread && <UnreadDot />}
       </div>
-      <p className="text-slate-600 dark:text-slate-300 text-sm transition-colors">
+      <p className="text-slate-600 dark:text-neutral-300 text-sm transition-colors">
         {notification.message}
       </p>
-      <p className="text-slate-400 dark:text-slate-500 text-xs mt-1 transition-colors">
+      <p className="text-slate-400 dark:text-neutral-500 text-xs mt-1 transition-colors">
         {notification.timestamp}
       </p>
     </div>
@@ -128,7 +128,7 @@ const NotificationsFooter = ({ count }) => {
       animate={{ opacity: 1 }}
       transition={{ delay: 0.3 }}
     >
-      <p className="text-slate-400 dark:text-slate-500 text-sm transition-colors">
+      <p className="text-slate-400 dark:text-neutral-500 text-sm transition-colors">
         Showing {count} notification{count !== 1 ? 's' : ''}
       </p>
     </motion.div>
@@ -163,7 +163,7 @@ const getNotificationIconConfig = (type) => {
   return (
     configs[type] || {
       icon: <Bell className="w-4 h-4 text-slate-400" />,
-      bgClass: 'bg-slate-50 dark:bg-slate-700',
+      bgClass: 'bg-slate-50 dark:bg-neutral-700',
     }
   );
 };

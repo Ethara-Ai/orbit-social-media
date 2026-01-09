@@ -12,7 +12,7 @@ const ExploreHeader = () => {
       <h1 className="text-2xl font-bold text-slate-900 dark:text-white transition-colors">
         Discover
       </h1>
-      <p className="text-slate-500 dark:text-slate-400 text-sm mt-1 transition-colors">
+      <p className="text-slate-500 dark:text-neutral-400 text-sm mt-1 transition-colors">
         Explore content from creators worldwide
       </p>
     </motion.div>

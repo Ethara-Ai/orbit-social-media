@@ -49,7 +49,7 @@ const ActiveChat = ({
 
 const MessagesList = ({ messages, messagesEndRef, user }) => {
   return (
-    <div className="flex-1 p-2 sm:p-4 overflow-y-auto custom-scrollbar bg-slate-50 dark:bg-slate-800/50 transition-colors">
+    <div className="flex-1 p-2 sm:p-4 overflow-y-auto custom-scrollbar bg-slate-50 dark:bg-neutral-800/50 transition-colors">
       {messages.length === 0 ? (
         <div className="flex flex-col items-center justify-center h-full text-center px-4">
           <div className="w-16 h-16 sm:w-20 sm:h-20 mb-4 rounded-full overflow-hidden border-2 border-orange-100 dark:border-orange-500/30">
@@ -66,7 +66,7 @@ const MessagesList = ({ messages, messagesEndRef, user }) => {
           <h3 className="text-base sm:text-lg font-semibold text-slate-800 dark:text-slate-100 mb-1 transition-colors">
             {user?.name}
           </h3>
-          <p className="text-slate-500 dark:text-slate-400 text-xs sm:text-sm max-w-50 transition-colors">
+          <p className="text-slate-500 dark:text-neutral-400 text-xs sm:text-sm max-w-50 transition-colors">
             Say hello and start a conversation with {user?.name?.split(' ')[0]}!
           </p>
         </div>

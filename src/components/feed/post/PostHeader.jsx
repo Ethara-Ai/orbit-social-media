@@ -18,7 +18,7 @@ const PostHeader = ({ user, timestamp }) => {
               {user.name}
             </h3>
           </div>
-          <p className="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 transition-colors">
+          <p className="text-[10px] sm:text-xs text-slate-500 dark:text-neutral-400 transition-colors">
             {timestamp}
           </p>
         </div>

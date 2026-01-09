@@ -16,7 +16,7 @@ const NotificationPopup = () => {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: 100 }}
           transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-          className={`fixed top-20 right-4 lg:right-6 bg-white dark:bg-slate-800 ${BORDER_RADIUS.cardLarge} shadow-2xl border border-slate-100 dark:border-slate-700 p-4 max-w-sm z-50 transition-colors duration-300`}
+          className={`fixed top-20 right-4 lg:right-6 bg-white dark:bg-neutral-800 ${BORDER_RADIUS.cardLarge} shadow-2xl border border-slate-100 dark:border-neutral-700 p-4 max-w-sm z-50 transition-colors duration-300`}
         >
           <div className="flex items-center gap-3">
             <img
@@ -28,13 +28,13 @@ const NotificationPopup = () => {
               <p className="font-semibold text-slate-900 dark:text-white text-sm transition-colors">
                 {latestNotification.user.name}
               </p>
-              <p className="text-slate-600 dark:text-slate-300 text-xs truncate transition-colors">
+              <p className="text-slate-600 dark:text-neutral-300 text-xs truncate transition-colors">
                 {latestNotification.message}
               </p>
             </div>
             <button
               onClick={dismissNotificationPopup}
-              className={`text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 p-1 ${BORDER_RADIUS.button} hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors`}
+              className={`text-slate-400 dark:text-neutral-500 hover:text-slate-600 dark:hover:text-slate-300 p-1 ${BORDER_RADIUS.button} hover:bg-slate-100 dark:hover:bg-neutral-700 transition-colors`}
             >
               <X className="w-4 h-4" />
             </button>

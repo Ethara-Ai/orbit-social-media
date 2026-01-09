@@ -29,7 +29,7 @@ const PostCard = memo(function PostCard({ post, index }) {
   return (
     <motion.article
       data-post-id={post.id}
-      className={`bg-white dark:bg-slate-800 ${BORDER_RADIUS.card} shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden max-w-[100vw] transition-colors duration-300`}
+      className={`bg-white dark:bg-neutral-800 ${BORDER_RADIUS.card} shadow-sm border border-slate-200 dark:border-neutral-700 overflow-hidden max-w-[100vw] transition-colors duration-300`}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{
@@ -63,7 +63,7 @@ const PostCard = memo(function PostCard({ post, index }) {
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="overflow-hidden border-t border-slate-100 dark:border-slate-700 cursor-default transition-colors"
+            className="overflow-hidden border-t border-slate-100 dark:border-neutral-700 cursor-default transition-colors"
             onClick={(e) => e.stopPropagation()}
           >
             <PostComments

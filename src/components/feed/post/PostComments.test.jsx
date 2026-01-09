@@ -362,13 +362,13 @@ describe('PostComments', () => {
   describe('dark mode classes', () => {
     it('should have dark mode class on container', () => {
       const { container } = render(<PostComments {...defaultProps} />);
-      expect(container.firstChild).toHaveClass('dark:bg-slate-800/50');
+      expect(container.firstChild).toHaveClass('dark:bg-neutral-800/50');
     });
 
     it('should have dark mode class on input', () => {
       render(<PostComments {...defaultProps} />);
       const input = screen.getByPlaceholderText('Write a comment...');
-      expect(input).toHaveClass('dark:bg-slate-700');
+      expect(input).toHaveClass('dark:bg-neutral-700');
     });
   });
 

@@ -240,7 +240,7 @@ describe('PostHeader', () => {
     it('should have dark mode class for timestamp', () => {
       render(<PostHeader {...defaultProps} />);
       const timestamp = screen.getByText('2 hours ago');
-      expect(timestamp).toHaveClass('dark:text-slate-400');
+      expect(timestamp).toHaveClass('dark:text-neutral-400');
     });
   });
 

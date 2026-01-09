@@ -182,7 +182,7 @@ describe('EmptyChatState', () => {
     it('should have dark mode class on container', () => {
       const { container } = render(<EmptyChatState />);
       const mainContainer = container.firstChild;
-      expect(mainContainer).toHaveClass('dark:bg-slate-800/50');
+      expect(mainContainer).toHaveClass('dark:bg-neutral-800/50');
     });
 
     it('should have dark mode class on icon container', () => {
@@ -194,19 +194,19 @@ describe('EmptyChatState', () => {
     it('should have dark mode class on icon', () => {
       const { container } = render(<EmptyChatState />);
       const svg = container.querySelector('svg');
-      expect(svg).toHaveClass('dark:text-slate-500');
+      expect(svg).toHaveClass('dark:text-neutral-500');
     });
 
     it('should have dark mode class on title', () => {
       render(<EmptyChatState />);
       const title = screen.getByText('Select a chat');
-      expect(title).toHaveClass('dark:text-slate-200');
+      expect(title).toHaveClass('dark:text-neutral-200');
     });
 
     it('should have dark mode class on description', () => {
       render(<EmptyChatState />);
       const description = screen.getByText('Choose a conversation to start messaging');
-      expect(description).toHaveClass('dark:text-slate-400');
+      expect(description).toHaveClass('dark:text-neutral-400');
     });
   });
 

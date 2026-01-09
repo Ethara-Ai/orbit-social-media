@@ -45,7 +45,7 @@ const CreatePost = () => {
 
   return (
     <motion.div
-      className={`bg-white dark:bg-slate-800 ${BORDER_RADIUS.cardSmall} shadow-sm border border-slate-200 dark:border-slate-700 p-3 w-full max-w-[100vw] overflow-hidden transition-colors duration-300`}
+      className={`bg-white dark:bg-neutral-800 ${BORDER_RADIUS.cardSmall} shadow-sm border border-slate-200 dark:border-neutral-700 p-3 w-full max-w-[100vw] overflow-hidden transition-colors duration-300`}
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: 0.1 }}
@@ -60,7 +60,7 @@ const CreatePost = () => {
         <div className="flex-1 min-w-0">
           {/* Text Input Area with inline buttons */}
           <div
-            className={`group relative bg-slate-100 dark:bg-slate-700/50 ${BORDER_RADIUS.cardLarge} focus-within:ring-1 focus-within:ring-orange-500/50 focus-within:bg-white dark:focus-within:bg-slate-800 transition-all border border-transparent focus-within:border-slate-200 dark:focus-within:border-slate-600`}
+            className={`group relative bg-slate-100 dark:bg-neutral-700/50 ${BORDER_RADIUS.cardLarge} focus-within:ring-1 focus-within:ring-orange-500/50 focus-within:bg-white dark:focus-within:bg-slate-800 transition-all border border-transparent focus-within:border-slate-200 dark:focus-within:border-slate-600`}
           >
             {/* Textarea with proper padding to avoid overlap with buttons */}
             <textarea
@@ -92,7 +92,7 @@ const CreatePost = () => {
             <div className="absolute right-1.5 sm:right-2 top-1/2 -translate-y-1/2 flex items-center gap-0.5 sm:gap-1">
               <motion.button
                 onClick={() => document.getElementById('image-upload')?.click()}
-                className={`p-1.5 sm:p-2 text-slate-500 dark:text-slate-400 hover:text-emerald-500 dark:hover:text-emerald-400 ${BORDER_RADIUS.button} transition-colors cursor-pointer bg-slate-100 dark:bg-slate-700/50 group-focus-within:bg-white dark:group-focus-within:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-600`}
+                className={`p-1.5 sm:p-2 text-slate-500 dark:text-neutral-400 hover:text-emerald-500 dark:hover:text-emerald-400 ${BORDER_RADIUS.button} transition-colors cursor-pointer bg-slate-100 dark:bg-neutral-700/50 group-focus-within:bg-white dark:group-focus-within:bg-slate-800 hover:bg-slate-200 dark:hover:bg-neutral-600`}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 title="Add photo"
@@ -120,7 +120,7 @@ const CreatePost = () => {
 
           {/* Selected Image Preview */}
           {selectedImage && (
-            <div className="mt-2 sm:mt-3 relative rounded-lg sm:rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-900">
+            <div className="mt-2 sm:mt-3 relative rounded-lg sm:rounded-xl overflow-hidden bg-slate-100 dark:bg-neutral-900">
               <img
                 src={selectedImage}
                 alt="Selected"

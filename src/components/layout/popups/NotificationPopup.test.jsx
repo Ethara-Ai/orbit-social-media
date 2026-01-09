@@ -277,16 +277,16 @@ describe('NotificationPopup', () => {
   });
 
   describe('dark mode classes', () => {
-    it('should have dark:bg-slate-800 class on popup', () => {
+    it('should have dark:bg-neutral-800 class on popup', () => {
       render(<NotificationPopup />);
       const popup = screen.getByTestId('motion-div');
-      expect(popup).toHaveClass('dark:bg-slate-800');
+      expect(popup).toHaveClass('dark:bg-neutral-800');
     });
 
-    it('should have dark:border-slate-700 class on popup', () => {
+    it('should have dark:border-neutral-700 class on popup', () => {
       render(<NotificationPopup />);
       const popup = screen.getByTestId('motion-div');
-      expect(popup).toHaveClass('dark:border-slate-700');
+      expect(popup).toHaveClass('dark:border-neutral-700');
     });
 
     it('should have dark:text-white class on user name', () => {
@@ -295,16 +295,16 @@ describe('NotificationPopup', () => {
       expect(userName).toHaveClass('dark:text-white');
     });
 
-    it('should have dark:text-slate-300 class on message', () => {
+    it('should have dark:text-neutral-300 class on message', () => {
       render(<NotificationPopup />);
       const message = screen.getByText('liked your post');
-      expect(message).toHaveClass('dark:text-slate-300');
+      expect(message).toHaveClass('dark:text-neutral-300');
     });
 
-    it('should have dark:text-slate-500 class on dismiss button', () => {
+    it('should have dark:text-neutral-500 class on dismiss button', () => {
       render(<NotificationPopup />);
       const button = screen.getByRole('button');
-      expect(button).toHaveClass('dark:text-slate-500');
+      expect(button).toHaveClass('dark:text-neutral-500');
     });
   });
 

@@ -229,19 +229,19 @@ describe('ProfileAnalytics', () => {
     it('should have dark mode class on container', () => {
       render(<ProfileAnalytics />);
       const motionDiv = screen.getByTestId('motion-div');
-      expect(motionDiv).toHaveClass('dark:bg-slate-900');
+      expect(motionDiv).toHaveClass('dark:bg-neutral-900');
     });
 
     it('should have dark mode border class', () => {
       render(<ProfileAnalytics />);
       const motionDiv = screen.getByTestId('motion-div');
-      expect(motionDiv).toHaveClass('dark:border-slate-700');
+      expect(motionDiv).toHaveClass('dark:border-neutral-700');
     });
 
     it('should have dark mode class on labels', () => {
       render(<ProfileAnalytics />);
       const label = screen.getByText('Profile viewers');
-      expect(label).toHaveClass('dark:text-slate-400');
+      expect(label).toHaveClass('dark:text-neutral-400');
     });
 
     it('should have dark mode class on values', () => {
@@ -254,7 +254,7 @@ describe('ProfileAnalytics', () => {
     it('should have dark mode hover class on clickable row', () => {
       render(<ProfileAnalytics />);
       const button = screen.getByRole('button');
-      expect(button).toHaveClass('dark:hover:bg-slate-800');
+      expect(button).toHaveClass('dark:hover:bg-neutral-800');
     });
   });
 

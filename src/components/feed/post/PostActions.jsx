@@ -14,12 +14,12 @@ const PostActions = ({ postId, likes, commentsCount, isLiked, onLike, onComment 
   };
 
   return (
-    <div className="px-4 py-3 border-t border-slate-100 dark:border-slate-700 transition-colors">
+    <div className="px-4 py-3 border-t border-slate-100 dark:border-neutral-700 transition-colors">
       <div className="flex items-center gap-3 sm:gap-4" role="group" aria-label="Post actions">
         <motion.button
           onClick={handleLike}
           className={`flex items-center gap-1 sm:gap-2 transition-colors cursor-pointer ${
-            isLiked ? 'text-rose-500' : 'text-slate-500 dark:text-slate-400 hover:text-rose-500'
+            isLiked ? 'text-rose-500' : 'text-slate-500 dark:text-neutral-400 hover:text-rose-500'
           }`}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
@@ -35,7 +35,7 @@ const PostActions = ({ postId, likes, commentsCount, isLiked, onLike, onComment 
 
         <motion.button
           onClick={handleComment}
-          className="flex items-center gap-1 sm:gap-2 text-slate-500 dark:text-slate-400 hover:text-blue-500 dark:hover:text-blue-400 transition-colors cursor-pointer"
+          className="flex items-center gap-1 sm:gap-2 text-slate-500 dark:text-neutral-400 hover:text-blue-500 dark:hover:text-blue-400 transition-colors cursor-pointer"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           aria-label={`View comments, ${commentsCount} comments`}

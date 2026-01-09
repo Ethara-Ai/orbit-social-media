@@ -16,7 +16,7 @@ const Header = () => {
   const { showMobileNav, setShowMobileNav } = useMobileNav();
 
   return (
-    <header className="fixed top-0 left-0 right-0 h-14 sm:h-16 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 z-40 w-full transition-colors duration-300">
+    <header className="fixed top-0 left-0 right-0 h-14 sm:h-16 bg-white dark:bg-neutral-900 border-b border-slate-200 dark:border-neutral-700 z-40 w-full transition-colors duration-300">
       <div className="h-full max-w-7xl mx-auto header-container">
         {/* Three Column Layout matching main content */}
         <div className="h-full flex items-center justify-center gap-5">
@@ -87,7 +87,7 @@ const Header = () => {
                   <p className="text-sm font-semibold text-slate-900 dark:text-white transition-colors">
                     {currentUserDetails.name}
                   </p>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 transition-colors">
+                  <p className="text-xs text-slate-500 dark:text-neutral-400 transition-colors">
                     {currentUserDetails.profession}
                   </p>
                 </div>
@@ -95,7 +95,7 @@ const Header = () => {
                   src={currentUserAvatar || '/placeholder.svg'}
                   alt=""
                   aria-hidden="true"
-                  className={`w-10 h-10 ${BORDER_RADIUS.avatar} object-cover ring-2 ring-slate-100 dark:ring-slate-700 transition-all`}
+                  className={`w-10 h-10 ${BORDER_RADIUS.avatar} object-cover ring-2 ring-slate-100 dark:ring-neutral-700 transition-all`}
                   onError={createImageErrorHandler()}
                 />
               </motion.button>
@@ -106,7 +106,7 @@ const Header = () => {
                 className={`w-10 h-10 ${BORDER_RADIUS.card} flex items-center justify-center transition-all cursor-pointer ${
                   activeTab === TABS.CONNECTIONS
                     ? 'bg-orange-500 text-white shadow-lg shadow-orange-500/25'
-                    : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
+                    : 'bg-slate-100 dark:bg-neutral-800 text-slate-600 dark:text-neutral-300 hover:bg-slate-200 dark:hover:bg-neutral-700'
                 }`}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -119,7 +119,7 @@ const Header = () => {
               {/* Theme Toggle Button */}
               <motion.button
                 onClick={toggleTheme}
-                className={`relative w-10 h-10 ${BORDER_RADIUS.card} bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center justify-center transition-colors duration-300 cursor-pointer`}
+                className={`relative w-10 h-10 ${BORDER_RADIUS.card} bg-slate-100 dark:bg-neutral-800 hover:bg-slate-200 dark:hover:bg-neutral-700 flex items-center justify-center transition-colors duration-300 cursor-pointer`}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
@@ -170,7 +170,7 @@ const Header = () => {
                 <p className="text-sm font-semibold text-slate-900 dark:text-white transition-colors">
                   {currentUserDetails.name}
                 </p>
-                <p className="text-xs text-slate-500 dark:text-slate-400 transition-colors">
+                <p className="text-xs text-slate-500 dark:text-neutral-400 transition-colors">
                   {currentUserDetails.profession}
                 </p>
               </div>
@@ -178,7 +178,7 @@ const Header = () => {
                 src={currentUserAvatar || '/placeholder.svg'}
                 alt=""
                 aria-hidden="true"
-                className={`w-9 h-9 sm:w-10 sm:h-10 ${BORDER_RADIUS.avatar} object-cover ring-2 ring-slate-100 dark:ring-slate-700 transition-all`}
+                className={`w-9 h-9 sm:w-10 sm:h-10 ${BORDER_RADIUS.avatar} object-cover ring-2 ring-slate-100 dark:ring-neutral-700 transition-all`}
                 onError={createImageErrorHandler()}
               />
             </motion.button>
@@ -189,7 +189,7 @@ const Header = () => {
               className={`min-w-11 min-h-11 sm:min-w-0 sm:min-h-0 w-9 h-9 sm:w-10 sm:h-10 ${BORDER_RADIUS.card} flex items-center justify-center transition-all cursor-pointer ${
                 activeTab === TABS.CONNECTIONS
                   ? 'bg-orange-500 text-white shadow-lg shadow-orange-500/25'
-                  : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
+                  : 'bg-slate-100 dark:bg-neutral-800 text-slate-600 dark:text-neutral-300 hover:bg-slate-200 dark:hover:bg-neutral-700'
               }`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -202,7 +202,7 @@ const Header = () => {
             {/* Theme Toggle Button */}
             <motion.button
               onClick={toggleTheme}
-              className={`relative min-w-11 min-h-11 sm:min-w-0 sm:min-h-0 w-9 h-9 sm:w-10 sm:h-10 ${BORDER_RADIUS.card} bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center justify-center transition-colors duration-300 cursor-pointer`}
+              className={`relative min-w-11 min-h-11 sm:min-w-0 sm:min-h-0 w-9 h-9 sm:w-10 sm:h-10 ${BORDER_RADIUS.card} bg-slate-100 dark:bg-neutral-800 hover:bg-slate-200 dark:hover:bg-neutral-700 flex items-center justify-center transition-colors duration-300 cursor-pointer`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}

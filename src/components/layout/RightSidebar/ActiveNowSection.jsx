@@ -33,7 +33,7 @@ const ActiveNowSection = ({ activeOnlineFriends, friends, startConversation }) =
             key={friend.id}
             role="button"
             tabIndex={0}
-            className={`flex items-center gap-2.5 p-2.5 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 ${BORDER_RADIUS.cardSmall} cursor-pointer transition-colors`}
+            className={`flex items-center gap-2.5 p-2.5 bg-slate-50 dark:bg-neutral-800 hover:bg-slate-100 dark:hover:bg-neutral-700 ${BORDER_RADIUS.cardSmall} cursor-pointer transition-colors`}
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: index * 0.05 }}
@@ -52,19 +52,19 @@ const ActiveNowSection = ({ activeOnlineFriends, friends, startConversation }) =
                 }}
               />
               <span
-                className={`absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-500 ${BORDER_RADIUS.badge} border-2 border-white dark:border-slate-800`}
+                className={`absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-500 ${BORDER_RADIUS.badge} border-2 border-white dark:border-neutral-800`}
               ></span>
             </div>
             <div className="flex-1 min-w-0">
               <p className="font-medium text-slate-900 dark:text-white text-xs truncate transition-colors">
                 {friend.name}
               </p>
-              <p className="text-[11px] text-slate-500 dark:text-slate-400 truncate transition-colors">
+              <p className="text-[11px] text-slate-500 dark:text-neutral-400 truncate transition-colors">
                 {friend.profession}
               </p>
             </div>
             <motion.button
-              className="text-slate-400 dark:text-slate-500 hover:text-orange-500 dark:hover:text-orange-400 transition-colors p-1 cursor-pointer"
+              className="text-slate-400 dark:text-neutral-500 hover:text-orange-500 dark:hover:text-orange-400 transition-colors p-1 cursor-pointer"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={(e) => {
@@ -77,7 +77,7 @@ const ActiveNowSection = ({ activeOnlineFriends, friends, startConversation }) =
           </motion.div>
         ))}
         {friends.filter((f) => f.isOnline).length === 0 && (
-          <p className="text-sm text-slate-400 dark:text-slate-500 text-center py-4 transition-colors">
+          <p className="text-sm text-slate-400 dark:text-neutral-500 text-center py-4 transition-colors">
             No connections online
           </p>
         )}

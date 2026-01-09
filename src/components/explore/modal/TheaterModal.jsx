@@ -16,6 +16,7 @@ const TheaterModal = ({
   commentText,
   setCommentText,
   onAddComment,
+  currentUserAvatar,
 }) => {
   if (!selectedPost) return null;
 
@@ -86,6 +87,7 @@ const TheaterModal = ({
                   setCommentText={setCommentText}
                   onAddComment={onAddComment}
                   onClose={() => setShowComments(false)}
+                  currentUserAvatar={currentUserAvatar}
                 />
               </motion.div>
             )}
@@ -244,9 +246,8 @@ const ActionButton = ({
   return (
     <motion.button
       onClick={onClick}
-      className={`flex items-center gap-1.5 sm:gap-2 px-4 sm:px-5 py-2 sm:py-2.5 ${BORDER_RADIUS.button} transition-all cursor-pointer ${
-        isActive ? activeClassName : 'bg-white/10 text-white hover:bg-white/20'
-      }`}
+      className={`flex items-center gap-1.5 sm:gap-2 px-4 sm:px-5 py-2 sm:py-2.5 ${BORDER_RADIUS.button} transition-all cursor-pointer ${isActive ? activeClassName : 'bg-white/10 text-white hover:bg-white/20'
+        }`}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
     >

@@ -264,7 +264,7 @@ describe('ChatHeader', () => {
     it('should have dark mode class on container', () => {
       const { container } = render(<ChatHeader {...defaultProps} />);
       const header = container.firstChild;
-      expect(header).toHaveClass('dark:bg-slate-900');
+      expect(header).toHaveClass('dark:bg-neutral-900');
     });
 
     it('should have dark mode class on user name', () => {
@@ -276,7 +276,7 @@ describe('ChatHeader', () => {
     it('should have dark mode class on border', () => {
       const { container } = render(<ChatHeader {...defaultProps} />);
       const header = container.firstChild;
-      expect(header).toHaveClass('dark:border-slate-700');
+      expect(header).toHaveClass('dark:border-neutral-700');
     });
   });
 

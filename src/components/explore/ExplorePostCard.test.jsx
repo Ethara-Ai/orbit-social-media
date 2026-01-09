@@ -225,10 +225,10 @@ describe('ExplorePostCard', () => {
       expect(card).toHaveClass('bg-white');
     });
 
-    it('should have dark:bg-slate-800 class', () => {
+    it('should have dark:bg-neutral-800 class', () => {
       render(<ExplorePostCard {...defaultProps} />);
       const card = screen.getByTestId('post-card');
-      expect(card).toHaveClass('dark:bg-slate-800');
+      expect(card).toHaveClass('dark:bg-neutral-800');
     });
 
     it('should have rounded-xl class', () => {

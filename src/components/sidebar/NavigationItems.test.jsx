@@ -342,8 +342,8 @@ describe('NavigationItems', () => {
     it('should have dark mode classes for inactive buttons', () => {
       render(<NavigationItems {...defaultProps} activeTab="feed" />);
       const exploreButton = screen.getByText('Explore').closest('button');
-      expect(exploreButton).toHaveClass('dark:text-slate-300');
-      expect(exploreButton).toHaveClass('dark:hover:bg-slate-800');
+      expect(exploreButton).toHaveClass('dark:text-neutral-300');
+      expect(exploreButton).toHaveClass('dark:hover:bg-neutral-800');
     });
   });
 

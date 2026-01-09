@@ -345,7 +345,7 @@ describe('UserProfileCard', () => {
     it('should have dark mode class on profession', () => {
       render(<UserProfileCard {...defaultProps} />);
       const profession = screen.getByText('Software Engineer');
-      expect(profession).toHaveClass('dark:text-slate-400');
+      expect(profession).toHaveClass('dark:text-neutral-400');
     });
 
     it('should have dark mode class on stats border', () => {
@@ -363,7 +363,7 @@ describe('UserProfileCard', () => {
     it('should have dark mode class on stat labels', () => {
       render(<UserProfileCard {...defaultProps} />);
       const statLabel = screen.getByText('Posts');
-      expect(statLabel).toHaveClass('dark:text-slate-400');
+      expect(statLabel).toHaveClass('dark:text-neutral-400');
     });
   });
 

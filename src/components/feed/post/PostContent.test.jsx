@@ -125,11 +125,11 @@ describe('PostContent', () => {
       expect(paragraph).toHaveClass('text-slate-700');
     });
 
-    it('should have dark:text-slate-300 class', () => {
+    it('should have dark:text-neutral-300 class', () => {
       render(<PostContent content="Test content" image={null} />);
       const textElement = screen.getByText('Test content');
       const paragraph = textElement.parentElement;
-      expect(paragraph).toHaveClass('dark:text-slate-300');
+      expect(paragraph).toHaveClass('dark:text-neutral-300');
     });
 
     it('should have leading-relaxed class', () => {

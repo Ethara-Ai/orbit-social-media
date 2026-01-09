@@ -54,7 +54,7 @@ const PostComments = ({
   };
 
   return (
-    <div className="p-2 sm:p-4 bg-slate-50 dark:bg-slate-800/50 transition-colors">
+    <div className="p-2 sm:p-4 bg-slate-50 dark:bg-neutral-800/50 transition-colors">
       {/* Comments List */}
       <div
         ref={commentsContainerRef}
@@ -66,7 +66,7 @@ const PostComments = ({
       </div>
 
       {/* Add Comment */}
-      <div className="flex gap-2 sm:gap-3 pt-2 sm:pt-3 border-t border-slate-200 dark:border-slate-700 transition-colors">
+      <div className="flex gap-2 sm:gap-3 pt-2 sm:pt-3 border-t border-slate-200 dark:border-neutral-700 transition-colors">
         <Avatar
           src={currentUserAvatar}
           alt={currentUser.name}
@@ -80,7 +80,7 @@ const PostComments = ({
             value={newComment[postId] || ''}
             onChange={handleCommentChange}
             onKeyDown={handleKeyDown}
-            className={`flex-1 min-w-0 px-3 sm:px-4 py-1.5 sm:py-2 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 ${BORDER_RADIUS.input} text-xs sm:text-sm focus:outline-hidden focus:ring-2 focus:ring-orange-500 focus:border-transparent text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 transition-colors`}
+            className={`flex-1 min-w-0 px-3 sm:px-4 py-1.5 sm:py-2 bg-white dark:bg-neutral-700 border border-slate-200 dark:border-neutral-600 ${BORDER_RADIUS.input} text-xs sm:text-sm focus:outline-hidden focus:ring-2 focus:ring-orange-500 focus:border-transparent text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 transition-colors`}
           />
           <motion.button
             onClick={handleSubmit}
@@ -116,17 +116,17 @@ const CommentItem = ({ comment, index }) => {
         className="w-6 h-6 sm:w-8 sm:h-8 shrink-0"
       />
       <div
-        className={`flex-1 min-w-0 bg-white dark:bg-slate-700 ${BORDER_RADIUS.commentBubble} p-2 sm:p-3 shadow-xs transition-colors`}
+        className={`flex-1 min-w-0 bg-white dark:bg-neutral-700 ${BORDER_RADIUS.commentBubble} p-2 sm:p-3 shadow-xs transition-colors`}
       >
         <div className="flex items-center gap-1 sm:gap-2 mb-0.5 sm:mb-1">
           <span className="font-semibold text-slate-900 dark:text-white text-xs sm:text-sm truncate transition-colors">
             {comment.user.name}
           </span>
-          <span className="text-[10px] sm:text-xs text-slate-400 dark:text-slate-500 shrink-0 transition-colors">
+          <span className="text-[10px] sm:text-xs text-slate-400 dark:text-neutral-500 shrink-0 transition-colors">
             {comment.timestamp}
           </span>
         </div>
-        <p className="text-slate-700 dark:text-slate-300 text-xs sm:text-sm transition-colors">
+        <p className="text-slate-700 dark:text-neutral-300 text-xs sm:text-sm transition-colors">
           {linkifyText(comment.content).map((part) => {
             if (part.type === 'link') {
               return (

@@ -18,7 +18,7 @@ const MessageBubble = ({ message }) => {
         className={`max-w-[75%] ${BORDER_RADIUS.cardLarge} overflow-hidden transition-colors ${
           isSent
             ? 'bg-orange-500 text-white rounded-br-md'
-            : 'bg-white dark:bg-slate-700 text-slate-800 dark:text-slate-100 shadow-xs rounded-bl-md'
+            : 'bg-white dark:bg-neutral-700 text-slate-800 dark:text-slate-100 shadow-xs rounded-bl-md'
         } ${hasOnlyAttachment ? 'p-1' : attachment ? 'pb-2' : 'px-4 py-2.5'}`}
       >
         {attachment && <MessageAttachment src={attachment} isSent={isSent} hasText={!!text} />}
@@ -80,7 +80,7 @@ const MessageTimestamp = ({ timestamp, isSent, hasAttachment, hasText }) => {
   return (
     <p
       className={`text-[10px] mt-1 text-right transition-colors ${
-        isSent ? 'text-orange-100' : 'text-slate-400 dark:text-slate-500'
+        isSent ? 'text-orange-100' : 'text-slate-400 dark:text-neutral-500'
       } ${hasAttachment && !hasText ? 'px-2 pb-1' : hasAttachment ? 'px-3' : ''}`}
     >
       {timestamp}

@@ -38,7 +38,7 @@ const MobileSidebar = () => {
     <AnimatePresence>
       {showMobileNav && (
         <motion.aside
-          className="fixed left-0 top-0 bottom-0 w-72 bg-white dark:bg-slate-900 z-50 lg:hidden shadow-2xl transition-colors duration-300 flex flex-col"
+          className="fixed left-0 top-0 bottom-0 w-72 bg-white dark:bg-neutral-900 z-50 lg:hidden shadow-2xl transition-colors duration-300 flex flex-col"
           initial={{ x: '-100%' }}
           animate={{ x: 0 }}
           exit={{ x: '-100%' }}
@@ -71,7 +71,7 @@ const MobileSidebar = () => {
             <ProfileAnalytics />
 
             {/* Navigation with Separator */}
-            <div className="border-t border-slate-100 dark:border-slate-700 pt-2">
+            <div className="border-t border-slate-100 dark:border-neutral-700 pt-2">
               <NavigationItems
                 navItems={navItems}
                 activeTab={activeTab}
@@ -92,7 +92,7 @@ const MobileSidebar = () => {
 
 const MobileSidebarHeader = ({ onClose }) => {
   return (
-    <div className="flex items-center justify-between p-4 border-b border-slate-100 dark:border-slate-700 transition-colors">
+    <div className="flex items-center justify-between p-4 border-b border-slate-100 dark:border-neutral-700 transition-colors">
       <div className="flex items-center gap-2">
         <div
           className={`w-8 h-8 bg-linear-to-br from-orange-500 to-amber-500 ${BORDER_RADIUS.cardSmall} flex items-center justify-center`}
@@ -103,11 +103,11 @@ const MobileSidebarHeader = ({ onClose }) => {
       </div>
       <motion.button
         onClick={onClose}
-        className={`p-2 ${BORDER_RADIUS.cardSmall} hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer`}
+        className={`p-2 ${BORDER_RADIUS.cardSmall} hover:bg-slate-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer`}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
       >
-        <X className="w-5 h-5 text-slate-500 dark:text-slate-400" />
+        <X className="w-5 h-5 text-slate-500 dark:text-neutral-400" />
       </motion.button>
     </div>
   );
