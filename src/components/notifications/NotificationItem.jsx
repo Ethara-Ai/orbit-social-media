@@ -1,8 +1,8 @@
 // eslint-disable-next-line no-unused-vars
-import { motion } from "framer-motion";
-import { Heart, MessageCircle, UserPlus, User, Bell, Users } from "../icons";
-import Avatar from "../common/Avatar";
-import { BORDER_RADIUS } from "../../utils/constants";
+import { motion } from 'framer-motion';
+import { Heart, MessageCircle, UserPlus, User, Bell, Users } from '../icons';
+import Avatar from '../common/Avatar';
+import { BORDER_RADIUS } from '../../utils/constants';
 
 const NotificationItem = ({ notification, index, onClick }) => {
   const handleClick = () => {
@@ -15,16 +15,17 @@ const NotificationItem = ({ notification, index, onClick }) => {
     <motion.div
       role="button"
       tabIndex={0}
-      className={`bg-white ${BORDER_RADIUS.card} p-4 shadow-xs border cursor-pointer transition-all ${!notification.isRead
-        ? "border-orange-200 bg-orange-50/30"
-        : "border-slate-200 hover:bg-slate-50"
-        }`}
+      className={`bg-white ${BORDER_RADIUS.card} p-4 shadow-xs border cursor-pointer transition-all ${
+        !notification.isRead
+          ? 'border-orange-200 bg-orange-50/30'
+          : 'border-slate-200 hover:bg-slate-50'
+      }`}
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: index * 0.05 }}
       whileHover={{ x: 2 }}
       onClick={handleClick}
-      onKeyDown={(e) => e.key === "Enter" && handleClick()}
+      onKeyDown={(e) => e.key === 'Enter' && handleClick()}
     >
       <div className="flex items-center gap-4">
         <NotificationAvatar
@@ -52,7 +53,7 @@ const NotificationBadge = ({ type }) => {
 
   return (
     <div
-      className={`absolute -bottom-0.5 -right-0.5 ${BORDER_RADIUS.badge} p-1 shadow-xs ${bgClass}`}
+      className={`absolute -bottom-1 -right-1 ${BORDER_RADIUS.badge} p-1.5 shadow-xs ${bgClass}`}
     >
       {icon}
     </div>
@@ -63,9 +64,7 @@ const NotificationContent = ({ notification }) => {
   return (
     <div className="flex-1 min-w-0">
       <div className="flex items-center gap-2">
-        <span className="font-semibold text-slate-900 text-sm">
-          {notification.user.name}
-        </span>
+        <span className="font-semibold text-slate-900 text-sm">{notification.user.name}</span>
         {!notification.isRead && <UnreadIndicator />}
       </div>
       <p className="text-slate-600 text-sm">{notification.message}</p>
@@ -81,28 +80,28 @@ const UnreadIndicator = () => {
 const getNotificationConfig = (type) => {
   const configs = {
     like: {
-      icon: <Heart className="w-3 h-3 text-rose-500" />,
-      bgClass: "bg-rose-100 dark:bg-rose-900",
+      icon: <Heart className="w-4 h-4 text-rose-500" />,
+      bgClass: 'bg-rose-50 dark:bg-rose-500/20',
     },
     comment: {
-      icon: <MessageCircle className="w-3 h-3 text-blue-500" />,
-      bgClass: "bg-blue-100 dark:bg-blue-900",
+      icon: <MessageCircle className="w-4 h-4 text-blue-500" />,
+      bgClass: 'bg-blue-50 dark:bg-blue-500/20',
     },
     follow: {
-      icon: <UserPlus className="w-3 h-3 text-emerald-500" />,
-      bgClass: "bg-emerald-100 dark:bg-emerald-900",
+      icon: <UserPlus className="w-4 h-4 text-emerald-500" />,
+      bgClass: 'bg-emerald-50 dark:bg-emerald-500/20',
     },
     mention: {
-      icon: <User className="w-3 h-3 text-orange-500" />,
-      bgClass: "bg-orange-100 dark:bg-orange-900",
+      icon: <User className="w-4 h-4 text-orange-500" />,
+      bgClass: 'bg-orange-50 dark:bg-orange-500/20',
     },
     friend_request: {
-      icon: <Users className="w-3 h-3 text-purple-500" />,
-      bgClass: "bg-purple-100 dark:bg-purple-900",
+      icon: <Users className="w-4 h-4 text-purple-500" />,
+      bgClass: 'bg-purple-50 dark:bg-purple-500/20',
     },
     default: {
-      icon: <Bell className="w-3 h-3 text-slate-400" />,
-      bgClass: "bg-slate-100 dark:bg-slate-700",
+      icon: <Bell className="w-4 h-4 text-slate-400" />,
+      bgClass: 'bg-slate-50 dark:bg-slate-700',
     },
   };
 
