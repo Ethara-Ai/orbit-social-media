@@ -295,25 +295,25 @@ describe('EmptyState', () => {
       render(<EmptyState icon={MockIcon} />);
       const icon = screen.getByTestId('mock-icon');
       const container = icon.parentElement;
-      expect(container).toHaveClass('dark:bg-slate-800');
+      expect(container).toHaveClass('dark:bg-neutral-800');
     });
 
     it('should have dark mode classes on default icon', () => {
       render(<EmptyState icon={MockIcon} />);
       const icon = screen.getByTestId('mock-icon');
-      expect(icon).toHaveClass('dark:text-slate-500');
+      expect(icon).toHaveClass('dark:text-neutral-500');
     });
 
     it('should have dark mode classes on title', () => {
       render(<EmptyState title="Dark Mode Title" />);
       const title = screen.getByText('Dark Mode Title');
-      expect(title).toHaveClass('dark:text-slate-200');
+      expect(title).toHaveClass('dark:text-neutral-200');
     });
 
     it('should have dark mode classes on description', () => {
       render(<EmptyState description="Dark Mode Description" />);
       const description = screen.getByText('Dark Mode Description');
-      expect(description).toHaveClass('dark:text-slate-400');
+      expect(description).toHaveClass('dark:text-neutral-400');
     });
   });
 

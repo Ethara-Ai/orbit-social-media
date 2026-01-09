@@ -4,7 +4,7 @@ import { BORDER_RADIUS } from '../../utils/constants';
 
 const LoadingScreen = () => {
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 font-['Inter',sans-serif] flex items-center justify-center relative overflow-hidden transition-colors duration-300">
+    <div className="min-h-screen bg-slate-50 dark:bg-black font-['Inter',sans-serif] flex items-center justify-center relative overflow-hidden transition-colors duration-300">
       {/* Subtle background pattern */}
       <div className="absolute inset-0 opacity-30 dark:opacity-20">
         <div
@@ -49,7 +49,7 @@ const LoadingScreen = () => {
           </motion.h1>
 
           <motion.p
-            className="text-slate-500 dark:text-slate-400 text-lg font-medium transition-colors"
+            className="text-slate-500 dark:text-neutral-400 text-lg font-medium transition-colors"
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.5 }}
@@ -86,7 +86,7 @@ const LoadingScreen = () => {
           </div>
 
           <motion.p
-            className="text-slate-400 dark:text-slate-500 text-sm transition-colors"
+            className="text-slate-400 dark:text-neutral-500 text-sm transition-colors"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.7, duration: 0.4 }}

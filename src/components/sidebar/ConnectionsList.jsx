@@ -6,7 +6,7 @@ import { BORDER_RADIUS } from '../../utils/constants';
 
 const ConnectionsList = ({ friends, showFriends, setShowFriends, onFriendClick }) => {
   return (
-    <div className="border-t border-slate-100 dark:border-slate-700 pt-4 transition-colors">
+    <div className="border-t border-slate-100 dark:border-neutral-700 pt-4 transition-colors">
       <ConnectionsHeader
         friendsCount={friends.length}
         showFriends={showFriends}
@@ -43,22 +43,22 @@ const ConnectionsHeader = ({ friendsCount, showFriends, setShowFriends }) => {
   return (
     <motion.button
       onClick={() => setShowFriends(!showFriends)}
-      className={`w-full flex items-center justify-between px-4 py-3 ${BORDER_RADIUS.card} hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors`}
+      className={`w-full flex items-center justify-between px-4 py-3 ${BORDER_RADIUS.card} hover:bg-slate-50 dark:hover:bg-neutral-800 transition-colors`}
       whileHover={{ scale: 1.01 }}
     >
       <div className="flex items-center gap-2">
-        <Users className="w-5 h-5 text-slate-500 dark:text-slate-400" />
-        <span className="font-medium text-sm text-slate-700 dark:text-slate-300 transition-colors">
+        <Users className="w-5 h-5 text-slate-500 dark:text-neutral-400" />
+        <span className="font-medium text-sm text-slate-700 dark:text-neutral-300 transition-colors">
           Connections
         </span>
         <span
-          className={`text-xs text-slate-400 dark:text-slate-500 bg-slate-100 dark:bg-slate-700 px-2 py-0.5 ${BORDER_RADIUS.badge} transition-colors`}
+          className={`text-xs text-slate-400 dark:text-neutral-500 bg-slate-100 dark:bg-neutral-700 px-2 py-0.5 ${BORDER_RADIUS.badge} transition-colors`}
         >
           {friendsCount}
         </span>
       </div>
       <motion.div animate={{ rotate: showFriends ? 180 : 0 }} transition={{ duration: 0.2 }}>
-        <ChevronDown className="w-4 h-4 text-slate-400 dark:text-slate-500" />
+        <ChevronDown className="w-4 h-4 text-slate-400 dark:text-neutral-500" />
       </motion.div>
     </motion.button>
   );
@@ -75,7 +75,7 @@ const ConnectionItem = ({ friend, index, onClick }) => {
     <motion.div
       role="button"
       tabIndex={0}
-      className={`flex items-center gap-2 p-1.5 ${BORDER_RADIUS.cardSmall} hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors cursor-pointer mx-2`}
+      className={`flex items-center gap-2 p-1.5 ${BORDER_RADIUS.cardSmall} hover:bg-slate-50 dark:hover:bg-neutral-800 transition-colors cursor-pointer mx-2`}
       initial={{ x: -10, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       transition={{ delay: index * 0.03 }}
@@ -94,7 +94,7 @@ const ConnectionItem = ({ friend, index, onClick }) => {
         <p className="font-medium text-slate-900 dark:text-white truncate text-xs transition-colors">
           {friend.name}
         </p>
-        <p className="text-xs text-slate-500 dark:text-slate-400 truncate transition-colors">
+        <p className="text-xs text-slate-500 dark:text-neutral-400 truncate transition-colors">
           {friend.isOnline ? 'Online' : friend.lastSeen}
         </p>
       </div>

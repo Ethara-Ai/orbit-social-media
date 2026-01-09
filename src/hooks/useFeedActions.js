@@ -8,7 +8,7 @@
  */
 
 import { useCallback } from 'react';
-import { useFeed } from '../context/AppContext';
+import { useFeed, useUser } from '../context/AppContext';
 import { useNotificationPopup } from '../context/providers/ui';
 import {
   createPost,
@@ -44,6 +44,9 @@ export const useFeedActions = () => {
     setSelectedPost,
   } = useFeed();
 
+  // Access user data from UserContext to ensure we use the latest profile info
+  const { currentUserAvatar, currentUserDetails } = useUser();
+
   // Access notification popup from focused UI context
   // This properly handles timeout cleanup and prevents memory leaks
   const { showCopyNotificationWithTimeout } = useNotificationPopup();
@@ -76,8 +79,15 @@ export const useFeedActions = () => {
       const commentText = newComment[postId];
       if (!commentText?.trim()) return;
 
+      // Create a user object that reflects the current profile state
+      const postingUser = {
+        ...currentUser,
+        ...currentUserDetails, // Overwrite name, profession, etc.
+        avatar: currentUserAvatar, // Overwrite avatar
+      };
+
       const newCommentObj = createComment({
-        user: currentUser,
+        user: postingUser,
         content: commentText,
         postId,
       });
@@ -90,7 +100,15 @@ export const useFeedActions = () => {
       setPosts((prev) => incrementCommentsById(prev, postId));
       setNewComment((prev) => ({ ...prev, [postId]: '' }));
     },
-    [newComment, currentUser, setComments, setPosts, setNewComment]
+    [
+      newComment,
+      currentUser,
+      currentUserDetails,
+      currentUserAvatar,
+      setComments,
+      setPosts,
+      setNewComment,
+    ]
   );
 
   /**
@@ -116,8 +134,15 @@ export const useFeedActions = () => {
   const handleCreatePost = useCallback(() => {
     if (!newPostContent.trim() && !selectedImage) return;
 
+    // Create a user object that reflects the current profile state
+    const postingUser = {
+      ...currentUser,
+      ...currentUserDetails, // Overwrite name, profession, etc.
+      avatar: currentUserAvatar, // Overwrite avatar
+    };
+
     const newPost = createPost({
-      user: currentUser,
+      user: postingUser,
       content: newPostContent,
       image: selectedImage,
       category: 'Personal',
@@ -126,7 +151,16 @@ export const useFeedActions = () => {
     setPosts((prev) => [newPost, ...prev]);
     setNewPostContent('');
     setSelectedImage(null);
-  }, [newPostContent, selectedImage, currentUser, setPosts, setNewPostContent, setSelectedImage]);
+  }, [
+    newPostContent,
+    selectedImage,
+    currentUser,
+    currentUserDetails,
+    currentUserAvatar,
+    setPosts,
+    setNewPostContent,
+    setSelectedImage,
+  ]);
 
   /**
    * Handle image upload for new post

@@ -8,7 +8,7 @@ import FeaturedSection from './FeaturedSection';
 import RegularPostsGrid from './RegularPostsGrid';
 import TheaterModal from './modal/TheaterModal';
 import { generateExplorePostComments } from '../../data/mockData';
-import { useExplore, useUI } from '../../context/AppContext';
+import { useExplore, useUI, useUser } from '../../context/AppContext';
 
 const ExploreTab = () => {
   // Access explore state and actions directly from context
@@ -19,6 +19,9 @@ const ExploreTab = () => {
     setActiveExploreCategory,
     handleExploreLike,
   } = useExplore();
+
+  // Access user data from context
+  const { currentUser, currentUserDetails, currentUserAvatar } = useUser();
 
   // Access UI state for theater mode
   const { setIsTheaterModeOpen } = useUI();
@@ -49,9 +52,9 @@ const ExploreTab = () => {
 
   const filteredExplorePosts = activeExploreCategory
     ? explorePosts.filter((post) => {
-        const category = exploreCategories.find((c) => c.id === activeExploreCategory);
-        return category && post.category === category.name;
-      })
+      const category = exploreCategories.find((c) => c.id === activeExploreCategory);
+      return category && post.category === category.name;
+    })
     : explorePosts;
 
   const handleOpenPost = (post) => {
@@ -81,13 +84,16 @@ const ExploreTab = () => {
   const handleAddComment = () => {
     if (!commentText.trim() || !selectedPostId) return;
 
+    // Create a user object that reflects the current profile state
+    const postingUser = {
+      ...currentUser,
+      ...currentUserDetails, // Overwrite name, profession, etc.
+      avatar: currentUserAvatar, // Overwrite avatar
+    };
+
     const newComment = {
       id: `c-new-${Date.now()}`,
-      user: {
-        name: 'jordan_mitchell',
-        avatar:
-          'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=50&h=50&fit=crop&crop=face',
-      },
+      user: postingUser,
       text: commentText,
       likes: 0,
       time: 'now',
@@ -150,6 +156,7 @@ const ExploreTab = () => {
             commentText={commentText}
             setCommentText={setCommentText}
             onAddComment={handleAddComment}
+            currentUserAvatar={currentUserAvatar}
           />
         )}
       </AnimatePresence>

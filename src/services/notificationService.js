@@ -39,7 +39,8 @@ export const generateConnectionNotification = (user) => {
     type: types[Math.floor(Math.random() * types.length)],
     user,
     message: ACTION_MESSAGES[Math.floor(Math.random() * ACTION_MESSAGES.length)],
-    timestamp: 'now',
+    timestamp: 'Just now',
+    createdAt: Date.now(),
     isRead: false,
     isConnection: true,
   };
@@ -56,7 +57,8 @@ export const generateFriendRequestNotification = (user) => {
     type: NOTIFICATION_TYPES.FRIEND_REQUEST,
     user,
     message: 'sent you a connection request',
-    timestamp: 'now',
+    timestamp: 'Just now',
+    createdAt: Date.now(),
     isRead: false,
     isConnection: false,
   };

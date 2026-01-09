@@ -18,7 +18,7 @@ const SuggestedUsersSection = ({
             key={user.id}
             role="button"
             tabIndex={0}
-            className="flex items-center gap-3 p-3 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-xl cursor-pointer transition-colors"
+            className="flex items-center gap-3 p-3 bg-slate-50 dark:bg-neutral-800 hover:bg-slate-100 dark:hover:bg-neutral-700 rounded-xl cursor-pointer transition-colors"
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: (index + 5) * 0.1 }}
@@ -34,7 +34,7 @@ const SuggestedUsersSection = ({
               <p className="font-medium text-slate-900 dark:text-white text-sm truncate transition-colors">
                 {user.name}
               </p>
-              <p className="text-xs text-slate-500 dark:text-slate-400 truncate transition-colors">
+              <p className="text-xs text-slate-500 dark:text-neutral-400 truncate transition-colors">
                 {user.mutualFriends} mutual connections
               </p>
             </div>
@@ -45,7 +45,7 @@ const SuggestedUsersSection = ({
               }}
               className={`text-xs font-semibold px-3 py-1.5 rounded-full transition-colors ${
                 connectionRequests.includes(user.id)
-                  ? 'text-slate-500 dark:text-slate-400 bg-slate-200 dark:bg-slate-700 cursor-default'
+                  ? 'text-slate-500 dark:text-neutral-400 bg-slate-200 dark:bg-neutral-700 cursor-default'
                   : 'text-orange-600 dark:text-orange-400 hover:text-orange-700 dark:hover:text-orange-300 bg-orange-50 dark:bg-orange-500/10 hover:bg-orange-100 dark:hover:bg-orange-500/20'
               }`}
               whileHover={{

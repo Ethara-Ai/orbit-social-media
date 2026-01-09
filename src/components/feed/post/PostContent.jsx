@@ -23,7 +23,7 @@ const PostContent = ({ content, image }) => {
       {/* Post Content */}
       {content && (
         <div className="px-4 pb-3">
-          <p className="text-slate-700 dark:text-slate-300 text-xs sm:text-sm leading-relaxed transition-colors">
+          <p className="text-slate-700 dark:text-neutral-300 text-xs sm:text-sm leading-relaxed transition-colors">
             {linkifyText(content).map((part) => {
               if (part.type === 'link') {
                 return (
@@ -49,7 +49,7 @@ const PostContent = ({ content, image }) => {
       {image && (
         <div className="px-4 pb-3">
           <div
-            className={`relative w-full rounded-md sm:rounded-lg overflow-hidden bg-slate-100 dark:bg-slate-900 ${
+            className={`relative w-full rounded-md sm:rounded-lg overflow-hidden bg-slate-100 dark:bg-neutral-900 ${
               isPortrait ? 'max-w-md mx-auto' : ''
             }`}
           >

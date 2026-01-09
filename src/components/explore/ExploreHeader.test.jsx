@@ -106,7 +106,7 @@ describe('ExploreHeader', () => {
     it('should have dark mode class on subtitle', () => {
       render(<ExploreHeader />);
       const subtitle = screen.getByText('Explore content from creators worldwide');
-      expect(subtitle).toHaveClass('dark:text-slate-400');
+      expect(subtitle).toHaveClass('dark:text-neutral-400');
     });
   });
 
@@ -217,7 +217,7 @@ describe('ExploreHeader', () => {
       const subtitle = screen.getByText('Explore content from creators worldwide');
       expect(subtitle).toHaveClass(
         'text-slate-500',
-        'dark:text-slate-400',
+        'dark:text-neutral-400',
         'text-sm',
         'mt-1',
         'transition-colors'

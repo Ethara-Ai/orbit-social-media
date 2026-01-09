@@ -34,11 +34,11 @@ const UserProfileCard = ({
           ring={false}
         />
         <h2 className="text-sm font-semibold text-slate-900 dark:text-white mt-2.5">{user.name}</h2>
-        <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">{user.profession}</p>
+        <p className="text-xs text-slate-500 dark:text-neutral-400 mt-0.5">{user.profession}</p>
       </div>
 
       {/* Stats Section */}
-      <div className="border-t border-slate-100 dark:border-slate-700 pt-3">
+      <div className="border-t border-slate-100 dark:border-neutral-700 pt-3">
         <div className="flex justify-between px-1">
           <StatItem label="Posts" value={stats.posts} />
           <StatItem label="Followers" value={stats.followers} />
@@ -52,7 +52,7 @@ const UserProfileCard = ({
 const StatItem = ({ label, value }) => (
   <div className="flex flex-col items-center">
     <span className="text-[16px] font-bold text-slate-900 dark:text-white">{value}</span>
-    <span className="text-xs text-slate-500 dark:text-slate-400">{label}</span>
+    <span className="text-xs text-slate-500 dark:text-neutral-400">{label}</span>
   </div>
 );
 

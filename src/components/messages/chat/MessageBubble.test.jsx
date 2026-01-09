@@ -324,7 +324,7 @@ describe('MessageBubble', () => {
   describe('dark mode classes', () => {
     it('should have dark mode background class for received messages', () => {
       const { container } = render(<MessageBubble message={receivedMessage} />);
-      const bubble = container.querySelector('.dark\\:bg-slate-700');
+      const bubble = container.querySelector('.dark\\:bg-neutral-700');
       expect(bubble).toBeInTheDocument();
     });
 
@@ -337,7 +337,7 @@ describe('MessageBubble', () => {
     it('should have dark mode timestamp class for received messages', () => {
       render(<MessageBubble message={receivedMessage} />);
       const timestamp = screen.getByText('10:31 AM');
-      expect(timestamp).toHaveClass('dark:text-slate-500');
+      expect(timestamp).toHaveClass('dark:text-neutral-500');
     });
 
     it('should have rounded-xl class for received attachment', () => {

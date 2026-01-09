@@ -101,7 +101,7 @@ const getNotificationConfig = (type) => {
     },
     default: {
       icon: <Bell className="w-4 h-4 text-slate-400" />,
-      bgClass: 'bg-slate-50 dark:bg-slate-700',
+      bgClass: 'bg-slate-50 dark:bg-neutral-700',
     },
   };
 

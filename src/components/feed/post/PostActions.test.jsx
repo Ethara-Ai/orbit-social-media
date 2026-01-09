@@ -280,7 +280,7 @@ describe('PostActions', () => {
     it('should have dark mode border class', () => {
       const { container } = render(<PostActions {...defaultProps} />);
       const wrapper = container.firstChild;
-      expect(wrapper).toHaveClass('dark:border-slate-700');
+      expect(wrapper).toHaveClass('dark:border-neutral-700');
     });
 
     it('should have transition-colors class', () => {
@@ -403,13 +403,13 @@ describe('PostActions', () => {
     it('should have dark mode text class for like button when not liked', () => {
       render(<PostActions {...defaultProps} isLiked={false} />);
       const likeButton = screen.getAllByTestId('motion-button')[0];
-      expect(likeButton).toHaveClass('dark:text-slate-400');
+      expect(likeButton).toHaveClass('dark:text-neutral-400');
     });
 
     it('should have dark mode text class for comment button', () => {
       render(<PostActions {...defaultProps} />);
       const commentButton = screen.getAllByTestId('motion-button')[1];
-      expect(commentButton).toHaveClass('dark:text-slate-400');
+      expect(commentButton).toHaveClass('dark:text-neutral-400');
     });
 
     it('should have dark mode hover class for comment button', () => {

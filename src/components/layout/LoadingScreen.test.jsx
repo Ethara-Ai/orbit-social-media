@@ -246,7 +246,7 @@ describe('LoadingScreen', () => {
     it('should have dark mode background class', () => {
       const { container } = render(<LoadingScreen />);
       const wrapper = container.firstChild;
-      expect(wrapper).toHaveClass('dark:bg-slate-950');
+      expect(wrapper).toHaveClass('dark:bg-black');
     });
 
     it('should have dark mode text color on title', () => {
@@ -258,13 +258,13 @@ describe('LoadingScreen', () => {
     it('should have dark mode text color on tagline', () => {
       render(<LoadingScreen />);
       const tagline = screen.getByText('Connect • Discover • Thrive');
-      expect(tagline).toHaveClass('dark:text-slate-400');
+      expect(tagline).toHaveClass('dark:text-neutral-400');
     });
 
     it('should have dark mode text color on loading message', () => {
       render(<LoadingScreen />);
       const message = screen.getByText('Launching your orbit...');
-      expect(message).toHaveClass('dark:text-slate-500');
+      expect(message).toHaveClass('dark:text-neutral-500');
     });
 
     it('should have dark mode colors on background patterns', () => {

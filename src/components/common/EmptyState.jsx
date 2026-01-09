@@ -9,7 +9,7 @@ const EmptyState = ({
   description,
   action,
   actionLabel,
-  iconClassName = 'w-8 h-8 text-slate-400 dark:text-slate-500',
+  iconClassName = 'w-8 h-8 text-slate-400 dark:text-neutral-500',
 }) => {
   return (
     <motion.div
@@ -20,18 +20,18 @@ const EmptyState = ({
     >
       {Icon && (
         <div
-          className={`w-16 h-16 mx-auto mb-4 bg-slate-100 dark:bg-slate-800 ${BORDER_RADIUS.badge} flex items-center justify-center transition-colors`}
+          className={`w-16 h-16 mx-auto mb-4 bg-slate-100 dark:bg-neutral-800 ${BORDER_RADIUS.badge} flex items-center justify-center transition-colors`}
         >
           <Icon className={iconClassName} />
         </div>
       )}
       {title && (
-        <h3 className="text-lg font-semibold text-slate-700 dark:text-slate-200 mb-1 transition-colors">
+        <h3 className="text-lg font-semibold text-slate-700 dark:text-neutral-200 mb-1 transition-colors">
           {title}
         </h3>
       )}
       {description && (
-        <p className="text-slate-500 dark:text-slate-400 text-sm transition-colors">
+        <p className="text-slate-500 dark:text-neutral-400 text-sm transition-colors">
           {description}
         </p>
       )}

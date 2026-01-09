@@ -230,7 +230,7 @@ const ProfileTab = () => {
 
   return (
     <div
-      className={`max-w-4xl mx-auto w-full pb-8 bg-white dark:bg-slate-900 ${BORDER_RADIUS.card}`}
+      className={`max-w-4xl mx-auto w-full pb-8 bg-white dark:bg-neutral-900 ${BORDER_RADIUS.card}`}
     >
       {/* Copy Profile Link Popup */}
       <AnimatePresence>
@@ -270,10 +270,10 @@ const ProfileTab = () => {
             <img
               src={PROFILE_DATA.avatar}
               alt={PROFILE_DATA.name}
-              className={`w-24 h-24 sm:w-32 sm:h-32 ${BORDER_RADIUS.avatar} border-4 border-white dark:border-slate-900 object-cover shadow-lg`}
+              className={`w-24 h-24 sm:w-32 sm:h-32 ${BORDER_RADIUS.avatar} border-4 border-white dark:border-neutral-900 object-cover shadow-lg`}
             />
             <div
-              className={`absolute bottom-1 right-1 w-4 h-4 sm:w-5 sm:h-5 bg-green-500 ${BORDER_RADIUS.badge} border-2 border-white dark:border-slate-900`}
+              className={`absolute bottom-1 right-1 w-4 h-4 sm:w-5 sm:h-5 bg-green-500 ${BORDER_RADIUS.badge} border-2 border-white dark:border-neutral-900`}
             />
           </div>
         </motion.div>
@@ -290,8 +290,8 @@ const ProfileTab = () => {
             <h1 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">
               {PROFILE_DATA.name}
             </h1>
-            <p className="text-sm text-slate-500 dark:text-slate-400">{PROFILE_DATA.username}</p>
-            <div className="flex flex-wrap items-center gap-3 mt-2 text-sm text-slate-600 dark:text-slate-400">
+            <p className="text-sm text-slate-500 dark:text-neutral-400">{PROFILE_DATA.username}</p>
+            <div className="flex flex-wrap items-center gap-3 mt-2 text-sm text-slate-600 dark:text-neutral-400">
               <span className="flex items-center gap-1">
                 <Briefcase className="w-4 h-4" />
                 {PROFILE_DATA.profession}
@@ -311,7 +311,7 @@ const ProfileTab = () => {
           >
             <motion.button
               onClick={handleShareProfile}
-              className={`flex items-center gap-2 px-4 py-2 border border-slate-200 dark:border-slate-700 ${BORDER_RADIUS.cardSmall} text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors cursor-pointer`}
+              className={`flex items-center gap-2 px-4 py-2 border border-slate-200 dark:border-neutral-700 ${BORDER_RADIUS.cardSmall} text-sm font-medium text-slate-700 dark:text-neutral-300 hover:bg-slate-50 dark:hover:bg-neutral-800 transition-colors cursor-pointer`}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
@@ -323,7 +323,7 @@ const ProfileTab = () => {
 
         {/* Bio */}
         <motion.p
-          className="mt-4 text-sm text-slate-600 dark:text-slate-400 max-w-2xl"
+          className="mt-4 text-sm text-slate-600 dark:text-neutral-400 max-w-2xl"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
@@ -342,13 +342,13 @@ const ProfileTab = () => {
             <span className="text-[16px] font-bold text-slate-900 dark:text-white">
               {stats.posts}
             </span>
-            <span className="text-sm sm:text-base text-slate-600 dark:text-slate-400">Posts</span>
+            <span className="text-sm sm:text-base text-slate-600 dark:text-neutral-400">Posts</span>
           </div>
           <div className="flex flex-col sm:flex-row sm:items-baseline gap-0.5 sm:gap-1.5">
             <span className="text-[16px] font-bold text-slate-900 dark:text-white">
               {stats.followers}
             </span>
-            <span className="text-sm sm:text-base text-slate-600 dark:text-slate-400">
+            <span className="text-sm sm:text-base text-slate-600 dark:text-neutral-400">
               Followers
             </span>
           </div>
@@ -356,14 +356,14 @@ const ProfileTab = () => {
             <span className="text-[16px] font-bold text-slate-900 dark:text-white">
               {stats.following}
             </span>
-            <span className="text-sm sm:text-base text-slate-600 dark:text-slate-400">
+            <span className="text-sm sm:text-base text-slate-600 dark:text-neutral-400">
               Following
             </span>
           </div>
         </motion.div>
 
         {/* Tabs */}
-        <div className="flex gap-1 mt-4 border-b border-slate-200 dark:border-slate-700">
+        <div className="flex gap-1 mt-4 border-b border-slate-200 dark:border-neutral-700">
           {tabs.map((tab) => (
             <motion.button
               key={tab.id}
@@ -371,7 +371,7 @@ const ProfileTab = () => {
               className={`px-4 py-2 text-sm font-medium transition-colors relative cursor-pointer ${
                 activeTab === tab.id
                   ? 'text-orange-500'
-                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                  : 'text-slate-600 dark:text-neutral-400 hover:text-slate-900 dark:hover:text-white'
               }`}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
@@ -405,7 +405,7 @@ const ProfileTab = () => {
                 {allUserPosts.map((post, index) => (
                   <motion.div
                     key={post.id}
-                    className={`bg-white dark:bg-slate-800 ${BORDER_RADIUS.card} border border-slate-200 dark:border-slate-700 overflow-hidden`}
+                    className={`bg-white dark:bg-neutral-800 ${BORDER_RADIUS.card} border border-slate-200 dark:border-neutral-700 overflow-hidden`}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.05 }}
@@ -421,7 +421,7 @@ const ProfileTab = () => {
                         <p className="text-sm font-semibold text-slate-900 dark:text-white">
                           {PROFILE_DATA.name}
                         </p>
-                        <p className="text-xs text-slate-500 dark:text-slate-400">
+                        <p className="text-xs text-slate-500 dark:text-neutral-400">
                           {post.timestamp || 'Recently'}
                         </p>
                       </div>
@@ -429,7 +429,7 @@ const ProfileTab = () => {
 
                     {/* Post Caption */}
                     {post.caption && (
-                      <p className="px-3 pb-2 text-sm text-slate-700 dark:text-slate-300">
+                      <p className="px-3 pb-2 text-sm text-slate-700 dark:text-neutral-300">
                         {post.caption}
                       </p>
                     )}
@@ -444,13 +444,13 @@ const ProfileTab = () => {
                     )}
 
                     {/* Post Actions */}
-                    <div className="p-3 flex items-center gap-4 border-t border-slate-100 dark:border-slate-700">
+                    <div className="p-3 flex items-center gap-4 border-t border-slate-100 dark:border-neutral-700">
                       <motion.button
                         onClick={() => handleLike(post.id)}
                         className={`flex items-center gap-1.5 cursor-pointer ${
                           post.isLiked
                             ? 'text-rose-500'
-                            : 'text-slate-500 dark:text-slate-400 hover:text-rose-500'
+                            : 'text-slate-500 dark:text-neutral-400 hover:text-rose-500'
                         }`}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
@@ -464,7 +464,7 @@ const ProfileTab = () => {
                         className={`flex items-center gap-1.5 cursor-pointer ${
                           profilePostComments[post.id]
                             ? 'text-blue-500'
-                            : 'text-slate-500 dark:text-slate-400 hover:text-blue-500'
+                            : 'text-slate-500 dark:text-neutral-400 hover:text-blue-500'
                         }`}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
@@ -481,9 +481,9 @@ const ProfileTab = () => {
                           initial={{ height: 0, opacity: 0 }}
                           animate={{ height: 'auto', opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}
-                          className="border-t border-slate-100 dark:border-slate-700 overflow-hidden"
+                          className="border-t border-slate-100 dark:border-neutral-700 overflow-hidden"
                         >
-                          <div className="p-3 bg-slate-50 dark:bg-slate-800/50">
+                          <div className="p-3 bg-slate-50 dark:bg-neutral-800/50">
                             {/* Comments List */}
                             {profileComments[post.id]?.length > 0 && (
                               <div className="space-y-3 mb-3 max-h-60 overflow-y-auto">
@@ -501,17 +501,17 @@ const ProfileTab = () => {
                                       className={`w-8 h-8 ${BORDER_RADIUS.avatar} object-cover shrink-0`}
                                     />
                                     <div
-                                      className={`flex-1 bg-white dark:bg-slate-700 ${BORDER_RADIUS.card} p-2.5 shadow-sm`}
+                                      className={`flex-1 bg-white dark:bg-neutral-700 ${BORDER_RADIUS.card} p-2.5 shadow-sm`}
                                     >
                                       <div className="flex items-center gap-2 mb-1">
                                         <span className="font-semibold text-slate-900 dark:text-white text-sm">
                                           {comment.user.name}
                                         </span>
-                                        <span className="text-xs text-slate-400 dark:text-slate-500">
+                                        <span className="text-xs text-slate-400 dark:text-neutral-500">
                                           {comment.timestamp}
                                         </span>
                                       </div>
-                                      <p className="text-slate-700 dark:text-slate-300 text-sm">
+                                      <p className="text-slate-700 dark:text-neutral-300 text-sm">
                                         {comment.content}
                                       </p>
                                     </div>
@@ -521,7 +521,7 @@ const ProfileTab = () => {
                             )}
 
                             {/* Add Comment Input */}
-                            <div className="flex gap-2 pt-2 border-t border-slate-200 dark:border-slate-700">
+                            <div className="flex gap-2 pt-2 border-t border-slate-200 dark:border-neutral-700">
                               <img
                                 src={PROFILE_DATA.avatar}
                                 alt={PROFILE_DATA.name}
@@ -543,7 +543,7 @@ const ProfileTab = () => {
                                       handleAddComment(post.id);
                                     }
                                   }}
-                                  className={`flex-1 px-3 py-1.5 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 ${BORDER_RADIUS.input} text-sm text-slate-900 dark:text-white placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-orange-500`}
+                                  className={`flex-1 px-3 py-1.5 bg-white dark:bg-neutral-700 border border-slate-200 dark:border-neutral-600 ${BORDER_RADIUS.input} text-sm text-slate-900 dark:text-white placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-orange-500`}
                                 />
                                 <motion.button
                                   onClick={() => handleAddComment(post.id)}
@@ -573,12 +573,12 @@ const ProfileTab = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.2 }}
-              className={`bg-white dark:bg-slate-800 ${BORDER_RADIUS.card} p-4 sm:p-6 border border-slate-200 dark:border-slate-700 mt-4`}
+              className={`bg-white dark:bg-neutral-800 ${BORDER_RADIUS.card} p-4 sm:p-6 border border-slate-200 dark:border-neutral-700 mt-4`}
             >
               <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
                 About Me
               </h3>
-              <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-6">
+              <p className="text-sm text-slate-600 dark:text-neutral-400 leading-relaxed mb-6">
                 Hey there! I'm {PROFILE_DATA.name}, a {PROFILE_DATA.profession} based in{' '}
                 {PROFILE_DATA.location}. I'm passionate about creating meaningful digital
                 experiences and connecting with like-minded individuals. When I'm not designing,
@@ -591,7 +591,7 @@ const ProfileTab = () => {
                   <h4 className="text-sm font-semibold text-slate-900 dark:text-white mb-2">
                     Work
                   </h4>
-                  <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
+                  <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-neutral-400">
                     <Briefcase className="w-4 h-4" />
                     <span>{PROFILE_DATA.profession}</span>
                   </div>
@@ -601,7 +601,7 @@ const ProfileTab = () => {
                   <h4 className="text-sm font-semibold text-slate-900 dark:text-white mb-2">
                     Location
                   </h4>
-                  <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
+                  <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-neutral-400">
                     <MapPin className="w-4 h-4" />
                     <span>{PROFILE_DATA.location}</span>
                   </div>
@@ -616,7 +616,7 @@ const ProfileTab = () => {
                       (interest) => (
                         <span
                           key={interest}
-                          className={`px-3 py-1 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 ${BORDER_RADIUS.badge} text-xs font-medium`}
+                          className={`px-3 py-1 bg-slate-100 dark:bg-neutral-700 text-slate-700 dark:text-neutral-300 ${BORDER_RADIUS.badge} text-xs font-medium`}
                         >
                           {interest}
                         </span>

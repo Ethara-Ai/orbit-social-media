@@ -293,10 +293,10 @@ describe('ConnectionsList', () => {
       expect(wrapper).toHaveClass('border-slate-100');
     });
 
-    it('should have dark:border-slate-700 class on container', () => {
+    it('should have dark:border-neutral-700 class on container', () => {
       const { container } = render(<ConnectionsList {...defaultProps} />);
       const wrapper = container.firstChild;
-      expect(wrapper).toHaveClass('dark:border-slate-700');
+      expect(wrapper).toHaveClass('dark:border-neutral-700');
     });
 
     it('should have pt-4 class on container', () => {
@@ -404,10 +404,10 @@ describe('ConnectionsList', () => {
       expect(label).toHaveClass('text-slate-700');
     });
 
-    it('should have dark:text-slate-300 class on label', () => {
+    it('should have dark:text-neutral-300 class on label', () => {
       render(<ConnectionsList {...defaultProps} />);
       const label = screen.getByText('Connections');
-      expect(label).toHaveClass('dark:text-slate-300');
+      expect(label).toHaveClass('dark:text-neutral-300');
     });
 
     it('should have transition-colors class on label', () => {
@@ -545,10 +545,10 @@ describe('ConnectionsList', () => {
       expect(status).toHaveClass('text-slate-500');
     });
 
-    it('should have dark:text-slate-400 class', () => {
+    it('should have dark:text-neutral-400 class', () => {
       render(<ConnectionsList {...defaultProps} showFriends={true} />);
       const status = screen.getByText('5 minutes ago');
-      expect(status).toHaveClass('dark:text-slate-400');
+      expect(status).toHaveClass('dark:text-neutral-400');
     });
 
     it('should have truncate class', () => {

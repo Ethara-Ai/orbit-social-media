@@ -19,7 +19,7 @@ const ExplorePostCard = memo(function ExplorePostCard({ post, index, onClick }) 
     <motion.article
       role="button"
       tabIndex={0}
-      className={`bg-white dark:bg-slate-800 ${BORDER_RADIUS.card} overflow-hidden cursor-pointer group border border-slate-100 dark:border-slate-700 hover:border-slate-200 dark:hover:border-slate-600 hover:shadow-lg dark:hover:shadow-slate-900/50 transition-all duration-300`}
+      className={`bg-white dark:bg-neutral-800 ${BORDER_RADIUS.card} overflow-hidden cursor-pointer group border border-slate-100 dark:border-neutral-700 hover:border-slate-200 dark:hover:border-slate-600 hover:shadow-lg dark:hover:shadow-slate-900/50 transition-all duration-300`}
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ delay: index * 0.03 }}
@@ -46,7 +46,7 @@ const ExplorePostCard = memo(function ExplorePostCard({ post, index, onClick }) 
       <div className="p-3">
         <div className="flex items-center gap-2 mb-1.5">
           <Avatar src={post.user.avatar} alt={post.user.name} size="xs" />
-          <span className="text-xs text-slate-500 dark:text-slate-400 truncate transition-colors">
+          <span className="text-xs text-slate-500 dark:text-neutral-400 truncate transition-colors">
             {post.user.name}
           </span>
         </div>

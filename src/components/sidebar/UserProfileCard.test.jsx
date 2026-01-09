@@ -345,12 +345,12 @@ describe('UserProfileCard', () => {
     it('should have dark mode class on profession', () => {
       render(<UserProfileCard {...defaultProps} />);
       const profession = screen.getByText('Software Engineer');
-      expect(profession).toHaveClass('dark:text-slate-400');
+      expect(profession).toHaveClass('dark:text-neutral-400');
     });
 
     it('should have dark mode class on stats border', () => {
       const { container } = render(<UserProfileCard {...defaultProps} />);
-      const statsSection = container.querySelector('.dark\\:border-slate-700');
+      const statsSection = container.querySelector('.dark\\:border-neutral-700');
       expect(statsSection).toBeInTheDocument();
     });
 
@@ -363,7 +363,7 @@ describe('UserProfileCard', () => {
     it('should have dark mode class on stat labels', () => {
       render(<UserProfileCard {...defaultProps} />);
       const statLabel = screen.getByText('Posts');
-      expect(statLabel).toHaveClass('dark:text-slate-400');
+      expect(statLabel).toHaveClass('dark:text-neutral-400');
     });
   });
 

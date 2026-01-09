@@ -21,62 +21,62 @@ const TabLoadingFallback = () => (
   <div className="w-full animate-pulse">
     {/* Header skeleton */}
     <div className="mb-6">
-      <div className="h-8 bg-slate-200 dark:bg-slate-700 rounded-lg w-48 mb-2" />
-      <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded-sm w-32" />
+      <div className="h-8 bg-slate-200 dark:bg-neutral-700 rounded-lg w-48 mb-2" />
+      <div className="h-4 bg-slate-200 dark:bg-neutral-700 rounded-sm w-32" />
     </div>
 
     {/* Content skeleton */}
     <div className="space-y-4">
       {/* Card skeleton 1 */}
       <div
-        className={`bg-white dark:bg-slate-800 ${BORDER_RADIUS.card} p-4 border border-slate-200 dark:border-slate-700`}
+        className={`bg-white dark:bg-neutral-800 ${BORDER_RADIUS.card} p-4 border border-slate-200 dark:border-neutral-700`}
       >
         <div className="flex items-center gap-3 mb-4">
-          <div className={`w-10 h-10 bg-slate-200 dark:bg-slate-700 ${BORDER_RADIUS.avatar}`} />
+          <div className={`w-10 h-10 bg-slate-200 dark:bg-neutral-700 ${BORDER_RADIUS.avatar}`} />
           <div className="flex-1">
-            <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded-sm w-32 mb-2" />
-            <div className="h-3 bg-slate-200 dark:bg-slate-700 rounded-sm w-24" />
+            <div className="h-4 bg-slate-200 dark:bg-neutral-700 rounded-sm w-32 mb-2" />
+            <div className="h-3 bg-slate-200 dark:bg-neutral-700 rounded-sm w-24" />
           </div>
         </div>
         <div className="space-y-2">
-          <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded-sm w-full" />
-          <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded-sm w-3/4" />
+          <div className="h-4 bg-slate-200 dark:bg-neutral-700 rounded-sm w-full" />
+          <div className="h-4 bg-slate-200 dark:bg-neutral-700 rounded-sm w-3/4" />
         </div>
       </div>
 
       {/* Card skeleton 2 */}
       <div
-        className={`bg-white dark:bg-slate-800 ${BORDER_RADIUS.card} p-4 border border-slate-200 dark:border-slate-700`}
+        className={`bg-white dark:bg-neutral-800 ${BORDER_RADIUS.card} p-4 border border-slate-200 dark:border-neutral-700`}
       >
         <div className="flex items-center gap-3 mb-4">
-          <div className={`w-10 h-10 bg-slate-200 dark:bg-slate-700 ${BORDER_RADIUS.avatar}`} />
+          <div className={`w-10 h-10 bg-slate-200 dark:bg-neutral-700 ${BORDER_RADIUS.avatar}`} />
           <div className="flex-1">
-            <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded-sm w-40 mb-2" />
-            <div className="h-3 bg-slate-200 dark:bg-slate-700 rounded-sm w-20" />
+            <div className="h-4 bg-slate-200 dark:bg-neutral-700 rounded-sm w-40 mb-2" />
+            <div className="h-3 bg-slate-200 dark:bg-neutral-700 rounded-sm w-20" />
           </div>
         </div>
-        <div className="h-48 bg-slate-200 dark:bg-slate-700 rounded-lg mb-3" />
+        <div className="h-48 bg-slate-200 dark:bg-neutral-700 rounded-lg mb-3" />
         <div className="space-y-2">
-          <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded-sm w-full" />
-          <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded-sm w-1/2" />
+          <div className="h-4 bg-slate-200 dark:bg-neutral-700 rounded-sm w-full" />
+          <div className="h-4 bg-slate-200 dark:bg-neutral-700 rounded-sm w-1/2" />
         </div>
       </div>
 
       {/* Card skeleton 3 */}
       <div
-        className={`bg-white dark:bg-slate-800 ${BORDER_RADIUS.card} p-4 border border-slate-200 dark:border-slate-700`}
+        className={`bg-white dark:bg-neutral-800 ${BORDER_RADIUS.card} p-4 border border-slate-200 dark:border-neutral-700`}
       >
         <div className="flex items-center gap-3 mb-4">
-          <div className={`w-10 h-10 bg-slate-200 dark:bg-slate-700 ${BORDER_RADIUS.avatar}`} />
+          <div className={`w-10 h-10 bg-slate-200 dark:bg-neutral-700 ${BORDER_RADIUS.avatar}`} />
           <div className="flex-1">
-            <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded-sm w-36 mb-2" />
-            <div className="h-3 bg-slate-200 dark:bg-slate-700 rounded-sm w-28" />
+            <div className="h-4 bg-slate-200 dark:bg-neutral-700 rounded-sm w-36 mb-2" />
+            <div className="h-3 bg-slate-200 dark:bg-neutral-700 rounded-sm w-28" />
           </div>
         </div>
         <div className="space-y-2">
-          <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded-sm w-full" />
-          <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded-sm w-5/6" />
-          <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded-sm w-2/3" />
+          <div className="h-4 bg-slate-200 dark:bg-neutral-700 rounded-sm w-full" />
+          <div className="h-4 bg-slate-200 dark:bg-neutral-700 rounded-sm w-5/6" />
+          <div className="h-4 bg-slate-200 dark:bg-neutral-700 rounded-sm w-2/3" />
         </div>
       </div>
     </div>

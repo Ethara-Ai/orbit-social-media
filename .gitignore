@@ -48,6 +48,10 @@ coverage/
 *.tmp
 *.bak
 
+# --- Testing ---
+*.snap
+**/__snapshots__/
+
 # --- Miscellaneous ---
 .terraform/
 *.tfstate*
