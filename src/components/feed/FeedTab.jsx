@@ -7,7 +7,7 @@ const FeedTab = () => {
   const { posts } = useFeed();
 
   return (
-    <div className="max-w-2xl mx-auto w-full px-0 pb-1.5 max-w-[100vw] overflow-x-hidden">
+    <div className="max-w-2xl mx-auto w-full px-0 pb-1.5 overflow-x-hidden">
       {/* Create Post Section - Now includes header internally */}
       <CreatePost />
 

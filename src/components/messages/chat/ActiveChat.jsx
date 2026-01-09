@@ -66,7 +66,7 @@ const MessagesList = ({ messages, messagesEndRef, user }) => {
           <h3 className="text-base sm:text-lg font-semibold text-slate-800 dark:text-slate-100 mb-1 transition-colors">
             {user?.name}
           </h3>
-          <p className="text-slate-500 dark:text-slate-400 text-xs sm:text-sm max-w-[200px] transition-colors">
+          <p className="text-slate-500 dark:text-slate-400 text-xs sm:text-sm max-w-50 transition-colors">
             Say hello and start a conversation with {user?.name?.split(" ")[0]}!
           </p>
         </div>

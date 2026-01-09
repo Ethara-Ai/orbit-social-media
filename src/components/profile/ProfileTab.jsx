@@ -265,7 +265,7 @@ const ProfileTab = () => {
             alt="Cover"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+          <div className="absolute inset-0 bg-linear-to-t from-black/30 to-transparent" />
         </motion.div>
 
         {/* Profile Picture */}
@@ -452,7 +452,7 @@ const ProfileTab = () => {
                       <img
                         src={post.image}
                         alt={post.caption || "Post"}
-                        className="w-full object-cover max-h-[500px]"
+                        className="w-full object-cover max-h-125"
                       />
                     )}
 

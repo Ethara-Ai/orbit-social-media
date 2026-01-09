@@ -44,7 +44,7 @@ const NavigationItems = ({
             whileHover={!isMobile && !isActive ? { x: 2 } : undefined}
             whileTap={{ scale: 0.99 }}
           >
-            <IconComponent className="w-5 h-5 flex-shrink-0" />
+            <IconComponent className="w-5 h-5 shrink-0" />
             <span className="font-medium text-sm flex-1 text-left">
               {item.label}
             </span>

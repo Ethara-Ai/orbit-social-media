@@ -73,7 +73,7 @@ const CreatePost = () => {
               placeholder="Share something..."
               value={newPostContent}
               onChange={handleTextChange}
-              className="block w-full bg-transparent border-0 resize-none focus:outline-hidden text-slate-900 dark:text-white placeholder-slate-500 text-xs sm:text-sm leading-normal pl-3 sm:pl-4 pr-[95px] sm:pr-[105px] py-2.5 sm:py-3 scrollbar-hide"
+              className="block w-full bg-transparent border-0 resize-none focus:outline-hidden text-slate-900 dark:text-white placeholder-slate-500 text-xs sm:text-sm leading-normal pl-3 sm:pl-4 pr-24 sm:pr-26 py-2.5 sm:py-3 scrollbar-hide"
               style={{
                 minHeight: "40px",
                 maxHeight: "150px",

@@ -38,21 +38,21 @@ export default function SocialMediaDashboard() {
       {/* Main Layout Container - Takes remaining height on desktop, flows naturally on mobile */}
       <div className="flex-1 pt-14 sm:pt-16 lg:overflow-hidden">
         {/* Centered Container */}
-        <div className="lg:h-full max-w-[1280px] mx-auto px-4 lg:px-5">
+        <div className="lg:h-full max-w-7xl mx-auto px-4 lg:px-5">
           {/* Three Column Layout */}
           <div className="lg:h-full flex justify-center gap-5 py-3 lg:py-3">
             {/* Left Sidebar - Fixed, non-scrollable (desktop only) */}
-            <div className="hidden lg:block w-[210px] shrink-0 h-fit max-h-[calc(100vh-5rem)] overflow-y-auto custom-scrollbar">
+            <div className="hidden lg:block w-52.5 shrink-0 h-fit max-h-[calc(100vh-5rem)] overflow-y-auto custom-scrollbar">
               <Sidebar />
             </div>
 
             {/* Main Content Area - Scrollable on desktop, natural flow on mobile */}
-            <div className="w-full lg:w-[520px] xl:w-[580px] shrink-0 min-w-0 lg:h-full lg:overflow-y-auto custom-scrollbar pb-6 lg:pb-4">
+            <div className="w-full lg:w-130 xl:w-145 shrink-0 min-w-0 lg:h-full lg:overflow-y-auto custom-scrollbar pb-6 lg:pb-4">
               <MainContent />
             </div>
 
             {/* Right Sidebar - Fixed, non-scrollable (desktop only) */}
-            <div className="hidden xl:block w-[280px] shrink-0 h-fit max-h-[calc(100vh-5rem)] overflow-y-auto custom-scrollbar">
+            <div className="hidden xl:block w-70 shrink-0 h-fit max-h-[calc(100vh-5rem)] overflow-y-auto custom-scrollbar">
               <RightSidebar />
             </div>
           </div>
