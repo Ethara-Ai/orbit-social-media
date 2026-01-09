@@ -5,9 +5,7 @@ import { useTab, useTheme, useMobileNav } from '../../context/providers/ui';
 import { Sun, Moon, Users } from '../icons';
 import { BORDER_RADIUS, TABS } from '../../utils/constants';
 import { createImageErrorHandler } from '../../utils/fileUtils';
-
-// Import CSS for responsive header padding (moved from inline styles for better performance)
-import './Header.css';
+import LayoutContainer from './LayoutContainer';
 
 const Header = () => {
   const { currentUserAvatar, currentUserDetails } = useUser();
@@ -17,7 +15,7 @@ const Header = () => {
 
   return (
     <header className="fixed top-0 left-0 right-0 h-14 sm:h-16 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 z-40 w-full transition-colors duration-300">
-      <div className="h-full max-w-7xl mx-auto header-container">
+      <LayoutContainer className="h-full">
         {/* Three Column Layout matching main content */}
         <div className="h-full flex items-center justify-center gap-5">
           {/* Left Column - matches left sidebar width */}
@@ -234,7 +232,7 @@ const Header = () => {
             </motion.button>
           </nav>
         </div>
-      </div>
+      </LayoutContainer>
     </header>
   );
 };

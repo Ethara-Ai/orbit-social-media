@@ -2,6 +2,7 @@ export { default as SocialMediaDashboard } from './SocialMediaDashboard';
 export { default as LoadingScreen } from './LoadingScreen';
 export { default as Sidebar } from './Sidebar';
 export { default as Header } from './Header';
+export { default as LayoutContainer } from './LayoutContainer';
 export { default as MainContent } from './MainContent';
 export { default as MobileNavOverlay } from './MobileNavOverlay';
 export { default as RightSidebar } from './RightSidebar';

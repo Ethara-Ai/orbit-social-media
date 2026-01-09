@@ -5,6 +5,7 @@ import {
   LoadingScreen,
   Sidebar,
   Header,
+  LayoutContainer,
   MainContent,
   MobileNavOverlay,
   RightSidebar,
@@ -37,9 +38,9 @@ export default function SocialMediaDashboard() {
       <MobileSidebar />
 
       {/* Main Layout Container - Takes remaining height on desktop, flows naturally on mobile */}
-      <div className="flex-1 pt-14 sm:pt-16 lg:overflow-hidden">
-        {/* Centered Container */}
-        <div className="lg:h-full max-w-7xl mx-auto px-4 lg:px-5">
+      <main className="pt-14 sm:pt-16 lg:flex-1 lg:overflow-hidden">
+        {/* Centered Container - Direct child like header's LayoutContainer */}
+        <LayoutContainer className="lg:h-full">
           {/* Three Column Layout */}
           <div className="lg:h-full flex justify-center gap-5 py-3 lg:py-3">
             {/* Left Sidebar - Fixed, non-scrollable (desktop only) */}
@@ -57,8 +58,8 @@ export default function SocialMediaDashboard() {
               <RightSidebar />
             </div>
           </div>
-        </div>
-      </div>
+        </LayoutContainer>
+      </main>
 
       {/* Copy Notification Popup */}
       <CopyNotificationPopup />
