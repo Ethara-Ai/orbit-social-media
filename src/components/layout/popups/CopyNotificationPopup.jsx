@@ -1,12 +1,7 @@
 // eslint-disable-next-line no-unused-vars
-<<<<<<< HEAD
-import { motion, AnimatePresence } from "framer-motion";
-import { useFeed } from "../../../context/AppContext";
-import { BORDER_RADIUS } from "../../../utils/constants";
-=======
 import { motion, AnimatePresence } from 'framer-motion';
 import { useUI } from '../../../context/AppContext';
->>>>>>> c54d32b27c727901701da85adb2ed9bf2b8c9945
+import { BORDER_RADIUS } from '../../../utils/constants';
 
 const CopyNotificationPopup = () => {
   const { showCopyNotification } = useUI();

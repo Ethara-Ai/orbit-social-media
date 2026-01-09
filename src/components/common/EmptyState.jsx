@@ -1,11 +1,7 @@
 // eslint-disable-next-line no-unused-vars
-<<<<<<< HEAD
-import { motion } from "framer-motion";
-import { BORDER_RADIUS } from "../../utils/constants";
-=======
 import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
->>>>>>> c54d32b27c727901701da85adb2ed9bf2b8c9945
+import { BORDER_RADIUS } from '../../utils/constants';
 
 const EmptyState = ({
   icon: Icon,

@@ -1,13 +1,7 @@
 import { memo } from 'react';
 // eslint-disable-next-line no-unused-vars
-<<<<<<< HEAD
-import { motion } from "framer-motion";
-import Avatar from "../common/Avatar";
-import { BORDER_RADIUS } from "../../utils/constants";
-=======
 import { motion } from 'framer-motion';
 import Avatar from '../common/Avatar';
->>>>>>> c54d32b27c727901701da85adb2ed9bf2b8c9945
 
 const FriendItem = memo(function FriendItem({ friend, index, onClick }) {
   return (

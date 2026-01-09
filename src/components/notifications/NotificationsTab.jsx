@@ -1,20 +1,12 @@
 /* eslint-disable react-refresh/only-export-components */
 import { memo } from 'react';
 // eslint-disable-next-line no-unused-vars
-<<<<<<< HEAD
-import { motion } from "framer-motion";
-import { Heart, MessageCircle, UserPlus, User, Bell, Users } from "../icons";
-import Avatar from "../common/Avatar";
-import EmptyState from "../common/EmptyState";
-import { useNotifications } from "../../context/AppContext";
-import { BORDER_RADIUS } from "../../utils/constants";
-=======
 import { motion } from 'framer-motion';
 import { Heart, MessageCircle, UserPlus, User, Bell, Users } from '../icons';
 import Avatar from '../common/Avatar';
 import EmptyState from '../common/EmptyState';
 import { useNotifications } from '../../context/AppContext';
->>>>>>> c54d32b27c727901701da85adb2ed9bf2b8c9945
+import { BORDER_RADIUS } from '../../utils/constants';
 
 const NotificationsTab = () => {
   // Access notifications state directly from context
@@ -64,18 +56,11 @@ const NotificationItem = memo(function NotificationItem({ notification, index })
 
   return (
     <motion.div
-<<<<<<< HEAD
-      className={`bg-white dark:bg-slate-800 ${BORDER_RADIUS.card} p-4 shadow-xs border cursor-default transition-all duration-300 ${isUnread
-        ? "border-orange-200 dark:border-orange-500/30 bg-orange-50/30 dark:bg-orange-500/10"
-        : "border-slate-200 dark:border-slate-700"
-        }`}
-=======
-      className={`bg-white dark:bg-slate-800 rounded-xl p-4 shadow-xs border cursor-default transition-all duration-300 ${
+      className={`bg-white dark:bg-slate-800 ${BORDER_RADIUS.card} p-4 shadow-xs border cursor-default transition-all duration-300 ${
         isUnread
           ? 'border-orange-200 dark:border-orange-500/30 bg-orange-50/30 dark:bg-orange-500/10'
           : 'border-slate-200 dark:border-slate-700'
       }`}
->>>>>>> c54d32b27c727901701da85adb2ed9bf2b8c9945
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: index * 0.05 }}
@@ -104,13 +89,9 @@ const NotificationIconBadge = ({ type }) => {
   const { icon, bgClass } = getNotificationIconConfig(type);
 
   return (
-<<<<<<< HEAD
     <div
-      className={`absolute -bottom-0.5 -right-0.5 ${BORDER_RADIUS.badge} p-1 shadow-xs ${bgClass}`}
+      className={`absolute -bottom-1 -right-1 ${BORDER_RADIUS.badge} p-1.5 shadow-xs ${bgClass}`}
     >
-=======
-    <div className={`absolute -bottom-1 -right-1 rounded-full p-1.5 shadow-xs ${bgClass}`}>
->>>>>>> c54d32b27c727901701da85adb2ed9bf2b8c9945
       {icon}
     </div>
   );
@@ -158,26 +139,6 @@ const NotificationsFooter = ({ count }) => {
 const getNotificationIconConfig = (type) => {
   const configs = {
     like: {
-<<<<<<< HEAD
-      icon: <Heart className="w-3 h-3 text-rose-500" />,
-      bgClass: "bg-rose-100 dark:bg-rose-900",
-    },
-    comment: {
-      icon: <MessageCircle className="w-3 h-3 text-blue-500" />,
-      bgClass: "bg-blue-100 dark:bg-blue-900",
-    },
-    follow: {
-      icon: <UserPlus className="w-3 h-3 text-emerald-500" />,
-      bgClass: "bg-emerald-100 dark:bg-emerald-900",
-    },
-    mention: {
-      icon: <User className="w-3 h-3 text-orange-500" />,
-      bgClass: "bg-orange-100 dark:bg-orange-900",
-    },
-    friend_request: {
-      icon: <Users className="w-3 h-3 text-purple-500" />,
-      bgClass: "bg-purple-100 dark:bg-purple-900",
-=======
       icon: <Heart className="w-4 h-4 text-rose-500" />,
       bgClass: 'bg-rose-50 dark:bg-rose-500/20',
     },
@@ -196,19 +157,13 @@ const getNotificationIconConfig = (type) => {
     friend_request: {
       icon: <Users className="w-4 h-4 text-purple-500" />,
       bgClass: 'bg-purple-50 dark:bg-purple-500/20',
->>>>>>> c54d32b27c727901701da85adb2ed9bf2b8c9945
     },
   };
 
   return (
     configs[type] || {
-<<<<<<< HEAD
-      icon: <Bell className="w-3 h-3 text-slate-400" />,
-      bgClass: "bg-slate-100 dark:bg-slate-700",
-=======
       icon: <Bell className="w-4 h-4 text-slate-400" />,
       bgClass: 'bg-slate-50 dark:bg-slate-700',
->>>>>>> c54d32b27c727901701da85adb2ed9bf2b8c9945
     }
   );
 };

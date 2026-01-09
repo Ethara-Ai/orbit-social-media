@@ -1,23 +1,13 @@
 import { memo } from 'react';
 // eslint-disable-next-line no-unused-vars
-<<<<<<< HEAD
-import { motion, AnimatePresence } from "framer-motion";
-import { usePostCard } from "../../hooks";
-import { BORDER_RADIUS } from "../../utils/constants";
-import PostHeader from "./post/PostHeader";
-import PostContent from "./post/PostContent";
-import PostActions from "./post/PostActions";
-import PostComments from "./post/PostComments";
-=======
 import { motion, AnimatePresence } from 'framer-motion';
 import PropTypes from 'prop-types';
-import { useFeed } from '../../context/AppContext';
-import { useUser } from '../../context/AppContext';
+import { usePostCard } from '../../hooks';
+import { BORDER_RADIUS } from '../../utils/constants';
 import PostHeader from './post/PostHeader';
 import PostContent from './post/PostContent';
 import PostActions from './post/PostActions';
 import PostComments from './post/PostComments';
->>>>>>> c54d32b27c727901701da85adb2ed9bf2b8c9945
 
 const PostCard = memo(function PostCard({ post, index }) {
   // Access feed state and actions directly from context

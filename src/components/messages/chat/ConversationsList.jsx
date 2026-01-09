@@ -1,15 +1,9 @@
 import { memo } from 'react';
 // eslint-disable-next-line no-unused-vars
-<<<<<<< HEAD
-import { motion } from "framer-motion";
-import { Search } from "../../icons";
-import Avatar from "../../common/Avatar";
-import { BORDER_RADIUS } from "../../../utils/constants";
-=======
 import { motion } from 'framer-motion';
 import { Search } from '../../icons';
 import Avatar from '../../common/Avatar';
->>>>>>> c54d32b27c727901701da85adb2ed9bf2b8c9945
+import { BORDER_RADIUS } from '../../../utils/constants';
 
 const ConversationsList = ({
   conversations,
@@ -42,14 +36,9 @@ const ConversationsList = ({
 
   return (
     <div
-<<<<<<< HEAD
-      className={`w-full sm:w-80 border-r border-slate-200 dark:border-slate-700 flex flex-col max-w-[100vw] overflow-x-hidden transition-colors ${isHidden ? "hidden sm:flex" : "flex"
-        }`}
-=======
       className={`w-full sm:w-80 border-r border-slate-200 dark:border-slate-700 flex flex-col max-w-[100vw] overflow-x-hidden transition-colors ${
         isHidden ? 'hidden sm:flex' : 'flex'
       }`}
->>>>>>> c54d32b27c727901701da85adb2ed9bf2b8c9945
     >
       {/* Header */}
       <ConversationsHeader searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
@@ -58,13 +47,13 @@ const ConversationsList = ({
       <div className="flex-1 overflow-y-auto custom-scrollbar">
         {filteredConversations.length > 0
           ? filteredConversations.map((conversation) => (
-            <ConversationItem
-              key={conversation.id}
-              conversation={conversation}
-              isActive={activeConversation === conversation.id}
-              onClick={() => handleConversationClick(conversation)}
-            />
-          ))
+              <ConversationItem
+                key={conversation.id}
+                conversation={conversation}
+                isActive={activeConversation === conversation.id}
+                onClick={() => handleConversationClick(conversation)}
+              />
+            ))
           : searchQuery.trim() && <EmptySearchState />}
       </div>
     </div>
@@ -99,15 +88,6 @@ const ConversationItem = memo(function ConversationItem({ conversation, isActive
       role="button"
       tabIndex={0}
       onClick={onClick}
-<<<<<<< HEAD
-      onKeyDown={(e) => e.key === "Enter" && onClick()}
-      className={`flex items-center gap-2 sm:gap-3 p-3 sm:p-4 cursor-pointer transition-all border-b border-slate-50 dark:border-slate-800 ${isActive
-          ? "bg-orange-50 dark:bg-orange-500/10"
-          : hasUnread
-            ? "bg-orange-50/40 dark:bg-orange-500/5 hover:bg-orange-50/60 dark:hover:bg-orange-500/10"
-            : "hover:bg-slate-50 dark:hover:bg-slate-800"
-        }`}
-=======
       onKeyDown={(e) => e.key === 'Enter' && onClick()}
       className={`flex items-center gap-2 sm:gap-3 p-3 sm:p-4 cursor-pointer transition-all border-b border-slate-50 dark:border-slate-800 ${
         isActive
@@ -116,7 +96,6 @@ const ConversationItem = memo(function ConversationItem({ conversation, isActive
             ? 'bg-orange-50/40 dark:bg-orange-500/5 hover:bg-orange-50/60 dark:hover:bg-orange-500/10'
             : 'hover:bg-slate-50 dark:hover:bg-slate-800'
       }`}
->>>>>>> c54d32b27c727901701da85adb2ed9bf2b8c9945
       whileHover={{ x: 2 }}
     >
       <Avatar
@@ -130,51 +109,30 @@ const ConversationItem = memo(function ConversationItem({ conversation, isActive
       <div className="flex-1 min-w-0">
         <div className="flex justify-between items-center mb-0.5">
           <h3
-<<<<<<< HEAD
-            className={`text-sm truncate transition-colors ${hasUnread
-                ? "font-bold text-slate-900 dark:text-white"
-                : "font-semibold text-slate-900 dark:text-white"
-              }`}
-=======
             className={`text-sm truncate transition-colors ${
               hasUnread
                 ? 'font-bold text-slate-900 dark:text-white'
                 : 'font-semibold text-slate-900 dark:text-white'
             }`}
->>>>>>> c54d32b27c727901701da85adb2ed9bf2b8c9945
           >
             {conversation.user.name}
           </h3>
           <span
-<<<<<<< HEAD
-            className={`text-xs shrink-0 transition-colors ${hasUnread
-                ? "text-orange-600 dark:text-orange-400 font-semibold"
-                : "text-slate-400 dark:text-slate-500"
-              }`}
-=======
             className={`text-xs shrink-0 transition-colors ${
               hasUnread
                 ? 'text-orange-600 dark:text-orange-400 font-semibold'
                 : 'text-slate-400 dark:text-slate-500'
             }`}
->>>>>>> c54d32b27c727901701da85adb2ed9bf2b8c9945
           >
             {conversation.lastMessageTime}
           </span>
         </div>
         <p
-<<<<<<< HEAD
-          className={`text-xs truncate transition-colors ${hasUnread
-              ? "text-slate-800 dark:text-slate-200 font-semibold"
-              : "text-slate-500 dark:text-slate-400"
-            }`}
-=======
           className={`text-xs truncate transition-colors ${
             hasUnread
               ? 'text-slate-800 dark:text-slate-200 font-semibold'
               : 'text-slate-500 dark:text-slate-400'
           }`}
->>>>>>> c54d32b27c727901701da85adb2ed9bf2b8c9945
         >
           {conversation.lastMessage}
         </p>
@@ -186,13 +144,10 @@ const ConversationItem = memo(function ConversationItem({ conversation, isActive
 
 const UnreadBadge = ({ count }) => {
   return (
-<<<<<<< HEAD
-    <div className={`bg-orange-500 text-white text-xs ${BORDER_RADIUS.badge} min-w-5 h-5 flex items-center justify-center shrink-0 font-bold px-1.5`}>
-      {count > 99 ? "99+" : count}
-=======
-    <div className="bg-orange-500 text-white text-xs rounded-full min-w-5 h-5 flex items-center justify-center shrink-0 font-bold px-1.5">
+    <div
+      className={`bg-orange-500 text-white text-xs ${BORDER_RADIUS.badge} min-w-5 h-5 flex items-center justify-center shrink-0 font-bold px-1.5`}
+    >
       {count > 99 ? '99+' : count}
->>>>>>> c54d32b27c727901701da85adb2ed9bf2b8c9945
     </div>
   );
 };
