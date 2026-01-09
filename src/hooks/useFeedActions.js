@@ -8,7 +8,8 @@
  */
 
 import { useCallback } from 'react';
-import { useFeed, useUI } from '../context/AppContext';
+import { useFeed } from '../context/AppContext';
+import { useNotificationPopup } from '../context/providers/ui';
 import {
   createPost,
   toggleLikeById,
@@ -19,7 +20,6 @@ import {
   copyPostUrlToClipboard,
 } from '../services/postService';
 import { processImageFile } from '../utils/fileUtils';
-import { COPY_NOTIFICATION_DURATION } from '../utils/constants';
 
 /**
  * Custom hook for feed action handlers
@@ -44,8 +44,9 @@ export const useFeedActions = () => {
     setSelectedPost,
   } = useFeed();
 
-  // Access UI state for notifications
-  const { setShowCopyNotification } = useUI();
+  // Access notification popup from focused UI context
+  // This properly handles timeout cleanup and prevents memory leaks
+  const { showCopyNotificationWithTimeout } = useNotificationPopup();
 
   /**
    * Handle like action on a post
@@ -94,16 +95,19 @@ export const useFeedActions = () => {
 
   /**
    * Handle share action on a post
+   * Uses the centralized notification popup handler to prevent memory leaks
    */
   const handleShare = useCallback(
     async (postId) => {
       const success = await copyPostUrlToClipboard(postId);
       setPosts((prev) => incrementSharesById(prev, postId));
-      setShowCopyNotification(true);
-      setTimeout(() => setShowCopyNotification(false), COPY_NOTIFICATION_DURATION);
+
+      // Use the centralized handler that properly manages timeouts
+      showCopyNotificationWithTimeout('Link copied to clipboard');
+
       return success;
     },
-    [setPosts, setShowCopyNotification]
+    [setPosts, showCopyNotificationWithTimeout]
   );
 
   /**

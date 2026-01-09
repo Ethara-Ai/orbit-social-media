@@ -5,7 +5,7 @@ A modern, feature-rich social media dashboard built with React 19, featuring a b
 ![React](https://img.shields.io/badge/React-19.2.3-61DAFB?style=flat-square&logo=react)
 ![Vite](https://img.shields.io/badge/Vite-7.3.1-646CFF?style=flat-square&logo=vite)
 ![TailwindCSS](https://img.shields.io/badge/Tailwind-4.1.18-38B2AC?style=flat-square&logo=tailwind-css)
-![Framer Motion](https://img.shields.io/badge/Framer_Motion-12.24.8-FF0055?style=flat-square&logo=framer)
+![Framer Motion](https://img.shields.io/badge/Framer_Motion-12.25.0-FF0055?style=flat-square&logo=framer)
 ![Vitest](https://img.shields.io/badge/Vitest-4.0.16-6E9F18?style=flat-square&logo=vitest)
 
 ## Overview
@@ -75,14 +75,12 @@ Orbit is a fully functional social media dashboard prototype that simulates a re
 | **Framer Motion 12.25.0** | Animations & Transitions |
 | **Vitest 4.0.16** | Unit Testing Framework |
 | **Testing Library** | Component Testing |
-| **ESLint 9** | Code Linting |
+| **ESLint 9.39.2** | Code Linting |
 | **Prettier 3.7.4** | Code Formatting |
 | **GitHub Actions** | CI/CD Pipeline |
 | **SSH Deployment** | Production Server |
 
 ## Architecture
-
-> **For comprehensive architecture documentation, see [ARCHITECTURE.md](docs/ARCHITECTURE.md)**
 
 **Architectural Overview:** This codebase achieves **high cohesion** and **low coupling** through strict separation of concerns. Contexts manage only state and expose setters. Business logic lives in action hooks that consume contexts and provide methods to components. Services contain pure functions with zero React dependencies. This architecture ensures components are decoupled from implementation details, business logic is testable in isolation, and state management is predictable.
 
@@ -136,7 +134,7 @@ Data initialization and access are separated from state management:
 |-----------|---------|
 | `PostRepository` | Initialize and access posts and comments data |
 | `ConversationRepository` | Initialize and access conversation data |
-| `ExploreRepository` | Initialize and access explore posts and categories |
+| `ExploreRepository` | Initialize and access explore posts and categories data |
 
 #### Service Layer
 
@@ -210,6 +208,7 @@ Utilities are organized by domain for high cohesion:
 | `domUtils.js` | DOM manipulation and browser interactions |
 | `numberUtils.js` | Number formatting and generation |
 | `objectUtils.js` | Object manipulation and function utilities |
+| `constants.js` | Application constants |
 | `helpers.js` | Backward compatibility layer (re-exports from domain-specific modules) |
 
 ## Project Structure
@@ -227,9 +226,11 @@ src/
 │   │   ├── EmptyState.jsx
 │   │   ├── EmptyState.test.jsx
 │   │   ├── ErrorBoundary.jsx
+│   │   ├── ErrorBoundary.test.jsx
 │   │   └── index.js
 │   ├── layout/                  # Layout components
 │   │   ├── Header.jsx
+│   │   ├── Header.css
 │   │   ├── Sidebar.jsx
 │   │   ├── MobileSidebar.jsx
 │   │   ├── MainContent.jsx
@@ -237,13 +238,16 @@ src/
 │   │   ├── LoadingScreen.jsx
 │   │   ├── LoadingScreen.test.jsx
 │   │   ├── MobileNavOverlay.jsx
+│   │   ├── SocialMediaDashboard.jsx
 │   │   ├── RightSidebar/
 │   │   │   ├── ActiveNowSection.jsx
 │   │   │   ├── SuggestedUsersSection.jsx
 │   │   │   └── index.js
 │   │   ├── popups/
 │   │   │   ├── CopyNotificationPopup.jsx
+│   │   │   ├── CopyNotificationPopup.test.jsx
 │   │   │   ├── NotificationPopup.jsx
+│   │   │   ├── NotificationPopup.test.jsx
 │   │   │   └── index.js
 │   │   └── index.js
 │   ├── feed/                    # Feed tab components
@@ -254,6 +258,7 @@ src/
 │   │       ├── PostActions.jsx
 │   │       ├── PostActions.test.jsx
 │   │       ├── PostComments.jsx
+│   │       ├── PostComments.test.jsx
 │   │       ├── PostContent.jsx
 │   │       ├── PostContent.test.jsx
 │   │       ├── PostHeader.jsx
@@ -264,8 +269,10 @@ src/
 │   │   └── chat/
 │   │       ├── ActiveChat.jsx
 │   │       ├── ChatHeader.jsx
+│   │       ├── ChatHeader.test.jsx
 │   │       ├── ConversationsList.jsx
 │   │       ├── EmptyChatState.jsx
+│   │       ├── EmptyChatState.test.jsx
 │   │       ├── MessageBubble.jsx
 │   │       ├── MessageBubble.test.jsx
 │   │       ├── MessageInput.jsx
@@ -285,8 +292,11 @@ src/
 │   │   ├── ExplorePostCard.jsx
 │   │   ├── ExplorePostCard.test.jsx
 │   │   ├── FeaturedPostCard.jsx
+│   │   ├── FeaturedPostCard.test.jsx
 │   │   ├── FeaturedSection.jsx
+│   │   ├── FeaturedSection.test.jsx
 │   │   ├── RegularPostsGrid.jsx
+│   │   ├── RegularPostsGrid.test.jsx
 │   │   ├── modal/
 │   │   │   ├── CommentsPanel.jsx
 │   │   │   ├── TheaterModal.jsx
@@ -304,7 +314,9 @@ src/
 │   │   ├── NavigationItems.jsx
 │   │   ├── NavigationItems.test.jsx
 │   │   ├── ProfileAnalytics.jsx
+│   │   ├── ProfileAnalytics.test.jsx
 │   │   ├── UserProfileCard.jsx
+│   │   ├── UserProfileCard.test.jsx
 │   │   └── index.js
 │   ├── icons.jsx                # SVG icon components
 │   └── index.js
@@ -318,6 +330,7 @@ src/
 │       ├── NotificationsContext.jsx
 │       ├── ExploreContext.jsx
 │       ├── UIContext.jsx
+│       ├── ui/                  # UI-related sub-providers
 │       └── index.js
 │
 ├── services/                    # Business logic layer (pure functions)
@@ -351,6 +364,7 @@ src/
 │   ├── arrayUtils.js            # Array manipulation utilities
 │   ├── fileUtils.js             # File processing utilities
 │   ├── stringUtils.js           # String manipulation utilities
+│   ├── stringUtils.test.js
 │   ├── domUtils.js              # DOM manipulation utilities
 │   ├── numberUtils.js           # Number formatting utilities
 │   ├── objectUtils.js           # Object and function utilities
@@ -369,16 +383,20 @@ src/
 │       ├── ExploreRepository.js # Explore posts and categories data
 │       └── index.js
 │
+├── assets/                      # Static assets
+│
 ├── App.jsx                      # App entry with AppProvider
 ├── App.css                      # App-specific styles
-├── SocialMediaDashboard.jsx     # Main dashboard component
 ├── main.jsx                     # Application entry point
 └── index.css                    # Global styles
 
 .github/
 └── workflows/
-    ├── deploy.yml               # CI/CD pipeline for AWS S3
+    ├── deploy.yml               # CI/CD pipeline for production
     └── pr-check.yml             # PR validation workflow
+
+docs/
+└── DEPLOYMENT.MD                # Deployment setup guide
 ```
 
 ## Getting Started
@@ -425,6 +443,8 @@ src/
 | `npm run preview` | Preview production build |
 | `npm run lint` | Run ESLint |
 | `npm run lint:fix` | Run ESLint with auto-fix |
+| `npm run format` | Format code with Prettier |
+| `npm run format:check` | Check code formatting |
 | `npm run test` | Run tests in watch mode |
 | `npm run test:run` | Run tests once |
 | `npm run test:coverage` | Run tests with coverage report |
@@ -575,23 +595,22 @@ The messaging system includes a smart response generator that analyzes your mess
 
 ## Documentation
 
-- [Architecture Guide](docs/ARCHITECTURE.md) - Comprehensive architecture documentation
 - [Deployment Guide](docs/DEPLOYMENT.MD) - Production deployment setup
 
 ## Project Stats
 
 | Metric | Value |
 |--------|-------|
-| Test Files | 34 |
-| Total Tests | 1,561 |
-| Components | 50+ |
+| Test Files | 35 |
+| Total Tests | 1,595 |
+| Components | 51 |
 | Utility Hooks | 6 |
 | Action Hooks | 2 |
 | Facade Hooks | 1 |
 | Context Providers | 6 |
 | Services | 4 |
 | Repositories | 3 |
-| Utility Modules | 7 |
+| Utility Modules | 9 |
 
 ## Contributing
 

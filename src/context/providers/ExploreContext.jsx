@@ -12,6 +12,7 @@ import { toggleLikeById } from '../../services/postService';
 // ============================================================================
 
 const ExploreContext = createContext(null);
+ExploreContext.displayName = 'ExploreContext';
 
 // ============================================================================
 // Explore Provider

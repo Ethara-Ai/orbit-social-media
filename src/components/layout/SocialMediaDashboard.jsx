@@ -1,4 +1,4 @@
-import { useUI } from './context/AppContext';
+import { useLoading } from '../../context/providers/ui';
 
 // Import Layout Components
 import {
@@ -10,14 +10,15 @@ import {
   RightSidebar,
   CopyNotificationPopup,
   MobileSidebar,
-} from './components/layout';
+} from './';
 
 // ============================================================================
 // Main Dashboard Component
 // ============================================================================
 
 export default function SocialMediaDashboard() {
-  const { isLoading } = useUI();
+  // Use focused hook for better performance - only re-renders when loading state changes
+  const { isLoading } = useLoading();
 
   // Loading State
   if (isLoading) {

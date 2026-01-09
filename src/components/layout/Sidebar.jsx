@@ -4,25 +4,27 @@ import { Home, Search, MessageCircle, Bell } from '../icons';
 import UserProfileCard from '../sidebar/UserProfileCard';
 import NavigationItems from '../sidebar/NavigationItems';
 import ProfileAnalytics from '../sidebar/ProfileAnalytics';
-import { INITIAL_PROFILE_POSTS, PROFILE_DATA, BORDER_RADIUS } from '../../utils/constants';
-import { useUser, useUI, useMessages, useNotifications, useFeed } from '../../context/AppContext';
+import { INITIAL_PROFILE_POSTS, PROFILE_DATA, BORDER_RADIUS, TABS } from '../../utils/constants';
+import { useUser, useMessages, useNotifications, useFeed } from '../../context/AppContext';
+import { useTab } from '../../context/providers/ui';
 
 const Sidebar = () => {
   const { currentUser, currentUserAvatar, currentUserDetails } = useUser();
   const { posts } = useFeed();
-  const { activeTab, setActiveTab } = useUI();
+  // Use focused hook for better performance - only re-renders when tab state changes
+  const { activeTab, setActiveTab } = useTab();
   const { totalUnreadMessages } = useMessages();
   const { notificationCount, markNotificationsAsRead } = useNotifications();
 
   const navItems = [
-    { id: 'feed', label: 'Home', icon: Home },
-    { id: 'explore', label: 'Discover', icon: Search },
-    { id: 'messages', label: 'Chats', icon: MessageCircle },
-    { id: 'notifications', label: 'Notifications', icon: Bell },
+    { id: TABS.FEED, label: 'Home', icon: Home },
+    { id: TABS.EXPLORE, label: 'Discover', icon: Search },
+    { id: TABS.MESSAGES, label: 'Chats', icon: MessageCircle },
+    { id: TABS.NOTIFICATIONS, label: 'Notifications', icon: Bell },
   ];
 
   const handleNavigateToProfile = () => {
-    setActiveTab('profile');
+    setActiveTab(TABS.PROFILE);
   };
 
   return (

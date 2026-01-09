@@ -1,10 +1,11 @@
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from 'framer-motion';
-import { useUI } from '../../../context/AppContext';
+import { useNotificationPopup } from '../../../context/providers/ui';
 import { BORDER_RADIUS } from '../../../utils/constants';
 
 const CopyNotificationPopup = () => {
-  const { showCopyNotification } = useUI();
+  // Use focused hook for better performance - only re-renders when notification popup state changes
+  const { showCopyNotification, copyNotificationMessage } = useNotificationPopup();
 
   return (
     <AnimatePresence>
@@ -23,7 +24,7 @@ const CopyNotificationPopup = () => {
           >
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
           </svg>
-          Link copied to clipboard!
+          {copyNotificationMessage}
         </motion.div>
       )}
     </AnimatePresence>

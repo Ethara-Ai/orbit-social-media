@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
 import Badge from '../common/Badge';
-import { BORDER_RADIUS } from '../../utils/constants';
+import { BORDER_RADIUS, TABS } from '../../utils/constants';
 
 const NavigationItems = ({
   navItems,
@@ -15,7 +15,7 @@ const NavigationItems = ({
 }) => {
   const handleNavClick = (item) => {
     setActiveTab(item.id);
-    if (item.id === 'notifications') {
+    if (item.id === TABS.NOTIFICATIONS) {
       markNotificationsAsRead();
     }
     if (onNavigate) {
@@ -28,8 +28,8 @@ const NavigationItems = ({
       {navItems.map((item) => {
         const IconComponent = item.icon;
         const isActive = activeTab === item.id;
-        const showNotificationBadge = item.id === 'notifications' && notificationCount > 0;
-        const showMessagesBadge = item.id === 'messages' && totalUnreadMessages > 0;
+        const showNotificationBadge = item.id === TABS.NOTIFICATIONS && notificationCount > 0;
+        const showMessagesBadge = item.id === TABS.MESSAGES && totalUnreadMessages > 0;
 
         return (
           <motion.button

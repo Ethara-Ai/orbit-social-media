@@ -13,6 +13,7 @@ import { MAX_ACTIVE_FRIENDS, PROFILE_DATA } from '../../utils/constants';
 // ============================================================================
 
 const UserContext = createContext(null);
+UserContext.displayName = 'UserContext';
 
 // ============================================================================
 // User Provider

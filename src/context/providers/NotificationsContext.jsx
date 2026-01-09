@@ -1,5 +1,13 @@
 /* eslint-disable react-refresh/only-export-components */
-import { createContext, useContext, useState, useMemo, useCallback, useEffect } from 'react';
+import {
+  createContext,
+  useContext,
+  useState,
+  useMemo,
+  useCallback,
+  useEffect,
+  useRef,
+} from 'react';
 
 // Import Data
 import { friends, suggestedUsers, createMockNotifications } from '../../data/mockData';
@@ -20,14 +28,15 @@ import {
   TABS,
 } from '../../utils/constants';
 
-// Import UI Context to check active tab
-import { useUI } from './UIContext';
+// Import focused UI hook for tab state
+import { useTab } from './ui';
 
 // ============================================================================
 // Context Definition
 // ============================================================================
 
 const NotificationsContext = createContext(null);
+NotificationsContext.displayName = 'NotificationsContext';
 
 // ============================================================================
 // Notifications Provider
@@ -38,6 +47,10 @@ const NotificationsContext = createContext(null);
 //   internal and only accessible through actions for better encapsulation
 // - Auto-generation of notifications is handled internally
 // - Components only interact through actions (markNotificationsAsRead, etc.)
+//
+// Memory Leak Fix:
+// - Uses ref to track activeTab to prevent interval recreation on tab changes
+// - Interval is only created once and reads current tab from ref
 // ============================================================================
 
 export function NotificationsProvider({ children }) {
@@ -53,13 +66,24 @@ export function NotificationsProvider({ children }) {
   const [notificationCount, setNotificationCount] = useState(() => countUnread(mockNotifications));
 
   // ==========================================================================
-  // Effects
+  // Refs for stable interval closure
   // ==========================================================================
 
-  // Get active tab from UI context to check if user is on notifications tab
-  const { activeTab } = useUI();
+  // Get active tab from focused Tab context
+  const { activeTab } = useTab();
 
-  // Auto-generate notifications
+  // Use ref to track activeTab - this prevents interval recreation on tab changes
+  // and ensures the interval always reads the current value
+  const activeTabRef = useRef(activeTab);
+
+  // Keep ref in sync with state
+  useEffect(() => {
+    activeTabRef.current = activeTab;
+  }, [activeTab]);
+
+  // ==========================================================================
+  // Auto-generate notifications (with memory leak fix)
+  // ==========================================================================
   useEffect(() => {
     const interval = setInterval(() => {
       const newNotification = generateRandomNotification(
@@ -69,8 +93,8 @@ export function NotificationsProvider({ children }) {
       );
 
       if (newNotification) {
-        // If user is on notifications tab, mark new notification as read immediately
-        const isOnNotificationsTab = activeTab === TABS.NOTIFICATIONS;
+        // Read current tab from ref to get latest value
+        const isOnNotificationsTab = activeTabRef.current === TABS.NOTIFICATIONS;
         const notificationToAdd = isOnNotificationsTab
           ? { ...newNotification, isRead: true }
           : newNotification;
@@ -101,10 +125,7 @@ export function NotificationsProvider({ children }) {
 
     // Cleanup interval on unmount to prevent memory leaks
     return () => clearInterval(interval);
-  }, [activeTab]);
-
-  // Note: Notification count is updated inline during notification generation
-  // This effect is redundant and has been removed to improve performance
+  }, []); // Empty dependency array - interval created only once
 
   // ==========================================================================
   // Notifications Handlers
@@ -116,11 +137,32 @@ export function NotificationsProvider({ children }) {
   }, []);
 
   const markNotificationAsRead = useCallback((notificationId) => {
-    setNotifications((prev) =>
-      prev.map((notification) =>
+    setNotifications((prev) => {
+      const updated = prev.map((notification) =>
         notification.id === notificationId ? { ...notification, isRead: true } : notification
-      )
-    );
+      );
+      setNotificationCount(countUnread(updated));
+      return updated;
+    });
+  }, []);
+
+  /**
+   * Add a new notification manually
+   * @param {Object} notification - The notification to add
+   */
+  const addNewNotification = useCallback((notification) => {
+    const isOnNotificationsTab = activeTabRef.current === TABS.NOTIFICATIONS;
+    const notificationToAdd = isOnNotificationsTab
+      ? { ...notification, isRead: true }
+      : notification;
+
+    setNotifications((prev) => {
+      const updated = addNotification(prev, notificationToAdd, MAX_NOTIFICATIONS);
+      if (!isOnNotificationsTab) {
+        setNotificationCount(countUnread(updated));
+      }
+      return updated;
+    });
   }, []);
 
   // ==========================================================================
@@ -143,8 +185,15 @@ export function NotificationsProvider({ children }) {
       // Actions (encapsulate state changes)
       markNotificationsAsRead,
       markNotificationAsRead,
+      addNewNotification,
     }),
-    [notifications, notificationCount, markNotificationsAsRead, markNotificationAsRead]
+    [
+      notifications,
+      notificationCount,
+      markNotificationsAsRead,
+      markNotificationAsRead,
+      addNewNotification,
+    ]
   );
 
   return (

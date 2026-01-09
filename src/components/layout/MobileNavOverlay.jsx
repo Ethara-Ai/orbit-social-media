@@ -1,9 +1,10 @@
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from 'framer-motion';
-import { useUI } from '../../context/AppContext';
+import { useMobileNav } from '../../context/providers/ui';
 
 const MobileNavOverlay = () => {
-  const { showMobileNav, closeMobileNav } = useUI();
+  // Use focused hook for better performance - only re-renders when mobile nav state changes
+  const { showMobileNav, closeMobileNav } = useMobileNav();
 
   return (
     <AnimatePresence>

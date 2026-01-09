@@ -27,6 +27,31 @@ export { NotificationsProvider, useNotifications } from './NotificationsContext'
 export { ExploreProvider, useExplore } from './ExploreContext';
 
 // ============================================================================
-// UI Context
+// UI Context (Composed Provider + Compatibility Hook)
 // ============================================================================
 export { UIProvider, useUI } from './UIContext';
+
+// ============================================================================
+// Focused UI Contexts (Recommended for better performance)
+// These are split from the monolithic UIContext to reduce re-renders
+// ============================================================================
+export {
+  // Tab Navigation
+  TabProvider,
+  useTab,
+  // Theme Management
+  ThemeProvider,
+  useTheme,
+  // Modal Management
+  ModalProvider,
+  useModal,
+  // Mobile Navigation
+  MobileNavProvider,
+  useMobileNav,
+  // Loading State
+  LoadingProvider,
+  useLoading,
+  // Notification Popups
+  NotificationPopupProvider,
+  useNotificationPopup,
+} from './ui';

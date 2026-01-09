@@ -1,9 +1,10 @@
 import { lazy, Suspense, useEffect } from 'react';
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
-import { useUI } from '../../context/AppContext';
+import { useTab } from '../../context/providers/ui';
 import { useMessagesActions } from '../../hooks/useMessagesActions';
 import { TABS, BORDER_RADIUS } from '../../utils/constants';
+import { InlineErrorBoundary } from '../common/ErrorBoundary';
 
 // Lazy load tab components for better initial bundle size
 const FeedTab = lazy(() => import('../feed/FeedTab'));
@@ -88,10 +89,12 @@ const TabLoadingFallback = () => (
  * This component:
  * 1. Renders the active tab content
  * 2. Uses React.lazy() for code splitting - tabs load on demand
- * 3. Content scrolling is handled by parent container in SocialMediaDashboard
+ * 3. Wraps each tab in InlineErrorBoundary for graceful error handling
+ * 4. Content scrolling is handled by parent container in SocialMediaDashboard
  */
 const MainContent = () => {
-  const { activeTab, isLeavingMessagesTab } = useUI();
+  // Use focused hook for better performance - only re-renders when tab state changes
+  const { activeTab, isLeavingMessagesTab } = useTab();
   const { cleanupEmptyConvos } = useMessagesActions();
 
   // Cleanup empty conversations when leaving messages tab
@@ -111,104 +114,116 @@ const MainContent = () => {
     <main className="w-full min-w-0">
       {/* Feed Tab */}
       <div className={getTabWrapperClass(TABS.FEED)}>
-        <Suspense fallback={<TabLoadingFallback />}>
-          {activeTab === TABS.FEED ? (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3 }}
-            >
+        <InlineErrorBoundary fallbackMessage="Failed to load feed. Please try refreshing the page.">
+          <Suspense fallback={<TabLoadingFallback />}>
+            {activeTab === TABS.FEED ? (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <FeedTab />
+              </motion.div>
+            ) : (
               <FeedTab />
-            </motion.div>
-          ) : (
-            <FeedTab />
-          )}
-        </Suspense>
+            )}
+          </Suspense>
+        </InlineErrorBoundary>
       </div>
 
       {/* Explore Tab */}
       <div className={getTabWrapperClass(TABS.EXPLORE)}>
-        <Suspense fallback={<TabLoadingFallback />}>
-          {activeTab === TABS.EXPLORE ? (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3 }}
-            >
+        <InlineErrorBoundary fallbackMessage="Failed to load explore content. Please try refreshing the page.">
+          <Suspense fallback={<TabLoadingFallback />}>
+            {activeTab === TABS.EXPLORE ? (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <ExploreTab />
+              </motion.div>
+            ) : (
               <ExploreTab />
-            </motion.div>
-          ) : (
-            <ExploreTab />
-          )}
-        </Suspense>
+            )}
+          </Suspense>
+        </InlineErrorBoundary>
       </div>
 
       {/* Messages Tab */}
       <div className={getTabWrapperClass(TABS.MESSAGES)}>
-        <Suspense fallback={<TabLoadingFallback />}>
-          {activeTab === TABS.MESSAGES ? (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3 }}
-            >
+        <InlineErrorBoundary fallbackMessage="Failed to load messages. Please try refreshing the page.">
+          <Suspense fallback={<TabLoadingFallback />}>
+            {activeTab === TABS.MESSAGES ? (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <MessagesTab />
+              </motion.div>
+            ) : (
               <MessagesTab />
-            </motion.div>
-          ) : (
-            <MessagesTab />
-          )}
-        </Suspense>
+            )}
+          </Suspense>
+        </InlineErrorBoundary>
       </div>
 
       {/* Notifications Tab */}
       <div className={getTabWrapperClass(TABS.NOTIFICATIONS)}>
-        <Suspense fallback={<TabLoadingFallback />}>
-          {activeTab === TABS.NOTIFICATIONS ? (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3 }}
-            >
+        <InlineErrorBoundary fallbackMessage="Failed to load notifications. Please try refreshing the page.">
+          <Suspense fallback={<TabLoadingFallback />}>
+            {activeTab === TABS.NOTIFICATIONS ? (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <NotificationsTab />
+              </motion.div>
+            ) : (
               <NotificationsTab />
-            </motion.div>
-          ) : (
-            <NotificationsTab />
-          )}
-        </Suspense>
+            )}
+          </Suspense>
+        </InlineErrorBoundary>
       </div>
 
       {/* Connections Tab */}
       <div className={getTabWrapperClass(TABS.CONNECTIONS)}>
-        <Suspense fallback={<TabLoadingFallback />}>
-          {activeTab === TABS.CONNECTIONS ? (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3 }}
-            >
+        <InlineErrorBoundary fallbackMessage="Failed to load connections. Please try refreshing the page.">
+          <Suspense fallback={<TabLoadingFallback />}>
+            {activeTab === TABS.CONNECTIONS ? (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <ConnectionsTab />
+              </motion.div>
+            ) : (
               <ConnectionsTab />
-            </motion.div>
-          ) : (
-            <ConnectionsTab />
-          )}
-        </Suspense>
+            )}
+          </Suspense>
+        </InlineErrorBoundary>
       </div>
 
       {/* Profile Tab */}
       <div className={getTabWrapperClass(TABS.PROFILE)}>
-        <Suspense fallback={<TabLoadingFallback />}>
-          {activeTab === TABS.PROFILE ? (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3 }}
-            >
+        <InlineErrorBoundary fallbackMessage="Failed to load profile. Please try refreshing the page.">
+          <Suspense fallback={<TabLoadingFallback />}>
+            {activeTab === TABS.PROFILE ? (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <ProfileTab />
+              </motion.div>
+            ) : (
               <ProfileTab />
-            </motion.div>
-          ) : (
-            <ProfileTab />
-          )}
-        </Suspense>
+            )}
+          </Suspense>
+        </InlineErrorBoundary>
       </div>
     </main>
   );
