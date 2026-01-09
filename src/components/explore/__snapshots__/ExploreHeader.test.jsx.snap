@@ -11,7 +11,7 @@ exports[`ExploreHeader > snapshot > should match snapshot 1`] = `
     Discover
   </h1>
   <p
-    class="text-slate-500 dark:text-slate-400 text-sm mt-1 transition-colors"
+    class="text-slate-500 dark:text-neutral-400 text-sm mt-1 transition-colors"
   >
     Explore content from creators worldwide
   </p>

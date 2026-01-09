@@ -187,7 +187,7 @@ describe('EmptyChatState', () => {
 
     it('should have dark mode class on icon container', () => {
       const { container } = render(<EmptyChatState />);
-      const iconContainer = container.querySelector('.dark\\:bg-slate-700');
+      const iconContainer = container.querySelector('.dark\\:bg-neutral-700');
       expect(iconContainer).toBeInTheDocument();
     });
 

@@ -44,14 +44,10 @@ const ConnectionsTab = () => {
             {friends.map((friend, index) => (
               <motion.div
                 key={friend.id}
-                role="button"
-                tabIndex={0}
-                className="flex items-center gap-3 px-4 py-3 hover:bg-slate-50 dark:hover:bg-neutral-700/50 transition-colors cursor-pointer"
+                className="flex items-center gap-3 px-4 py-3 border-b border-transparent transition-colors"
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: index * 0.03 }}
-                onClick={() => handleViewProfile(friend)}
-                onKeyDown={(e) => e.key === 'Enter' && handleViewProfile(friend)}
               >
                 <Avatar
                   src={friend.avatar}
@@ -126,24 +122,21 @@ const ConnectionsTab = () => {
                   />
                 </button>
                 <div className="flex-1 min-w-0">
-                  <button
-                    type="button"
-                    className="font-medium text-sm text-slate-900 dark:text-white truncate hover:text-orange-600 dark:hover:text-orange-400 transition-colors bg-transparent border-0 p-0 text-left cursor-pointer"
-                    onClick={() => handleViewProfile(user)}
+                  <span
+                    className="font-medium text-sm text-slate-900 dark:text-white truncate transition-colors block"
                   >
                     {user.name}
-                  </button>
+                  </span>
                   <p className="text-xs text-slate-500 dark:text-neutral-400 truncate">
                     {user.mutualFriends} mutual connections
                   </p>
                 </div>
                 <motion.button
                   onClick={() => sendConnectionRequest(user.id)}
-                  className={`shrink-0 px-3 py-1.5 ${BORDER_RADIUS.cardSmall} font-medium text-xs transition-all ${
-                    connectionRequests.includes(user.id)
+                  className={`shrink-0 px-3 py-1.5 ${BORDER_RADIUS.cardSmall} font-medium text-xs transition-all ${connectionRequests.includes(user.id)
                       ? 'bg-slate-100 dark:bg-neutral-700 text-slate-500 dark:text-neutral-400 cursor-default'
                       : 'bg-orange-500 hover:bg-orange-600 text-white shadow-sm cursor-pointer'
-                  }`}
+                    }`}
                   whileHover={{
                     scale: connectionRequests.includes(user.id) ? 1 : 1.02,
                   }}

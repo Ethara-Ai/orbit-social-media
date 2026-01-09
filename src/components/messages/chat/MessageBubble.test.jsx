@@ -324,7 +324,7 @@ describe('MessageBubble', () => {
   describe('dark mode classes', () => {
     it('should have dark mode background class for received messages', () => {
       const { container } = render(<MessageBubble message={receivedMessage} />);
-      const bubble = container.querySelector('.dark\\:bg-slate-700');
+      const bubble = container.querySelector('.dark\\:bg-neutral-700');
       expect(bubble).toBeInTheDocument();
     });
 

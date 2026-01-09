@@ -76,7 +76,7 @@ describe('notificationService', () => {
       const user = { id: '1', name: 'John Doe' };
       const notification = generateConnectionNotification(user);
 
-      expect(notification.timestamp).toBe('now');
+      expect(notification.timestamp).toBe('Just now');
     });
 
     it('should set isRead to false', () => {
@@ -172,10 +172,10 @@ describe('notificationService', () => {
     });
 
     it('should set timestamp to "now"', () => {
-      const user = { id: '1', name: 'Jane Doe' };
+      const user = { id: '1', name: 'John Doe' };
       const notification = generateFriendRequestNotification(user);
 
-      expect(notification.timestamp).toBe('now');
+      expect(notification.timestamp).toBe('Just now');
     });
 
     it('should set isRead to false', () => {

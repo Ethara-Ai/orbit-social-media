@@ -1,5 +1,5 @@
 /* eslint-disable react-refresh/only-export-components */
-import { createContext, useContext, useState, useMemo, useCallback } from 'react';
+import { createContext, useContext, useState, useMemo, useCallback, useEffect } from 'react';
 
 // ============================================================================
 // Context Definition
@@ -37,6 +37,28 @@ export function MobileNavProvider({ children }) {
     setShowMobileNav(false);
     setShowMobileRightSidebar(false);
   }, []);
+
+  // ==========================================================================
+  // Side Effects
+  // ==========================================================================
+
+  // Lock body scroll when any mobile overlay is open
+  useEffect(() => {
+    if (showMobileNav || showMobileRightSidebar) {
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+    } else {
+      // Re-enable scrolling only if no other blocking UI elements are active
+      // (This is a simplified check - for more complex apps, use a proper lock manager)
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+    };
+  }, [showMobileNav, showMobileRightSidebar]);
 
   // ==========================================================================
   // Context Value

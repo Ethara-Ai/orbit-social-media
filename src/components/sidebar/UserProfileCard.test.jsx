@@ -350,7 +350,7 @@ describe('UserProfileCard', () => {
 
     it('should have dark mode class on stats border', () => {
       const { container } = render(<UserProfileCard {...defaultProps} />);
-      const statsSection = container.querySelector('.dark\\:border-slate-700');
+      const statsSection = container.querySelector('.dark\\:border-neutral-700');
       expect(statsSection).toBeInTheDocument();
     });
 

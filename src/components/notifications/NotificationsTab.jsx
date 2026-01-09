@@ -1,5 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
-import { memo } from 'react';
+/* eslint-disable react-refresh/only-export-components */
+import { memo, useState, useEffect } from 'react';
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
 import { Heart, MessageCircle, UserPlus, User, Bell, Users } from '../icons';
@@ -7,10 +8,21 @@ import Avatar from '../common/Avatar';
 import EmptyState from '../common/EmptyState';
 import { useNotifications } from '../../context/AppContext';
 import { BORDER_RADIUS } from '../../utils/constants';
+import { formatRelativeTime } from '../../utils/timeUtils';
 
 const NotificationsTab = () => {
   // Access notifications state directly from context
   const { notifications } = useNotifications();
+  const [now, setNow] = useState(Date.now());
+
+  // Update relative times every minute
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setNow(Date.now());
+    }, 60000); // 60 seconds
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="max-w-2xl mx-auto w-full">
@@ -21,7 +33,12 @@ const NotificationsTab = () => {
       <div className="space-y-2">
         {notifications.length > 0 ? (
           notifications.map((notification, index) => (
-            <NotificationItem key={notification.id} notification={notification} index={index} />
+            <NotificationItem
+              key={notification.id}
+              notification={notification}
+              index={index}
+              now={now}
+            />
           ))
         ) : (
           <EmptyState
@@ -51,30 +68,42 @@ const NotificationsHeader = () => {
   );
 };
 
-const NotificationItem = memo(function NotificationItem({ notification, index }) {
-  const isUnread = !notification.isRead;
+const NotificationItem = memo(
+  function NotificationItem({ notification, index, now }) {
+    const isUnread = !notification.isRead;
 
-  return (
-    <motion.div
-      className={`bg-white dark:bg-neutral-800 ${BORDER_RADIUS.card} p-4 shadow-xs border cursor-default transition-all duration-300 ${
-        isUnread
-          ? 'border-orange-200 dark:border-orange-500/30 bg-orange-50/30 dark:bg-orange-500/10'
-          : 'border-slate-200 dark:border-neutral-700'
-      }`}
-      initial={{ opacity: 0, x: -20 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ delay: index * 0.05 }}
-    >
-      <div className="flex items-center gap-4">
-        {/* Avatar with Icon Badge */}
-        <NotificationAvatar user={notification.user} type={notification.type} />
+    return (
+      <motion.div
+        className={`bg-white dark:bg-neutral-800 ${BORDER_RADIUS.card} p-4 shadow-xs border cursor-default transition-all duration-300 ${
+          isUnread
+            ? 'border-orange-200 dark:border-orange-500/30 bg-orange-50/30 dark:bg-orange-500/10'
+            : 'border-slate-200 dark:border-neutral-700'
+        }`}
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: index * 0.05 }}
+      >
+        <div className="flex items-center gap-4">
+          {/* Avatar with Icon Badge */}
+          <NotificationAvatar user={notification.user} type={notification.type} />
 
-        {/* Content */}
-        <NotificationContent notification={notification} isUnread={isUnread} />
-      </div>
-    </motion.div>
-  );
-});
+          {/* Content */}
+          <NotificationContent notification={notification} isUnread={isUnread} now={now} />
+        </div>
+      </motion.div>
+    );
+  },
+  // Custom comparison function for memo
+  (prevProps, nextProps) => {
+    return (
+      prevProps.notification === nextProps.notification &&
+      prevProps.index === nextProps.index &&
+      // Only re-render if time difference affects relative string?
+      // For simplicity, we can let it re-render every minute if now changes
+      prevProps.now === nextProps.now
+    );
+  }
+);
 
 const NotificationAvatar = ({ user, type }) => {
   return (
@@ -97,7 +126,13 @@ const NotificationIconBadge = ({ type }) => {
   );
 };
 
-const NotificationContent = ({ notification, isUnread }) => {
+const NotificationContent = ({ notification, isUnread, now }) => {
+  // Calculate relative time if createdAt is present, otherwise fallback to static timestamp
+  // We pass 'now' as a dependency to ensure recalc on update
+  const timeString = notification.createdAt
+    ? formatRelativeTime(notification.createdAt, now)
+    : notification.timestamp;
+
   return (
     <div className="flex-1 min-w-0">
       <div className="flex items-center gap-2">
@@ -110,7 +145,7 @@ const NotificationContent = ({ notification, isUnread }) => {
         {notification.message}
       </p>
       <p className="text-slate-400 dark:text-neutral-500 text-xs mt-1 transition-colors">
-        {notification.timestamp}
+        {timeString}
       </p>
     </div>
   );
