@@ -6,14 +6,15 @@ import {
   useMemo,
   useCallback,
   useEffect,
-} from "react";
+  useRef,
+} from 'react';
 
 // Import Data
-import { trendingTopics } from "../../data/mockData";
+import { trendingTopics } from '../../data/mockData';
 
 // Import Utils
-import { scrollToTop } from "../../utils/helpers";
-import { LOADING_DURATION, TABS } from "../../utils/constants";
+import { scrollToTop } from '../../utils/helpers';
+import { LOADING_DURATION, TABS, COPY_NOTIFICATION_DURATION } from '../../utils/constants';
 
 // ============================================================================
 // Context Definition
@@ -49,24 +50,27 @@ export function UIProvider({ children }) {
   const [selectedPost, setSelectedPost] = useState(null);
   const [isTheaterModeOpen, setIsTheaterModeOpen] = useState(false);
 
+  // Ref for copy notification timeout to prevent memory leaks
+  const copyNotificationTimeoutRef = useRef(null);
+
   // Theme state - use lazy initializer to read from localStorage/system preference
   const [theme, setThemeState] = useState(() => {
     // Safe check for SSR
-    if (typeof window === "undefined") return "light";
+    if (typeof window === 'undefined') return 'light';
 
     try {
-      const savedTheme = localStorage.getItem("orbit-theme");
-      if (savedTheme === "dark" || savedTheme === "light") {
+      const savedTheme = localStorage.getItem('orbit-theme');
+      if (savedTheme === 'dark' || savedTheme === 'light') {
         return savedTheme;
       }
       // Check system preference
-      if (window.matchMedia?.("(prefers-color-scheme: dark)")?.matches) {
-        return "dark";
+      if (window.matchMedia?.('(prefers-color-scheme: dark)')?.matches) {
+        return 'dark';
       }
     } catch {
       // localStorage might not be available
     }
-    return "light";
+    return 'light';
   });
 
   // ==========================================================================
@@ -84,32 +88,37 @@ export function UIProvider({ children }) {
   // Apply theme to document whenever it changes
   useEffect(() => {
     const root = document.documentElement;
-    root.classList.remove("light", "dark");
+    root.classList.remove('light', 'dark');
     root.classList.add(theme);
     try {
-      localStorage.setItem("orbit-theme", theme);
+      localStorage.setItem('orbit-theme', theme);
     } catch {
       // localStorage might not be available
     }
   }, [theme]);
+
+  // Cleanup copy notification timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (copyNotificationTimeoutRef.current) {
+        clearTimeout(copyNotificationTimeoutRef.current);
+      }
+    };
+  }, []);
 
   // ==========================================================================
   // Computed Values
   // ==========================================================================
 
   const isModalOpen = useMemo(
-    () =>
-      showProfileModal ||
-      showCurrentUserModal ||
-      selectedPost !== null ||
-      isTheaterModeOpen,
-    [showProfileModal, showCurrentUserModal, selectedPost, isTheaterModeOpen],
+    () => showProfileModal || showCurrentUserModal || selectedPost !== null || isTheaterModeOpen,
+    [showProfileModal, showCurrentUserModal, selectedPost, isTheaterModeOpen]
   );
 
   // Track if we're leaving the messages tab (used by MessagesTab to cleanup)
   const isLeavingMessagesTab = useMemo(
     () => previousTab === TABS.MESSAGES && activeTab !== TABS.MESSAGES,
-    [previousTab, activeTab],
+    [previousTab, activeTab]
   );
 
   // ==========================================================================
@@ -122,7 +131,7 @@ export function UIProvider({ children }) {
       setActiveTabState(newTab);
       scrollToTop();
     },
-    [activeTab],
+    [activeTab]
   );
 
   const closeMobileNav = useCallback(() => {
@@ -137,14 +146,32 @@ export function UIProvider({ children }) {
   }, []);
 
   const toggleTheme = useCallback(() => {
-    setThemeState((prev) => (prev === "light" ? "dark" : "light"));
+    setThemeState((prev) => (prev === 'light' ? 'dark' : 'light'));
   }, []);
 
   const setTheme = useCallback((newTheme) => {
     setThemeState(newTheme);
   }, []);
 
-  const isDarkMode = theme === "dark";
+  /**
+   * Show copy notification with automatic timeout cleanup
+   * Prevents memory leaks by clearing previous timeouts
+   */
+  const showCopyNotificationWithTimeout = useCallback(() => {
+    // Clear any existing timeout to prevent overlap
+    if (copyNotificationTimeoutRef.current) {
+      clearTimeout(copyNotificationTimeoutRef.current);
+    }
+
+    setShowCopyNotification(true);
+
+    copyNotificationTimeoutRef.current = setTimeout(() => {
+      setShowCopyNotification(false);
+      copyNotificationTimeoutRef.current = null;
+    }, COPY_NOTIFICATION_DURATION);
+  }, []);
+
+  const isDarkMode = theme === 'dark';
 
   // ==========================================================================
   // Context Value
@@ -196,6 +223,7 @@ export function UIProvider({ children }) {
       closeMobileNav,
       closeAllModals,
       toggleTheme,
+      showCopyNotificationWithTimeout,
     }),
     [
       activeTab,
@@ -218,12 +246,11 @@ export function UIProvider({ children }) {
       closeAllModals,
       toggleTheme,
       setTheme,
-    ],
+      showCopyNotificationWithTimeout,
+    ]
   );
 
-  return (
-    <UIContext.Provider value={contextValue}>{children}</UIContext.Provider>
-  );
+  return <UIContext.Provider value={contextValue}>{children}</UIContext.Provider>;
 }
 
 // ============================================================================
@@ -233,7 +260,7 @@ export function UIProvider({ children }) {
 export function useUI() {
   const context = useContext(UIContext);
   if (!context) {
-    throw new Error("useUI must be used within a UIProvider");
+    throw new Error('useUI must be used within a UIProvider');
   }
   return context;
 }

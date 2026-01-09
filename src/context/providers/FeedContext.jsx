@@ -1,12 +1,24 @@
 /* eslint-disable react-refresh/only-export-components */
-import { createContext, useContext, useState, useMemo } from "react";
+import { createContext, useContext, useState, useMemo, useCallback } from 'react';
 
 // Import Data
-import { currentUser } from "../../data/mockData";
-import { postRepository } from "../../data/repositories";
+import { currentUser, friends, createMockPosts, createInitialComments } from '../../data/mockData';
 
-// Import Hooks
-import { useFeedActions } from "../../hooks/useFeedActions";
+// Import Services
+import {
+  createPost,
+  toggleLikeById,
+  incrementSharesById,
+  incrementCommentsById,
+  addPost,
+  createComment,
+  addComment,
+  toggleCommentVisibility,
+  copyPostUrlToClipboard,
+} from '../../services/postService';
+
+// Import Utils
+import { processImageFile } from '../../utils/helpers';
 
 // ============================================================================
 // Context Definition
@@ -40,10 +52,9 @@ export function FeedProvider({ children }) {
   const [comments, setComments] = useState(initialComments);
   const [showComments, setShowComments] = useState([]);
   const [newComment, setNewComment] = useState({});
-  const [newPostContent, setNewPostContent] = useState("");
+  const [newPostContent, setNewPostContent] = useState('');
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedPost, setSelectedPost] = useState(null);
-  const [showCopyNotification, setShowCopyNotification] = useState(false);
 
   // ==========================================================================
   // Feed Action Handlers (Business Logic)
@@ -127,7 +138,6 @@ export function FeedProvider({ children }) {
       newPostContent,
       selectedImage,
       selectedPost,
-      showCopyNotification,
       handleLike,
       handleComment,
       handleAddComment,
@@ -136,12 +146,10 @@ export function FeedProvider({ children }) {
       handleImageUpload,
       handlePostClick,
       clearSelectedPost,
-    ],
+    ]
   );
 
-  return (
-    <FeedContext.Provider value={contextValue}>{children}</FeedContext.Provider>
-  );
+  return <FeedContext.Provider value={contextValue}>{children}</FeedContext.Provider>;
 }
 
 // ============================================================================
@@ -151,7 +159,7 @@ export function FeedProvider({ children }) {
 export function useFeed() {
   const context = useContext(FeedContext);
   if (!context) {
-    throw new Error("useFeed must be used within a FeedProvider");
+    throw new Error('useFeed must be used within a FeedProvider');
   }
   return context;
 }

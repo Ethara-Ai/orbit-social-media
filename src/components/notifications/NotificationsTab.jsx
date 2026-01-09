@@ -1,10 +1,20 @@
+/* eslint-disable react-refresh/only-export-components */
+import { memo } from 'react';
 // eslint-disable-next-line no-unused-vars
+<<<<<<< HEAD
 import { motion } from "framer-motion";
 import { Heart, MessageCircle, UserPlus, User, Bell, Users } from "../icons";
 import Avatar from "../common/Avatar";
 import EmptyState from "../common/EmptyState";
 import { useNotifications } from "../../context/AppContext";
 import { BORDER_RADIUS } from "../../utils/constants";
+=======
+import { motion } from 'framer-motion';
+import { Heart, MessageCircle, UserPlus, User, Bell, Users } from '../icons';
+import Avatar from '../common/Avatar';
+import EmptyState from '../common/EmptyState';
+import { useNotifications } from '../../context/AppContext';
+>>>>>>> c54d32b27c727901701da85adb2ed9bf2b8c9945
 
 const NotificationsTab = () => {
   // Access notifications state directly from context
@@ -19,11 +29,7 @@ const NotificationsTab = () => {
       <div className="space-y-2">
         {notifications.length > 0 ? (
           notifications.map((notification, index) => (
-            <NotificationItem
-              key={notification.id}
-              notification={notification}
-              index={index}
-            />
+            <NotificationItem key={notification.id} notification={notification} index={index} />
           ))
         ) : (
           <EmptyState
@@ -35,9 +41,7 @@ const NotificationsTab = () => {
       </div>
 
       {/* Footer */}
-      {notifications.length > 0 && (
-        <NotificationsFooter count={notifications.length} />
-      )}
+      {notifications.length > 0 && <NotificationsFooter count={notifications.length} />}
     </div>
   );
 };
@@ -55,15 +59,23 @@ const NotificationsHeader = () => {
   );
 };
 
-const NotificationItem = ({ notification, index }) => {
+const NotificationItem = memo(function NotificationItem({ notification, index }) {
   const isUnread = !notification.isRead;
 
   return (
     <motion.div
+<<<<<<< HEAD
       className={`bg-white dark:bg-slate-800 ${BORDER_RADIUS.card} p-4 shadow-xs border cursor-default transition-all duration-300 ${isUnread
         ? "border-orange-200 dark:border-orange-500/30 bg-orange-50/30 dark:bg-orange-500/10"
         : "border-slate-200 dark:border-slate-700"
         }`}
+=======
+      className={`bg-white dark:bg-slate-800 rounded-xl p-4 shadow-xs border cursor-default transition-all duration-300 ${
+        isUnread
+          ? 'border-orange-200 dark:border-orange-500/30 bg-orange-50/30 dark:bg-orange-500/10'
+          : 'border-slate-200 dark:border-slate-700'
+      }`}
+>>>>>>> c54d32b27c727901701da85adb2ed9bf2b8c9945
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: index * 0.05 }}
@@ -77,7 +89,7 @@ const NotificationItem = ({ notification, index }) => {
       </div>
     </motion.div>
   );
-};
+});
 
 const NotificationAvatar = ({ user, type }) => {
   return (
@@ -92,9 +104,13 @@ const NotificationIconBadge = ({ type }) => {
   const { icon, bgClass } = getNotificationIconConfig(type);
 
   return (
+<<<<<<< HEAD
     <div
       className={`absolute -bottom-0.5 -right-0.5 ${BORDER_RADIUS.badge} p-1 shadow-xs ${bgClass}`}
     >
+=======
+    <div className={`absolute -bottom-1 -right-1 rounded-full p-1.5 shadow-xs ${bgClass}`}>
+>>>>>>> c54d32b27c727901701da85adb2ed9bf2b8c9945
       {icon}
     </div>
   );
@@ -132,7 +148,7 @@ const NotificationsFooter = ({ count }) => {
       transition={{ delay: 0.3 }}
     >
       <p className="text-slate-400 dark:text-slate-500 text-sm transition-colors">
-        Showing {count} notification{count !== 1 ? "s" : ""}
+        Showing {count} notification{count !== 1 ? 's' : ''}
       </p>
     </motion.div>
   );
@@ -142,6 +158,7 @@ const NotificationsFooter = ({ count }) => {
 const getNotificationIconConfig = (type) => {
   const configs = {
     like: {
+<<<<<<< HEAD
       icon: <Heart className="w-3 h-3 text-rose-500" />,
       bgClass: "bg-rose-100 dark:bg-rose-900",
     },
@@ -160,15 +177,50 @@ const getNotificationIconConfig = (type) => {
     friend_request: {
       icon: <Users className="w-3 h-3 text-purple-500" />,
       bgClass: "bg-purple-100 dark:bg-purple-900",
+=======
+      icon: <Heart className="w-4 h-4 text-rose-500" />,
+      bgClass: 'bg-rose-50 dark:bg-rose-500/20',
+    },
+    comment: {
+      icon: <MessageCircle className="w-4 h-4 text-blue-500" />,
+      bgClass: 'bg-blue-50 dark:bg-blue-500/20',
+    },
+    follow: {
+      icon: <UserPlus className="w-4 h-4 text-emerald-500" />,
+      bgClass: 'bg-emerald-50 dark:bg-emerald-500/20',
+    },
+    mention: {
+      icon: <User className="w-4 h-4 text-orange-500" />,
+      bgClass: 'bg-orange-50 dark:bg-orange-500/20',
+    },
+    friend_request: {
+      icon: <Users className="w-4 h-4 text-purple-500" />,
+      bgClass: 'bg-purple-50 dark:bg-purple-500/20',
+>>>>>>> c54d32b27c727901701da85adb2ed9bf2b8c9945
     },
   };
 
   return (
     configs[type] || {
+<<<<<<< HEAD
       icon: <Bell className="w-3 h-3 text-slate-400" />,
       bgClass: "bg-slate-100 dark:bg-slate-700",
+=======
+      icon: <Bell className="w-4 h-4 text-slate-400" />,
+      bgClass: 'bg-slate-50 dark:bg-slate-700',
+>>>>>>> c54d32b27c727901701da85adb2ed9bf2b8c9945
     }
   );
 };
 
 export default NotificationsTab;
+export {
+  NotificationsHeader,
+  NotificationItem,
+  NotificationAvatar,
+  NotificationIconBadge,
+  NotificationContent,
+  UnreadDot,
+  NotificationsFooter,
+  getNotificationIconConfig,
+};
