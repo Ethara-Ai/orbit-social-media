@@ -1,2 +1,2 @@
-export { default as ActiveNowSection } from "./ActiveNowSection";
-export { default as SuggestedUsersSection } from "./SuggestedUsersSection";
+export { default as ActiveNowSection } from './ActiveNowSection';
+export { default as SuggestedUsersSection } from './SuggestedUsersSection';

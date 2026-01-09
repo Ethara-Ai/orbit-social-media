@@ -46,7 +46,7 @@ export const getRandomItems = (array, count) => {
  */
 export const groupBy = (array, key) => {
   return array.reduce((result, item) => {
-    const groupKey = typeof key === "function" ? key(item) : item[key];
+    const groupKey = typeof key === 'function' ? key(item) : item[key];
     (result[groupKey] = result[groupKey] || []).push(item);
     return result;
   }, {});

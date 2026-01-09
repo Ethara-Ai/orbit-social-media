@@ -1,17 +1,11 @@
 /* eslint-disable react-refresh/only-export-components */
-import {
-  createContext,
-  useContext,
-  useState,
-  useMemo,
-  useCallback,
-} from "react";
+import { createContext, useContext, useState, useMemo, useCallback } from 'react';
 
 // Import Data
-import { exploreRepository } from "../../data/repositories";
+import { exploreRepository } from '../../data/repositories';
 
 // Import Services
-import { toggleLikeById } from "../../services/postService";
+import { toggleLikeById } from '../../services/postService';
 
 // ============================================================================
 // Context Definition
@@ -36,16 +30,12 @@ export function ExploreProvider({ children }) {
   // Initialize Data from Repository
   // ==========================================================================
   const initialExplorePosts = useMemo(() => exploreRepository.getPosts(), []);
-  const exploreCategories = useMemo(
-    () => exploreRepository.getCategories(),
-    [],
-  );
+  const exploreCategories = useMemo(() => exploreRepository.getCategories(), []);
 
   // ==========================================================================
   // Explore State
   // ==========================================================================
-  const [explorePostsState, setExplorePostsState] =
-    useState(initialExplorePosts);
+  const [explorePostsState, setExplorePostsState] = useState(initialExplorePosts);
   const [activeExploreCategory, setActiveExploreCategory] = useState(null);
   const [showExploreModal, setShowExploreModal] = useState(false);
   const [selectedExplorePost, setSelectedExplorePost] = useState(null);
@@ -59,7 +49,7 @@ export function ExploreProvider({ children }) {
   }, []);
 
   const handleExplorePostClick = useCallback((post) => {
-    console.log("View explore post:", post?.title);
+    console.log('View explore post:', post?.title);
     setSelectedExplorePost(post);
     setShowExploreModal(true);
   }, []);
@@ -107,14 +97,10 @@ export function ExploreProvider({ children }) {
       handleExploreLike,
       handleExplorePostClick,
       closeExploreModal,
-    ],
+    ]
   );
 
-  return (
-    <ExploreContext.Provider value={contextValue}>
-      {children}
-    </ExploreContext.Provider>
-  );
+  return <ExploreContext.Provider value={contextValue}>{children}</ExploreContext.Provider>;
 }
 
 // ============================================================================
@@ -124,7 +110,7 @@ export function ExploreProvider({ children }) {
 export function useExplore() {
   const context = useContext(ExploreContext);
   if (!context) {
-    throw new Error("useExplore must be used within an ExploreProvider");
+    throw new Error('useExplore must be used within an ExploreProvider');
   }
   return context;
 }

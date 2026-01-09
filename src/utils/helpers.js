@@ -14,43 +14,38 @@
  */
 
 // Time Utilities
-import * as timeUtilsImport from "./timeUtils";
-export { formatRelativeTime, formatTime } from "./timeUtils";
+import * as timeUtilsImport from './timeUtils';
+export { formatRelativeTime, formatTime } from './timeUtils';
 
 // Array Utilities
-import * as arrayUtilsImport from "./arrayUtils";
-export {
-  pickRandom,
-  shuffleArray,
-  getRandomItems,
-  groupBy,
-} from "./arrayUtils";
+import * as arrayUtilsImport from './arrayUtils';
+export { pickRandom, shuffleArray, getRandomItems, groupBy } from './arrayUtils';
 
 // File Utilities
-import * as fileUtilsImport from "./fileUtils";
+import * as fileUtilsImport from './fileUtils';
 export {
   readFileAsDataUrl,
   isValidImage,
   processImageFile,
   DEFAULT_AVATAR,
   createImageErrorHandler,
-} from "./fileUtils";
+} from './fileUtils';
 
 // String Utilities
-import * as stringUtilsImport from "./stringUtils";
-export { truncateText, capitalizeFirst, isEmpty } from "./stringUtils";
+import * as stringUtilsImport from './stringUtils';
+export { truncateText, capitalizeFirst, isEmpty } from './stringUtils';
 
 // DOM Utilities
-import * as domUtilsImport from "./domUtils";
-export { copyToClipboard, scrollToTop, scrollIntoView, cn } from "./domUtils";
+import * as domUtilsImport from './domUtils';
+export { copyToClipboard, scrollToTop, scrollIntoView, cn } from './domUtils';
 
 // Number Utilities
-import * as numberUtilsImport from "./numberUtils";
-export { formatNumber, generateId } from "./numberUtils";
+import * as numberUtilsImport from './numberUtils';
+export { formatNumber, generateId } from './numberUtils';
 
 // Object Utilities
-import * as objectUtilsImport from "./objectUtils";
-export { deepClone, debounce, throttle } from "./objectUtils";
+import * as objectUtilsImport from './objectUtils';
+export { deepClone, debounce, throttle } from './objectUtils';
 
 // Default export with all utilities
 export default {

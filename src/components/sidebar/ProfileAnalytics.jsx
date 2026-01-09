@@ -1,20 +1,16 @@
-import { useState } from "react";
+import { useState } from 'react';
 // eslint-disable-next-line no-unused-vars
-import { motion } from "framer-motion";
-import { useUI } from "../../context/AppContext";
-import { Eye, BarChart3 } from "../icons";
-import { BORDER_RADIUS } from "../../utils/constants";
+import { motion } from 'framer-motion';
+import { useUI } from '../../context/AppContext';
+import { Eye, BarChart3 } from '../icons';
+import { BORDER_RADIUS } from '../../utils/constants';
 
 const ProfileAnalytics = () => {
   const { setActiveTab } = useUI();
   // Initialize with random values using function initializers to avoid useEffect
   const [profileViewers] = useState(() => Math.floor(Math.random() * 451) + 50);
-  const [postImpressions] = useState(
-    () => Math.floor(Math.random() * 1801) + 200,
-  );
-  const [likesAndComments] = useState(
-    () => Math.floor(Math.random() * 901) + 100,
-  );
+  const [postImpressions] = useState(() => Math.floor(Math.random() * 1801) + 200);
+  const [likesAndComments] = useState(() => Math.floor(Math.random() * 901) + 100);
 
   // Format large numbers with commas
   const formatNumber = (num) => {
@@ -53,8 +49,8 @@ const ProfileAnalytics = () => {
         <div
           role="button"
           tabIndex={0}
-          onClick={() => setActiveTab("notifications")}
-          onKeyDown={(e) => e.key === "Enter" && setActiveTab("notifications")}
+          onClick={() => setActiveTab('notifications')}
+          onKeyDown={(e) => e.key === 'Enter' && setActiveTab('notifications')}
           className="flex items-center justify-between px-4 py-0.5 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors cursor-pointer group"
         >
           <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-200 transition-colors">

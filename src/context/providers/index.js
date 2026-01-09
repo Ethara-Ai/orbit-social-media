@@ -4,32 +4,29 @@
 // ============================================================================
 // User Context
 // ============================================================================
-export { UserProvider, useUser } from "./UserContext";
+export { UserProvider, useUser } from './UserContext';
 
 // ============================================================================
 // Feed Context
 // ============================================================================
-export { FeedProvider, useFeed } from "./FeedContext";
+export { FeedProvider, useFeed } from './FeedContext';
 
 // ============================================================================
 // Messages Context
 // ============================================================================
-export { MessagesProvider, useMessages } from "./MessagesContext";
+export { MessagesProvider, useMessages } from './MessagesContext';
 
 // ============================================================================
 // Notifications Context
 // ============================================================================
-export {
-  NotificationsProvider,
-  useNotifications,
-} from "./NotificationsContext";
+export { NotificationsProvider, useNotifications } from './NotificationsContext';
 
 // ============================================================================
 // Explore Context
 // ============================================================================
-export { ExploreProvider, useExplore } from "./ExploreContext";
+export { ExploreProvider, useExplore } from './ExploreContext';
 
 // ============================================================================
 // UI Context
 // ============================================================================
-export { UIProvider, useUI } from "./UIContext";
+export { UIProvider, useUI } from './UIContext';

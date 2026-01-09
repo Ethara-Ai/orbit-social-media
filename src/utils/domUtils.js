@@ -13,7 +13,7 @@ export const copyToClipboard = async (text) => {
     await navigator.clipboard.writeText(text);
     return true;
   } catch (err) {
-    console.error("Failed to copy to clipboard:", err);
+    console.error('Failed to copy to clipboard:', err);
     return false;
   }
 };
@@ -22,7 +22,7 @@ export const copyToClipboard = async (text) => {
  * Scroll to top of page
  * @param {string} behavior - Scroll behavior ('smooth', 'instant', 'auto')
  */
-export const scrollToTop = (behavior = "instant") => {
+export const scrollToTop = (behavior = 'instant') => {
   window.scrollTo({ top: 0, behavior });
 };
 
@@ -31,7 +31,7 @@ export const scrollToTop = (behavior = "instant") => {
  * @param {HTMLElement|null} element - Element to scroll to
  * @param {string} behavior - Scroll behavior
  */
-export const scrollIntoView = (element, behavior = "smooth") => {
+export const scrollIntoView = (element, behavior = 'smooth') => {
   element?.scrollIntoView({ behavior });
 };
 
@@ -44,16 +44,16 @@ export const cn = (...classes) => {
   return classes
     .filter(Boolean)
     .map((c) => {
-      if (typeof c === "string") return c;
-      if (typeof c === "object") {
+      if (typeof c === 'string') return c;
+      if (typeof c === 'object') {
         return Object.entries(c)
           .filter(([, value]) => value)
           .map(([key]) => key)
-          .join(" ");
+          .join(' ');
       }
-      return "";
+      return '';
     })
-    .join(" ")
+    .join(' ')
     .trim();
 };
 

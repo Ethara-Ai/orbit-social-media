@@ -146,7 +146,10 @@ const Header = () => {
           </div>
 
           {/* Mobile/Tablet Right Actions - shows when xl right sidebar is hidden */}
-          <nav className="xl:hidden flex items-center gap-1 sm:gap-3 shrink-0" aria-label="User actions">
+          <nav
+            className="xl:hidden flex items-center gap-1 sm:gap-3 shrink-0"
+            aria-label="User actions"
+          >
             {/* User Profile */}
             <motion.button
               onClick={() => setActiveTab('profile')}

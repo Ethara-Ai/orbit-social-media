@@ -14,8 +14,8 @@ export const createConversation = (user) => {
     user,
     messages: [],
     unreadCount: 0,
-    lastMessage: "",
-    lastMessageTime: "",
+    lastMessage: '',
+    lastMessageTime: '',
   };
 };
 
@@ -86,9 +86,7 @@ export const moveConversationToTop = (conversations, conversationId) => {
  * @returns {Object[]} Updated conversations
  */
 export const updateConversation = (conversations, conversationId, updates) => {
-  return conversations.map((conv) =>
-    conv.id === conversationId ? { ...conv, ...updates } : conv
-  );
+  return conversations.map((conv) => (conv.id === conversationId ? { ...conv, ...updates } : conv));
 };
 
 /**
@@ -111,10 +109,9 @@ export const addMessageToConversation = (
     return {
       ...conv,
       messages: [...conv.messages, message],
-      lastMessage: message.text || "Sent an attachment",
-      lastMessageTime: "Just now",
-      unreadCount:
-        message.isSent || isViewing ? conv.unreadCount : conv.unreadCount + 1,
+      lastMessage: message.text || 'Sent an attachment',
+      lastMessageTime: 'Just now',
+      unreadCount: message.isSent || isViewing ? conv.unreadCount : conv.unreadCount + 1,
     };
   });
 };
@@ -131,8 +128,8 @@ export const clearConversationMessages = (conversations, conversationId) => {
       ? {
           ...conv,
           messages: [],
-          lastMessage: "No messages yet",
-          lastMessageTime: "",
+          lastMessage: 'No messages yet',
+          lastMessageTime: '',
           unreadCount: 0,
         }
       : conv

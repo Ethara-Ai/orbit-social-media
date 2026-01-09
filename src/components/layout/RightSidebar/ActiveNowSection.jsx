@@ -1,14 +1,9 @@
 // eslint-disable-next-line no-unused-vars
-import { motion } from "framer-motion";
-import { BORDER_RADIUS } from "../../../utils/constants";
+import { motion } from 'framer-motion';
+import { BORDER_RADIUS } from '../../../utils/constants';
 
 const MessageIcon = () => (
-  <svg
-    className="w-5 h-5"
-    fill="none"
-    stroke="currentColor"
-    viewBox="0 0 24 24"
-  >
+  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -18,18 +13,16 @@ const MessageIcon = () => (
   </svg>
 );
 
-const ActiveNowSection = ({
-  activeOnlineFriends,
-  friends,
-  startConversation,
-}) => {
+const ActiveNowSection = ({ activeOnlineFriends, friends, startConversation }) => {
   return (
     <>
       <div className="flex items-center justify-between mb-3">
         <h2 className="text-base font-bold text-slate-900 dark:text-white transition-colors">
           Active Now
         </h2>
-        <span className={`flex items-center gap-1.5 text-xs text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/10 px-2 py-1 ${BORDER_RADIUS.badge} transition-colors`}>
+        <span
+          className={`flex items-center gap-1.5 text-xs text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/10 px-2 py-1 ${BORDER_RADIUS.badge} transition-colors`}
+        >
           <span className={`w-2 h-2 bg-emerald-500 ${BORDER_RADIUS.badge} animate-pulse`}></span>
           {activeOnlineFriends.length} online
         </span>
@@ -46,7 +39,7 @@ const ActiveNowSection = ({
             transition={{ delay: index * 0.05 }}
             whileHover={{ x: -2 }}
             onClick={() => startConversation(friend)}
-            onKeyDown={(e) => e.key === "Enter" && startConversation(friend)}
+            onKeyDown={(e) => e.key === 'Enter' && startConversation(friend)}
           >
             <div className="relative">
               <img
@@ -55,10 +48,12 @@ const ActiveNowSection = ({
                 className={`w-9 h-9 ${BORDER_RADIUS.avatar} object-cover`}
                 onError={(e) => {
                   e.target.src =
-                    "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=50&h=50&fit=crop&crop=face";
+                    'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=50&h=50&fit=crop&crop=face';
                 }}
               />
-              <span className={`absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-500 ${BORDER_RADIUS.badge} border-2 border-white dark:border-slate-800`}></span>
+              <span
+                className={`absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-500 ${BORDER_RADIUS.badge} border-2 border-white dark:border-slate-800`}
+              ></span>
             </div>
             <div className="flex-1 min-w-0">
               <p className="font-medium text-slate-900 dark:text-white text-xs truncate transition-colors">

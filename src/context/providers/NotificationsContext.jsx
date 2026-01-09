@@ -1,19 +1,8 @@
 /* eslint-disable react-refresh/only-export-components */
-import {
-  createContext,
-  useContext,
-  useState,
-  useMemo,
-  useCallback,
-  useEffect,
-} from "react";
+import { createContext, useContext, useState, useMemo, useCallback, useEffect } from 'react';
 
 // Import Data
-import {
-  friends,
-  suggestedUsers,
-  createMockNotifications,
-} from "../../data/mockData";
+import { friends, suggestedUsers, createMockNotifications } from '../../data/mockData';
 
 // Import Services
 import {
@@ -21,7 +10,7 @@ import {
   markAllAsRead,
   countUnread,
   addNotification,
-} from "../../services/notificationService";
+} from '../../services/notificationService';
 
 // Import Utils
 import {
@@ -29,10 +18,10 @@ import {
   MAX_NOTIFICATIONS,
   FRIEND_REQUEST_PROBABILITY,
   TABS,
-} from "../../utils/constants";
+} from '../../utils/constants';
 
 // Import UI Context to check active tab
-import { useUI } from "./UIContext";
+import { useUI } from './UIContext';
 
 // ============================================================================
 // Context Definition
@@ -55,18 +44,13 @@ export function NotificationsProvider({ children }) {
   // ==========================================================================
   // Initialize Mock Data
   // ==========================================================================
-  const mockNotifications = useMemo(
-    () => createMockNotifications(friends, suggestedUsers),
-    [],
-  );
+  const mockNotifications = useMemo(() => createMockNotifications(friends, suggestedUsers), []);
 
   // ==========================================================================
   // Notifications State
   // ==========================================================================
   const [notifications, setNotifications] = useState(mockNotifications);
-  const [notificationCount, setNotificationCount] = useState(() =>
-    countUnread(mockNotifications),
-  );
+  const [notificationCount, setNotificationCount] = useState(() => countUnread(mockNotifications));
 
   // ==========================================================================
   // Effects
@@ -81,7 +65,7 @@ export function NotificationsProvider({ children }) {
       const newNotification = generateRandomNotification(
         friends,
         suggestedUsers,
-        FRIEND_REQUEST_PROBABILITY,
+        FRIEND_REQUEST_PROBABILITY
       );
 
       if (newNotification) {
@@ -97,7 +81,7 @@ export function NotificationsProvider({ children }) {
             (n) =>
               n.user.id === notificationToAdd.user.id &&
               n.type === notificationToAdd.type &&
-              n.message === notificationToAdd.message,
+              n.message === notificationToAdd.message
           );
 
           // Skip adding if it's a duplicate
@@ -105,11 +89,7 @@ export function NotificationsProvider({ children }) {
             return prev;
           }
 
-          const updated = addNotification(
-            prev,
-            notificationToAdd,
-            MAX_NOTIFICATIONS,
-          );
+          const updated = addNotification(prev, notificationToAdd, MAX_NOTIFICATIONS);
           // Only update count if user is NOT on notifications tab
           if (!isOnNotificationsTab) {
             setNotificationCount(countUnread(updated));
@@ -139,10 +119,8 @@ export function NotificationsProvider({ children }) {
   const markNotificationAsRead = useCallback((notificationId) => {
     setNotifications((prev) =>
       prev.map((notification) =>
-        notification.id === notificationId
-          ? { ...notification, isRead: true }
-          : notification,
-      ),
+        notification.id === notificationId ? { ...notification, isRead: true } : notification
+      )
     );
   }, []);
 
@@ -167,18 +145,11 @@ export function NotificationsProvider({ children }) {
       markNotificationsAsRead,
       markNotificationAsRead,
     }),
-    [
-      notifications,
-      notificationCount,
-      markNotificationsAsRead,
-      markNotificationAsRead,
-    ],
+    [notifications, notificationCount, markNotificationsAsRead, markNotificationAsRead]
   );
 
   return (
-    <NotificationsContext.Provider value={contextValue}>
-      {children}
-    </NotificationsContext.Provider>
+    <NotificationsContext.Provider value={contextValue}>{children}</NotificationsContext.Provider>
   );
 }
 
@@ -189,9 +160,7 @@ export function NotificationsProvider({ children }) {
 export function useNotifications() {
   const context = useContext(NotificationsContext);
   if (!context) {
-    throw new Error(
-      "useNotifications must be used within a NotificationsProvider",
-    );
+    throw new Error('useNotifications must be used within a NotificationsProvider');
   }
   return context;
 }

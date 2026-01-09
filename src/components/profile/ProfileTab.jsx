@@ -1,157 +1,148 @@
-import { useState } from "react";
+import { useState } from 'react';
 // eslint-disable-next-line no-unused-vars
-import { motion, AnimatePresence } from "framer-motion";
-import { useUser, useFeed } from "../../context/AppContext";
-import { Heart, MessageCircle, Briefcase, MapPin, Share2 } from "../icons";
-import {
-  PROFILE_DATA,
-  INITIAL_PROFILE_POSTS,
-  BORDER_RADIUS,
-} from "../../utils/constants";
+import { motion, AnimatePresence } from 'framer-motion';
+import { useUser, useFeed } from '../../context/AppContext';
+import { Heart, MessageCircle, Briefcase, MapPin, Share2 } from '../icons';
+import { PROFILE_DATA, INITIAL_PROFILE_POSTS, BORDER_RADIUS } from '../../utils/constants';
 
 // Mock comments for profile posts
 const profilePostMockComments = {
   p1: [
     {
-      id: "pc1",
+      id: 'pc1',
       user: {
-        name: "Zara Chen",
+        name: 'Zara Chen',
         avatar:
-          "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop&crop=face",
+          'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop&crop=face',
       },
-      content: "Absolutely breathtaking view! 😍 Where was this taken?",
-      timestamp: "2 hours ago",
+      content: 'Absolutely breathtaking view! 😍 Where was this taken?',
+      timestamp: '2 hours ago',
     },
     {
-      id: "pc2",
+      id: 'pc2',
       user: {
-        name: "Lucas Rivera",
+        name: 'Lucas Rivera',
         avatar:
-          "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&h=150&fit=crop&crop=face",
+          'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&h=150&fit=crop&crop=face',
       },
-      content: "The mountains are calling! Great shot 🏔️",
-      timestamp: "1 hour ago",
+      content: 'The mountains are calling! Great shot 🏔️',
+      timestamp: '1 hour ago',
     },
   ],
   p2: [
     {
-      id: "pc3",
+      id: 'pc3',
       user: {
-        name: "Emma Watson",
+        name: 'Emma Watson',
         avatar:
-          "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face",
+          'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face',
       },
-      content: "Golden hour is always magical ✨",
-      timestamp: "3 hours ago",
+      content: 'Golden hour is always magical ✨',
+      timestamp: '3 hours ago',
     },
     {
-      id: "pc4",
+      id: 'pc4',
       user: {
-        name: "James Wilson",
+        name: 'James Wilson',
         avatar:
-          "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+          'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
       },
-      content: "Such stunning colors! What camera did you use?",
-      timestamp: "2 hours ago",
+      content: 'Such stunning colors! What camera did you use?',
+      timestamp: '2 hours ago',
     },
     {
-      id: "pc5",
+      id: 'pc5',
       user: {
-        name: "Sophia Lee",
+        name: 'Sophia Lee',
         avatar:
-          "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face",
+          'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face',
       },
-      content: "This should be on a postcard! Beautiful! 🌅",
-      timestamp: "1 hour ago",
+      content: 'This should be on a postcard! Beautiful! 🌅',
+      timestamp: '1 hour ago',
     },
   ],
   p3: [
     {
-      id: "pc6",
+      id: 'pc6',
       user: {
-        name: "Nathan Park",
+        name: 'Nathan Park',
         avatar:
-          "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face",
+          'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face',
       },
-      content: "Adventure awaits! Love the composition 🌄",
-      timestamp: "5 hours ago",
+      content: 'Adventure awaits! Love the composition 🌄',
+      timestamp: '5 hours ago',
     },
   ],
   p4: [
     {
-      id: "pc7",
+      id: 'pc7',
       user: {
-        name: "Zara Chen",
+        name: 'Zara Chen',
         avatar:
-          "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop&crop=face",
+          'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop&crop=face',
       },
-      content: "Nature therapy at its finest 🌲💚",
-      timestamp: "4 hours ago",
+      content: 'Nature therapy at its finest 🌲💚',
+      timestamp: '4 hours ago',
     },
     {
-      id: "pc8",
+      id: 'pc8',
       user: {
-        name: "Lucas Rivera",
+        name: 'Lucas Rivera',
         avatar:
-          "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&h=150&fit=crop&crop=face",
+          'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&h=150&fit=crop&crop=face',
       },
-      content: "This makes me want to go hiking!",
-      timestamp: "3 hours ago",
+      content: 'This makes me want to go hiking!',
+      timestamp: '3 hours ago',
     },
   ],
   p5: [
     {
-      id: "pc9",
+      id: 'pc9',
       user: {
-        name: "Emma Watson",
+        name: 'Emma Watson',
         avatar:
-          "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face",
+          'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face',
       },
-      content: "The sound of waterfalls is so calming 💧",
-      timestamp: "6 hours ago",
+      content: 'The sound of waterfalls is so calming 💧',
+      timestamp: '6 hours ago',
     },
   ],
   p6: [
     {
-      id: "pc10",
+      id: 'pc10',
       user: {
-        name: "James Wilson",
+        name: 'James Wilson',
         avatar:
-          "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+          'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
       },
-      content: "Moody vibes! Perfect atmosphere 🌫️",
-      timestamp: "8 hours ago",
+      content: 'Moody vibes! Perfect atmosphere 🌫️',
+      timestamp: '8 hours ago',
     },
     {
-      id: "pc11",
+      id: 'pc11',
       user: {
-        name: "Sophia Lee",
+        name: 'Sophia Lee',
         avatar:
-          "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face",
+          'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face',
       },
-      content: "Early mornings are worth it for views like this!",
-      timestamp: "7 hours ago",
+      content: 'Early mornings are worth it for views like this!',
+      timestamp: '7 hours ago',
     },
   ],
 };
 
 const ProfileTab = () => {
-  const { currentUser, profilePostComments, toggleProfilePostComments } =
-    useUser();
+  const { currentUser, profilePostComments, toggleProfilePostComments } = useUser();
   const { posts: feedPosts } = useFeed();
 
-  const [activeTab, setActiveTab] = useState("posts");
+  const [activeTab, setActiveTab] = useState('posts');
   const [profilePosts, setProfilePosts] = useState(INITIAL_PROFILE_POSTS);
   const [showCopyPopup, setShowCopyPopup] = useState(false);
   const [newComment, setNewComment] = useState({});
-  const [profileComments, setProfileComments] = useState(
-    profilePostMockComments,
-  );
+  const [profileComments, setProfileComments] = useState(profilePostMockComments);
 
   // Get user's posts from feed (posts created by current user)
-  const userFeedPosts = feedPosts.filter(
-    (post) => post.user.id === currentUser.id,
-  );
+  const userFeedPosts = feedPosts.filter((post) => post.user.id === currentUser.id);
 
   // Combine user's feed posts with profile posts
   const allUserPosts = [
@@ -175,8 +166,8 @@ const ProfileTab = () => {
   };
 
   const tabs = [
-    { id: "posts", label: "Posts", count: allUserPosts.length },
-    { id: "about", label: "About", count: null },
+    { id: 'posts', label: 'Posts', count: allUserPosts.length },
+    { id: 'about', label: 'About', count: null },
   ];
 
   // Handle like interaction
@@ -185,18 +176,18 @@ const ProfileTab = () => {
       prev.map((post) =>
         post.id === postId
           ? {
-            ...post,
-            isLiked: !post.isLiked,
-            likes: post.isLiked ? post.likes - 1 : post.likes + 1,
-          }
-          : post,
-      ),
+              ...post,
+              isLiked: !post.isLiked,
+              likes: post.isLiked ? post.likes - 1 : post.likes + 1,
+            }
+          : post
+      )
     );
   };
 
   // Handle share profile
   const handleShareProfile = () => {
-    const profileUrl = `https://orbit.social/${PROFILE_DATA.username.replace("@", "")}`;
+    const profileUrl = `https://orbit.social/${PROFILE_DATA.username.replace('@', '')}`;
     navigator.clipboard.writeText(profileUrl);
     setShowCopyPopup(true);
     setTimeout(() => setShowCopyPopup(false), 2000);
@@ -219,7 +210,7 @@ const ProfileTab = () => {
         avatar: PROFILE_DATA.avatar,
       },
       content: newComment[postId],
-      timestamp: "Just now",
+      timestamp: 'Just now',
     };
 
     // Add comment to the post's comments
@@ -230,13 +221,11 @@ const ProfileTab = () => {
 
     // Update comment count
     setProfilePosts((prev) =>
-      prev.map((post) =>
-        post.id === postId ? { ...post, comments: post.comments + 1 } : post,
-      ),
+      prev.map((post) => (post.id === postId ? { ...post, comments: post.comments + 1 } : post))
     );
 
     // Clear the comment input
-    setNewComment((prev) => ({ ...prev, [postId]: "" }));
+    setNewComment((prev) => ({ ...prev, [postId]: '' }));
   };
 
   return (
@@ -266,11 +255,7 @@ const ProfileTab = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
-          <img
-            src={PROFILE_DATA.cover}
-            alt="Cover"
-            className="w-full h-full object-cover"
-          />
+          <img src={PROFILE_DATA.cover} alt="Cover" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-linear-to-t from-black/30 to-transparent" />
         </motion.div>
 
@@ -305,9 +290,7 @@ const ProfileTab = () => {
             <h1 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">
               {PROFILE_DATA.name}
             </h1>
-            <p className="text-sm text-slate-500 dark:text-slate-400">
-              {PROFILE_DATA.username}
-            </p>
+            <p className="text-sm text-slate-500 dark:text-slate-400">{PROFILE_DATA.username}</p>
             <div className="flex flex-wrap items-center gap-3 mt-2 text-sm text-slate-600 dark:text-slate-400">
               <span className="flex items-center gap-1">
                 <Briefcase className="w-4 h-4" />
@@ -359,9 +342,7 @@ const ProfileTab = () => {
             <span className="text-[16px] font-bold text-slate-900 dark:text-white">
               {stats.posts}
             </span>
-            <span className="text-sm sm:text-base text-slate-600 dark:text-slate-400">
-              Posts
-            </span>
+            <span className="text-sm sm:text-base text-slate-600 dark:text-slate-400">Posts</span>
           </div>
           <div className="flex flex-col sm:flex-row sm:items-baseline gap-0.5 sm:gap-1.5">
             <span className="text-[16px] font-bold text-slate-900 dark:text-white">
@@ -387,18 +368,17 @@ const ProfileTab = () => {
             <motion.button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`px-4 py-2 text-sm font-medium transition-colors relative cursor-pointer ${activeTab === tab.id
-                  ? "text-orange-500"
-                  : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
-                }`}
+              className={`px-4 py-2 text-sm font-medium transition-colors relative cursor-pointer ${
+                activeTab === tab.id
+                  ? 'text-orange-500'
+                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+              }`}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
               {tab.label}
               {tab.count !== null && (
-                <span className="ml-1 text-xs text-slate-400">
-                  ({tab.count})
-                </span>
+                <span className="ml-1 text-xs text-slate-400">({tab.count})</span>
               )}
               {activeTab === tab.id && (
                 <motion.div
@@ -412,7 +392,7 @@ const ProfileTab = () => {
 
         {/* Tab Content */}
         <AnimatePresence mode="wait">
-          {activeTab === "posts" && (
+          {activeTab === 'posts' && (
             <motion.div
               key="posts"
               initial={{ opacity: 0, y: 10 }}
@@ -442,7 +422,7 @@ const ProfileTab = () => {
                           {PROFILE_DATA.name}
                         </p>
                         <p className="text-xs text-slate-500 dark:text-slate-400">
-                          {post.timestamp || "Recently"}
+                          {post.timestamp || 'Recently'}
                         </p>
                       </div>
                     </div>
@@ -458,7 +438,7 @@ const ProfileTab = () => {
                     {post.image && (
                       <img
                         src={post.image}
-                        alt={post.caption || "Post"}
+                        alt={post.caption || 'Post'}
                         className="w-full object-cover max-h-125"
                       />
                     )}
@@ -467,35 +447,30 @@ const ProfileTab = () => {
                     <div className="p-3 flex items-center gap-4 border-t border-slate-100 dark:border-slate-700">
                       <motion.button
                         onClick={() => handleLike(post.id)}
-                        className={`flex items-center gap-1.5 cursor-pointer ${post.isLiked
-                            ? "text-rose-500"
-                            : "text-slate-500 dark:text-slate-400 hover:text-rose-500"
-                          }`}
+                        className={`flex items-center gap-1.5 cursor-pointer ${
+                          post.isLiked
+                            ? 'text-rose-500'
+                            : 'text-slate-500 dark:text-slate-400 hover:text-rose-500'
+                        }`}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                       >
-                        <Heart
-                          className={`w-5 h-5 ${post.isLiked ? "fill-current" : ""
-                            }`}
-                        />
-                        <span className="text-sm font-medium">
-                          {post.likes}
-                        </span>
+                        <Heart className={`w-5 h-5 ${post.isLiked ? 'fill-current' : ''}`} />
+                        <span className="text-sm font-medium">{post.likes}</span>
                       </motion.button>
 
                       <motion.button
                         onClick={() => handleCommentToggle(post.id)}
-                        className={`flex items-center gap-1.5 cursor-pointer ${profilePostComments[post.id]
-                            ? "text-blue-500"
-                            : "text-slate-500 dark:text-slate-400 hover:text-blue-500"
-                          }`}
+                        className={`flex items-center gap-1.5 cursor-pointer ${
+                          profilePostComments[post.id]
+                            ? 'text-blue-500'
+                            : 'text-slate-500 dark:text-slate-400 hover:text-blue-500'
+                        }`}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                       >
                         <MessageCircle className="w-5 h-5" />
-                        <span className="text-sm font-medium">
-                          {post.comments}
-                        </span>
+                        <span className="text-sm font-medium">{post.comments}</span>
                       </motion.button>
                     </div>
 
@@ -504,7 +479,7 @@ const ProfileTab = () => {
                       {profilePostComments[post.id] && (
                         <motion.div
                           initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
+                          animate={{ height: 'auto', opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}
                           className="border-t border-slate-100 dark:border-slate-700 overflow-hidden"
                         >
@@ -512,36 +487,36 @@ const ProfileTab = () => {
                             {/* Comments List */}
                             {profileComments[post.id]?.length > 0 && (
                               <div className="space-y-3 mb-3 max-h-60 overflow-y-auto">
-                                {profileComments[post.id].map(
-                                  (comment, idx) => (
-                                    <motion.div
-                                      key={comment.id}
-                                      className="flex gap-2"
-                                      initial={{ opacity: 0, y: 10 }}
-                                      animate={{ opacity: 1, y: 0 }}
-                                      transition={{ delay: idx * 0.05 }}
+                                {profileComments[post.id].map((comment, idx) => (
+                                  <motion.div
+                                    key={comment.id}
+                                    className="flex gap-2"
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: idx * 0.05 }}
+                                  >
+                                    <img
+                                      src={comment.user.avatar}
+                                      alt={comment.user.name}
+                                      className={`w-8 h-8 ${BORDER_RADIUS.avatar} object-cover shrink-0`}
+                                    />
+                                    <div
+                                      className={`flex-1 bg-white dark:bg-slate-700 ${BORDER_RADIUS.card} p-2.5 shadow-sm`}
                                     >
-                                      <img
-                                        src={comment.user.avatar}
-                                        alt={comment.user.name}
-                                        className={`w-8 h-8 ${BORDER_RADIUS.avatar} object-cover shrink-0`}
-                                      />
-                                      <div className={`flex-1 bg-white dark:bg-slate-700 ${BORDER_RADIUS.card} p-2.5 shadow-sm`}>
-                                        <div className="flex items-center gap-2 mb-1">
-                                          <span className="font-semibold text-slate-900 dark:text-white text-sm">
-                                            {comment.user.name}
-                                          </span>
-                                          <span className="text-xs text-slate-400 dark:text-slate-500">
-                                            {comment.timestamp}
-                                          </span>
-                                        </div>
-                                        <p className="text-slate-700 dark:text-slate-300 text-sm">
-                                          {comment.content}
-                                        </p>
+                                      <div className="flex items-center gap-2 mb-1">
+                                        <span className="font-semibold text-slate-900 dark:text-white text-sm">
+                                          {comment.user.name}
+                                        </span>
+                                        <span className="text-xs text-slate-400 dark:text-slate-500">
+                                          {comment.timestamp}
+                                        </span>
                                       </div>
-                                    </motion.div>
-                                  ),
-                                )}
+                                      <p className="text-slate-700 dark:text-slate-300 text-sm">
+                                        {comment.content}
+                                      </p>
+                                    </div>
+                                  </motion.div>
+                                ))}
                               </div>
                             )}
 
@@ -556,7 +531,7 @@ const ProfileTab = () => {
                                 <input
                                   type="text"
                                   placeholder="Write a comment..."
-                                  value={newComment[post.id] || ""}
+                                  value={newComment[post.id] || ''}
                                   onChange={(e) =>
                                     setNewComment((prev) => ({
                                       ...prev,
@@ -564,7 +539,7 @@ const ProfileTab = () => {
                                     }))
                                   }
                                   onKeyDown={(e) => {
-                                    if (e.key === "Enter") {
+                                    if (e.key === 'Enter') {
                                       handleAddComment(post.id);
                                     }
                                   }}
@@ -591,7 +566,7 @@ const ProfileTab = () => {
             </motion.div>
           )}
 
-          {activeTab === "about" && (
+          {activeTab === 'about' && (
             <motion.div
               key="about"
               initial={{ opacity: 0, y: 10 }}
@@ -604,12 +579,11 @@ const ProfileTab = () => {
                 About Me
               </h3>
               <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-6">
-                Hey there! I'm {PROFILE_DATA.name}, a {PROFILE_DATA.profession}{" "}
-                based in {PROFILE_DATA.location}. I'm passionate about creating
-                meaningful digital experiences and connecting with like-minded
-                individuals. When I'm not designing, you'll find me exploring
-                nature, capturing moments through photography, or diving into a
-                good book.
+                Hey there! I'm {PROFILE_DATA.name}, a {PROFILE_DATA.profession} based in{' '}
+                {PROFILE_DATA.location}. I'm passionate about creating meaningful digital
+                experiences and connecting with like-minded individuals. When I'm not designing,
+                you'll find me exploring nature, capturing moments through photography, or diving
+                into a good book.
               </p>
 
               <div className="space-y-4">
@@ -638,21 +612,16 @@ const ProfileTab = () => {
                     Interests
                   </h4>
                   <div className="flex flex-wrap gap-2">
-                    {[
-                      "Design",
-                      "Photography",
-                      "Travel",
-                      "Technology",
-                      "Music",
-                      "Art",
-                    ].map((interest) => (
-                      <span
-                        key={interest}
-                        className={`px-3 py-1 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 ${BORDER_RADIUS.badge} text-xs font-medium`}
-                      >
-                        {interest}
-                      </span>
-                    ))}
+                    {['Design', 'Photography', 'Travel', 'Technology', 'Music', 'Art'].map(
+                      (interest) => (
+                        <span
+                          key={interest}
+                          className={`px-3 py-1 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 ${BORDER_RADIUS.badge} text-xs font-medium`}
+                        >
+                          {interest}
+                        </span>
+                      )
+                    )}
                   </div>
                 </div>
               </div>

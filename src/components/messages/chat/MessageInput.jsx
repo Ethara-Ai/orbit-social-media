@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
-import { motion } from "framer-motion";
-import { Paperclip, Send, X } from "../../icons";
-import { BORDER_RADIUS } from "../../../utils/constants";
+import { motion } from 'framer-motion';
+import { Paperclip, Send, X } from '../../icons';
+import { BORDER_RADIUS } from '../../../utils/constants';
 
 const MessageInput = ({
   messageText,
@@ -12,14 +12,14 @@ const MessageInput = ({
   onAttachmentUpload,
 }) => {
   const handleKeyDown = (e) => {
-    if (e.key === "Enter" && !e.shiftKey) {
+    if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       onSendMessage();
     }
   };
 
   const handleAttachmentClick = () => {
-    document.getElementById("message-attachment")?.click();
+    document.getElementById('message-attachment')?.click();
   };
 
   const removeAttachment = () => {
@@ -32,10 +32,7 @@ const MessageInput = ({
     <div className="p-2 sm:p-4 border-t border-slate-100 dark:border-slate-700 bg-white dark:bg-slate-900 transition-colors">
       {/* Attachment Preview */}
       {messageAttachment && (
-        <AttachmentPreview
-          attachment={messageAttachment}
-          onRemove={removeAttachment}
-        />
+        <AttachmentPreview attachment={messageAttachment} onRemove={removeAttachment} />
       )}
 
       {/* Input Row */}

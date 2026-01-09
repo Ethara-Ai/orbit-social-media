@@ -1,10 +1,10 @@
-import { createPortal } from "react-dom";
+import { createPortal } from 'react-dom';
 // eslint-disable-next-line no-unused-vars
-import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, Fire, Heart, MessageCircle } from "../../icons";
-import Avatar from "../../common/Avatar";
-import CommentsPanel from "./CommentsPanel";
-import { BORDER_RADIUS } from "../../../utils/constants";
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronLeft, Fire, Heart, MessageCircle } from '../../icons';
+import Avatar from '../../common/Avatar';
+import CommentsPanel from './CommentsPanel';
+import { BORDER_RADIUS } from '../../../utils/constants';
 
 const TheaterModal = ({
   selectedPost,
@@ -48,7 +48,7 @@ const TheaterModal = ({
           <motion.div
             className="flex-1 flex flex-col min-w-0"
             animate={{
-              paddingRight: showComments ? "28rem" : 0,
+              paddingRight: showComments ? '28rem' : 0,
             }}
             transition={{
               duration: 0.4,
@@ -72,9 +72,9 @@ const TheaterModal = ({
             {showComments && (
               <motion.div
                 className="absolute right-0 top-0 bottom-0 w-full max-w-md bg-white shadow-2xl flex flex-col"
-                initial={{ x: "100%", opacity: 0 }}
+                initial={{ x: '100%', opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
-                exit={{ x: "100%", opacity: 0 }}
+                exit={{ x: '100%', opacity: 0 }}
                 transition={{
                   duration: 0.4,
                   ease: [0.4, 0, 0.2, 1],
@@ -93,7 +93,7 @@ const TheaterModal = ({
         </div>
       </div>
     </motion.div>,
-    document.body,
+    document.body
   );
 };
 
@@ -124,12 +124,8 @@ const TheaterHeader = ({ selectedPost, onClose }) => {
           className="w-7 h-7 sm:w-9 sm:h-9"
         />
         <div className="hidden xs:block sm:block">
-          <p className="text-white font-semibold text-xs sm:text-sm">
-            {selectedPost.user.name}
-          </p>
-          <p className="text-white/50 text-[10px] sm:text-xs">
-            {selectedPost.user.profession}
-          </p>
+          <p className="text-white font-semibold text-xs sm:text-sm">{selectedPost.user.name}</p>
+          <p className="text-white/50 text-[10px] sm:text-xs">{selectedPost.user.profession}</p>
         </div>
       </div>
 
@@ -156,7 +152,7 @@ const TheaterHeader = ({ selectedPost, onClose }) => {
 const TheaterContent = ({ selectedPost }) => {
   const handleImageError = (e) => {
     e.target.src =
-      "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=600&h=400&fit=crop";
+      'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=600&h=400&fit=crop';
   };
 
   return (
@@ -171,9 +167,7 @@ const TheaterContent = ({ selectedPost }) => {
         }}
       >
         {/* Main Image Card */}
-        <div
-          className="relative rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl"
-        >
+        <div className="relative rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl">
           <img
             src={selectedPost.image}
             alt={selectedPost.title}
@@ -240,7 +234,7 @@ const TheaterActionBar = ({
 const ActionButton = ({
   onClick,
   isActive,
-  activeClassName = "",
+  activeClassName = '',
   // eslint-disable-next-line no-unused-vars
   icon: Icon,
   count,
@@ -250,14 +244,13 @@ const ActionButton = ({
   return (
     <motion.button
       onClick={onClick}
-      className={`flex items-center gap-1.5 sm:gap-2 px-4 sm:px-5 py-2 sm:py-2.5 ${BORDER_RADIUS.button} transition-all cursor-pointer ${isActive ? activeClassName : "bg-white/10 text-white hover:bg-white/20"
-        }`}
+      className={`flex items-center gap-1.5 sm:gap-2 px-4 sm:px-5 py-2 sm:py-2.5 ${BORDER_RADIUS.button} transition-all cursor-pointer ${
+        isActive ? activeClassName : 'bg-white/10 text-white hover:bg-white/20'
+      }`}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
     >
-      <Icon
-        className={`w-4 h-4 sm:w-5 sm:h-5 ${fillIcon ? "fill-current" : ""}`}
-      />
+      <Icon className={`w-4 h-4 sm:w-5 sm:h-5 ${fillIcon ? 'fill-current' : ''}`} />
       <span className="font-medium text-sm sm:text-base">
         {count !== undefined ? count.toLocaleString() : label}
       </span>

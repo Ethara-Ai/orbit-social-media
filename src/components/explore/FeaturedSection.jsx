@@ -1,5 +1,5 @@
-import { Fire } from "../icons";
-import FeaturedPostCard from "./FeaturedPostCard";
+import { Fire } from '../icons';
+import FeaturedPostCard from './FeaturedPostCard';
 
 const FeaturedSection = ({ posts, onPostClick }) => {
   return (
@@ -10,12 +10,7 @@ const FeaturedSection = ({ posts, onPostClick }) => {
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {posts.map((post, index) => (
-          <FeaturedPostCard
-            key={post.id}
-            post={post}
-            index={index}
-            onClick={onPostClick}
-          />
+          <FeaturedPostCard key={post.id} post={post} index={index} onClick={onPostClick} />
         ))}
       </div>
     </div>

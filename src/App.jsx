@@ -1,7 +1,7 @@
-import { AppProvider } from "./context/AppContext";
-import { ErrorBoundary } from "./components/common";
-import SocialMediaDashboard from "./SocialMediaDashboard";
-import "./App.css";
+import { AppProvider } from './context/AppContext';
+import { ErrorBoundary } from './components/common';
+import SocialMediaDashboard from './SocialMediaDashboard';
+import './App.css';
 
 function App() {
   return (

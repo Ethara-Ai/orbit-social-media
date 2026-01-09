@@ -1,18 +1,12 @@
 /* eslint-disable react-refresh/only-export-components */
-import {
-  createContext,
-  useContext,
-  useState,
-  useMemo,
-  useCallback,
-} from "react";
+import { createContext, useContext, useState, useMemo, useCallback } from 'react';
 
 // Import Data
-import { currentUser, friends, suggestedUsers } from "../../data/mockData";
+import { currentUser, friends, suggestedUsers } from '../../data/mockData';
 
 // Import Utils
-import { shuffleArray } from "../../utils/helpers";
-import { MAX_ACTIVE_FRIENDS, PROFILE_DATA } from "../../utils/constants";
+import { shuffleArray } from '../../utils/helpers';
+import { MAX_ACTIVE_FRIENDS, PROFILE_DATA } from '../../utils/constants';
 
 // ============================================================================
 // Context Definition
@@ -35,9 +29,7 @@ export function UserProvider({ children }) {
   // ==========================================================================
   // User State
   // ==========================================================================
-  const [currentUserAvatar, setCurrentUserAvatar] = useState(
-    PROFILE_DATA.avatar,
-  );
+  const [currentUserAvatar, setCurrentUserAvatar] = useState(PROFILE_DATA.avatar);
   const [currentUserCover, setCurrentUserCover] = useState(null);
   const [currentUserDetails, setCurrentUserDetails] = useState({
     name: currentUser.name,
@@ -67,7 +59,7 @@ export function UserProvider({ children }) {
   }, []);
 
   const handleViewProfile = useCallback((user) => {
-    console.log("View profile:", user?.name);
+    console.log('View profile:', user?.name);
     setSelectedProfileUser(user);
   }, []);
 
@@ -142,12 +134,10 @@ export function UserProvider({ children }) {
       updateUserCover,
       updateUserDetails,
       toggleProfilePostComments,
-    ],
+    ]
   );
 
-  return (
-    <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>
-  );
+  return <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>;
 }
 
 // ============================================================================
@@ -157,7 +147,7 @@ export function UserProvider({ children }) {
 export function useUser() {
   const context = useContext(UserContext);
   if (!context) {
-    throw new Error("useUser must be used within a UserProvider");
+    throw new Error('useUser must be used within a UserProvider');
   }
   return context;
 }

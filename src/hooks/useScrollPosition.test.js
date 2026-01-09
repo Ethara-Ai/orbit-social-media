@@ -2,17 +2,17 @@
  * Unit Tests for useScrollPosition Hook
  */
 
-import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import { renderHook, act } from "@testing-library/react";
-import useScrollPosition from "./useScrollPosition";
-import { TABS } from "../utils/constants";
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { renderHook, act } from '@testing-library/react';
+import useScrollPosition from './useScrollPosition';
+import { TABS } from '../utils/constants';
 
-describe("useScrollPosition", () => {
+describe('useScrollPosition', () => {
   let mockRequestAnimationFrame;
 
   beforeEach(() => {
     mockRequestAnimationFrame = vi
-      .spyOn(window, "requestAnimationFrame")
+      .spyOn(window, 'requestAnimationFrame')
       .mockImplementation((callback) => {
         callback();
         return 1;
@@ -24,59 +24,59 @@ describe("useScrollPosition", () => {
     mockRequestAnimationFrame.mockRestore();
   });
 
-  describe("return values", () => {
-    it("should return saveScrollPosition function", () => {
+  describe('return values', () => {
+    it('should return saveScrollPosition function', () => {
       const { result } = renderHook(() => useScrollPosition(TABS.FEED));
-      expect(typeof result.current.saveScrollPosition).toBe("function");
+      expect(typeof result.current.saveScrollPosition).toBe('function');
     });
 
-    it("should return restoreScrollPosition function", () => {
+    it('should return restoreScrollPosition function', () => {
       const { result } = renderHook(() => useScrollPosition(TABS.FEED));
-      expect(typeof result.current.restoreScrollPosition).toBe("function");
+      expect(typeof result.current.restoreScrollPosition).toBe('function');
     });
 
-    it("should return registerScrollContainer function", () => {
+    it('should return registerScrollContainer function', () => {
       const { result } = renderHook(() => useScrollPosition(TABS.FEED));
-      expect(typeof result.current.registerScrollContainer).toBe("function");
+      expect(typeof result.current.registerScrollContainer).toBe('function');
     });
 
-    it("should return getScrollContainer function", () => {
+    it('should return getScrollContainer function', () => {
       const { result } = renderHook(() => useScrollPosition(TABS.FEED));
-      expect(typeof result.current.getScrollContainer).toBe("function");
+      expect(typeof result.current.getScrollContainer).toBe('function');
     });
 
-    it("should return resetScrollPosition function", () => {
+    it('should return resetScrollPosition function', () => {
       const { result } = renderHook(() => useScrollPosition(TABS.FEED));
-      expect(typeof result.current.resetScrollPosition).toBe("function");
+      expect(typeof result.current.resetScrollPosition).toBe('function');
     });
 
-    it("should return resetAllScrollPositions function", () => {
+    it('should return resetAllScrollPositions function', () => {
       const { result } = renderHook(() => useScrollPosition(TABS.FEED));
-      expect(typeof result.current.resetAllScrollPositions).toBe("function");
+      expect(typeof result.current.resetAllScrollPositions).toBe('function');
     });
 
-    it("should return createScrollHandler function", () => {
+    it('should return createScrollHandler function', () => {
       const { result } = renderHook(() => useScrollPosition(TABS.FEED));
-      expect(typeof result.current.createScrollHandler).toBe("function");
+      expect(typeof result.current.createScrollHandler).toBe('function');
     });
 
-    it("should return getScrollPositions function", () => {
+    it('should return getScrollPositions function', () => {
       const { result } = renderHook(() => useScrollPosition(TABS.FEED));
-      expect(typeof result.current.getScrollPositions).toBe("function");
+      expect(typeof result.current.getScrollPositions).toBe('function');
     });
   });
 
-  describe("registerScrollContainer", () => {
-    it("should return a ref callback function", () => {
+  describe('registerScrollContainer', () => {
+    it('should return a ref callback function', () => {
       const { result } = renderHook(() => useScrollPosition(TABS.FEED));
       const refCallback = result.current.registerScrollContainer(TABS.FEED);
-      expect(typeof refCallback).toBe("function");
+      expect(typeof refCallback).toBe('function');
     });
 
-    it("should register an element for a tab", () => {
+    it('should register an element for a tab', () => {
       const { result } = renderHook(() => useScrollPosition(TABS.FEED));
 
-      const mockElement = document.createElement("div");
+      const mockElement = document.createElement('div');
       const refCallback = result.current.registerScrollContainer(TABS.FEED);
 
       act(() => {
@@ -86,16 +86,14 @@ describe("useScrollPosition", () => {
       expect(result.current.getScrollContainer(TABS.FEED)).toBe(mockElement);
     });
 
-    it("should register different elements for different tabs", () => {
+    it('should register different elements for different tabs', () => {
       const { result } = renderHook(() => useScrollPosition(TABS.FEED));
 
-      const feedElement = document.createElement("div");
-      const exploreElement = document.createElement("div");
+      const feedElement = document.createElement('div');
+      const exploreElement = document.createElement('div');
 
       const feedRefCallback = result.current.registerScrollContainer(TABS.FEED);
-      const exploreRefCallback = result.current.registerScrollContainer(
-        TABS.EXPLORE,
-      );
+      const exploreRefCallback = result.current.registerScrollContainer(TABS.EXPLORE);
 
       act(() => {
         feedRefCallback(feedElement);
@@ -103,12 +101,10 @@ describe("useScrollPosition", () => {
       });
 
       expect(result.current.getScrollContainer(TABS.FEED)).toBe(feedElement);
-      expect(result.current.getScrollContainer(TABS.EXPLORE)).toBe(
-        exploreElement,
-      );
+      expect(result.current.getScrollContainer(TABS.EXPLORE)).toBe(exploreElement);
     });
 
-    it("should handle null element registration", () => {
+    it('should handle null element registration', () => {
       const { result } = renderHook(() => useScrollPosition(TABS.FEED));
 
       const refCallback = result.current.registerScrollContainer(TABS.FEED);
@@ -121,34 +117,32 @@ describe("useScrollPosition", () => {
     });
   });
 
-  describe("getScrollContainer", () => {
-    it("should return null for unregistered tab", () => {
+  describe('getScrollContainer', () => {
+    it('should return null for unregistered tab', () => {
       const { result } = renderHook(() => useScrollPosition(TABS.FEED));
       expect(result.current.getScrollContainer(TABS.FEED)).toBeNull();
     });
 
-    it("should return the registered element", () => {
+    it('should return the registered element', () => {
       const { result } = renderHook(() => useScrollPosition(TABS.FEED));
 
-      const mockElement = document.createElement("div");
+      const mockElement = document.createElement('div');
       const refCallback = result.current.registerScrollContainer(TABS.MESSAGES);
 
       act(() => {
         refCallback(mockElement);
       });
 
-      expect(result.current.getScrollContainer(TABS.MESSAGES)).toBe(
-        mockElement,
-      );
+      expect(result.current.getScrollContainer(TABS.MESSAGES)).toBe(mockElement);
     });
   });
 
-  describe("saveScrollPosition", () => {
-    it("should save the scroll position of a tab", () => {
+  describe('saveScrollPosition', () => {
+    it('should save the scroll position of a tab', () => {
       const { result } = renderHook(() => useScrollPosition(TABS.FEED));
 
-      const mockElement = document.createElement("div");
-      Object.defineProperty(mockElement, "scrollTop", {
+      const mockElement = document.createElement('div');
+      Object.defineProperty(mockElement, 'scrollTop', {
         value: 500,
         writable: true,
       });
@@ -167,7 +161,7 @@ describe("useScrollPosition", () => {
       expect(positions[TABS.FEED]).toBe(500);
     });
 
-    it("should not throw when container is null", () => {
+    it('should not throw when container is null', () => {
       const { result } = renderHook(() => useScrollPosition(TABS.FEED));
 
       expect(() => {
@@ -177,17 +171,17 @@ describe("useScrollPosition", () => {
       }).not.toThrow();
     });
 
-    it("should save different positions for different tabs", () => {
+    it('should save different positions for different tabs', () => {
       const { result } = renderHook(() => useScrollPosition(TABS.FEED));
 
-      const feedElement = document.createElement("div");
-      const exploreElement = document.createElement("div");
+      const feedElement = document.createElement('div');
+      const exploreElement = document.createElement('div');
 
-      Object.defineProperty(feedElement, "scrollTop", {
+      Object.defineProperty(feedElement, 'scrollTop', {
         value: 100,
         writable: true,
       });
-      Object.defineProperty(exploreElement, "scrollTop", {
+      Object.defineProperty(exploreElement, 'scrollTop', {
         value: 200,
         writable: true,
       });
@@ -207,12 +201,12 @@ describe("useScrollPosition", () => {
       expect(positions[TABS.EXPLORE]).toBe(200);
     });
 
-    it("should overwrite previous saved position", () => {
+    it('should overwrite previous saved position', () => {
       const { result } = renderHook(() => useScrollPosition(TABS.FEED));
 
-      const mockElement = document.createElement("div");
+      const mockElement = document.createElement('div');
       let scrollTopValue = 100;
-      Object.defineProperty(mockElement, "scrollTop", {
+      Object.defineProperty(mockElement, 'scrollTop', {
         get: () => scrollTopValue,
         set: (val) => {
           scrollTopValue = val;
@@ -240,13 +234,13 @@ describe("useScrollPosition", () => {
     });
   });
 
-  describe("restoreScrollPosition", () => {
-    it("should restore scroll position using requestAnimationFrame", () => {
+  describe('restoreScrollPosition', () => {
+    it('should restore scroll position using requestAnimationFrame', () => {
       const { result } = renderHook(() => useScrollPosition(TABS.FEED));
 
-      const mockElement = document.createElement("div");
+      const mockElement = document.createElement('div');
       let scrollTopValue = 0;
-      Object.defineProperty(mockElement, "scrollTop", {
+      Object.defineProperty(mockElement, 'scrollTop', {
         get: () => scrollTopValue,
         set: (val) => {
           scrollTopValue = val;
@@ -274,7 +268,7 @@ describe("useScrollPosition", () => {
       expect(scrollTopValue).toBe(500);
     });
 
-    it("should not throw when container is null", () => {
+    it('should not throw when container is null', () => {
       const { result } = renderHook(() => useScrollPosition(TABS.FEED));
 
       expect(() => {
@@ -284,12 +278,12 @@ describe("useScrollPosition", () => {
       }).not.toThrow();
     });
 
-    it("should restore to 0 for tab with no saved position", () => {
+    it('should restore to 0 for tab with no saved position', () => {
       const { result } = renderHook(() => useScrollPosition(TABS.FEED));
 
-      const mockElement = document.createElement("div");
+      const mockElement = document.createElement('div');
       let scrollTopValue = 100;
-      Object.defineProperty(mockElement, "scrollTop", {
+      Object.defineProperty(mockElement, 'scrollTop', {
         get: () => scrollTopValue,
         set: (val) => {
           scrollTopValue = val;
@@ -308,13 +302,13 @@ describe("useScrollPosition", () => {
     });
   });
 
-  describe("resetScrollPosition", () => {
-    it("should reset scroll position to 0 for a specific tab", () => {
+  describe('resetScrollPosition', () => {
+    it('should reset scroll position to 0 for a specific tab', () => {
       const { result } = renderHook(() => useScrollPosition(TABS.FEED));
 
-      const mockElement = document.createElement("div");
+      const mockElement = document.createElement('div');
       let scrollTopValue = 500;
-      Object.defineProperty(mockElement, "scrollTop", {
+      Object.defineProperty(mockElement, 'scrollTop', {
         get: () => scrollTopValue,
         set: (val) => {
           scrollTopValue = val;
@@ -341,22 +335,22 @@ describe("useScrollPosition", () => {
       expect(scrollTopValue).toBe(0);
     });
 
-    it("should only reset the specified tab", () => {
+    it('should only reset the specified tab', () => {
       const { result } = renderHook(() => useScrollPosition(TABS.FEED));
 
-      const feedElement = document.createElement("div");
-      const exploreElement = document.createElement("div");
+      const feedElement = document.createElement('div');
+      const exploreElement = document.createElement('div');
 
       let feedScrollTop = 100;
       let exploreScrollTop = 200;
 
-      Object.defineProperty(feedElement, "scrollTop", {
+      Object.defineProperty(feedElement, 'scrollTop', {
         get: () => feedScrollTop,
         set: (val) => {
           feedScrollTop = val;
         },
       });
-      Object.defineProperty(exploreElement, "scrollTop", {
+      Object.defineProperty(exploreElement, 'scrollTop', {
         get: () => exploreScrollTop,
         set: (val) => {
           exploreScrollTop = val;
@@ -382,7 +376,7 @@ describe("useScrollPosition", () => {
       expect(positions[TABS.EXPLORE]).toBe(200);
     });
 
-    it("should not throw when container is null", () => {
+    it('should not throw when container is null', () => {
       const { result } = renderHook(() => useScrollPosition(TABS.FEED));
 
       expect(() => {
@@ -393,31 +387,31 @@ describe("useScrollPosition", () => {
     });
   });
 
-  describe("resetAllScrollPositions", () => {
-    it("should reset all scroll positions to 0", () => {
+  describe('resetAllScrollPositions', () => {
+    it('should reset all scroll positions to 0', () => {
       const { result } = renderHook(() => useScrollPosition(TABS.FEED));
 
-      const feedElement = document.createElement("div");
-      const exploreElement = document.createElement("div");
-      const messagesElement = document.createElement("div");
+      const feedElement = document.createElement('div');
+      const exploreElement = document.createElement('div');
+      const messagesElement = document.createElement('div');
 
       let feedScrollTop = 100;
       let exploreScrollTop = 200;
       let messagesScrollTop = 300;
 
-      Object.defineProperty(feedElement, "scrollTop", {
+      Object.defineProperty(feedElement, 'scrollTop', {
         get: () => feedScrollTop,
         set: (val) => {
           feedScrollTop = val;
         },
       });
-      Object.defineProperty(exploreElement, "scrollTop", {
+      Object.defineProperty(exploreElement, 'scrollTop', {
         get: () => exploreScrollTop,
         set: (val) => {
           exploreScrollTop = val;
         },
       });
-      Object.defineProperty(messagesElement, "scrollTop", {
+      Object.defineProperty(messagesElement, 'scrollTop', {
         get: () => messagesScrollTop,
         set: (val) => {
           messagesScrollTop = val;
@@ -450,7 +444,7 @@ describe("useScrollPosition", () => {
       expect(messagesScrollTop).toBe(0);
     });
 
-    it("should handle containers that are null", () => {
+    it('should handle containers that are null', () => {
       const { result } = renderHook(() => useScrollPosition(TABS.FEED));
 
       expect(() => {
@@ -461,19 +455,19 @@ describe("useScrollPosition", () => {
     });
   });
 
-  describe("createScrollHandler", () => {
-    it("should return a scroll handler function", () => {
+  describe('createScrollHandler', () => {
+    it('should return a scroll handler function', () => {
       const { result } = renderHook(() => useScrollPosition(TABS.FEED));
       const handler = result.current.createScrollHandler(TABS.FEED);
-      expect(typeof handler).toBe("function");
+      expect(typeof handler).toBe('function');
     });
 
-    it("should update scroll position when handler is called", () => {
+    it('should update scroll position when handler is called', () => {
       const { result } = renderHook(() => useScrollPosition(TABS.FEED));
 
-      const mockElement = document.createElement("div");
+      const mockElement = document.createElement('div');
       let scrollTopValue = 0;
-      Object.defineProperty(mockElement, "scrollTop", {
+      Object.defineProperty(mockElement, 'scrollTop', {
         get: () => scrollTopValue,
         set: (val) => {
           scrollTopValue = val;
@@ -496,12 +490,12 @@ describe("useScrollPosition", () => {
       expect(result.current.getScrollPositions()[TABS.FEED]).toBe(250);
     });
 
-    it("should track continuous scrolling", () => {
+    it('should track continuous scrolling', () => {
       const { result } = renderHook(() => useScrollPosition(TABS.FEED));
 
-      const mockElement = document.createElement("div");
+      const mockElement = document.createElement('div');
       let scrollTopValue = 0;
-      Object.defineProperty(mockElement, "scrollTop", {
+      Object.defineProperty(mockElement, 'scrollTop', {
         get: () => scrollTopValue,
         set: (val) => {
           scrollTopValue = val;
@@ -534,7 +528,7 @@ describe("useScrollPosition", () => {
       expect(result.current.getScrollPositions()[TABS.FEED]).toBe(300);
     });
 
-    it("should not throw when container is null", () => {
+    it('should not throw when container is null', () => {
       const { result } = renderHook(() => useScrollPosition(TABS.FEED));
 
       const handler = result.current.createScrollHandler(TABS.FEED);
@@ -547,8 +541,8 @@ describe("useScrollPosition", () => {
     });
   });
 
-  describe("getScrollPositions", () => {
-    it("should return initial scroll positions as 0", () => {
+  describe('getScrollPositions', () => {
+    it('should return initial scroll positions as 0', () => {
       const { result } = renderHook(() => useScrollPosition(TABS.FEED));
       const positions = result.current.getScrollPositions();
 
@@ -558,7 +552,7 @@ describe("useScrollPosition", () => {
       expect(positions[TABS.NOTIFICATIONS]).toBe(0);
     });
 
-    it("should return a copy of scroll positions", () => {
+    it('should return a copy of scroll positions', () => {
       const { result } = renderHook(() => useScrollPosition(TABS.FEED));
 
       const positions1 = result.current.getScrollPositions();
@@ -568,11 +562,11 @@ describe("useScrollPosition", () => {
       expect(positions1).toEqual(positions2);
     });
 
-    it("should return updated positions after saving", () => {
+    it('should return updated positions after saving', () => {
       const { result } = renderHook(() => useScrollPosition(TABS.FEED));
 
-      const mockElement = document.createElement("div");
-      Object.defineProperty(mockElement, "scrollTop", {
+      const mockElement = document.createElement('div');
+      Object.defineProperty(mockElement, 'scrollTop', {
         value: 750,
         writable: true,
       });
@@ -590,21 +584,20 @@ describe("useScrollPosition", () => {
     });
   });
 
-  describe("tab change behavior", () => {
-    it("should save scroll position when switching away from a tab", () => {
-      const feedElement = document.createElement("div");
+  describe('tab change behavior', () => {
+    it('should save scroll position when switching away from a tab', () => {
+      const feedElement = document.createElement('div');
       let feedScrollTop = 400;
-      Object.defineProperty(feedElement, "scrollTop", {
+      Object.defineProperty(feedElement, 'scrollTop', {
         get: () => feedScrollTop,
         set: (val) => {
           feedScrollTop = val;
         },
       });
 
-      const { result, rerender } = renderHook(
-        ({ activeTab }) => useScrollPosition(activeTab),
-        { initialProps: { activeTab: TABS.FEED } },
-      );
+      const { result, rerender } = renderHook(({ activeTab }) => useScrollPosition(activeTab), {
+        initialProps: { activeTab: TABS.FEED },
+      });
 
       act(() => {
         result.current.registerScrollContainer(TABS.FEED)(feedElement);
@@ -618,30 +611,29 @@ describe("useScrollPosition", () => {
       expect(positions[TABS.FEED]).toBe(400);
     });
 
-    it("should restore scroll position when switching to a tab", () => {
-      const feedElement = document.createElement("div");
-      const exploreElement = document.createElement("div");
+    it('should restore scroll position when switching to a tab', () => {
+      const feedElement = document.createElement('div');
+      const exploreElement = document.createElement('div');
 
       let feedScrollTop = 0;
       let exploreScrollTop = 0;
 
-      Object.defineProperty(feedElement, "scrollTop", {
+      Object.defineProperty(feedElement, 'scrollTop', {
         get: () => feedScrollTop,
         set: (val) => {
           feedScrollTop = val;
         },
       });
-      Object.defineProperty(exploreElement, "scrollTop", {
+      Object.defineProperty(exploreElement, 'scrollTop', {
         get: () => exploreScrollTop,
         set: (val) => {
           exploreScrollTop = val;
         },
       });
 
-      const { result, rerender } = renderHook(
-        ({ activeTab }) => useScrollPosition(activeTab),
-        { initialProps: { activeTab: TABS.FEED } },
-      );
+      const { result, rerender } = renderHook(({ activeTab }) => useScrollPosition(activeTab), {
+        initialProps: { activeTab: TABS.FEED },
+      });
 
       act(() => {
         result.current.registerScrollContainer(TABS.FEED)(feedElement);
@@ -669,20 +661,19 @@ describe("useScrollPosition", () => {
       expect(feedScrollTop).toBe(500);
     });
 
-    it("should not save/restore when staying on the same tab", () => {
-      const feedElement = document.createElement("div");
+    it('should not save/restore when staying on the same tab', () => {
+      const feedElement = document.createElement('div');
       let feedScrollTop = 100;
-      Object.defineProperty(feedElement, "scrollTop", {
+      Object.defineProperty(feedElement, 'scrollTop', {
         get: () => feedScrollTop,
         set: (val) => {
           feedScrollTop = val;
         },
       });
 
-      const { result, rerender } = renderHook(
-        ({ activeTab }) => useScrollPosition(activeTab),
-        { initialProps: { activeTab: TABS.FEED } },
-      );
+      const { result, rerender } = renderHook(({ activeTab }) => useScrollPosition(activeTab), {
+        initialProps: { activeTab: TABS.FEED },
+      });
 
       act(() => {
         result.current.registerScrollContainer(TABS.FEED)(feedElement);
@@ -696,12 +687,11 @@ describe("useScrollPosition", () => {
     });
   });
 
-  describe("stability of returned functions", () => {
-    it("should return stable saveScrollPosition function", () => {
-      const { result, rerender } = renderHook(
-        ({ activeTab }) => useScrollPosition(activeTab),
-        { initialProps: { activeTab: TABS.FEED } },
-      );
+  describe('stability of returned functions', () => {
+    it('should return stable saveScrollPosition function', () => {
+      const { result, rerender } = renderHook(({ activeTab }) => useScrollPosition(activeTab), {
+        initialProps: { activeTab: TABS.FEED },
+      });
 
       const firstSave = result.current.saveScrollPosition;
       rerender({ activeTab: TABS.FEED });
@@ -710,11 +700,10 @@ describe("useScrollPosition", () => {
       expect(firstSave).toBe(secondSave);
     });
 
-    it("should return stable restoreScrollPosition function", () => {
-      const { result, rerender } = renderHook(
-        ({ activeTab }) => useScrollPosition(activeTab),
-        { initialProps: { activeTab: TABS.FEED } },
-      );
+    it('should return stable restoreScrollPosition function', () => {
+      const { result, rerender } = renderHook(({ activeTab }) => useScrollPosition(activeTab), {
+        initialProps: { activeTab: TABS.FEED },
+      });
 
       const firstRestore = result.current.restoreScrollPosition;
       rerender({ activeTab: TABS.FEED });
@@ -723,11 +712,10 @@ describe("useScrollPosition", () => {
       expect(firstRestore).toBe(secondRestore);
     });
 
-    it("should return stable registerScrollContainer function", () => {
-      const { result, rerender } = renderHook(
-        ({ activeTab }) => useScrollPosition(activeTab),
-        { initialProps: { activeTab: TABS.FEED } },
-      );
+    it('should return stable registerScrollContainer function', () => {
+      const { result, rerender } = renderHook(({ activeTab }) => useScrollPosition(activeTab), {
+        initialProps: { activeTab: TABS.FEED },
+      });
 
       const firstRegister = result.current.registerScrollContainer;
       rerender({ activeTab: TABS.FEED });
@@ -736,11 +724,10 @@ describe("useScrollPosition", () => {
       expect(firstRegister).toBe(secondRegister);
     });
 
-    it("should return stable createScrollHandler function", () => {
-      const { result, rerender } = renderHook(
-        ({ activeTab }) => useScrollPosition(activeTab),
-        { initialProps: { activeTab: TABS.FEED } },
-      );
+    it('should return stable createScrollHandler function', () => {
+      const { result, rerender } = renderHook(({ activeTab }) => useScrollPosition(activeTab), {
+        initialProps: { activeTab: TABS.FEED },
+      });
 
       const firstCreate = result.current.createScrollHandler;
       rerender({ activeTab: TABS.FEED });
@@ -750,12 +737,11 @@ describe("useScrollPosition", () => {
     });
   });
 
-  describe("edge cases", () => {
-    it("should handle rapid tab switching", () => {
-      const { rerender } = renderHook(
-        ({ activeTab }) => useScrollPosition(activeTab),
-        { initialProps: { activeTab: TABS.FEED } },
-      );
+  describe('edge cases', () => {
+    it('should handle rapid tab switching', () => {
+      const { rerender } = renderHook(({ activeTab }) => useScrollPosition(activeTab), {
+        initialProps: { activeTab: TABS.FEED },
+      });
 
       expect(() => {
         rerender({ activeTab: TABS.EXPLORE });
@@ -765,12 +751,12 @@ describe("useScrollPosition", () => {
       }).not.toThrow();
     });
 
-    it("should handle zero scroll position", () => {
+    it('should handle zero scroll position', () => {
       const { result } = renderHook(() => useScrollPosition(TABS.FEED));
 
-      const mockElement = document.createElement("div");
+      const mockElement = document.createElement('div');
       let scrollTopValue = 0;
-      Object.defineProperty(mockElement, "scrollTop", {
+      Object.defineProperty(mockElement, 'scrollTop', {
         get: () => scrollTopValue,
         set: (val) => {
           scrollTopValue = val;
@@ -788,11 +774,11 @@ describe("useScrollPosition", () => {
       expect(result.current.getScrollPositions()[TABS.FEED]).toBe(0);
     });
 
-    it("should handle large scroll positions", () => {
+    it('should handle large scroll positions', () => {
       const { result } = renderHook(() => useScrollPosition(TABS.FEED));
 
-      const mockElement = document.createElement("div");
-      Object.defineProperty(mockElement, "scrollTop", {
+      const mockElement = document.createElement('div');
+      Object.defineProperty(mockElement, 'scrollTop', {
         value: 999999,
         writable: true,
       });
@@ -808,11 +794,11 @@ describe("useScrollPosition", () => {
       expect(result.current.getScrollPositions()[TABS.FEED]).toBe(999999);
     });
 
-    it("should handle decimal scroll positions", () => {
+    it('should handle decimal scroll positions', () => {
       const { result } = renderHook(() => useScrollPosition(TABS.FEED));
 
-      const mockElement = document.createElement("div");
-      Object.defineProperty(mockElement, "scrollTop", {
+      const mockElement = document.createElement('div');
+      Object.defineProperty(mockElement, 'scrollTop', {
         value: 123.456,
         writable: true,
       });
@@ -829,23 +815,19 @@ describe("useScrollPosition", () => {
     });
   });
 
-  describe("multiple hook instances", () => {
-    it("should maintain independent state between instances", () => {
-      const { result: result1 } = renderHook(() =>
-        useScrollPosition(TABS.FEED),
-      );
-      const { result: result2 } = renderHook(() =>
-        useScrollPosition(TABS.EXPLORE),
-      );
+  describe('multiple hook instances', () => {
+    it('should maintain independent state between instances', () => {
+      const { result: result1 } = renderHook(() => useScrollPosition(TABS.FEED));
+      const { result: result2 } = renderHook(() => useScrollPosition(TABS.EXPLORE));
 
-      const element1 = document.createElement("div");
-      const element2 = document.createElement("div");
+      const element1 = document.createElement('div');
+      const element2 = document.createElement('div');
 
-      Object.defineProperty(element1, "scrollTop", {
+      Object.defineProperty(element1, 'scrollTop', {
         value: 100,
         writable: true,
       });
-      Object.defineProperty(element2, "scrollTop", {
+      Object.defineProperty(element2, 'scrollTop', {
         value: 200,
         writable: true,
       });

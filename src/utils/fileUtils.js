@@ -28,7 +28,7 @@ export const readFileAsDataUrl = (file) => {
  * @returns {boolean} Whether file is a valid image
  */
 export const isValidImage = (file) => {
-  return file && file.type.startsWith("image/");
+  return file && file.type.startsWith('image/');
 };
 
 /**
@@ -45,16 +45,14 @@ export const processImageFile = async (file) => {
  * Default fallback avatar URL
  */
 export const DEFAULT_AVATAR =
-  "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=50&h=50&fit=crop&crop=face";
+  'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=50&h=50&fit=crop&crop=face';
 
 /**
  * Create a fallback image handler for img onError
  * @param {string} fallbackSrc - Fallback image source
  * @returns {Function} Error handler function
  */
-export const createImageErrorHandler = (
-  fallbackSrc = DEFAULT_AVATAR,
-) => {
+export const createImageErrorHandler = (fallbackSrc = DEFAULT_AVATAR) => {
   return (e) => {
     e.target.src = fallbackSrc;
   };

@@ -12,12 +12,7 @@
  * @param {string} options.category - Post category, default 'General'
  * @returns {Object} New post object
  */
-export const createPost = ({
-  user,
-  content,
-  image = null,
-  category = "General",
-}) => {
+export const createPost = ({ user, content, image = null, category = 'General' }) => {
   return {
     id: Date.now().toString(),
     user,
@@ -26,7 +21,7 @@ export const createPost = ({
     likes: 0,
     comments: 0,
     shares: 0,
-    timestamp: "Just now",
+    timestamp: 'Just now',
     isLiked: false,
     category,
   };
@@ -170,7 +165,7 @@ export const createComment = ({ user, content, postId }) => {
     id: `c${Date.now()}`,
     user,
     content,
-    timestamp: "Just now",
+    timestamp: 'Just now',
     postId,
   };
 };
@@ -228,7 +223,7 @@ export const copyPostUrlToClipboard = async (postId) => {
     await navigator.clipboard.writeText(url);
     return true;
   } catch (err) {
-    console.error("Failed to copy link:", err);
+    console.error('Failed to copy link:', err);
     return false;
   }
 };

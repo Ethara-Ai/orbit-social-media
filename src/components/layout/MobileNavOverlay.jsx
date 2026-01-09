@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-unused-vars
-import { motion, AnimatePresence } from "framer-motion";
-import { useUI } from "../../context/AppContext";
+import { motion, AnimatePresence } from 'framer-motion';
+import { useUI } from '../../context/AppContext';
 
 const MobileNavOverlay = () => {
   const { showMobileNav, closeMobileNav } = useUI();

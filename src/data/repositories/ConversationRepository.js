@@ -4,7 +4,7 @@
  * Decouples data layer from state management
  */
 
-import { createInitialConversations, friends } from "../mockData";
+import { createInitialConversations, friends } from '../mockData';
 
 /**
  * ConversationRepository Class

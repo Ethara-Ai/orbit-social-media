@@ -4,7 +4,7 @@
  * Decouples data layer from state management
  */
 
-import { createExplorePosts, exploreCategories, friends } from "../mockData";
+import { createExplorePosts, exploreCategories, friends } from '../mockData';
 
 /**
  * ExploreRepository Class

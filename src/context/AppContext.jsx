@@ -12,7 +12,7 @@ import {
   useExplore,
   UIProvider,
   useUI,
-} from "./providers";
+} from './providers';
 
 // ============================================================================
 // App Provider - Clean Composition of Domain-Specific Contexts

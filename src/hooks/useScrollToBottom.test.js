@@ -2,11 +2,11 @@
  * Unit Tests for useScrollToBottom Hook
  */
 
-import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import { renderHook, act } from "@testing-library/react";
-import useScrollToBottom from "./useScrollToBottom";
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { renderHook, act } from '@testing-library/react';
+import useScrollToBottom from './useScrollToBottom';
 
-describe("useScrollToBottom", () => {
+describe('useScrollToBottom', () => {
   beforeEach(() => {
     vi.useFakeTimers();
   });
@@ -16,47 +16,47 @@ describe("useScrollToBottom", () => {
     vi.clearAllMocks();
   });
 
-  describe("return values", () => {
-    it("should return bottomRef", () => {
+  describe('return values', () => {
+    it('should return bottomRef', () => {
       const { result } = renderHook(() => useScrollToBottom());
       expect(result.current.bottomRef).toBeDefined();
-      expect(result.current.bottomRef).toHaveProperty("current");
+      expect(result.current.bottomRef).toHaveProperty('current');
     });
 
-    it("should return containerRef", () => {
+    it('should return containerRef', () => {
       const { result } = renderHook(() => useScrollToBottom());
       expect(result.current.containerRef).toBeDefined();
-      expect(result.current.containerRef).toHaveProperty("current");
+      expect(result.current.containerRef).toHaveProperty('current');
     });
 
-    it("should return scrollToBottom function", () => {
+    it('should return scrollToBottom function', () => {
       const { result } = renderHook(() => useScrollToBottom());
-      expect(typeof result.current.scrollToBottom).toBe("function");
+      expect(typeof result.current.scrollToBottom).toBe('function');
     });
 
-    it("should return checkIfAtBottom function", () => {
+    it('should return checkIfAtBottom function', () => {
       const { result } = renderHook(() => useScrollToBottom());
-      expect(typeof result.current.checkIfAtBottom).toBe("function");
+      expect(typeof result.current.checkIfAtBottom).toBe('function');
     });
 
-    it("should return handleScroll function", () => {
+    it('should return handleScroll function', () => {
       const { result } = renderHook(() => useScrollToBottom());
-      expect(typeof result.current.handleScroll).toBe("function");
+      expect(typeof result.current.handleScroll).toBe('function');
     });
 
-    it("should return isAtBottom boolean", () => {
+    it('should return isAtBottom boolean', () => {
       const { result } = renderHook(() => useScrollToBottom());
-      expect(typeof result.current.isAtBottom).toBe("boolean");
+      expect(typeof result.current.isAtBottom).toBe('boolean');
     });
 
-    it("should have isAtBottom as true by default", () => {
+    it('should have isAtBottom as true by default', () => {
       const { result } = renderHook(() => useScrollToBottom());
       expect(result.current.isAtBottom).toBe(true);
     });
   });
 
-  describe("scrollToBottom", () => {
-    it("should call scrollIntoView on bottomRef element", () => {
+  describe('scrollToBottom', () => {
+    it('should call scrollIntoView on bottomRef element', () => {
       const { result } = renderHook(() => useScrollToBottom());
 
       const mockElement = {
@@ -69,14 +69,12 @@ describe("useScrollToBottom", () => {
       });
 
       expect(mockElement.scrollIntoView).toHaveBeenCalledWith({
-        behavior: "smooth",
+        behavior: 'smooth',
       });
     });
 
-    it("should use provided scroll behavior", () => {
-      const { result } = renderHook(() =>
-        useScrollToBottom([], { behavior: "instant" }),
-      );
+    it('should use provided scroll behavior', () => {
+      const { result } = renderHook(() => useScrollToBottom([], { behavior: 'instant' }));
 
       const mockElement = {
         scrollIntoView: vi.fn(),
@@ -88,14 +86,12 @@ describe("useScrollToBottom", () => {
       });
 
       expect(mockElement.scrollIntoView).toHaveBeenCalledWith({
-        behavior: "instant",
+        behavior: 'instant',
       });
     });
 
-    it("should allow overriding behavior when calling scrollToBottom", () => {
-      const { result } = renderHook(() =>
-        useScrollToBottom([], { behavior: "smooth" }),
-      );
+    it('should allow overriding behavior when calling scrollToBottom', () => {
+      const { result } = renderHook(() => useScrollToBottom([], { behavior: 'smooth' }));
 
       const mockElement = {
         scrollIntoView: vi.fn(),
@@ -103,15 +99,15 @@ describe("useScrollToBottom", () => {
       result.current.bottomRef.current = mockElement;
 
       act(() => {
-        result.current.scrollToBottom("instant");
+        result.current.scrollToBottom('instant');
       });
 
       expect(mockElement.scrollIntoView).toHaveBeenCalledWith({
-        behavior: "instant",
+        behavior: 'instant',
       });
     });
 
-    it("should not throw when bottomRef is null", () => {
+    it('should not throw when bottomRef is null', () => {
       const { result } = renderHook(() => useScrollToBottom());
       result.current.bottomRef.current = null;
 
@@ -123,8 +119,8 @@ describe("useScrollToBottom", () => {
     });
   });
 
-  describe("checkIfAtBottom", () => {
-    it("should return true when at bottom of container", () => {
+  describe('checkIfAtBottom', () => {
+    it('should return true when at bottom of container', () => {
       const { result } = renderHook(() => useScrollToBottom());
 
       const mockContainer = {
@@ -142,7 +138,7 @@ describe("useScrollToBottom", () => {
       expect(isAtBottom).toBe(true);
     });
 
-    it("should return false when not at bottom of container", () => {
+    it('should return false when not at bottom of container', () => {
       const { result } = renderHook(() => useScrollToBottom());
 
       const mockContainer = {
@@ -160,7 +156,7 @@ describe("useScrollToBottom", () => {
       expect(isAtBottom).toBe(false);
     });
 
-    it("should consider within 100px of bottom as at bottom", () => {
+    it('should consider within 100px of bottom as at bottom', () => {
       const { result } = renderHook(() => useScrollToBottom());
 
       // scrollHeight - scrollTop - clientHeight = 1000 - 810 - 100 = 90 < 100
@@ -179,7 +175,7 @@ describe("useScrollToBottom", () => {
       expect(isAtBottom).toBe(true);
     });
 
-    it("should not consider 101px from bottom as at bottom", () => {
+    it('should not consider 101px from bottom as at bottom', () => {
       const { result } = renderHook(() => useScrollToBottom());
 
       // scrollHeight - scrollTop - clientHeight = 1000 - 799 - 100 = 101 >= 100
@@ -198,7 +194,7 @@ describe("useScrollToBottom", () => {
       expect(isAtBottom).toBe(false);
     });
 
-    it("should update isAtBottom state", () => {
+    it('should update isAtBottom state', () => {
       const { result } = renderHook(() => useScrollToBottom());
 
       const mockContainer = {
@@ -215,7 +211,7 @@ describe("useScrollToBottom", () => {
       expect(result.current.isAtBottom).toBe(false);
     });
 
-    it("should return current isAtBottom when containerRef is null", () => {
+    it('should return current isAtBottom when containerRef is null', () => {
       const { result } = renderHook(() => useScrollToBottom());
       result.current.containerRef.current = null;
 
@@ -229,8 +225,8 @@ describe("useScrollToBottom", () => {
     });
   });
 
-  describe("handleScroll", () => {
-    it("should call checkIfAtBottom when invoked", () => {
+  describe('handleScroll', () => {
+    it('should call checkIfAtBottom when invoked', () => {
       const { result } = renderHook(() => useScrollToBottom());
 
       const mockContainer = {
@@ -248,7 +244,7 @@ describe("useScrollToBottom", () => {
       expect(result.current.isAtBottom).toBe(false);
     });
 
-    it("should update isAtBottom when scrolled to bottom", () => {
+    it('should update isAtBottom when scrolled to bottom', () => {
       const { result } = renderHook(() => useScrollToBottom());
 
       const mockContainer = {
@@ -266,8 +262,8 @@ describe("useScrollToBottom", () => {
     });
   });
 
-  describe("auto-scroll behavior", () => {
-    it("should scroll to bottom on initial mount", () => {
+  describe('auto-scroll behavior', () => {
+    it('should scroll to bottom on initial mount', () => {
       const mockElement = {
         scrollIntoView: vi.fn(),
       };
@@ -285,14 +281,14 @@ describe("useScrollToBottom", () => {
       expect(mockElement.scrollIntoView).toHaveBeenCalled();
     });
 
-    it("should auto-scroll when dependencies change and isAtBottom is true", () => {
+    it('should auto-scroll when dependencies change and isAtBottom is true', () => {
       const mockElement = {
         scrollIntoView: vi.fn(),
       };
 
       const { result, rerender } = renderHook(
         ({ deps }) => useScrollToBottom(deps, { autoScroll: true }),
-        { initialProps: { deps: [1] } },
+        { initialProps: { deps: [1] } }
       );
 
       result.current.bottomRef.current = mockElement;
@@ -310,14 +306,14 @@ describe("useScrollToBottom", () => {
       expect(mockElement.scrollIntoView).toHaveBeenCalled();
     });
 
-    it("should not auto-scroll when autoScroll is false", () => {
+    it('should not auto-scroll when autoScroll is false', () => {
       const mockElement = {
         scrollIntoView: vi.fn(),
       };
 
       const { result, rerender } = renderHook(
         ({ deps }) => useScrollToBottom(deps, { autoScroll: false }),
-        { initialProps: { deps: [1] } },
+        { initialProps: { deps: [1] } }
       );
 
       result.current.bottomRef.current = mockElement;
@@ -347,14 +343,14 @@ describe("useScrollToBottom", () => {
       expect(mockElement.scrollIntoView).not.toHaveBeenCalled();
     });
 
-    it("should not auto-scroll when isAtBottom is false", () => {
+    it('should not auto-scroll when isAtBottom is false', () => {
       const mockElement = {
         scrollIntoView: vi.fn(),
       };
 
       const { result, rerender } = renderHook(
         ({ deps }) => useScrollToBottom(deps, { autoScroll: true }),
-        { initialProps: { deps: [1] } },
+        { initialProps: { deps: [1] } }
       );
 
       result.current.bottomRef.current = mockElement;
@@ -385,16 +381,15 @@ describe("useScrollToBottom", () => {
     });
   });
 
-  describe("options", () => {
-    it("should default autoScroll to true", () => {
+  describe('options', () => {
+    it('should default autoScroll to true', () => {
       const mockElement = {
         scrollIntoView: vi.fn(),
       };
 
-      const { result, rerender } = renderHook(
-        ({ deps }) => useScrollToBottom(deps),
-        { initialProps: { deps: [1] } },
-      );
+      const { result, rerender } = renderHook(({ deps }) => useScrollToBottom(deps), {
+        initialProps: { deps: [1] },
+      });
 
       result.current.bottomRef.current = mockElement;
       mockElement.scrollIntoView.mockClear();
@@ -409,7 +404,7 @@ describe("useScrollToBottom", () => {
       expect(mockElement.scrollIntoView).toHaveBeenCalled();
     });
 
-    it("should default behavior to smooth", () => {
+    it('should default behavior to smooth', () => {
       const { result } = renderHook(() => useScrollToBottom());
 
       const mockElement = {
@@ -422,14 +417,12 @@ describe("useScrollToBottom", () => {
       });
 
       expect(mockElement.scrollIntoView).toHaveBeenCalledWith({
-        behavior: "smooth",
+        behavior: 'smooth',
       });
     });
 
-    it("should accept custom behavior option", () => {
-      const { result } = renderHook(() =>
-        useScrollToBottom([], { behavior: "auto" }),
-      );
+    it('should accept custom behavior option', () => {
+      const { result } = renderHook(() => useScrollToBottom([], { behavior: 'auto' }));
 
       const mockElement = {
         scrollIntoView: vi.fn(),
@@ -441,27 +434,26 @@ describe("useScrollToBottom", () => {
       });
 
       expect(mockElement.scrollIntoView).toHaveBeenCalledWith({
-        behavior: "auto",
+        behavior: 'auto',
       });
     });
   });
 
-  describe("dependencies array", () => {
-    it("should handle empty dependencies array", () => {
+  describe('dependencies array', () => {
+    it('should handle empty dependencies array', () => {
       const { result } = renderHook(() => useScrollToBottom([]));
       expect(result.current).toBeDefined();
     });
 
-    it("should handle undefined dependencies", () => {
+    it('should handle undefined dependencies', () => {
       const { result } = renderHook(() => useScrollToBottom());
       expect(result.current).toBeDefined();
     });
 
-    it("should handle dependencies with objects", () => {
-      const { result, rerender } = renderHook(
-        ({ deps }) => useScrollToBottom(deps),
-        { initialProps: { deps: [{ id: 1 }] } },
-      );
+    it('should handle dependencies with objects', () => {
+      const { result, rerender } = renderHook(({ deps }) => useScrollToBottom(deps), {
+        initialProps: { deps: [{ id: 1 }] },
+      });
 
       expect(() => {
         rerender({ deps: [{ id: 2 }] });
@@ -470,11 +462,10 @@ describe("useScrollToBottom", () => {
       expect(result.current).toBeDefined();
     });
 
-    it("should handle dependencies with arrays", () => {
-      const { result, rerender } = renderHook(
-        ({ deps }) => useScrollToBottom(deps),
-        { initialProps: { deps: [[1, 2, 3]] } },
-      );
+    it('should handle dependencies with arrays', () => {
+      const { result, rerender } = renderHook(({ deps }) => useScrollToBottom(deps), {
+        initialProps: { deps: [[1, 2, 3]] },
+      });
 
       expect(() => {
         rerender({ deps: [[1, 2, 3, 4]] });
@@ -484,9 +475,9 @@ describe("useScrollToBottom", () => {
     });
   });
 
-  describe("cleanup", () => {
-    it("should clear timeout on unmount", () => {
-      const clearTimeoutSpy = vi.spyOn(globalThis, "clearTimeout");
+  describe('cleanup', () => {
+    it('should clear timeout on unmount', () => {
+      const clearTimeoutSpy = vi.spyOn(globalThis, 'clearTimeout');
 
       const { result, unmount } = renderHook(() => useScrollToBottom([1]));
 
@@ -502,7 +493,7 @@ describe("useScrollToBottom", () => {
       clearTimeoutSpy.mockRestore();
     });
 
-    it("should handle rapid mount/unmount without errors", () => {
+    it('should handle rapid mount/unmount without errors', () => {
       expect(() => {
         for (let i = 0; i < 5; i++) {
           const { unmount } = renderHook(() => useScrollToBottom());
@@ -512,8 +503,8 @@ describe("useScrollToBottom", () => {
     });
   });
 
-  describe("edge cases", () => {
-    it("should handle container with zero height", () => {
+  describe('edge cases', () => {
+    it('should handle container with zero height', () => {
       const { result } = renderHook(() => useScrollToBottom());
 
       const mockContainer = {
@@ -532,7 +523,7 @@ describe("useScrollToBottom", () => {
       expect(isAtBottom).toBe(true);
     });
 
-    it("should handle negative scroll values", () => {
+    it('should handle negative scroll values', () => {
       const { result } = renderHook(() => useScrollToBottom());
 
       const mockContainer = {
@@ -551,7 +542,7 @@ describe("useScrollToBottom", () => {
       expect(isAtBottom).toBe(false);
     });
 
-    it("should handle very large scroll values", () => {
+    it('should handle very large scroll values', () => {
       const { result } = renderHook(() => useScrollToBottom());
 
       const mockContainer = {
@@ -571,8 +562,8 @@ describe("useScrollToBottom", () => {
     });
   });
 
-  describe("multiple calls", () => {
-    it("should handle multiple scrollToBottom calls", () => {
+  describe('multiple calls', () => {
+    it('should handle multiple scrollToBottom calls', () => {
       const { result } = renderHook(() => useScrollToBottom());
 
       const mockElement = {
@@ -589,7 +580,7 @@ describe("useScrollToBottom", () => {
       expect(mockElement.scrollIntoView).toHaveBeenCalledTimes(3);
     });
 
-    it("should handle multiple checkIfAtBottom calls", () => {
+    it('should handle multiple checkIfAtBottom calls', () => {
       const { result } = renderHook(() => useScrollToBottom());
 
       const mockContainer = {
@@ -608,7 +599,7 @@ describe("useScrollToBottom", () => {
       expect(result.current.isAtBottom).toBe(true);
     });
 
-    it("should handle multiple handleScroll calls", () => {
+    it('should handle multiple handleScroll calls', () => {
       const { result } = renderHook(() => useScrollToBottom());
 
       const mockContainer = {
@@ -628,8 +619,8 @@ describe("useScrollToBottom", () => {
     });
   });
 
-  describe("state transitions", () => {
-    it("should transition from at bottom to not at bottom", () => {
+  describe('state transitions', () => {
+    it('should transition from at bottom to not at bottom', () => {
       const { result } = renderHook(() => useScrollToBottom());
 
       // Initially at bottom
@@ -650,7 +641,7 @@ describe("useScrollToBottom", () => {
       expect(result.current.isAtBottom).toBe(false);
     });
 
-    it("should transition from not at bottom to at bottom", () => {
+    it('should transition from not at bottom to at bottom', () => {
       const { result } = renderHook(() => useScrollToBottom());
 
       // First, scroll up
@@ -678,8 +669,8 @@ describe("useScrollToBottom", () => {
     });
   });
 
-  describe("integration with scroll events", () => {
-    it("should work as expected when used with actual scroll events", () => {
+  describe('integration with scroll events', () => {
+    it('should work as expected when used with actual scroll events', () => {
       const { result } = renderHook(() => useScrollToBottom());
 
       const mockContainer = {

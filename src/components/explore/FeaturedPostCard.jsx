@@ -1,18 +1,18 @@
 // eslint-disable-next-line no-unused-vars
-import { motion } from "framer-motion";
-import { Heart } from "../icons";
-import Avatar from "../common/Avatar";
-import { BORDER_RADIUS } from "../../utils/constants";
+import { motion } from 'framer-motion';
+import { Heart } from '../icons';
+import Avatar from '../common/Avatar';
+import { BORDER_RADIUS } from '../../utils/constants';
 
 const FeaturedPostCard = ({ post, index, onClick }) => {
   const handleImageError = (e) => {
     e.target.src =
-      "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=600&h=400&fit=crop";
+      'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=600&h=400&fit=crop';
   };
 
   const handleAvatarError = (e) => {
     e.target.src =
-      "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=50&h=50&fit=crop&crop=face";
+      'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=50&h=50&fit=crop&crop=face';
   };
 
   return (
@@ -25,11 +25,11 @@ const FeaturedPostCard = ({ post, index, onClick }) => {
       transition={{ delay: index * 0.1 }}
       whileHover={{ scale: 1.01 }}
       onClick={() => onClick(post)}
-      onKeyDown={(e) => e.key === "Enter" && onClick(post)}
+      onKeyDown={(e) => e.key === 'Enter' && onClick(post)}
     >
       {/* Background Image */}
       <img
-        src={post.image || "/placeholder.svg"}
+        src={post.image || '/placeholder.svg'}
         alt={post.title}
         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
         onError={handleImageError}
@@ -43,27 +43,21 @@ const FeaturedPostCard = ({ post, index, onClick }) => {
         {/* Author */}
         <div className="flex items-center gap-2 mb-3">
           <img
-            src={post.user.avatar || "/placeholder.svg"}
+            src={post.user.avatar || '/placeholder.svg'}
             alt={post.user.name}
             className={`w-8 h-8 ${BORDER_RADIUS.avatar} object-cover ring-2 ring-white/30`}
             onError={handleAvatarError}
           />
-          <span className="text-white text-sm font-medium">
-            {post.user.name}
-          </span>
+          <span className="text-white text-sm font-medium">{post.user.name}</span>
         </div>
 
         {/* Title */}
-        <h3 className="text-white font-bold text-lg leading-tight mb-2">
-          {post.title}
-        </h3>
+        <h3 className="text-white font-bold text-lg leading-tight mb-2">{post.title}</h3>
 
         {/* Stats */}
         <div className="flex items-center gap-4 text-white/80 text-sm">
           <span className="flex items-center gap-1">
-            <Heart
-              className={`w-4 h-4 ${post.isLiked ? "fill-current text-rose-400" : ""}`}
-            />
+            <Heart className={`w-4 h-4 ${post.isLiked ? 'fill-current text-rose-400' : ''}`} />
             {post.likes.toLocaleString()}
           </span>
         </div>

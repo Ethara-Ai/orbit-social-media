@@ -1,5 +1,5 @@
-import { Component } from "react";
-import { BORDER_RADIUS } from "../../utils/constants";
+import { Component } from 'react';
+import { BORDER_RADIUS } from '../../utils/constants';
 
 /**
  * ErrorBoundary Component
@@ -46,8 +46,8 @@ class ErrorBoundary extends Component {
 
     // Log to console in development
     if (import.meta.env.DEV) {
-      console.error("ErrorBoundary caught an error:", error);
-      console.error("Component stack:", errorInfo?.componentStack);
+      console.error('ErrorBoundary caught an error:', error);
+      console.error('Component stack:', errorInfo?.componentStack);
     }
   }
 
@@ -72,11 +72,7 @@ class ErrorBoundary extends Component {
       // Custom fallback component with error props
       if (FallbackComponent) {
         return (
-          <FallbackComponent
-            error={error}
-            errorInfo={errorInfo}
-            resetError={this.handleReset}
-          />
+          <FallbackComponent error={error} errorInfo={errorInfo} resetError={this.handleReset} />
         );
       }
 
@@ -87,11 +83,7 @@ class ErrorBoundary extends Component {
 
       // Default fallback UI
       return (
-        <DefaultErrorFallback
-          error={error}
-          errorInfo={errorInfo}
-          resetError={this.handleReset}
-        />
+        <DefaultErrorFallback error={error} errorInfo={errorInfo} resetError={this.handleReset} />
       );
     }
 
@@ -135,9 +127,7 @@ function DefaultErrorFallback({ error, errorInfo, resetError }) {
               <h2 className="text-lg font-semibold text-red-800 dark:text-red-200">
                 Something went wrong
               </h2>
-              <p className="text-sm text-red-600 dark:text-red-400">
-                An unexpected error occurred
-              </p>
+              <p className="text-sm text-red-600 dark:text-red-400">An unexpected error occurred</p>
             </div>
           </div>
         </div>
@@ -145,8 +135,7 @@ function DefaultErrorFallback({ error, errorInfo, resetError }) {
         {/* Content */}
         <div className="px-6 py-4">
           <p className="text-slate-600 dark:text-slate-300 text-sm mb-4">
-            We apologize for the inconvenience. Please try again or refresh the
-            page.
+            We apologize for the inconvenience. Please try again or refresh the page.
           </p>
 
           {/* Error details in development */}
@@ -195,21 +184,13 @@ function DefaultErrorFallback({ error, errorInfo, resetError }) {
  * Lightweight error boundary for smaller sections
  * Shows a minimal inline error message
  */
-export function InlineErrorBoundary({
-  children,
-  fallbackMessage = "Failed to load this section",
-}) {
+export function InlineErrorBoundary({ children, fallbackMessage = 'Failed to load this section' }) {
   return (
     <ErrorBoundary
       fallback={
         <div className="p-4 text-center text-slate-500 dark:text-slate-400 text-sm">
           <span className="inline-flex items-center gap-2">
-            <svg
-              className="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"

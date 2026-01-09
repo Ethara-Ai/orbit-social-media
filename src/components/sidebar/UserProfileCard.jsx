@@ -1,5 +1,5 @@
-import { motion } from "framer-motion";
-import Avatar from "../common/Avatar";
+import { motion } from 'framer-motion';
+import Avatar from '../common/Avatar';
 
 const UserProfileCard = ({
   user,
@@ -7,12 +7,12 @@ const UserProfileCard = ({
   onClick,
   stats = {
     posts: 142,
-    followers: "24.7K",
+    followers: '24.7K',
     following: 318,
   },
   animated = true,
 }) => {
-  const CardWrapper = animated ? motion.div : "div";
+  const CardWrapper = animated ? motion.div : 'div';
   const cardProps = animated
     ? {
         onClick,
@@ -22,10 +22,7 @@ const UserProfileCard = ({
     : { onClick };
 
   return (
-    <CardWrapper
-      className={onClick ? "cursor-pointer" : "cursor-default"}
-      {...cardProps}
-    >
+    <CardWrapper className={onClick ? 'cursor-pointer' : 'cursor-default'} {...cardProps}>
       {/* User Info Section - Centered */}
       <div className="flex flex-col items-center text-center pb-3">
         <Avatar
@@ -36,12 +33,8 @@ const UserProfileCard = ({
           showStatus={true}
           ring={false}
         />
-        <h2 className="text-sm font-semibold text-slate-900 dark:text-white mt-2.5">
-          {user.name}
-        </h2>
-        <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-          {user.profession}
-        </p>
+        <h2 className="text-sm font-semibold text-slate-900 dark:text-white mt-2.5">{user.name}</h2>
+        <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">{user.profession}</p>
       </div>
 
       {/* Stats Section */}
@@ -58,9 +51,7 @@ const UserProfileCard = ({
 
 const StatItem = ({ label, value }) => (
   <div className="flex flex-col items-center">
-    <span className="text-[16px] font-bold text-slate-900 dark:text-white">
-      {value}
-    </span>
+    <span className="text-[16px] font-bold text-slate-900 dark:text-white">{value}</span>
     <span className="text-xs text-slate-500 dark:text-slate-400">{label}</span>
   </div>
 );

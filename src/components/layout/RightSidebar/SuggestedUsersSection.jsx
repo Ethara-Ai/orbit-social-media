@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion';
 
 const SuggestedUsersSection = ({
   suggestedUsers,
@@ -23,10 +23,10 @@ const SuggestedUsersSection = ({
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: (index + 5) * 0.1 }}
             onClick={() => handleViewProfile(user)}
-            onKeyDown={(e) => e.key === "Enter" && handleViewProfile(user)}
+            onKeyDown={(e) => e.key === 'Enter' && handleViewProfile(user)}
           >
             <img
-              src={user.avatar || "/placeholder.svg"}
+              src={user.avatar || '/placeholder.svg'}
               alt={user.name}
               className="w-11 h-11 rounded-full object-cover"
             />
@@ -45,8 +45,8 @@ const SuggestedUsersSection = ({
               }}
               className={`text-xs font-semibold px-3 py-1.5 rounded-full transition-colors ${
                 connectionRequests.includes(user.id)
-                  ? "text-slate-500 dark:text-slate-400 bg-slate-200 dark:bg-slate-700 cursor-default"
-                  : "text-orange-600 dark:text-orange-400 hover:text-orange-700 dark:hover:text-orange-300 bg-orange-50 dark:bg-orange-500/10 hover:bg-orange-100 dark:hover:bg-orange-500/20"
+                  ? 'text-slate-500 dark:text-slate-400 bg-slate-200 dark:bg-slate-700 cursor-default'
+                  : 'text-orange-600 dark:text-orange-400 hover:text-orange-700 dark:hover:text-orange-300 bg-orange-50 dark:bg-orange-500/10 hover:bg-orange-100 dark:hover:bg-orange-500/20'
               }`}
               whileHover={{
                 scale: connectionRequests.includes(user.id) ? 1 : 1.05,
@@ -56,9 +56,7 @@ const SuggestedUsersSection = ({
               }}
               disabled={connectionRequests.includes(user.id)}
             >
-              {connectionRequests.includes(user.id)
-                ? "Request Sent"
-                : "Connect"}
+              {connectionRequests.includes(user.id) ? 'Request Sent' : 'Connect'}
             </motion.button>
           </motion.div>
         ))}

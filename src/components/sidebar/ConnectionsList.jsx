@@ -1,15 +1,10 @@
 // eslint-disable-next-line no-unused-vars
-import { motion, AnimatePresence } from "framer-motion";
-import { Users, ChevronDown } from "../icons";
-import Avatar from "../common/Avatar";
-import { BORDER_RADIUS } from "../../utils/constants";
+import { motion, AnimatePresence } from 'framer-motion';
+import { Users, ChevronDown } from '../icons';
+import Avatar from '../common/Avatar';
+import { BORDER_RADIUS } from '../../utils/constants';
 
-const ConnectionsList = ({
-  friends,
-  showFriends,
-  setShowFriends,
-  onFriendClick,
-}) => {
+const ConnectionsList = ({ friends, showFriends, setShowFriends, onFriendClick }) => {
   return (
     <div className="border-t border-slate-100 dark:border-slate-700 pt-4 transition-colors">
       <ConnectionsHeader
@@ -22,9 +17,9 @@ const ConnectionsList = ({
         {showFriends && (
           <motion.div
             initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
+            animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
             className="overflow-hidden"
           >
             <div className="space-y-0.5 py-1.5 max-h-60 sm:max-h-72 overflow-y-auto custom-scrollbar">
@@ -56,14 +51,13 @@ const ConnectionsHeader = ({ friendsCount, showFriends, setShowFriends }) => {
         <span className="font-medium text-sm text-slate-700 dark:text-slate-300 transition-colors">
           Connections
         </span>
-        <span className={`text-xs text-slate-400 dark:text-slate-500 bg-slate-100 dark:bg-slate-700 px-2 py-0.5 ${BORDER_RADIUS.badge} transition-colors`}>
+        <span
+          className={`text-xs text-slate-400 dark:text-slate-500 bg-slate-100 dark:bg-slate-700 px-2 py-0.5 ${BORDER_RADIUS.badge} transition-colors`}
+        >
           {friendsCount}
         </span>
       </div>
-      <motion.div
-        animate={{ rotate: showFriends ? 180 : 0 }}
-        transition={{ duration: 0.2 }}
-      >
+      <motion.div animate={{ rotate: showFriends ? 180 : 0 }} transition={{ duration: 0.2 }}>
         <ChevronDown className="w-4 h-4 text-slate-400 dark:text-slate-500" />
       </motion.div>
     </motion.button>
@@ -86,7 +80,7 @@ const ConnectionItem = ({ friend, index, onClick }) => {
       animate={{ x: 0, opacity: 1 }}
       transition={{ delay: index * 0.03 }}
       onClick={handleClick}
-      onKeyDown={(e) => e.key === "Enter" && handleClick()}
+      onKeyDown={(e) => e.key === 'Enter' && handleClick()}
     >
       <Avatar
         src={friend.avatar}
@@ -101,7 +95,7 @@ const ConnectionItem = ({ friend, index, onClick }) => {
           {friend.name}
         </p>
         <p className="text-xs text-slate-500 dark:text-slate-400 truncate transition-colors">
-          {friend.isOnline ? "Online" : friend.lastSeen}
+          {friend.isOnline ? 'Online' : friend.lastSeen}
         </p>
       </div>
     </motion.div>

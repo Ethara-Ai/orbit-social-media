@@ -1,6 +1,6 @@
-import { useFeed } from "../../context/AppContext";
-import CreatePost from "./CreatePost";
-import PostCard from "./PostCard";
+import { useFeed } from '../../context/AppContext';
+import CreatePost from './CreatePost';
+import PostCard from './PostCard';
 
 const FeedTab = () => {
   // Only need posts from context - child components access their own data via hooks

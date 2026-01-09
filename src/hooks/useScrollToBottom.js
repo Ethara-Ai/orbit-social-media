@@ -1,4 +1,4 @@
-import { useRef, useCallback, useEffect, useState } from "react";
+import { useRef, useCallback, useEffect, useState } from 'react';
 
 /**
  * Custom hook for scrolling to bottom of a container
@@ -11,7 +11,7 @@ import { useRef, useCallback, useEffect, useState } from "react";
  * @returns {Object} { ref, scrollToBottom, isAtBottom }
  */
 function useScrollToBottom(dependencies = [], options = {}) {
-  const { autoScroll = true, behavior = "smooth" } = options;
+  const { autoScroll = true, behavior = 'smooth' } = options;
 
   const bottomRef = useRef(null);
   const containerRef = useRef(null);
@@ -25,7 +25,7 @@ function useScrollToBottom(dependencies = [], options = {}) {
         bottomRef.current.scrollIntoView({ behavior: scrollBehavior });
       }
     },
-    [behavior],
+    [behavior]
   );
 
   // Check if user is at bottom of container
@@ -61,7 +61,7 @@ function useScrollToBottom(dependencies = [], options = {}) {
 
   // Scroll to bottom on initial mount
   useEffect(() => {
-    scrollToBottom("instant");
+    scrollToBottom('instant');
     // Only run on mount
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

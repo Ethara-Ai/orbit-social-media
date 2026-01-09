@@ -1,8 +1,8 @@
 // eslint-disable-next-line no-unused-vars
-import { motion } from "framer-motion";
-import { X } from "../../icons";
-import Avatar from "../../common/Avatar";
-import { BORDER_RADIUS } from "../../../utils/constants";
+import { motion } from 'framer-motion';
+import { X } from '../../icons';
+import Avatar from '../../common/Avatar';
+import { BORDER_RADIUS } from '../../../utils/constants';
 
 const CommentsPanel = ({
   comments,
@@ -10,10 +10,10 @@ const CommentsPanel = ({
   setCommentText,
   onAddComment,
   onClose,
-  currentUserAvatar = "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=50&h=50&fit=crop&crop=face",
+  currentUserAvatar = 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=50&h=50&fit=crop&crop=face',
 }) => {
   const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
       onAddComment();
     }
   };
@@ -41,9 +41,7 @@ const CommentsPanel = ({
 const CommentsPanelHeader = ({ onClose }) => {
   return (
     <div className="flex items-center justify-between p-4 border-b border-slate-100 dark:border-slate-700 transition-colors">
-      <h3 className="font-bold text-slate-900 dark:text-white transition-colors">
-        Comments
-      </h3>
+      <h3 className="font-bold text-slate-900 dark:text-white transition-colors">Comments</h3>
       <button
         onClick={onClose}
         className={`p-1 hover:bg-slate-100 dark:hover:bg-slate-700 ${BORDER_RADIUS.button} transition-colors cursor-pointer`}
@@ -107,12 +105,7 @@ const CommentInput = ({
   return (
     <div className="shrink-0 p-4 border-t border-slate-100 dark:border-slate-700 bg-white dark:bg-slate-800 transition-colors">
       <div className="flex items-center gap-2 sm:gap-3">
-        <Avatar
-          src={currentUserAvatar}
-          alt="You"
-          size="sm"
-          className="shrink-0"
-        />
+        <Avatar src={currentUserAvatar} alt="You" size="sm" className="shrink-0" />
         <div className="flex-1 min-w-0 flex gap-2">
           <input
             type="text"

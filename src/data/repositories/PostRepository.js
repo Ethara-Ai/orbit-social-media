@@ -4,7 +4,7 @@
  * Decouples data layer from state management
  */
 
-import { createMockPosts, createInitialComments, friends } from "../mockData";
+import { createMockPosts, createInitialComments, friends } from '../mockData';
 
 /**
  * PostRepository Class

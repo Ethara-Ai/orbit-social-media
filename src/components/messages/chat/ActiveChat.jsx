@@ -1,6 +1,6 @@
-import ChatHeader from "./ChatHeader";
-import MessageBubble from "./MessageBubble";
-import MessageInput from "./MessageInput";
+import ChatHeader from './ChatHeader';
+import MessageBubble from './MessageBubble';
+import MessageInput from './MessageInput';
 
 const ActiveChat = ({
   conversation,
@@ -59,7 +59,7 @@ const MessagesList = ({ messages, messagesEndRef, user }) => {
               className="w-full h-full object-cover"
               onError={(e) => {
                 e.target.src =
-                  "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=50&h=50&fit=crop&crop=face";
+                  'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=50&h=50&fit=crop&crop=face';
               }}
             />
           </div>
@@ -67,7 +67,7 @@ const MessagesList = ({ messages, messagesEndRef, user }) => {
             {user?.name}
           </h3>
           <p className="text-slate-500 dark:text-slate-400 text-xs sm:text-sm max-w-50 transition-colors">
-            Say hello and start a conversation with {user?.name?.split(" ")[0]}!
+            Say hello and start a conversation with {user?.name?.split(' ')[0]}!
           </p>
         </div>
       ) : (

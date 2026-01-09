@@ -2,12 +2,12 @@
  * Unit Tests for useClickOutside Hook
  */
 
-import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import { renderHook } from "@testing-library/react";
-import { fireEvent } from "@testing-library/react";
-import useClickOutside from "./useClickOutside";
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { renderHook } from '@testing-library/react';
+import { fireEvent } from '@testing-library/react';
+import useClickOutside from './useClickOutside';
 
-describe("useClickOutside", () => {
+describe('useClickOutside', () => {
   let handler;
 
   beforeEach(() => {
@@ -18,25 +18,25 @@ describe("useClickOutside", () => {
     vi.clearAllMocks();
   });
 
-  describe("return value", () => {
-    it("should return a ref object", () => {
+  describe('return value', () => {
+    it('should return a ref object', () => {
       const { result } = renderHook(() => useClickOutside(handler));
       expect(result.current).toBeDefined();
-      expect(result.current).toHaveProperty("current");
+      expect(result.current).toHaveProperty('current');
     });
 
-    it("should return ref with initial value of null", () => {
+    it('should return ref with initial value of null', () => {
       const { result } = renderHook(() => useClickOutside(handler));
       expect(result.current.current).toBeNull();
     });
   });
 
-  describe("click outside behavior", () => {
-    it("should call handler when clicking outside the referenced element", () => {
+  describe('click outside behavior', () => {
+    it('should call handler when clicking outside the referenced element', () => {
       const { result } = renderHook(() => useClickOutside(handler));
 
       // Create a div and attach the ref
-      const div = document.createElement("div");
+      const div = document.createElement('div');
       document.body.appendChild(div);
       result.current.current = div;
 
@@ -49,11 +49,11 @@ describe("useClickOutside", () => {
       document.body.removeChild(div);
     });
 
-    it("should not call handler when clicking inside the referenced element", () => {
+    it('should not call handler when clicking inside the referenced element', () => {
       const { result } = renderHook(() => useClickOutside(handler));
 
       // Create a div and attach the ref
-      const div = document.createElement("div");
+      const div = document.createElement('div');
       document.body.appendChild(div);
       result.current.current = div;
 
@@ -66,12 +66,12 @@ describe("useClickOutside", () => {
       document.body.removeChild(div);
     });
 
-    it("should not call handler when clicking on child elements", () => {
+    it('should not call handler when clicking on child elements', () => {
       const { result } = renderHook(() => useClickOutside(handler));
 
       // Create a div with a child
-      const div = document.createElement("div");
-      const childButton = document.createElement("button");
+      const div = document.createElement('div');
+      const childButton = document.createElement('button');
       div.appendChild(childButton);
       document.body.appendChild(div);
       result.current.current = div;
@@ -85,10 +85,10 @@ describe("useClickOutside", () => {
       document.body.removeChild(div);
     });
 
-    it("should handle touch events (touchstart)", () => {
+    it('should handle touch events (touchstart)', () => {
       const { result } = renderHook(() => useClickOutside(handler));
 
-      const div = document.createElement("div");
+      const div = document.createElement('div');
       document.body.appendChild(div);
       result.current.current = div;
 
@@ -101,10 +101,10 @@ describe("useClickOutside", () => {
       document.body.removeChild(div);
     });
 
-    it("should not call handler on touch inside the element", () => {
+    it('should not call handler on touch inside the element', () => {
       const { result } = renderHook(() => useClickOutside(handler));
 
-      const div = document.createElement("div");
+      const div = document.createElement('div');
       document.body.appendChild(div);
       result.current.current = div;
 
@@ -118,41 +118,41 @@ describe("useClickOutside", () => {
     });
   });
 
-  describe("escape key behavior", () => {
-    it("should call handler when Escape key is pressed", () => {
+  describe('escape key behavior', () => {
+    it('should call handler when Escape key is pressed', () => {
       renderHook(() => useClickOutside(handler));
 
-      fireEvent.keyDown(document, { key: "Escape" });
+      fireEvent.keyDown(document, { key: 'Escape' });
 
       expect(handler).toHaveBeenCalledTimes(1);
     });
 
-    it("should not call handler for other keys", () => {
+    it('should not call handler for other keys', () => {
       renderHook(() => useClickOutside(handler));
 
-      fireEvent.keyDown(document, { key: "Enter" });
-      fireEvent.keyDown(document, { key: "Tab" });
-      fireEvent.keyDown(document, { key: "Space" });
-      fireEvent.keyDown(document, { key: "a" });
+      fireEvent.keyDown(document, { key: 'Enter' });
+      fireEvent.keyDown(document, { key: 'Tab' });
+      fireEvent.keyDown(document, { key: 'Space' });
+      fireEvent.keyDown(document, { key: 'a' });
 
       expect(handler).not.toHaveBeenCalled();
     });
 
-    it("should pass event to handler on Escape", () => {
+    it('should pass event to handler on Escape', () => {
       renderHook(() => useClickOutside(handler));
 
-      fireEvent.keyDown(document, { key: "Escape" });
+      fireEvent.keyDown(document, { key: 'Escape' });
 
       expect(handler).toHaveBeenCalledWith(expect.any(Object));
-      expect(handler.mock.calls[0][0].key).toBe("Escape");
+      expect(handler.mock.calls[0][0].key).toBe('Escape');
     });
   });
 
-  describe("enabled prop", () => {
-    it("should be enabled by default", () => {
+  describe('enabled prop', () => {
+    it('should be enabled by default', () => {
       const { result } = renderHook(() => useClickOutside(handler));
 
-      const div = document.createElement("div");
+      const div = document.createElement('div');
       document.body.appendChild(div);
       result.current.current = div;
 
@@ -163,10 +163,10 @@ describe("useClickOutside", () => {
       document.body.removeChild(div);
     });
 
-    it("should not call handler when disabled", () => {
+    it('should not call handler when disabled', () => {
       const { result } = renderHook(() => useClickOutside(handler, false));
 
-      const div = document.createElement("div");
+      const div = document.createElement('div');
       document.body.appendChild(div);
       result.current.current = div;
 
@@ -177,18 +177,18 @@ describe("useClickOutside", () => {
       document.body.removeChild(div);
     });
 
-    it("should not respond to Escape key when disabled", () => {
+    it('should not respond to Escape key when disabled', () => {
       renderHook(() => useClickOutside(handler, false));
 
-      fireEvent.keyDown(document, { key: "Escape" });
+      fireEvent.keyDown(document, { key: 'Escape' });
 
       expect(handler).not.toHaveBeenCalled();
     });
 
-    it("should not respond to touch events when disabled", () => {
+    it('should not respond to touch events when disabled', () => {
       const { result } = renderHook(() => useClickOutside(handler, false));
 
-      const div = document.createElement("div");
+      const div = document.createElement('div');
       document.body.appendChild(div);
       result.current.current = div;
 
@@ -199,13 +199,12 @@ describe("useClickOutside", () => {
       document.body.removeChild(div);
     });
 
-    it("should respond after being re-enabled", () => {
-      const { result, rerender } = renderHook(
-        ({ enabled }) => useClickOutside(handler, enabled),
-        { initialProps: { enabled: false } },
-      );
+    it('should respond after being re-enabled', () => {
+      const { result, rerender } = renderHook(({ enabled }) => useClickOutside(handler, enabled), {
+        initialProps: { enabled: false },
+      });
 
-      const div = document.createElement("div");
+      const div = document.createElement('div');
       document.body.appendChild(div);
       result.current.current = div;
 
@@ -222,13 +221,12 @@ describe("useClickOutside", () => {
       document.body.removeChild(div);
     });
 
-    it("should stop responding after being disabled", () => {
-      const { result, rerender } = renderHook(
-        ({ enabled }) => useClickOutside(handler, enabled),
-        { initialProps: { enabled: true } },
-      );
+    it('should stop responding after being disabled', () => {
+      const { result, rerender } = renderHook(({ enabled }) => useClickOutside(handler, enabled), {
+        initialProps: { enabled: true },
+      });
 
-      const div = document.createElement("div");
+      const div = document.createElement('div');
       document.body.appendChild(div);
       result.current.current = div;
 
@@ -246,33 +244,24 @@ describe("useClickOutside", () => {
     });
   });
 
-  describe("event listener cleanup", () => {
-    it("should remove event listeners on unmount", () => {
-      const removeEventListenerSpy = vi.spyOn(document, "removeEventListener");
+  describe('event listener cleanup', () => {
+    it('should remove event listeners on unmount', () => {
+      const removeEventListenerSpy = vi.spyOn(document, 'removeEventListener');
 
       const { unmount } = renderHook(() => useClickOutside(handler));
 
       unmount();
 
-      expect(removeEventListenerSpy).toHaveBeenCalledWith(
-        "mousedown",
-        expect.any(Function),
-      );
-      expect(removeEventListenerSpy).toHaveBeenCalledWith(
-        "touchstart",
-        expect.any(Function),
-      );
-      expect(removeEventListenerSpy).toHaveBeenCalledWith(
-        "keydown",
-        expect.any(Function),
-      );
+      expect(removeEventListenerSpy).toHaveBeenCalledWith('mousedown', expect.any(Function));
+      expect(removeEventListenerSpy).toHaveBeenCalledWith('touchstart', expect.any(Function));
+      expect(removeEventListenerSpy).toHaveBeenCalledWith('keydown', expect.any(Function));
 
       removeEventListenerSpy.mockRestore();
     });
 
-    it("should not have memory leaks with rapid mount/unmount", () => {
-      const addEventListenerSpy = vi.spyOn(document, "addEventListener");
-      const removeEventListenerSpy = vi.spyOn(document, "removeEventListener");
+    it('should not have memory leaks with rapid mount/unmount', () => {
+      const addEventListenerSpy = vi.spyOn(document, 'addEventListener');
+      const removeEventListenerSpy = vi.spyOn(document, 'removeEventListener');
 
       for (let i = 0; i < 5; i++) {
         const { unmount } = renderHook(() => useClickOutside(handler));
@@ -291,17 +280,16 @@ describe("useClickOutside", () => {
     });
   });
 
-  describe("handler changes", () => {
-    it("should use the latest handler", () => {
+  describe('handler changes', () => {
+    it('should use the latest handler', () => {
       const handler1 = vi.fn();
       const handler2 = vi.fn();
 
-      const { result, rerender } = renderHook(
-        ({ handler }) => useClickOutside(handler),
-        { initialProps: { handler: handler1 } },
-      );
+      const { result, rerender } = renderHook(({ handler }) => useClickOutside(handler), {
+        initialProps: { handler: handler1 },
+      });
 
-      const div = document.createElement("div");
+      const div = document.createElement('div');
       document.body.appendChild(div);
       result.current.current = div;
 
@@ -321,8 +309,8 @@ describe("useClickOutside", () => {
     });
   });
 
-  describe("ref not attached", () => {
-    it("should not call handler when ref is not attached to any element", () => {
+  describe('ref not attached', () => {
+    it('should not call handler when ref is not attached to any element', () => {
       renderHook(() => useClickOutside(handler));
 
       // ref.current is null, so the condition ref.current && !ref.current.contains()
@@ -333,16 +321,16 @@ describe("useClickOutside", () => {
     });
   });
 
-  describe("multiple instances", () => {
-    it("should handle multiple hooks independently", () => {
+  describe('multiple instances', () => {
+    it('should handle multiple hooks independently', () => {
       const handler1 = vi.fn();
       const handler2 = vi.fn();
 
       const { result: result1 } = renderHook(() => useClickOutside(handler1));
       const { result: result2 } = renderHook(() => useClickOutside(handler2));
 
-      const div1 = document.createElement("div");
-      const div2 = document.createElement("div");
+      const div1 = document.createElement('div');
+      const div2 = document.createElement('div');
       document.body.appendChild(div1);
       document.body.appendChild(div2);
 
@@ -370,46 +358,46 @@ describe("useClickOutside", () => {
     });
   });
 
-  describe("event object", () => {
-    it("should pass event object to handler on click outside", () => {
+  describe('event object', () => {
+    it('should pass event object to handler on click outside', () => {
       const { result } = renderHook(() => useClickOutside(handler));
 
-      const div = document.createElement("div");
+      const div = document.createElement('div');
       document.body.appendChild(div);
       result.current.current = div;
 
       fireEvent.mouseDown(document.body);
 
       expect(handler).toHaveBeenCalledWith(expect.any(Object));
-      expect(handler.mock.calls[0][0].type).toBe("mousedown");
+      expect(handler.mock.calls[0][0].type).toBe('mousedown');
 
       document.body.removeChild(div);
     });
 
-    it("should pass event object to handler on touch outside", () => {
+    it('should pass event object to handler on touch outside', () => {
       const { result } = renderHook(() => useClickOutside(handler));
 
-      const div = document.createElement("div");
+      const div = document.createElement('div');
       document.body.appendChild(div);
       result.current.current = div;
 
       fireEvent.touchStart(document.body);
 
       expect(handler).toHaveBeenCalledWith(expect.any(Object));
-      expect(handler.mock.calls[0][0].type).toBe("touchstart");
+      expect(handler.mock.calls[0][0].type).toBe('touchstart');
 
       document.body.removeChild(div);
     });
   });
 
-  describe("nested elements", () => {
-    it("should handle deeply nested click targets", () => {
+  describe('nested elements', () => {
+    it('should handle deeply nested click targets', () => {
       const { result } = renderHook(() => useClickOutside(handler));
 
       // Create nested structure: div > span > button
-      const div = document.createElement("div");
-      const span = document.createElement("span");
-      const button = document.createElement("button");
+      const div = document.createElement('div');
+      const span = document.createElement('span');
+      const button = document.createElement('button');
 
       span.appendChild(button);
       div.appendChild(span);
@@ -425,12 +413,12 @@ describe("useClickOutside", () => {
       document.body.removeChild(div);
     });
 
-    it("should detect click outside when clicking sibling element", () => {
+    it('should detect click outside when clicking sibling element', () => {
       const { result } = renderHook(() => useClickOutside(handler));
 
-      const container = document.createElement("div");
-      const targetDiv = document.createElement("div");
-      const siblingDiv = document.createElement("div");
+      const container = document.createElement('div');
+      const targetDiv = document.createElement('div');
+      const siblingDiv = document.createElement('div');
 
       container.appendChild(targetDiv);
       container.appendChild(siblingDiv);

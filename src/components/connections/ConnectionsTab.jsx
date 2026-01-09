@@ -1,18 +1,13 @@
 // eslint-disable-next-line no-unused-vars
-import { motion } from "framer-motion";
-import { Users, UserPlus } from "../icons";
-import { useUser } from "../../context/AppContext";
-import Avatar from "../common/Avatar";
-import { BORDER_RADIUS } from "../../utils/constants";
+import { motion } from 'framer-motion';
+import { Users, UserPlus } from '../icons';
+import { useUser } from '../../context/AppContext';
+import Avatar from '../common/Avatar';
+import { BORDER_RADIUS } from '../../utils/constants';
 
 const ConnectionsTab = () => {
-  const {
-    friends,
-    suggestedUsers,
-    connectionRequests,
-    sendConnectionRequest,
-    handleViewProfile,
-  } = useUser();
+  const { friends, suggestedUsers, connectionRequests, sendConnectionRequest, handleViewProfile } =
+    useUser();
 
   return (
     <div className="max-w-4xl mx-auto w-full px-4 pb-6 space-y-6">
@@ -22,9 +17,7 @@ const ConnectionsTab = () => {
       >
         {/* Page Header */}
         <div className="px-4 pt-4 pb-3 border-b border-slate-100 dark:border-slate-700">
-          <h1 className="text-[20px] font-bold text-slate-900 dark:text-white mb-1">
-            Connections
-          </h1>
+          <h1 className="text-[20px] font-bold text-slate-900 dark:text-white mb-1">Connections</h1>
           <p className="text-[14px] text-slate-600 dark:text-slate-400">
             Manage your network and discover new connections
           </p>
@@ -58,9 +51,7 @@ const ConnectionsTab = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: index * 0.03 }}
                 onClick={() => handleViewProfile(friend)}
-                onKeyDown={(e) =>
-                  e.key === "Enter" && handleViewProfile(friend)
-                }
+                onKeyDown={(e) => e.key === 'Enter' && handleViewProfile(friend)}
               >
                 <Avatar
                   src={friend.avatar}
@@ -74,15 +65,13 @@ const ConnectionsTab = () => {
                     {friend.name}
                   </h3>
                   <p className="text-xs text-slate-500 dark:text-slate-400 truncate">
-                    {friend.profession || "Connection"}
+                    {friend.profession || 'Connection'}
                   </p>
                 </div>
                 <div className="shrink-0">
                   {friend.isOnline ? (
                     <span className="inline-flex items-center gap-1 text-xs text-green-600 dark:text-green-400 font-medium">
-                      <span
-                        className={`w-1.5 h-1.5 bg-green-500 ${BORDER_RADIUS.badge}`}
-                      ></span>
+                      <span className={`w-1.5 h-1.5 bg-green-500 ${BORDER_RADIUS.badge}`}></span>
                       Online
                     </span>
                   ) : (
@@ -97,9 +86,7 @@ const ConnectionsTab = () => {
         ) : (
           <div className="text-center py-12 px-4">
             <Users className="w-12 h-12 text-slate-300 dark:text-slate-600 mx-auto mb-3" />
-            <p className="text-slate-600 dark:text-slate-400">
-              No connections yet
-            </p>
+            <p className="text-slate-600 dark:text-slate-400">No connections yet</p>
           </div>
         )}
       </div>
@@ -133,7 +120,7 @@ const ConnectionsTab = () => {
                   onClick={() => handleViewProfile(user)}
                 >
                   <img
-                    src={user.avatar || "/placeholder.svg"}
+                    src={user.avatar || '/placeholder.svg'}
                     alt={user.name}
                     className={`w-8 h-8 ${BORDER_RADIUS.avatar} object-cover`}
                   />
@@ -154,8 +141,8 @@ const ConnectionsTab = () => {
                   onClick={() => sendConnectionRequest(user.id)}
                   className={`shrink-0 px-3 py-1.5 ${BORDER_RADIUS.cardSmall} font-medium text-xs transition-all ${
                     connectionRequests.includes(user.id)
-                      ? "bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-400 cursor-default"
-                      : "bg-orange-500 hover:bg-orange-600 text-white shadow-sm cursor-pointer"
+                      ? 'bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-400 cursor-default'
+                      : 'bg-orange-500 hover:bg-orange-600 text-white shadow-sm cursor-pointer'
                   }`}
                   whileHover={{
                     scale: connectionRequests.includes(user.id) ? 1 : 1.02,
@@ -165,7 +152,7 @@ const ConnectionsTab = () => {
                   }}
                   disabled={connectionRequests.includes(user.id)}
                 >
-                  {connectionRequests.includes(user.id) ? "Sent" : "Connect"}
+                  {connectionRequests.includes(user.id) ? 'Sent' : 'Connect'}
                 </motion.button>
               </motion.div>
             ))}
@@ -173,9 +160,7 @@ const ConnectionsTab = () => {
         ) : (
           <div className="text-center py-12 px-4">
             <UserPlus className="w-12 h-12 text-slate-300 dark:text-slate-600 mx-auto mb-3" />
-            <p className="text-slate-600 dark:text-slate-400">
-              No suggestions at the moment
-            </p>
+            <p className="text-slate-600 dark:text-slate-400">No suggestions at the moment</p>
           </div>
         )}
       </div>

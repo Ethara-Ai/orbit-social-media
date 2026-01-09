@@ -1,16 +1,18 @@
 // eslint-disable-next-line no-unused-vars
-import { motion } from "framer-motion";
-import { BORDER_RADIUS } from "../../utils/constants";
+import { motion } from 'framer-motion';
+import { BORDER_RADIUS } from '../../utils/constants';
 
 const LoadingScreen = () => {
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 font-['Inter',sans-serif] flex items-center justify-center relative overflow-hidden transition-colors duration-300">
       {/* Subtle background pattern */}
       <div className="absolute inset-0 opacity-30 dark:opacity-20">
-        <div className={`absolute top-1/4 left-1/4 w-96 h-96 bg-orange-200 dark:bg-orange-500 ${BORDER_RADIUS.badge} blur-3xl animate-pulse`}></div>
+        <div
+          className={`absolute top-1/4 left-1/4 w-96 h-96 bg-orange-200 dark:bg-orange-500 ${BORDER_RADIUS.badge} blur-3xl animate-pulse`}
+        ></div>
         <div
           className={`absolute bottom-1/4 right-1/4 w-80 h-80 bg-amber-200 dark:bg-amber-500 ${BORDER_RADIUS.badge} blur-3xl animate-pulse`}
-          style={{ animationDelay: "1s" }}
+          style={{ animationDelay: '1s' }}
         ></div>
       </div>
 
@@ -20,7 +22,7 @@ const LoadingScreen = () => {
         <motion.div
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.6, type: "spring", stiffness: 100 }}
+          transition={{ duration: 0.6, type: 'spring', stiffness: 100 }}
           className="mb-8"
         >
           <motion.div
@@ -31,7 +33,7 @@ const LoadingScreen = () => {
             transition={{
               duration: 2,
               repeat: Infinity,
-              ease: "easeInOut",
+              ease: 'easeInOut',
             }}
           >
             <span className="text-white text-3xl font-bold">O</span>
@@ -77,7 +79,7 @@ const LoadingScreen = () => {
                   duration: 1,
                   repeat: Infinity,
                   delay: i * 0.2,
-                  ease: "easeInOut",
+                  ease: 'easeInOut',
                 }}
               />
             ))}

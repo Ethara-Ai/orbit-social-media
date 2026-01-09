@@ -72,10 +72,11 @@ Orbit is a fully functional social media dashboard prototype that simulates a re
 | **React 19.2.3** | UI Framework |
 | **Vite 7.3.1** | Build Tool & Dev Server |
 | **Tailwind CSS 4.1.18** | Utility-first Styling |
-| **Framer Motion 12.24.8** | Animations & Transitions |
+| **Framer Motion 12.25.0** | Animations & Transitions |
 | **Vitest 4.0.16** | Unit Testing Framework |
 | **Testing Library** | Component Testing |
 | **ESLint 9** | Code Linting |
+| **Prettier 3.7.4** | Code Formatting |
 | **GitHub Actions** | CI/CD Pipeline |
 | **SSH Deployment** | Production Server |
 
