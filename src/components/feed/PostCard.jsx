@@ -1,14 +1,13 @@
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
-import { useFeed } from "../../context/AppContext";
-import { useUser } from "../../context/AppContext";
+import { usePostCard } from "../../hooks";
 import PostHeader from "./post/PostHeader";
 import PostContent from "./post/PostContent";
 import PostActions from "./post/PostActions";
 import PostComments from "./post/PostComments";
 
 const PostCard = ({ post, index }) => {
-  // Access feed state and actions directly from context
+  // Use facade hook to access all needed data and actions
   const {
     comments,
     showComments,
@@ -18,10 +17,9 @@ const PostCard = ({ post, index }) => {
     handleComment,
     handleAddComment,
     handlePostClick,
-  } = useFeed();
-
-  // Access user data from context
-  const { currentUser, currentUserAvatar } = useUser();
+    currentUser,
+    currentUserAvatar,
+  } = usePostCard();
 
   const isCommentsVisible = showComments.includes(post.id);
 

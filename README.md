@@ -81,12 +81,18 @@ Orbit is a fully functional social media dashboard prototype that simulates a re
 
 ## Architecture
 
+> **For comprehensive architecture documentation, see [ARCHITECTURE.md](docs/ARCHITECTURE.md)**
+
 ### Design Principles
 
 This project follows **high cohesion** and **low coupling** principles:
 
 - **Domain-Specific Contexts** - State is organized by feature domain, not by component
-- **Service Layer** - Business logic is extracted into reusable service functions
+- **Repository Pattern** - Data initialization and access are separated from state management
+- **Service Layer** - Business logic is extracted into reusable, pure service functions
+- **Action Hooks** - Complex business logic handlers are extracted from contexts into dedicated hooks
+- **Facade Hooks** - Components with multiple context dependencies use facade hooks for simplified interfaces
+- **Domain-Specific Utils** - Utility functions are organized by purpose (time, array, file, string, DOM, etc.)
 - **Thin Orchestrators** - Layout components delegate to child components via hooks
 - **No Prop Drilling** - Tab components access their data directly via context hooks
 - **Colocated Tests** - Test files live alongside the components they test
@@ -105,16 +111,75 @@ The application state is split into 6 domain-specific contexts:
 | `ExploreContext` | Explore posts, categories, theater modal |
 | `UIContext` | Tabs, modals, loading states, mobile navigation |
 
-### Service Layer
+### Data Layer
 
-Business logic is extracted into dedicated services:
+#### Repositories
+
+Data initialization and access are separated from state management:
+
+| Repository | Purpose |
+|-----------|---------|
+| `PostRepository` | Initialize and access posts and comments data |
+| `ConversationRepository` | Initialize and access conversation data |
+| `ExploreRepository` | Initialize and access explore posts and categories |
+
+#### Service Layer
+
+Business logic is extracted into dedicated, pure service functions:
 
 | Service | Purpose |
 |---------|---------|
-| `postService.js` | Post CRUD, likes, comments, sharing |
+| `postService.js` | Post CRUD, likes, comments, sharing (pure functions) |
 | `messageService.js` | Message creation, smart response generation |
 | `conversationService.js` | Conversation management, search, cleanup |
 | `notificationService.js` | Notification generation, read state management |
+
+### Hook Architecture
+
+#### Action Hooks
+
+Complex business logic handlers are extracted from contexts:
+
+| Hook | Purpose |
+|------|---------|
+| `useFeedActions` | Feed operations (like, comment, share, create post) |
+| `useMessagesActions` | Messaging operations (send, clear, attachments) |
+
+#### Facade Hooks
+
+Simplified interfaces for components with multiple context dependencies:
+
+| Hook | Purpose |
+|------|---------|
+| `usePostCard` | Consolidates feed and user context for PostCard component |
+
+#### Utility Hooks
+
+Reusable stateful logic:
+
+| Hook | Purpose |
+|------|---------|
+| `useDebounce` | Debounce values with configurable delay |
+| `useLocalStorage` | Persist state to localStorage |
+| `useMediaQuery` | Responsive media query matching |
+| `useClickOutside` | Detect clicks outside an element |
+| `useScrollToBottom` | Auto-scroll to bottom of container |
+| `useScrollPosition` | Track scroll position |
+
+### Utility Organization
+
+Utilities are organized by domain for high cohesion:
+
+| Module | Purpose |
+|--------|---------|
+| `timeUtils.js` | Time and date formatting |
+| `arrayUtils.js` | Array manipulation and transformation |
+| `fileUtils.js` | File processing and validation |
+| `stringUtils.js` | String manipulation |
+| `domUtils.js` | DOM manipulation and browser interactions |
+| `numberUtils.js` | Number formatting and generation |
+| `objectUtils.js` | Object manipulation and function utilities |
+| `helpers.js` | Backward compatibility layer (re-exports from domain-specific modules) |
 
 ## Project Structure
 
@@ -224,7 +289,7 @@ src/
 │       ├── UIContext.jsx
 │       └── index.js
 │
-├── services/                    # Business logic layer
+├── services/                    # Business logic layer (pure functions)
 │   ├── postService.js
 │   ├── messageService.js
 │   ├── conversationService.js
@@ -232,23 +297,33 @@ src/
 │   └── index.js
 │
 ├── hooks/                       # Custom React hooks
-│   ├── useClickOutside.js
+│   ├── useClickOutside.js       # Utility hook
 │   ├── useClickOutside.test.js
-│   ├── useDebounce.js
+│   ├── useDebounce.js           # Utility hook
 │   ├── useDebounce.test.js
-│   ├── useLocalStorage.js
+│   ├── useLocalStorage.js       # Utility hook
 │   ├── useLocalStorage.test.js
-│   ├── useMediaQuery.js
+│   ├── useMediaQuery.js         # Utility hook
 │   ├── useMediaQuery.test.js
-│   ├── useScrollPosition.js
+│   ├── useScrollPosition.js     # Utility hook
 │   ├── useScrollPosition.test.js
-│   ├── useScrollToBottom.js
+│   ├── useScrollToBottom.js     # Utility hook
 │   ├── useScrollToBottom.test.js
+│   ├── useFeedActions.js        # Action hook - Feed business logic
+│   ├── useMessagesActions.js    # Action hook - Messages business logic
+│   ├── usePostCard.js           # Facade hook - PostCard interface
 │   └── index.js
 │
-├── utils/                       # Utilities and constants
-│   ├── constants.js
-│   ├── helpers.js
+├── utils/                       # Domain-organized utilities
+│   ├── constants.js             # Application constants
+│   ├── timeUtils.js             # Time and date utilities
+│   ├── arrayUtils.js            # Array manipulation utilities
+│   ├── fileUtils.js             # File processing utilities
+│   ├── stringUtils.js           # String manipulation utilities
+│   ├── domUtils.js              # DOM manipulation utilities
+│   ├── numberUtils.js           # Number formatting utilities
+│   ├── objectUtils.js           # Object and function utilities
+│   ├── helpers.js               # Backward compatibility layer
 │   ├── helpers.test.js
 │   └── index.js
 │
@@ -256,7 +331,12 @@ src/
 │   └── setup.js                 # Vitest setup file
 │
 ├── data/
-│   └── mockData.js              # Mock data generators
+│   ├── mockData.js              # Mock data generators
+│   └── repositories/            # Data access layer
+│       ├── PostRepository.js    # Posts and comments data
+│       ├── ConversationRepository.js  # Conversations data
+│       ├── ExploreRepository.js # Explore posts and categories data
+│       └── index.js
 │
 ├── App.jsx                      # App entry with AppProvider
 ├── App.css                      # App-specific styles
@@ -462,15 +542,25 @@ The messaging system includes a smart response generator that analyzes your mess
 - Simulates likes, comments, follows, and friend requests
 - Toast popups appear for new notifications
 
+## Documentation
+
+- [Architecture Guide](docs/ARCHITECTURE.md) - Comprehensive architecture documentation
+- [Deployment Guide](docs/DEPLOYMENT.MD) - Production deployment setup
+
 ## Project Stats
 
 | Metric | Value |
 |--------|-------|
-| Test Files | 23 |
+| Test Files | 34 |
+| Total Tests | 1,561 |
 | Components | 50+ |
-| Custom Hooks | 7 |
+| Utility Hooks | 6 |
+| Action Hooks | 2 |
+| Facade Hooks | 1 |
 | Context Providers | 6 |
 | Services | 4 |
+| Repositories | 3 |
+| Utility Modules | 7 |
 
 ## Contributing
 

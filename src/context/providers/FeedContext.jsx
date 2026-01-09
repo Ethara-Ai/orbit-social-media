@@ -1,36 +1,12 @@
 /* eslint-disable react-refresh/only-export-components */
-import {
-  createContext,
-  useContext,
-  useState,
-  useMemo,
-  useCallback,
-} from "react";
+import { createContext, useContext, useState, useMemo } from "react";
 
 // Import Data
-import {
-  currentUser,
-  friends,
-  createMockPosts,
-  createInitialComments,
-} from "../../data/mockData";
+import { currentUser } from "../../data/mockData";
+import { postRepository } from "../../data/repositories";
 
-// Import Services
-import {
-  createPost,
-  toggleLikeById,
-  incrementSharesById,
-  incrementCommentsById,
-  addPost,
-  createComment,
-  addComment,
-  toggleCommentVisibility,
-  copyPostUrlToClipboard,
-} from "../../services/postService";
-
-// Import Utils
-import { processImageFile } from "../../utils/helpers";
-import { COPY_NOTIFICATION_DURATION } from "../../utils/constants";
+// Import Hooks
+import { useFeedActions } from "../../hooks/useFeedActions";
 
 // ============================================================================
 // Context Definition
@@ -40,20 +16,21 @@ const FeedContext = createContext(null);
 
 // ============================================================================
 // Feed Provider
-// Self-contained provider managing feed-related state and actions
+// Self-contained provider managing feed-related state
+// Business logic extracted to useFeedActions hook
 // ============================================================================
 
 export function FeedProvider({ children }) {
   // ==========================================================================
-  // Initialize Mock Data
+  // Initialize Data from Repository
   // ==========================================================================
-  const mockPosts = useMemo(() => createMockPosts(friends), []);
-  const initialComments = useMemo(() => createInitialComments(friends), []);
+  const initialPosts = useMemo(() => postRepository.getPosts(), []);
+  const initialComments = useMemo(() => postRepository.getComments(), []);
 
   // ==========================================================================
   // Feed State
   // ==========================================================================
-  const [posts, setPosts] = useState(mockPosts);
+  const [posts, setPosts] = useState(initialPosts);
   const [comments, setComments] = useState(initialComments);
   const [showComments, setShowComments] = useState([]);
   const [newComment, setNewComment] = useState({});
@@ -63,77 +40,31 @@ export function FeedProvider({ children }) {
   const [showCopyNotification, setShowCopyNotification] = useState(false);
 
   // ==========================================================================
-  // Feed Handlers
+  // Feed Action Handlers (Business Logic)
   // ==========================================================================
-
-  const handleLike = useCallback((postId) => {
-    setPosts((prev) => toggleLikeById(prev, postId));
-  }, []);
-
-  const handleComment = useCallback((postId) => {
-    setShowComments((prev) => toggleCommentVisibility(prev, postId));
-  }, []);
-
-  const handleAddComment = useCallback(
-    (postId) => {
-      const commentText = newComment[postId];
-      if (!commentText?.trim()) return;
-
-      const newCommentObj = createComment({
-        user: currentUser,
-        content: commentText,
-        postId,
-      });
-
-      setComments((prev) => addComment(prev, newCommentObj));
-      setPosts((prev) => incrementCommentsById(prev, postId));
-      setNewComment((prev) => ({ ...prev, [postId]: "" }));
-    },
-    [newComment],
-  );
-
-  const handleShare = useCallback(async (postId) => {
-    const success = await copyPostUrlToClipboard(postId);
-    setPosts((prev) => incrementSharesById(prev, postId));
-    setShowCopyNotification(true);
-    setTimeout(
-      () => setShowCopyNotification(false),
-      COPY_NOTIFICATION_DURATION,
-    );
-    return success;
-  }, []);
-
-  const handleCreatePost = useCallback(() => {
-    if (!newPostContent.trim() && !selectedImage) return;
-
-    const newPost = createPost({
-      user: currentUser,
-      content: newPostContent,
-      image: selectedImage,
-      category: "Personal",
-    });
-
-    setPosts((prev) => addPost(prev, newPost));
-    setNewPostContent("");
-    setSelectedImage(null);
-  }, [newPostContent, selectedImage]);
-
-  const handleImageUpload = useCallback(async (event) => {
-    const file = event.target.files?.[0];
-    const dataUrl = await processImageFile(file);
-    if (dataUrl) {
-      setSelectedImage(dataUrl);
-    }
-  }, []);
-
-  const handlePostClick = useCallback((postId) => {
-    console.log("Post clicked:", postId);
-    setSelectedPost(postId);
-  }, []);
-
-  const clearSelectedPost = useCallback(() => {
-    setSelectedPost(null);
-  }, []);
+  const {
+    handleLike,
+    handleComment,
+    handleAddComment,
+    handleShare,
+    handleCreatePost,
+    handleImageUpload,
+    handlePostClick,
+    clearSelectedPost,
+  } = useFeedActions({
+    currentUser,
+    setPosts,
+    setComments,
+    setShowComments,
+    setNewComment,
+    setNewPostContent,
+    setSelectedImage,
+    setSelectedPost,
+    setShowCopyNotification,
+    newComment,
+    newPostContent,
+    selectedImage,
+  });
 
   // ==========================================================================
   // Context Value

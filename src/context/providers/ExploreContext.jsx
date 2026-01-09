@@ -8,11 +8,7 @@ import {
 } from "react";
 
 // Import Data
-import {
-  friends,
-  createExplorePosts,
-  exploreCategories,
-} from "../../data/mockData";
+import { exploreRepository } from "../../data/repositories";
 
 // Import Services
 import { toggleLikeById } from "../../services/postService";
@@ -25,19 +21,25 @@ const ExploreContext = createContext(null);
 
 // ============================================================================
 // Explore Provider
-// Self-contained provider managing explore-related state and actions
+// Self-contained provider managing explore-related state
+// Business logic is simple enough to remain in context
 // ============================================================================
 
 export function ExploreProvider({ children }) {
   // ==========================================================================
-  // Initialize Mock Data
+  // Initialize Data from Repository
   // ==========================================================================
-  const explorePosts = useMemo(() => createExplorePosts(friends), []);
+  const initialExplorePosts = useMemo(() => exploreRepository.getPosts(), []);
+  const exploreCategories = useMemo(
+    () => exploreRepository.getCategories(),
+    [],
+  );
 
   // ==========================================================================
   // Explore State
   // ==========================================================================
-  const [explorePostsState, setExplorePostsState] = useState(explorePosts);
+  const [explorePostsState, setExplorePostsState] =
+    useState(initialExplorePosts);
   const [activeExploreCategory, setActiveExploreCategory] = useState(null);
   const [showExploreModal, setShowExploreModal] = useState(false);
   const [selectedExplorePost, setSelectedExplorePost] = useState(null);
@@ -85,6 +87,7 @@ export function ExploreProvider({ children }) {
     }),
     [
       explorePostsState,
+      exploreCategories,
       activeExploreCategory,
       showExploreModal,
       selectedExplorePost,
