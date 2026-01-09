@@ -42,6 +42,13 @@ const NotificationsContext = createContext(null);
 
 // ============================================================================
 // Notifications Provider
+// Self-contained provider managing notification-related state and actions
+//
+// Encapsulation Strategy:
+// - All state setters (setNotifications, setNotificationCount) are kept
+//   internal and only accessible through actions for better encapsulation
+// - Auto-generation of notifications is handled internally
+// - Components only interact through actions (markNotificationsAsRead, etc.)
 // ============================================================================
 
 export function NotificationsProvider({ children }) {
@@ -128,17 +135,22 @@ export function NotificationsProvider({ children }) {
 
   // ==========================================================================
   // Context Value
+  //
+  // Exposed to consumers:
+  // - Read-only data (notifications, notificationCount)
+  // - Actions (mark notifications as read)
+  //
+  // Kept internal (not exposed):
+  // - setNotifications (managed by auto-generation and actions)
+  // - setNotificationCount (computed from notifications state)
   // ==========================================================================
 
   const contextValue = useMemo(
     () => ({
-      // Data
+      // Read-only Data
       notifications,
       notificationCount,
-      // Setters
-      setNotifications,
-      setNotificationCount,
-      // Actions
+      // Actions (encapsulate state changes)
       markNotificationsAsRead,
       markNotificationAsRead,
     }),

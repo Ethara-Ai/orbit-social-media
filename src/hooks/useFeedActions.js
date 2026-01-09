@@ -20,35 +20,38 @@ import { processImageFile } from "../utils/fileUtils";
 import { COPY_NOTIFICATION_DURATION } from "../utils/constants";
 
 /**
- * Custom hook for feed action handlers
+ * Custom hook for feed action handlers with organized parameter structure
  * @param {Object} params - Hook parameters
  * @param {Object} params.currentUser - Current user object
- * @param {Function} params.setPosts - Function to update posts state
- * @param {Function} params.setComments - Function to update comments state
- * @param {Function} params.setShowComments - Function to update show comments state
- * @param {Function} params.setNewComment - Function to update new comment state
- * @param {Function} params.setNewPostContent - Function to update new post content state
- * @param {Function} params.setSelectedImage - Function to update selected image state
- * @param {Function} params.setSelectedPost - Function to update selected post state
- * @param {Function} params.setShowCopyNotification - Function to update copy notification state
- * @param {Object} params.newComment - New comment state object
- * @param {string} params.newPostContent - New post content string
- * @param {string|null} params.selectedImage - Selected image data URL
+ * @param {Object} params.state - State values
+ * @param {string} params.state.newPostContent - New post content string
+ * @param {string|null} params.state.selectedImage - Selected image data URL
+ * @param {Object} params.state.newComment - New comment state object
+ * @param {Object} params.setState - State setters grouped by domain
+ * @param {Function} params.setState.setPosts - Function to update posts state
+ * @param {Function} params.setState.setComments - Function to update comments state
+ * @param {Function} params.setState.setShowComments - Function to update show comments state
+ * @param {Function} params.setState.setNewComment - Function to update new comment state
+ * @param {Function} params.setState.setNewPostContent - Function to update new post content state
+ * @param {Function} params.setState.setSelectedImage - Function to update selected image state
+ * @param {Function} params.setState.setSelectedPost - Function to update selected post state
+ * @param {Object} params.ui - UI-related state and setters
+ * @param {Function} params.ui.setShowCopyNotification - Function to update copy notification state
  * @returns {Object} Object containing all feed action handlers
  */
 export const useFeedActions = ({
   currentUser,
-  setPosts,
-  setComments,
-  setShowComments,
-  setNewComment,
-  setNewPostContent,
-  setSelectedImage,
-  setSelectedPost,
-  setShowCopyNotification,
-  newComment,
-  newPostContent,
-  selectedImage,
+  state: { newPostContent, selectedImage, newComment },
+  setState: {
+    setPosts,
+    setComments,
+    setShowComments,
+    setNewComment,
+    setNewPostContent,
+    setSelectedImage,
+    setSelectedPost,
+  },
+  ui: { setShowCopyNotification },
 }) => {
   /**
    * Handle like action on a post
@@ -57,7 +60,7 @@ export const useFeedActions = ({
     (postId) => {
       setPosts((prev) => toggleLikeById(prev, postId));
     },
-    [setPosts]
+    [setPosts],
   );
 
   /**
@@ -67,7 +70,7 @@ export const useFeedActions = ({
     (postId) => {
       setShowComments((prev) => toggleCommentVisibility(prev, postId));
     },
-    [setShowComments]
+    [setShowComments],
   );
 
   /**
@@ -88,7 +91,7 @@ export const useFeedActions = ({
       setPosts((prev) => incrementCommentsById(prev, postId));
       setNewComment((prev) => ({ ...prev, [postId]: "" }));
     },
-    [newComment, currentUser, setComments, setPosts, setNewComment]
+    [newComment, currentUser, setComments, setPosts, setNewComment],
   );
 
   /**
@@ -101,11 +104,11 @@ export const useFeedActions = ({
       setShowCopyNotification(true);
       setTimeout(
         () => setShowCopyNotification(false),
-        COPY_NOTIFICATION_DURATION
+        COPY_NOTIFICATION_DURATION,
       );
       return success;
     },
-    [setPosts, setShowCopyNotification]
+    [setPosts, setShowCopyNotification],
   );
 
   /**
@@ -144,7 +147,7 @@ export const useFeedActions = ({
         setSelectedImage(dataUrl);
       }
     },
-    [setSelectedImage]
+    [setSelectedImage],
   );
 
   /**
@@ -155,7 +158,7 @@ export const useFeedActions = ({
       console.log("Post clicked:", postId);
       setSelectedPost(postId);
     },
-    [setSelectedPost]
+    [setSelectedPost],
   );
 
   /**

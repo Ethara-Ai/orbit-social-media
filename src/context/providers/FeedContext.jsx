@@ -18,6 +18,12 @@ const FeedContext = createContext(null);
 // Feed Provider
 // Self-contained provider managing feed-related state
 // Business logic extracted to useFeedActions hook
+//
+// Encapsulation Strategy:
+// - Form-related setters (setNewComment, setNewPostContent, setSelectedImage)
+//   are exposed for controlled input components
+// - Critical state setters (setPosts, setComments, etc.) are kept internal
+//   and only accessible through actions for better encapsulation
 // ============================================================================
 
 export function FeedProvider({ children }) {
@@ -41,6 +47,7 @@ export function FeedProvider({ children }) {
 
   // ==========================================================================
   // Feed Action Handlers (Business Logic)
+  // Organized parameter structure for better maintainability
   // ==========================================================================
   const {
     handleLike,
@@ -53,26 +60,42 @@ export function FeedProvider({ children }) {
     clearSelectedPost,
   } = useFeedActions({
     currentUser,
-    setPosts,
-    setComments,
-    setShowComments,
-    setNewComment,
-    setNewPostContent,
-    setSelectedImage,
-    setSelectedPost,
-    setShowCopyNotification,
-    newComment,
-    newPostContent,
-    selectedImage,
+    state: {
+      newPostContent,
+      selectedImage,
+      newComment,
+    },
+    setState: {
+      setPosts,
+      setComments,
+      setShowComments,
+      setNewComment,
+      setNewPostContent,
+      setSelectedImage,
+      setSelectedPost,
+    },
+    ui: {
+      setShowCopyNotification,
+    },
   });
 
   // ==========================================================================
   // Context Value
+  //
+  // Exposed to consumers:
+  // - Read-only data (posts, comments, etc.)
+  // - Form setters (for controlled inputs)
+  // - Actions (encapsulated state changes)
+  //
+  // Kept internal (not exposed):
+  // - setPosts, setComments, setShowComments (use actions instead)
+  // - setSelectedPost (use handlePostClick/clearSelectedPost)
+  // - setShowCopyNotification (managed by handleShare action)
   // ==========================================================================
 
   const contextValue = useMemo(
     () => ({
-      // Data
+      // Read-only Data
       currentUser,
       posts,
       comments,
@@ -82,13 +105,11 @@ export function FeedProvider({ children }) {
       selectedImage,
       selectedPost,
       showCopyNotification,
-      // Setters
+      // Form Setters (for controlled inputs)
       setNewComment,
       setNewPostContent,
       setSelectedImage,
-      setSelectedPost,
-      setShowCopyNotification,
-      // Actions
+      // Actions (encapsulate complex state changes)
       handleLike,
       handleComment,
       handleAddComment,

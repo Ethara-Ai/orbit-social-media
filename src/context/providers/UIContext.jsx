@@ -24,6 +24,13 @@ const UIContext = createContext(null);
 // ============================================================================
 // UI Provider
 // Self-contained provider managing UI-related state and actions
+//
+// Encapsulation Strategy:
+// - UI control setters (tab, navigation, modals) are exposed to support
+//   the application's UI interaction patterns
+// - Actions (closeMobileNav, closeAllModals, toggleTheme) provide
+//   convenient methods for common operations
+// - Theme state management is encapsulated with both setter and toggle
 // ============================================================================
 
 export function UIProvider({ children }) {
@@ -141,11 +148,19 @@ export function UIProvider({ children }) {
 
   // ==========================================================================
   // Context Value
-  // ==========================================================================
+  //
+  // Exposed to consumers:
+  // - Read-only data (activeTab, theme, computed states, etc.)
+  // - UI control setters (for navigation, modals, overlays)
+  // - Actions (convenient methods for common UI operations)
+  //
+  // All setters are intentionally exposed for this global UI state manager
+  // as it serves as the central coordination point for application-wide UI
+  // ============================================================================
 
   const contextValue = useMemo(
     () => ({
-      // Data
+      // Read-only Data
       activeTab,
       previousTab,
       showFriends,
@@ -162,19 +177,22 @@ export function UIProvider({ children }) {
       isTheaterModeOpen,
       theme,
       isDarkMode,
-      // Setters
+      // Navigation & Tab Control
       setActiveTab,
+      // UI Visibility Setters
       setShowFriends,
       setShowMobileNav,
       setShowMobileRightSidebar,
       setIsLoading,
       setShowCopyNotification,
+      // Modal & Overlay Setters
       setShowCurrentUserModal,
       setShowProfileModal,
       setSelectedPost,
       setIsTheaterModeOpen,
+      // Theme Setters
       setTheme,
-      // Actions
+      // Actions (encapsulate common UI operations)
       closeMobileNav,
       closeAllModals,
       toggleTheme,

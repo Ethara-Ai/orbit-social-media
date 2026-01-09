@@ -23,6 +23,12 @@ const ExploreContext = createContext(null);
 // Explore Provider
 // Self-contained provider managing explore-related state
 // Business logic is simple enough to remain in context
+//
+// Encapsulation Strategy:
+// - Category setter (setActiveExploreCategory) is exposed for filter controls
+// - Critical state setters (setExplorePosts, setShowExploreModal,
+//   setSelectedExplorePost) are kept internal and only accessible through
+//   actions for better encapsulation
 // ============================================================================
 
 export function ExploreProvider({ children }) {
@@ -65,22 +71,29 @@ export function ExploreProvider({ children }) {
 
   // ==========================================================================
   // Context Value
+  //
+  // Exposed to consumers:
+  // - Read-only data (explorePosts, exploreCategories, etc.)
+  // - Category setter (for filter controls)
+  // - Actions (encapsulated state changes)
+  //
+  // Kept internal (not exposed):
+  // - setExplorePosts (use handleExploreLike action)
+  // - setShowExploreModal (use handleExplorePostClick/closeExploreModal)
+  // - setSelectedExplorePost (use handleExplorePostClick/closeExploreModal)
   // ==========================================================================
 
   const contextValue = useMemo(
     () => ({
-      // Data
+      // Read-only Data
       explorePosts: explorePostsState,
       exploreCategories,
       activeExploreCategory,
       showExploreModal,
       selectedExplorePost,
-      // Setters
-      setExplorePosts: setExplorePostsState,
+      // Filter Setter (for controlled inputs)
       setActiveExploreCategory,
-      setShowExploreModal,
-      setSelectedExplorePost,
-      // Actions
+      // Actions (encapsulate complex state changes)
       handleExploreLike,
       handleExplorePostClick,
       closeExploreModal,

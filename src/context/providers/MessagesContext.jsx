@@ -27,6 +27,13 @@ const MessagesContext = createContext(null);
 // Messages Provider
 // Self-contained provider managing messages-related state
 // Business logic extracted to useMessagesActions hook
+//
+// Encapsulation Strategy:
+// - Messaging interface setters (setActiveConversation, setConversations,
+//   setMessageText, setMessageAttachment, setShowChatDropdown) are exposed
+//   to support the complex messaging UI interaction patterns
+// - Internal UI setters (setShowEmptyChatPopup, setPendingNavigateToMessages)
+//   are kept internal and only accessible through actions
 // ============================================================================
 
 export function MessagesProvider({ children }) {
@@ -112,11 +119,20 @@ export function MessagesProvider({ children }) {
 
   // ==========================================================================
   // Context Value
+  //
+  // Exposed to consumers:
+  // - Read-only data (conversations, messageText, etc.)
+  // - Messaging interface setters (for conversation/message state management)
+  // - Actions (encapsulated business logic operations)
+  //
+  // Kept internal (not exposed):
+  // - setShowEmptyChatPopup (managed by actions)
+  // - setPendingNavigateToMessages (managed by actions)
   // ==========================================================================
 
   const contextValue = useMemo(
     () => ({
-      // Data
+      // Read-only Data
       conversations,
       activeConversation,
       messageText,
@@ -125,14 +141,13 @@ export function MessagesProvider({ children }) {
       showEmptyChatPopup,
       totalUnreadMessages,
       pendingNavigateToMessages,
-      // Setters
+      // Messaging Interface Setters (for complex UI state management)
       setActiveConversation,
       setConversations,
       setMessageText,
       setMessageAttachment,
       setShowChatDropdown,
-      setShowEmptyChatPopup,
-      // Actions
+      // Actions (encapsulate complex operations)
       handleSendMessage,
       handleClearAllChat,
       handleAttachmentUpload,

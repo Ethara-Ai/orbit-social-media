@@ -23,6 +23,12 @@ const UserContext = createContext(null);
 // ============================================================================
 // User Provider
 // Self-contained provider managing user-related state and actions
+//
+// Encapsulation Strategy:
+// - All state setters are kept internal - components interact only through
+//   actions (sendConnectionRequest, updateUserAvatar, etc.)
+// - This provides a clean API and prevents direct state manipulation
+// - Profile and user data updates are encapsulated in dedicated action methods
 // ============================================================================
 
 export function UserProvider({ children }) {
@@ -90,11 +96,18 @@ export function UserProvider({ children }) {
 
   // ==========================================================================
   // Context Value
+  //
+  // Exposed to consumers:
+  // - Read-only data (currentUser, friends, etc.)
+  // - Actions only (no direct setters exposed)
+  //
+  // All state changes must go through actions for better encapsulation
+  // and to ensure business logic consistency
   // ==========================================================================
 
   const contextValue = useMemo(
     () => ({
-      // Data
+      // Read-only Data
       currentUser,
       currentUserAvatar,
       currentUserCover,
@@ -105,7 +118,7 @@ export function UserProvider({ children }) {
       activeOnlineFriends,
       connectionRequests,
       selectedProfileUser,
-      // Actions
+      // Actions (encapsulate all state changes)
       sendConnectionRequest,
       handleViewProfile,
       clearSelectedProfile,

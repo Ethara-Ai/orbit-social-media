@@ -12,7 +12,12 @@
  * @param {string} options.category - Post category, default 'General'
  * @returns {Object} New post object
  */
-export const createPost = ({ user, content, image = null, category = 'General' }) => {
+export const createPost = ({
+  user,
+  content,
+  image = null,
+  category = "General",
+}) => {
   return {
     id: Date.now().toString(),
     user,
@@ -21,7 +26,7 @@ export const createPost = ({ user, content, image = null, category = 'General' }
     likes: 0,
     comments: 0,
     shares: 0,
-    timestamp: 'Just now',
+    timestamp: "Just now",
     isLiked: false,
     category,
   };
@@ -165,7 +170,7 @@ export const createComment = ({ user, content, postId }) => {
     id: `c${Date.now()}`,
     user,
     content,
-    timestamp: 'Just now',
+    timestamp: "Just now",
     postId,
   };
 };
@@ -223,28 +228,9 @@ export const copyPostUrlToClipboard = async (postId) => {
     await navigator.clipboard.writeText(url);
     return true;
   } catch (err) {
-    console.error('Failed to copy link:', err);
+    console.error("Failed to copy link:", err);
     return false;
   }
-};
-
-/**
- * Process image upload and return data URL
- * @param {File} file - Image file to process
- * @returns {Promise<string|null>} Data URL of image or null if invalid
- */
-export const processImageUpload = (file) => {
-  return new Promise((resolve) => {
-    if (!file || !file.type.startsWith('image/')) {
-      resolve(null);
-      return;
-    }
-
-    const reader = new FileReader();
-    reader.onload = (e) => resolve(e.target?.result);
-    reader.onerror = () => resolve(null);
-    reader.readAsDataURL(file);
-  });
 };
 
 export default {
@@ -266,5 +252,4 @@ export default {
   toggleCommentVisibility,
   generateShareUrl,
   copyPostUrlToClipboard,
-  processImageUpload,
 };
