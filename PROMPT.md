@@ -1,4 +1,4 @@
-Build a social networking dashboard named Orbit using React 19, Vite, Tailwind CSS 4, and Framer Motion. Structure the codebase with a layered architecture emphasizing high cohesion and low coupling.
+Build a social networking dashboard named Orbit using React, Vite, Tailwind CSS, and Framer Motion. Structure the codebase with a layered architecture emphasizing high cohesion and low coupling.
 
 Organize state through six domain-specific React Context providers (User, Feed, Messages, Notifications, Explore, UI), each focusing on state management only. Extract complex business logic into action hooks (useFeedActions, useMessagesActions) that orchestrate operations. Use facade hooks (usePostCard) to simplify components with multiple context dependencies.
 
