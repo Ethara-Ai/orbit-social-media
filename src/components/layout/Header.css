@@ -1,0 +1,117 @@
+/**
+ * Header Component Styles
+ *
+ * Responsive padding styles for the header container.
+ * These are extracted from inline styles for better performance
+ * (CSS is cached and not re-parsed on every render).
+ */
+
+/* Base padding - smallest screens */
+.header-container {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+/* 320px - 374px: Extra small phones */
+@media (min-width: 320px) and (max-width: 374px) {
+  .header-container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+/* 375px - 424px: Small phones (iPhone SE, etc.) */
+@media (min-width: 375px) and (max-width: 424px) {
+  .header-container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+/* 425px - 539px: Large phones */
+@media (min-width: 425px) and (max-width: 539px) {
+  .header-container {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+}
+
+/* 540px - 639px: Small tablets in portrait */
+@media (min-width: 540px) and (max-width: 639px) {
+  .header-container {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+/* 640px - 767px: Tablets in portrait */
+@media (min-width: 640px) and (max-width: 767px) {
+  .header-container {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+
+/* 768px - 1023px: Tablets landscape / small laptops */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .header-container {
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+}
+
+/* 1024px - 1279px: Standard laptops */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .header-container {
+    padding-left: 137px;
+    padding-right: 137px;
+  }
+}
+
+/* 1280px - 1365px: Smaller external monitors */
+@media (min-width: 1280px) and (max-width: 1365px) {
+  .header-container {
+    padding-left: 88px;
+    padding-right: 88px;
+  }
+}
+
+/* 1366px - 1439px: Common laptop resolution */
+@media (min-width: 1366px) and (max-width: 1439px) {
+  .header-container {
+    padding-left: 100px;
+    padding-right: 100px;
+  }
+}
+
+/* 1440px - 1599px: Standard external monitors */
+@media (min-width: 1440px) and (max-width: 1599px) {
+  .header-container {
+    padding-left: 88px;
+    padding-right: 88px;
+  }
+}
+
+/* 1600px - 1919px: Large monitors */
+@media (min-width: 1600px) and (max-width: 1919px) {
+  .header-container {
+    padding-left: 120px;
+    padding-right: 120px;
+  }
+}
+
+/* 1920px - 2559px: Full HD monitors */
+@media (min-width: 1920px) and (max-width: 2559px) {
+  .header-container {
+    padding-left: 160px;
+    padding-right: 160px;
+  }
+}
+
+/* 2560px and above: 4K and ultra-wide monitors */
+@media (min-width: 2560px) {
+  .header-container {
+    padding-left: 200px;
+    padding-right: 200px;
+  }
+}

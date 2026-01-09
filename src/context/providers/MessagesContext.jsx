@@ -12,6 +12,7 @@ import { getTotalUnreadCount } from '../../services/conversationService';
 // ============================================================================
 
 const MessagesContext = createContext(null);
+MessagesContext.displayName = 'MessagesContext';
 
 // ============================================================================
 // Messages Provider

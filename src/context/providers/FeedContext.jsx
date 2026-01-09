@@ -10,6 +10,7 @@ import postRepository from '../../data/repositories/PostRepository';
 // ============================================================================
 
 const FeedContext = createContext(null);
+FeedContext.displayName = 'FeedContext';
 
 // ============================================================================
 // Feed Provider

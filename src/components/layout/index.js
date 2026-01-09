@@ -1,3 +1,4 @@
+export { default as SocialMediaDashboard } from './SocialMediaDashboard';
 export { default as LoadingScreen } from './LoadingScreen';
 export { default as Sidebar } from './Sidebar';
 export { default as Header } from './Header';

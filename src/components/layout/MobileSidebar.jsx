@@ -4,26 +4,29 @@ import { Home, Search, MessageCircle, Bell, X, User } from '../icons';
 import UserProfileCard from '../sidebar/UserProfileCard';
 import NavigationItems from '../sidebar/NavigationItems';
 import ProfileAnalytics from '../sidebar/ProfileAnalytics';
-import { useUser, useUI, useMessages, useNotifications, useFeed } from '../../context/AppContext';
-import { INITIAL_PROFILE_POSTS, PROFILE_DATA, BORDER_RADIUS } from '../../utils/constants';
+import { useUser, useMessages, useNotifications, useFeed } from '../../context/AppContext';
+import { useTab, useMobileNav } from '../../context/providers/ui';
+import { INITIAL_PROFILE_POSTS, PROFILE_DATA, BORDER_RADIUS, TABS } from '../../utils/constants';
 
 const MobileSidebar = () => {
   const { posts } = useFeed();
   const { currentUser, currentUserAvatar, currentUserDetails } = useUser();
-  const { activeTab, setActiveTab, showMobileNav, setShowMobileNav } = useUI();
+  // Use focused hooks for better performance
+  const { activeTab, setActiveTab } = useTab();
+  const { showMobileNav, setShowMobileNav } = useMobileNav();
   const { totalUnreadMessages } = useMessages();
   const { notificationCount, markNotificationsAsRead } = useNotifications();
 
   const navItems = [
-    { id: 'feed', label: 'Home', icon: Home },
-    { id: 'explore', label: 'Discover', icon: Search },
-    { id: 'messages', label: 'Chats', icon: MessageCircle },
-    { id: 'notifications', label: 'Notifications', icon: Bell },
-    { id: 'profile', label: 'Profile', icon: User },
+    { id: TABS.FEED, label: 'Home', icon: Home },
+    { id: TABS.EXPLORE, label: 'Discover', icon: Search },
+    { id: TABS.MESSAGES, label: 'Chats', icon: MessageCircle },
+    { id: TABS.NOTIFICATIONS, label: 'Notifications', icon: Bell },
+    { id: TABS.PROFILE, label: 'Profile', icon: User },
   ];
 
   const handleNavigateToProfile = () => {
-    setActiveTab('profile');
+    setActiveTab(TABS.PROFILE);
     setShowMobileNav(false);
   };
 

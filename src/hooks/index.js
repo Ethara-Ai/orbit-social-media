@@ -17,6 +17,20 @@ export {
 } from '../context/AppContext';
 
 // ============================================================================
+// Focused UI Hooks (Recommended for better performance)
+// These provide granular access to specific UI state slices
+// ============================================================================
+
+export {
+  useTab,
+  useTheme,
+  useModal,
+  useMobileNav,
+  useLoading,
+  useNotificationPopup,
+} from '../context/providers/ui';
+
+// ============================================================================
 // Utility Hooks - Reusable logic hooks
 // ============================================================================
 

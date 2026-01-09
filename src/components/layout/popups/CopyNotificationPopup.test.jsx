@@ -6,10 +6,11 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import CopyNotificationPopup from './CopyNotificationPopup';
 
-// Mock the context - updated to use useUI instead of useFeed
-vi.mock('../../../context/AppContext', () => ({
-  useUI: () => ({
+// Mock the focused UI context hook
+vi.mock('../../../context/providers/ui', () => ({
+  useNotificationPopup: () => ({
     showCopyNotification: true,
+    copyNotificationMessage: 'Link copied to clipboard!',
   }),
 }));
 
@@ -282,10 +283,9 @@ describe('CopyNotificationPopup', () => {
       expect(() => rerender(<CopyNotificationPopup />)).not.toThrow();
     });
 
-    it('should always show the same message text', () => {
+    it('should display the message from context', () => {
       render(<CopyNotificationPopup />);
       expect(screen.getByText('Link copied to clipboard!')).toBeInTheDocument();
-      expect(screen.queryByText('Copied!')).not.toBeInTheDocument();
     });
   });
 });
@@ -293,7 +293,7 @@ describe('CopyNotificationPopup', () => {
 describe('CopyNotificationPopup visibility states', () => {
   it('should document that popup shows based on showCopyNotification context value', () => {
     // This test documents the expected behavior:
-    // The popup visibility is controlled by the showCopyNotification value from useUI context
+    // The popup visibility is controlled by the showCopyNotification value from useNotificationPopup context
     // When showCopyNotification is true, the popup renders
     // When showCopyNotification is false, the popup does not render (via AnimatePresence)
     render(<CopyNotificationPopup />);
