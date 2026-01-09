@@ -7,7 +7,7 @@ export default defineConfig({
 
   // Base path - use '/' for S3 root deployment
   // Change this if deploying to a subdirectory
-  base: "/orbit-social-media/",
+  base: "./",
 
   // Build configuration
   build: {
