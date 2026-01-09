@@ -53,7 +53,7 @@ export function FeedProvider({ children }) {
   const [showComments, setShowComments] = useState([]);
   const [newComment, setNewComment] = useState({});
   const [newPostContent, setNewPostContent] = useState('');
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImages, setSelectedImages] = useState([]);
   const [selectedPost, setSelectedPost] = useState(null);
 
   // ==========================================================================
@@ -76,7 +76,8 @@ export function FeedProvider({ children }) {
       showComments,
       newComment,
       newPostContent,
-      selectedImage,
+      newPostContent,
+      selectedImages,
       selectedPost,
 
       // State Setters
@@ -85,10 +86,10 @@ export function FeedProvider({ children }) {
       setShowComments,
       setNewComment,
       setNewPostContent,
-      setSelectedImage,
+      setSelectedImages,
       setSelectedPost,
     }),
-    [posts, comments, showComments, newComment, newPostContent, selectedImage, selectedPost]
+    [posts, comments, showComments, newComment, newPostContent, selectedImages, selectedPost]
   );
 
   return <FeedContext.Provider value={contextValue}>{children}</FeedContext.Provider>;

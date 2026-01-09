@@ -44,7 +44,7 @@ const PostCard = memo(function PostCard({ post, index }) {
     >
       <PostHeader user={post.user} timestamp={post.timestamp} />
 
-      <PostContent content={post.content} image={post.image} />
+      <PostContent content={post.content} image={post.image} images={post.images} />
 
       <PostActions
         postId={post.id}

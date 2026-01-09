@@ -17,8 +17,8 @@ const MessagesTab = () => {
     setConversations,
     messageText,
     setMessageText,
-    messageAttachment,
-    setMessageAttachment,
+    messageAttachments,
+    setMessageAttachments,
     showChatDropdown,
     setShowChatDropdown,
     showEmptyChatPopup,
@@ -47,10 +47,10 @@ const MessagesTab = () => {
 
   const filteredConversations = searchQuery.trim()
     ? conversations.filter(
-        (conversation) =>
-          conversation.user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          conversation.lastMessage.toLowerCase().includes(searchQuery.toLowerCase())
-      )
+      (conversation) =>
+        conversation.user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        conversation.lastMessage.toLowerCase().includes(searchQuery.toLowerCase())
+    )
     : conversations;
 
   const activeConversationData = conversations.find((conv) => conv.id === activeConversation);
@@ -61,9 +61,9 @@ const MessagesTab = () => {
 
   // Get current message text and attachment for active conversation
   const currentMessageText = activeConversation ? messageText[activeConversation] || '' : '';
-  const currentMessageAttachment = activeConversation
-    ? messageAttachment[activeConversation] || null
-    : null;
+  const currentMessageAttachments = activeConversation
+    ? messageAttachments[activeConversation] || []
+    : [];
 
   // Handle setting message text for current conversation
   const handleSetMessageText = (value) => {
@@ -76,9 +76,9 @@ const MessagesTab = () => {
   };
 
   // Handle setting message attachment for current conversation
-  const handleSetMessageAttachment = (value) => {
+  const handleSetMessageAttachments = (value) => {
     if (activeConversation) {
-      setMessageAttachment((prev) => ({
+      setMessageAttachments((prev) => ({
         ...prev,
         [activeConversation]: value,
       }));
@@ -112,8 +112,8 @@ const MessagesTab = () => {
                 onClearAllChat={handleClearAllChat}
                 messageText={currentMessageText}
                 setMessageText={handleSetMessageText}
-                messageAttachment={currentMessageAttachment}
-                setMessageAttachment={handleSetMessageAttachment}
+                messageAttachments={currentMessageAttachments}
+                setMessageAttachments={handleSetMessageAttachments}
                 onSendMessage={handleSendMessage}
                 onAttachmentUpload={handleAttachmentUpload}
                 messagesEndRef={messagesEndRef}

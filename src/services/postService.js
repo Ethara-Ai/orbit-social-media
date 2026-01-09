@@ -12,12 +12,17 @@
  * @param {string} options.category - Post category, default 'General'
  * @returns {Object} New post object
  */
-export const createPost = ({ user, content, image = null, category = 'General' }) => {
+export const createPost = ({ user, content, image = null, images = [], category = 'General' }) => {
+  // Handle backward compatibility and priority
+  const finalImages = images.length > 0 ? images : image ? [image] : [];
+  const primaryImage = image || (finalImages.length > 0 ? finalImages[0] : undefined);
+
   return {
     id: Date.now().toString(),
     user,
     content,
-    image: image || undefined,
+    image: primaryImage,
+    images: finalImages,
     likes: 0,
     comments: 0,
     shares: 0,

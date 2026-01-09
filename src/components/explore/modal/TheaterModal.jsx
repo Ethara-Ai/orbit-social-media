@@ -31,7 +31,7 @@ const TheaterModal = ({
     >
       {/* Backdrop - solid dark background for better mobile performance */}
       <motion.div
-        className="absolute inset-0 bg-slate-950/95"
+        className="absolute inset-0 bg-black/95"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
@@ -125,7 +125,7 @@ const TheaterHeader = ({ selectedPost, onClose }) => {
           ringColor="orange"
           className="w-7 h-7 sm:w-9 sm:h-9"
         />
-        <div className="hidden xs:block sm:block">
+        <div className="block">
           <p className="text-white font-semibold text-xs sm:text-sm">{selectedPost.user.name}</p>
           <p className="text-white/50 text-[10px] sm:text-xs">{selectedPost.user.profession}</p>
         </div>
@@ -202,7 +202,7 @@ const TheaterActionBar = ({
 }) => {
   return (
     <motion.div
-      className="bg-linear-to-t from-slate-950 via-slate-950/95 to-transparent"
+      className="bg-linear-to-t from-black via-black/95 to-transparent"
       initial={{ y: 50, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ delay: 0.15 }}

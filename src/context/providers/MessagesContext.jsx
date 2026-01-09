@@ -41,7 +41,7 @@ export function MessagesProvider({ children }) {
   const [conversations, setConversations] = useState(initialConversations);
   const [activeConversation, setActiveConversation] = useState(null);
   const [messageText, setMessageText] = useState({});
-  const [messageAttachment, setMessageAttachment] = useState({});
+  const [messageAttachments, setMessageAttachments] = useState({});
   const [showChatDropdown, setShowChatDropdown] = useState(false);
   const [showEmptyChatPopup, setShowEmptyChatPopup] = useState(false);
   const [pendingNavigateToMessages, setPendingNavigateToMessages] = useState(false);
@@ -93,7 +93,9 @@ export function MessagesProvider({ children }) {
       activeConversation,
       activeConversationRef,
       messageText,
-      messageAttachment,
+      activeConversationRef,
+      messageText,
+      messageAttachments,
       showChatDropdown,
       showEmptyChatPopup,
       totalUnreadMessages,
@@ -103,7 +105,7 @@ export function MessagesProvider({ children }) {
       setConversations,
       setActiveConversation,
       setMessageText,
-      setMessageAttachment,
+      setMessageAttachments,
       setShowChatDropdown,
       setShowEmptyChatPopup,
       setPendingNavigateToMessages,
@@ -112,7 +114,7 @@ export function MessagesProvider({ children }) {
       conversations,
       activeConversation,
       messageText,
-      messageAttachment,
+      messageAttachments,
       showChatDropdown,
       showEmptyChatPopup,
       totalUnreadMessages,

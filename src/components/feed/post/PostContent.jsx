@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { linkifyText } from '../../../utils/stringUtils';
 
-const PostContent = ({ content, image }) => {
+const PostContent = ({ content, image, images }) => {
   const [imageAspect, setImageAspect] = useState(null);
 
   const handleImageError = (e) => {
@@ -15,7 +15,10 @@ const PostContent = ({ content, image }) => {
     setImageAspect(aspect);
   };
 
-  // Determine if image is portrait (taller than wide)
+  // Prepare images array
+  const allImages = images && images.length > 0 ? images : image ? [image] : [];
+
+  // Determine if single image is portrait (taller than wide)
   const isPortrait = imageAspect !== null && imageAspect < 1;
 
   return (
@@ -45,22 +48,41 @@ const PostContent = ({ content, image }) => {
         </div>
       )}
 
-      {/* Post Image */}
-      {image && (
+      {/* Post Images */}
+      {allImages.length > 0 && (
         <div className="px-4 pb-3">
-          <div
-            className={`relative w-full rounded-md sm:rounded-lg overflow-hidden bg-slate-100 dark:bg-neutral-900 ${
-              isPortrait ? 'max-w-md mx-auto' : ''
-            }`}
-          >
-            <img
-              src={image || '/placeholder.svg'}
-              alt="Post content"
-              className="w-full h-auto max-h-[70vh] object-contain rounded-md sm:rounded-lg"
-              onError={handleImageError}
-              onLoad={handleImageLoad}
-            />
-          </div>
+          {allImages.length === 1 ? (
+            /* Single Image */
+            <div
+              className={`relative w-full rounded-md sm:rounded-lg overflow-hidden bg-slate-100 dark:bg-neutral-900 ${isPortrait ? 'max-w-md mx-auto' : ''
+                }`}
+            >
+              <img
+                src={allImages[0] || '/placeholder.svg'}
+                alt="Post content"
+                className="w-full h-auto max-h-[70vh] object-contain rounded-md sm:rounded-lg"
+                onError={handleImageError}
+                onLoad={handleImageLoad}
+              />
+            </div>
+          ) : (
+            /* Multi Image Grid */
+            <div className={`grid gap-2 ${allImages.length === 2 ? 'grid-cols-2' : 'grid-cols-2 sm:grid-cols-3'}`}>
+              {allImages.map((imgSrc, idx) => (
+                <div
+                  key={idx}
+                  className="relative rounded-md sm:rounded-lg overflow-hidden bg-slate-100 dark:bg-neutral-900 aspect-square"
+                >
+                  <img
+                    src={imgSrc}
+                    alt={`Post content ${idx + 1}`}
+                    className="w-full h-full object-cover"
+                    onError={handleImageError}
+                  />
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       )}
     </>

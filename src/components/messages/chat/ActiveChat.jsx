@@ -10,8 +10,8 @@ const ActiveChat = ({
   onClearAllChat,
   messageText,
   setMessageText,
-  messageAttachment,
-  setMessageAttachment,
+  messageAttachments,
+  setMessageAttachments,
   onSendMessage,
   onAttachmentUpload,
   messagesEndRef,
@@ -38,8 +38,8 @@ const ActiveChat = ({
       <MessageInput
         messageText={messageText}
         setMessageText={setMessageText}
-        messageAttachment={messageAttachment}
-        setMessageAttachment={setMessageAttachment}
+        messageAttachments={messageAttachments}
+        setMessageAttachments={setMessageAttachments}
         onSendMessage={onSendMessage}
         onAttachmentUpload={onAttachmentUpload}
       />

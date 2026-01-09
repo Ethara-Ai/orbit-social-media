@@ -9,7 +9,7 @@ import { BORDER_RADIUS, TEXTAREA_MIN_HEIGHT, TEXTAREA_MAX_HEIGHT } from '../../u
 
 const CreatePost = () => {
   // Access state from context
-  const { newPostContent, setNewPostContent, selectedImage, setSelectedImage } = useFeed();
+  const { newPostContent, setNewPostContent, selectedImages, setSelectedImages } = useFeed();
 
   // Access actions from hook
   const { handleCreatePost, handleImageUpload } = useFeedActions();
@@ -35,8 +35,8 @@ const CreatePost = () => {
     }
   }, [newPostContent]);
 
-  const removeSelectedMedia = () => {
-    setSelectedImage(null);
+  const removeSelectedMedia = (indexToCheck) => {
+    setSelectedImages((prev) => prev.filter((_, index) => index !== indexToCheck));
   };
 
   const handleTextChange = (e) => {
@@ -84,7 +84,11 @@ const CreatePost = () => {
               type="file"
               id="image-upload"
               accept="image/*"
-              onChange={handleImageUpload}
+              multiple
+              onChange={(e) => {
+                handleImageUpload(e);
+                e.target.value = ''; // Reset input to allow same file selection
+              }}
               className="hidden"
             />
 
@@ -103,13 +107,13 @@ const CreatePost = () => {
 
               <motion.button
                 onClick={handleCreatePost}
-                disabled={!newPostContent.trim() && !selectedImage}
+                disabled={!newPostContent.trim() && selectedImages.length === 0}
                 className={`bg-orange-500 hover:bg-orange-600 text-white px-2.5 sm:px-3 py-1.5 sm:py-1.5 ${BORDER_RADIUS.button} font-semibold text-[10px] sm:text-[11px] transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-orange-500 whitespace-nowrap`}
                 whileHover={{
-                  scale: newPostContent.trim() || selectedImage ? 1.02 : 1,
+                  scale: newPostContent.trim() || selectedImages.length > 0 ? 1.02 : 1,
                 }}
                 whileTap={{
-                  scale: newPostContent.trim() || selectedImage ? 0.98 : 1,
+                  scale: newPostContent.trim() || selectedImages.length > 0 ? 0.98 : 1,
                 }}
                 type="button"
               >
@@ -118,21 +122,28 @@ const CreatePost = () => {
             </div>
           </div>
 
-          {/* Selected Image Preview */}
-          {selectedImage && (
-            <div className="mt-2 sm:mt-3 relative rounded-lg sm:rounded-xl overflow-hidden bg-slate-100 dark:bg-neutral-900">
-              <img
-                src={selectedImage}
-                alt="Selected"
-                className="w-full h-auto max-h-64 sm:max-h-80 object-contain"
-              />
-              <button
-                onClick={removeSelectedMedia}
-                className={`absolute top-1.5 right-1.5 sm:top-2 sm:right-2 bg-slate-900/80 text-white ${BORDER_RADIUS.button} p-1 sm:p-1.5 hover:bg-slate-900 transition-colors cursor-pointer`}
-                type="button"
-              >
-                <X className="w-3 h-3 sm:w-4 sm:h-4" />
-              </button>
+          {/* Selected Image Preview (Grid) */}
+          {selectedImages.length > 0 && (
+            <div className="mt-2 sm:mt-3 grid grid-cols-2 gap-2">
+              {selectedImages.map((image, index) => (
+                <div
+                  key={index}
+                  className="relative rounded-lg sm:rounded-xl overflow-hidden bg-slate-100 dark:bg-neutral-900 group"
+                >
+                  <img
+                    src={image}
+                    alt={`Selected ${index + 1}`}
+                    className="w-full h-auto max-h-40 sm:max-h-50 object-cover"
+                  />
+                  <button
+                    onClick={() => removeSelectedMedia(index)}
+                    className={`absolute top-1.5 right-1.5 sm:top-2 sm:right-2 bg-slate-900/80 text-white ${BORDER_RADIUS.button} p-1 sm:p-1.5 hover:bg-slate-900 transition-colors cursor-pointer opacity-0 group-hover:opacity-100 focus:opacity-100`}
+                    type="button"
+                  >
+                    <X className="w-3 h-3 sm:w-4 sm:h-4" />
+                  </button>
+                </div>
+              ))}
             </div>
           )}
         </div>

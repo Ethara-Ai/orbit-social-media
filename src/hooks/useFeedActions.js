@@ -34,13 +34,13 @@ export const useFeedActions = () => {
     posts,
     newComment,
     newPostContent,
-    selectedImage,
+    selectedImages,
     setPosts,
     setComments,
     setShowComments,
     setNewComment,
     setNewPostContent,
-    setSelectedImage,
+    setSelectedImages,
     setSelectedPost,
   } = useFeed();
 
@@ -132,7 +132,7 @@ export const useFeedActions = () => {
    * Handle creating a new post
    */
   const handleCreatePost = useCallback(() => {
-    if (!newPostContent.trim() && !selectedImage) return;
+    if (!newPostContent.trim() && selectedImages.length === 0) return;
 
     // Create a user object that reflects the current profile state
     const postingUser = {
@@ -144,22 +144,24 @@ export const useFeedActions = () => {
     const newPost = createPost({
       user: postingUser,
       content: newPostContent,
-      image: selectedImage,
+      images: selectedImages,
+      // For backward compatibility
+      image: selectedImages[0] || null,
       category: 'Personal',
     });
 
     setPosts((prev) => [newPost, ...prev]);
     setNewPostContent('');
-    setSelectedImage(null);
+    setSelectedImages([]);
   }, [
     newPostContent,
-    selectedImage,
+    selectedImages,
     currentUser,
     currentUserDetails,
     currentUserAvatar,
     setPosts,
     setNewPostContent,
-    setSelectedImage,
+    setSelectedImages,
   ]);
 
   /**
@@ -167,13 +169,26 @@ export const useFeedActions = () => {
    */
   const handleImageUpload = useCallback(
     async (event) => {
-      const file = event.target.files?.[0];
-      const dataUrl = await processImageFile(file);
-      if (dataUrl) {
-        setSelectedImage(dataUrl);
+      const files = Array.from(event.target.files || []);
+      if (files.length === 0) return;
+
+      const processedImages = await Promise.all(
+        files.map(async (file) => {
+          return await processImageFile(file);
+        })
+      );
+
+      // Filter out any failed uploads (nulls)
+      const validImages = processedImages.filter((img) => img !== null);
+
+      if (validImages.length > 0) {
+        setSelectedImages((prev) => [...prev, ...validImages]);
       }
+
+      // Reset input so same files can be selected again if needed
+      event.target.value = '';
     },
-    [setSelectedImage]
+    [setSelectedImages]
   );
 
   /**

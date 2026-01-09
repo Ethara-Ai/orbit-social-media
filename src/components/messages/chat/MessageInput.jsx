@@ -6,8 +6,8 @@ import { BORDER_RADIUS } from '../../../utils/constants';
 const MessageInput = ({
   messageText,
   setMessageText,
-  messageAttachment,
-  setMessageAttachment,
+  messageAttachments = [],
+  setMessageAttachments,
   onSendMessage,
   onAttachmentUpload,
 }) => {
@@ -22,17 +22,26 @@ const MessageInput = ({
     document.getElementById('message-attachment')?.click();
   };
 
-  const removeAttachment = () => {
-    setMessageAttachment(null);
+  const removeAttachment = (index) => {
+    const newAttachments = messageAttachments.filter((_, i) => i !== index);
+    setMessageAttachments(newAttachments);
   };
 
-  const canSend = messageText.trim() || messageAttachment;
+  const canSend = messageText.trim() || messageAttachments.length > 0;
 
   return (
     <div className="p-2 sm:p-4 border-t border-slate-100 dark:border-neutral-700 bg-white dark:bg-neutral-900 transition-colors">
-      {/* Attachment Preview */}
-      {messageAttachment && (
-        <AttachmentPreview attachment={messageAttachment} onRemove={removeAttachment} />
+      {/* Attachment Preview (Grid) */}
+      {messageAttachments.length > 0 && (
+        <div className="mb-2 sm:mb-3 flex overflow-x-auto gap-2 pb-2">
+          {messageAttachments.map((attachment, index) => (
+            <AttachmentPreview
+              key={index}
+              attachment={attachment}
+              onRemove={() => removeAttachment(index)}
+            />
+          ))}
+        </div>
       )}
 
       {/* Input Row */}
@@ -42,7 +51,11 @@ const MessageInput = ({
           type="file"
           id="message-attachment"
           accept="image/*"
-          onChange={onAttachmentUpload}
+          multiple
+          onChange={(e) => {
+            onAttachmentUpload(e);
+            e.target.value = ''; // Reset input to allow same file selection
+          }}
           className="hidden"
         />
 
@@ -82,7 +95,7 @@ const MessageInput = ({
 
 const AttachmentPreview = ({ attachment, onRemove }) => {
   return (
-    <div className="mb-2 sm:mb-3 relative inline-block">
+    <div className="relative shrink-0">
       <img
         src={attachment}
         alt="Attachment"

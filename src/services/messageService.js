@@ -304,7 +304,11 @@ export const generateSmartResponse = (messageText, hasAttachment = false) => {
  * @param {string|null} options.attachment - Optional attachment URL
  * @returns {Object} New message object
  */
-export const createMessage = ({ text, isSent = true, attachment = null }) => {
+export const createMessage = ({ text, isSent = true, attachment = null, attachments = [] }) => {
+  // Handle backward compatibility and priority
+  const finalAttachments = attachments.length > 0 ? attachments : attachment ? [attachment] : [];
+  const primaryAttachment = attachment || (finalAttachments.length > 0 ? finalAttachments[0] : null);
+
   return {
     id: Date.now().toString(),
     text,
@@ -314,7 +318,8 @@ export const createMessage = ({ text, isSent = true, attachment = null }) => {
     }),
     isRead: isSent,
     isSent,
-    ...(attachment && { attachment }),
+    ...(primaryAttachment && { attachment: primaryAttachment }),
+    ...(finalAttachments.length > 0 && { attachments: finalAttachments }),
   };
 };
 

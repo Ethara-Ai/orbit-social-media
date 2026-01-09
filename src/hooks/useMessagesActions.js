@@ -35,11 +35,11 @@ export const useMessagesActions = () => {
     conversations,
     activeConversation,
     messageText,
-    messageAttachment,
+    messageAttachments,
     setConversations,
     setActiveConversation,
     setMessageText,
-    setMessageAttachment,
+    setMessageAttachments,
     setShowChatDropdown,
     setShowEmptyChatPopup,
     setPendingNavigateToMessages,
@@ -50,9 +50,9 @@ export const useMessagesActions = () => {
    */
   const handleSendMessage = useCallback(() => {
     const currentMessageText = messageText[activeConversation] || '';
-    const currentAttachment = messageAttachment[activeConversation] || null;
+    const currentAttachments = messageAttachments[activeConversation] || [];
 
-    if ((!currentMessageText.trim() && !currentAttachment) || !activeConversation) {
+    if ((!currentMessageText.trim() && currentAttachments.length === 0) || !activeConversation) {
       return;
     }
 
@@ -60,7 +60,9 @@ export const useMessagesActions = () => {
     const newMessage = createMessage({
       text: currentMessageText,
       isSent: true,
-      attachment: currentAttachment,
+      attachments: currentAttachments,
+      // For backward compatibility
+      attachment: currentAttachments[0] || null,
     });
 
     // Update conversation with new message and move to top
@@ -71,14 +73,14 @@ export const useMessagesActions = () => {
 
     // Clear input for current conversation
     setMessageText((prev) => ({ ...prev, [activeConversation]: '' }));
-    setMessageAttachment((prev) => ({ ...prev, [activeConversation]: null }));
+    setMessageAttachments((prev) => ({ ...prev, [activeConversation]: [] }));
   }, [
     activeConversation,
     messageText,
-    messageAttachment,
+    messageAttachments,
     setConversations,
     setMessageText,
-    setMessageAttachment,
+    setMessageAttachments,
   ]);
 
   /**
@@ -111,18 +113,29 @@ export const useMessagesActions = () => {
    */
   const handleAttachmentUpload = useCallback(
     async (event) => {
-      const file = event.target.files?.[0];
-      if (!file || !activeConversation) return;
+      const files = Array.from(event.target.files || []);
+      if (files.length === 0 || !activeConversation) return;
 
-      const dataUrl = await processImageFile(file);
-      if (dataUrl) {
-        setMessageAttachment((prev) => ({
+      const processedImages = await Promise.all(
+        files.map(async (file) => {
+          return await processImageFile(file);
+        })
+      );
+
+      // Filter out any failed uploads (nulls)
+      const validImages = processedImages.filter((img) => img !== null);
+
+      if (validImages.length > 0) {
+        setMessageAttachments((prev) => ({
           ...prev,
-          [activeConversation]: dataUrl,
+          [activeConversation]: [...(prev[activeConversation] || []), ...validImages],
         }));
       }
+
+      // Reset input
+      event.target.value = '';
     },
-    [activeConversation, setMessageAttachment]
+    [activeConversation, setMessageAttachments]
   );
 
   /**
