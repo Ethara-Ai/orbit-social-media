@@ -1,5 +1,4 @@
 /* eslint-disable react-refresh/only-export-components */
-/* eslint-disable react-refresh/only-export-components */
 import { memo, useState, useEffect } from 'react';
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
@@ -13,7 +12,7 @@ import { formatRelativeTime } from '../../utils/timeUtils';
 const NotificationsTab = () => {
   // Access notifications state directly from context
   const { notifications } = useNotifications();
-  const [now, setNow] = useState(Date.now());
+  const [now, setNow] = useState(() => Date.now());
 
   // Update relative times every minute
   useEffect(() => {
