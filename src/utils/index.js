@@ -6,3 +6,6 @@ export * from './helpers';
 
 export { default as constants } from './constants';
 export * from './constants';
+
+export { default as stringUtils } from './stringUtils';
+export * from './stringUtils';

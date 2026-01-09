@@ -3,6 +3,7 @@ import { useRef, useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import Avatar from '../../common/Avatar';
 import { BORDER_RADIUS } from '../../../utils/constants';
+import { linkifyText } from '../../../utils/stringUtils';
 
 const PostComments = ({
   postId,
@@ -126,7 +127,23 @@ const CommentItem = ({ comment, index }) => {
           </span>
         </div>
         <p className="text-slate-700 dark:text-slate-300 text-xs sm:text-sm transition-colors">
-          {comment.content}
+          {linkifyText(comment.content).map((part) => {
+            if (part.type === 'link') {
+              return (
+                <a
+                  key={part.key}
+                  href={part.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline transition-colors"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  {part.content}
+                </a>
+              );
+            }
+            return <span key={part.key}>{part.content}</span>;
+          })}
         </p>
       </div>
     </motion.div>
