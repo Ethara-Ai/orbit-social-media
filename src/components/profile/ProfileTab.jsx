@@ -1,9 +1,12 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from 'framer-motion';
 import { useUser, useFeed } from '../../context/AppContext';
-import { Heart, MessageCircle, Briefcase, MapPin, Share2 } from '../icons';
-import { PROFILE_DATA, INITIAL_PROFILE_POSTS, BORDER_RADIUS } from '../../utils/constants';
+import { useTab } from '../../context/providers/ui';
+import { Heart, MessageCircle, Briefcase, MapPin, Share2, ChevronLeft } from '../icons';
+import { PROFILE_DATA, INITIAL_PROFILE_POSTS, BORDER_RADIUS, TABS } from '../../utils/constants';
+import FollowersModal from './FollowersModal';
+import ProfileTheaterModal from './ProfileTheaterModal';
 
 // Mock comments for profile posts
 const profilePostMockComments = {
@@ -33,19 +36,19 @@ const profilePostMockComments = {
     {
       id: 'pc3',
       user: {
-        name: 'Emma Watson',
+        name: 'Lucas Rivera',
         avatar:
-          'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face',
+          'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&h=150&fit=crop&crop=face',
       },
-      content: 'Golden hour is always magical ✨',
-      timestamp: '3 hours ago',
+      content: 'This is absolutely stunning! The colors are perfect ✨',
+      timestamp: '10 min ago',
     },
     {
       id: 'pc4',
       user: {
-        name: 'James Wilson',
+        name: 'Mia Tanaka',
         avatar:
-          'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
+          'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop&crop=face',
       },
       content: 'Such stunning colors! What camera did you use?',
       timestamp: '2 hours ago',
@@ -53,17 +56,28 @@ const profilePostMockComments = {
     {
       id: 'pc5',
       user: {
-        name: 'Sophia Lee',
+        name: 'Zara Chen',
         avatar:
-          'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face',
+          'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop&crop=face',
       },
       content: 'This should be on a postcard! Beautiful! 🌅',
-      timestamp: '1 hour ago',
+      timestamp: '3 hours ago',
     },
   ],
   p3: [
     {
       id: 'pc6',
+      user: {
+        name: 'Mia Tanaka',
+        avatar:
+          'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop&crop=face',
+      },
+      content:
+        '@jordanm this reminds me of our conversation about travel photography! You have such a great eye for landscapes 🌄',
+      timestamp: '18 min ago',
+    },
+    {
+      id: 'pc6b',
       user: {
         name: 'Nathan Park',
         avatar:
@@ -77,19 +91,19 @@ const profilePostMockComments = {
     {
       id: 'pc7',
       user: {
-        name: 'Zara Chen',
+        name: 'Nathan Okonkwo',
         avatar:
-          'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop&crop=face',
+          'https://images.unsplash.com/photo-1507591064344-4c6ce005b128?w=150&h=150&fit=crop&crop=face',
       },
-      content: 'Nature therapy at its finest 🌲💚',
-      timestamp: '4 hours ago',
+      content: 'Nature therapy at its finest 🌲💚 This is incredible!',
+      timestamp: '35 min ago',
     },
     {
       id: 'pc8',
       user: {
-        name: 'Lucas Rivera',
+        name: 'Zara Chen',
         avatar:
-          'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&h=150&fit=crop&crop=face',
+          'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop&crop=face',
       },
       content: 'This makes me want to go hiking!',
       timestamp: '3 hours ago',
@@ -98,6 +112,17 @@ const profilePostMockComments = {
   p5: [
     {
       id: 'pc9',
+      user: {
+        name: 'Elena Volkov',
+        avatar:
+          'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=150&h=150&fit=crop&crop=face',
+      },
+      content:
+        'Hey @jordanm, you should check out the waterfalls in Iceland! This shot is amazing 💧',
+      timestamp: '1 hour ago',
+    },
+    {
+      id: 'pc9b',
       user: {
         name: 'Emma Watson',
         avatar:
@@ -111,22 +136,22 @@ const profilePostMockComments = {
     {
       id: 'pc10',
       user: {
-        name: 'James Wilson',
+        name: 'Kai Anderson',
         avatar:
-          'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
+          'https://images.unsplash.com/photo-1463453091185-61582044d556?w=150&h=150&fit=crop&crop=face',
       },
-      content: 'Moody vibes! Perfect atmosphere 🌫️',
-      timestamp: '8 hours ago',
+      content: 'Moody vibes! Perfect atmosphere 🌫️ Love this shot!',
+      timestamp: '2 hours ago',
     },
     {
       id: 'pc11',
       user: {
-        name: 'Sophia Lee',
+        name: 'Elena Volkov',
         avatar:
-          'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face',
+          'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=150&h=150&fit=crop&crop=face',
       },
       content: 'Early mornings are worth it for views like this!',
-      timestamp: '7 hours ago',
+      timestamp: '5 hours ago',
     },
   ],
 };
@@ -134,12 +159,24 @@ const profilePostMockComments = {
 const ProfileTab = () => {
   const { currentUser, profilePostComments, toggleProfilePostComments } = useUser();
   const { posts: feedPosts } = useFeed();
+  const { pendingProfilePost, setPendingProfilePost, setActiveTab: setActiveMainTab } = useTab();
 
-  const [activeTab, setActiveTab] = useState('posts');
+  const [activeProfileTab, setActiveProfileTab] = useState('posts');
+  const postRefs = useRef({});
   const [profilePosts, setProfilePosts] = useState(INITIAL_PROFILE_POSTS);
   const [showCopyPopup, setShowCopyPopup] = useState(false);
   const [newComment, setNewComment] = useState({});
   const [profileComments, setProfileComments] = useState(profilePostMockComments);
+  const [showFollowersModal, setShowFollowersModal] = useState(false);
+  const [followersModalTab, setFollowersModalTab] = useState('followers');
+  // Initialize state directly from pendingProfilePost to prevent flash
+  const [selectedPostId, setSelectedPostId] = useState(() => pendingProfilePost?.postId || null);
+  const [openCommentsOnModal, setOpenCommentsOnModal] = useState(
+    () => pendingProfilePost?.openComments || false
+  );
+  const [cameFromNotifications, setCameFromNotifications] = useState(
+    () => pendingProfilePost?.fromNotifications || false
+  );
 
   // Get user's posts from feed (posts created by current user)
   const userFeedPosts = feedPosts.filter((post) => post.user.id === currentUser.id);
@@ -159,13 +196,34 @@ const ProfileTab = () => {
     ...profilePosts,
   ];
 
+  // Derive selectedPost from profilePosts to keep it in sync (for like button)
+  const selectedPost = selectedPostId
+    ? allUserPosts.find((p) => p.id === selectedPostId) || null
+    : null;
+
+  // Clear pendingProfilePost after initial render (state already initialized from it)
+  useEffect(() => {
+    if (pendingProfilePost) {
+      setPendingProfilePost(null);
+    }
+  }, [pendingProfilePost, setPendingProfilePost]);
+
+  // Handle subsequent pendingProfilePost changes (when navigating back and clicking another notification)
+  useEffect(() => {
+    if (pendingProfilePost && selectedPostId !== pendingProfilePost.postId) {
+      setSelectedPostId(pendingProfilePost.postId);
+      setOpenCommentsOnModal(pendingProfilePost.openComments || false);
+      setCameFromNotifications(pendingProfilePost.fromNotifications || false);
+    }
+  }, [pendingProfilePost, selectedPostId]);
+
   const stats = {
     posts: allUserPosts.length,
     followers: PROFILE_DATA.followers,
     following: PROFILE_DATA.following,
   };
 
-  const tabs = [
+  const profileTabs = [
     { id: 'posts', label: 'Posts', count: allUserPosts.length },
     { id: 'about', label: 'About', count: null },
   ];
@@ -196,6 +254,54 @@ const ProfileTab = () => {
   // Handle comment toggle
   const handleCommentToggle = (postId) => {
     toggleProfilePostComments(postId);
+  };
+
+  // Handle opening followers/following modal
+  const handleOpenFollowersModal = (tab) => {
+    setFollowersModalTab(tab);
+    setShowFollowersModal(true);
+  };
+
+  // Handle opening post in theater modal
+  const handleOpenPost = (post) => {
+    setSelectedPostId(post.id);
+    setOpenCommentsOnModal(false);
+    setCameFromNotifications(false);
+  };
+
+  // Handle closing theater modal
+  const handleCloseTheaterModal = () => {
+    // If user came from notifications, navigate back to notifications tab
+    if (cameFromNotifications) {
+      setActiveMainTab(TABS.NOTIFICATIONS);
+    }
+    setSelectedPostId(null);
+    setOpenCommentsOnModal(false);
+    setCameFromNotifications(false);
+  };
+
+  // Handle adding comment from theater modal
+  const handleTheaterAddComment = (postId, commentText) => {
+    if (!commentText?.trim()) return;
+
+    const newCommentObj = {
+      id: `pc-${Date.now()}`,
+      user: {
+        name: PROFILE_DATA.name,
+        avatar: PROFILE_DATA.avatar,
+      },
+      content: commentText,
+      timestamp: 'Just now',
+    };
+
+    setProfileComments((prev) => ({
+      ...prev,
+      [postId]: [...(prev[postId] || []), newCommentObj],
+    }));
+
+    setProfilePosts((prev) =>
+      prev.map((post) => (post.id === postId ? { ...post, comments: post.comments + 1 } : post))
+    );
   };
 
   // Handle add comment - uses static profile data
@@ -232,6 +338,32 @@ const ProfileTab = () => {
     <div
       className={`max-w-4xl mx-auto w-full pb-8 bg-white dark:bg-neutral-900 ${BORDER_RADIUS.card}`}
     >
+      {/* Followers/Following Modal */}
+      <AnimatePresence>
+        {showFollowersModal && (
+          <FollowersModal
+            isOpen={showFollowersModal}
+            onClose={() => setShowFollowersModal(false)}
+            initialTab={followersModalTab}
+          />
+        )}
+      </AnimatePresence>
+
+      {/* Profile Theater Modal */}
+      <AnimatePresence>
+        {selectedPost && (
+          <ProfileTheaterModal
+            selectedPost={selectedPost}
+            onClose={handleCloseTheaterModal}
+            onLike={handleLike}
+            comments={profileComments}
+            onAddComment={handleTheaterAddComment}
+            showComments={openCommentsOnModal}
+            currentUserAvatar={PROFILE_DATA.avatar}
+          />
+        )}
+      </AnimatePresence>
+
       {/* Copy Profile Link Popup */}
       <AnimatePresence>
         {showCopyPopup && (
@@ -257,6 +389,20 @@ const ProfileTab = () => {
         >
           <img src={PROFILE_DATA.cover} alt="Cover" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-linear-to-t from-black/30 to-transparent" />
+
+          {/* Back to Home Button */}
+          <motion.button
+            onClick={() => setActiveMainTab(TABS.FEED)}
+            className={`absolute top-2 left-2 sm:top-3 sm:left-3 flex items-center gap-0.5 px-2 py-1 bg-white/20 hover:bg-white/30 dark:bg-black/20 dark:hover:bg-black/30 backdrop-blur-md ${BORDER_RADIUS.button} text-white text-xs font-medium transition-all cursor-pointer`}
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.3 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <ChevronLeft className="w-3 h-3" />
+            <span>Home</span>
+          </motion.button>
         </motion.div>
 
         {/* Profile Picture */}
@@ -344,32 +490,42 @@ const ProfileTab = () => {
             </span>
             <span className="text-sm sm:text-base text-slate-600 dark:text-neutral-400">Posts</span>
           </div>
-          <div className="flex flex-col sm:flex-row sm:items-baseline gap-0.5 sm:gap-1.5">
+          <motion.button
+            onClick={() => handleOpenFollowersModal('followers')}
+            className="flex flex-col sm:flex-row sm:items-baseline gap-0.5 sm:gap-1.5 cursor-pointer hover:opacity-70 transition-opacity"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
             <span className="text-[16px] font-bold text-slate-900 dark:text-white">
               {stats.followers}
             </span>
             <span className="text-sm sm:text-base text-slate-600 dark:text-neutral-400">
               Followers
             </span>
-          </div>
-          <div className="flex flex-col sm:flex-row sm:items-baseline gap-0.5 sm:gap-1.5">
+          </motion.button>
+          <motion.button
+            onClick={() => handleOpenFollowersModal('following')}
+            className="flex flex-col sm:flex-row sm:items-baseline gap-0.5 sm:gap-1.5 cursor-pointer hover:opacity-70 transition-opacity"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
             <span className="text-[16px] font-bold text-slate-900 dark:text-white">
               {stats.following}
             </span>
             <span className="text-sm sm:text-base text-slate-600 dark:text-neutral-400">
               Following
             </span>
-          </div>
+          </motion.button>
         </motion.div>
 
         {/* Tabs */}
         <div className="flex gap-1 mt-4 border-b border-slate-200 dark:border-neutral-700">
-          {tabs.map((tab) => (
+          {profileTabs.map((tab) => (
             <motion.button
               key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
+              onClick={() => setActiveProfileTab(tab.id)}
               className={`px-4 py-2 text-sm font-medium transition-colors relative cursor-pointer ${
-                activeTab === tab.id
+                activeProfileTab === tab.id
                   ? 'text-orange-500'
                   : 'text-slate-600 dark:text-neutral-400 hover:text-slate-900 dark:hover:text-white'
               }`}
@@ -380,10 +536,10 @@ const ProfileTab = () => {
               {tab.count !== null && (
                 <span className="ml-1 text-xs text-slate-400">({tab.count})</span>
               )}
-              {activeTab === tab.id && (
+              {activeProfileTab === tab.id && (
                 <motion.div
                   className="absolute bottom-0 left-0 right-0 h-0.5 bg-orange-500"
-                  layoutId="activeTab"
+                  layoutId="activeProfileTab"
                 />
               )}
             </motion.button>
@@ -392,7 +548,7 @@ const ProfileTab = () => {
 
         {/* Tab Content */}
         <AnimatePresence mode="wait">
-          {activeTab === 'posts' && (
+          {activeProfileTab === 'posts' && (
             <motion.div
               key="posts"
               initial={{ opacity: 0, y: 10 }}
@@ -402,171 +558,96 @@ const ProfileTab = () => {
             >
               {/* Expanded Posts List */}
               <div className="space-y-4 mt-4">
-                {allUserPosts.map((post, index) => (
-                  <motion.div
-                    key={post.id}
-                    className={`bg-white dark:bg-neutral-800 ${BORDER_RADIUS.card} border border-slate-200 dark:border-neutral-700 overflow-hidden`}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.05 }}
-                  >
-                    {/* Post Header */}
-                    <div className="flex items-center gap-3 p-3">
-                      <img
-                        src={PROFILE_DATA.avatar}
-                        alt={PROFILE_DATA.name}
-                        className={`w-10 h-10 ${BORDER_RADIUS.avatar} object-cover`}
-                      />
-                      <div>
-                        <p className="text-sm font-semibold text-slate-900 dark:text-white">
-                          {PROFILE_DATA.name}
-                        </p>
-                        <p className="text-xs text-slate-500 dark:text-neutral-400">
-                          {post.timestamp || 'Recently'}
-                        </p>
+                {allUserPosts.map((post, index) => {
+                  return (
+                    <motion.div
+                      key={post.id}
+                      ref={(el) => (postRefs.current[post.id] = el)}
+                      className={`bg-white dark:bg-neutral-800 ${BORDER_RADIUS.card} border border-slate-200 dark:border-neutral-700 overflow-hidden cursor-pointer hover:shadow-md transition-all duration-300`}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.05 }}
+                      onClick={() => handleOpenPost(post)}
+                    >
+                      {/* Post Header */}
+                      <div className="flex items-center gap-3 p-3">
+                        <img
+                          src={PROFILE_DATA.avatar}
+                          alt={PROFILE_DATA.name}
+                          className={`w-10 h-10 ${BORDER_RADIUS.avatar} object-cover`}
+                        />
+                        <div>
+                          <p className="text-sm font-semibold text-slate-900 dark:text-white">
+                            {PROFILE_DATA.name}
+                          </p>
+                          <p className="text-xs text-slate-500 dark:text-neutral-400">
+                            {post.timestamp || 'Recently'}
+                          </p>
+                        </div>
                       </div>
-                    </div>
 
-                    {/* Post Caption */}
-                    {post.caption && (
-                      <p className="px-3 pb-2 text-sm text-slate-700 dark:text-neutral-300">
-                        {post.caption}
-                      </p>
-                    )}
-
-                    {/* Post Image */}
-                    {post.image && (
-                      <img
-                        src={post.image}
-                        alt={post.caption || 'Post'}
-                        className="w-full object-cover max-h-125"
-                      />
-                    )}
-
-                    {/* Post Actions */}
-                    <div className="p-3 flex items-center gap-4 border-t border-slate-100 dark:border-neutral-700">
-                      <motion.button
-                        onClick={() => handleLike(post.id)}
-                        className={`flex items-center gap-1.5 cursor-pointer ${
-                          post.isLiked
-                            ? 'text-rose-500'
-                            : 'text-slate-500 dark:text-neutral-400 hover:text-rose-500'
-                        }`}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        <Heart className={`w-5 h-5 ${post.isLiked ? 'fill-current' : ''}`} />
-                        <span className="text-sm font-medium">{post.likes}</span>
-                      </motion.button>
-
-                      <motion.button
-                        onClick={() => handleCommentToggle(post.id)}
-                        className={`flex items-center gap-1.5 cursor-pointer ${
-                          profilePostComments[post.id]
-                            ? 'text-blue-500'
-                            : 'text-slate-500 dark:text-neutral-400 hover:text-blue-500'
-                        }`}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        <MessageCircle className="w-5 h-5" />
-                        <span className="text-sm font-medium">{post.comments}</span>
-                      </motion.button>
-                    </div>
-
-                    {/* Comments Section */}
-                    <AnimatePresence>
-                      {profilePostComments[post.id] && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: 'auto', opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          className="border-t border-slate-100 dark:border-neutral-700 overflow-hidden"
-                        >
-                          <div className="p-3 bg-slate-50 dark:bg-neutral-800/50">
-                            {/* Comments List */}
-                            {profileComments[post.id]?.length > 0 && (
-                              <div className="space-y-3 mb-3 max-h-60 overflow-y-auto">
-                                {profileComments[post.id].map((comment, idx) => (
-                                  <motion.div
-                                    key={comment.id}
-                                    className="flex gap-2"
-                                    initial={{ opacity: 0, y: 10 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: idx * 0.05 }}
-                                  >
-                                    <img
-                                      src={comment.user.avatar}
-                                      alt={comment.user.name}
-                                      className={`w-8 h-8 ${BORDER_RADIUS.avatar} object-cover shrink-0`}
-                                    />
-                                    <div
-                                      className={`flex-1 bg-white dark:bg-neutral-700 ${BORDER_RADIUS.card} p-2.5 shadow-sm`}
-                                    >
-                                      <div className="flex items-center gap-2 mb-1">
-                                        <span className="font-semibold text-slate-900 dark:text-white text-sm">
-                                          {comment.user.name}
-                                        </span>
-                                        <span className="text-xs text-slate-400 dark:text-neutral-500">
-                                          {comment.timestamp}
-                                        </span>
-                                      </div>
-                                      <p className="text-slate-700 dark:text-neutral-300 text-sm">
-                                        {comment.content}
-                                      </p>
-                                    </div>
-                                  </motion.div>
-                                ))}
-                              </div>
-                            )}
-
-                            {/* Add Comment Input */}
-                            <div className="flex gap-2 pt-2 border-t border-slate-200 dark:border-neutral-700">
-                              <img
-                                src={PROFILE_DATA.avatar}
-                                alt={PROFILE_DATA.name}
-                                className={`w-8 h-8 ${BORDER_RADIUS.avatar} object-cover shrink-0`}
-                              />
-                              <div className="flex-1 flex gap-2">
-                                <input
-                                  type="text"
-                                  placeholder="Write a comment..."
-                                  value={newComment[post.id] || ''}
-                                  onChange={(e) =>
-                                    setNewComment((prev) => ({
-                                      ...prev,
-                                      [post.id]: e.target.value,
-                                    }))
-                                  }
-                                  onKeyDown={(e) => {
-                                    if (e.key === 'Enter') {
-                                      handleAddComment(post.id);
-                                    }
-                                  }}
-                                  className={`flex-1 px-3 py-1.5 bg-white dark:bg-neutral-700 border border-slate-200 dark:border-neutral-600 ${BORDER_RADIUS.input} text-sm text-slate-900 dark:text-white placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-orange-500`}
-                                />
-                                <motion.button
-                                  onClick={() => handleAddComment(post.id)}
-                                  disabled={!newComment[post.id]?.trim()}
-                                  className={`px-3 py-1.5 bg-orange-500 text-white ${BORDER_RADIUS.button} text-xs font-semibold hover:bg-orange-600 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed transition-colors`}
-                                  whileHover={{ scale: 1.02 }}
-                                  whileTap={{ scale: 0.98 }}
-                                >
-                                  Post
-                                </motion.button>
-                              </div>
-                            </div>
-                          </div>
-                        </motion.div>
+                      {/* Post Caption */}
+                      {post.caption && (
+                        <p className="px-3 pb-2 text-sm text-slate-700 dark:text-neutral-300">
+                          {post.caption}
+                        </p>
                       )}
-                    </AnimatePresence>
-                  </motion.div>
-                ))}
+
+                      {/* Post Image */}
+                      {post.image && (
+                        <img
+                          src={post.image}
+                          alt={post.caption || 'Post'}
+                          className="w-full object-cover max-h-125"
+                        />
+                      )}
+
+                      {/* Post Actions */}
+                      <div
+                        className="p-3 flex items-center gap-4 border-t border-slate-100 dark:border-neutral-700"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <motion.button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleLike(post.id);
+                          }}
+                          className={`flex items-center gap-1.5 cursor-pointer ${
+                            post.isLiked
+                              ? 'text-rose-500'
+                              : 'text-slate-500 dark:text-neutral-400 hover:text-rose-500'
+                          }`}
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          <Heart className={`w-5 h-5 ${post.isLiked ? 'fill-current' : ''}`} />
+                          <span className="text-sm font-medium">{post.likes}</span>
+                        </motion.button>
+
+                        <motion.button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleOpenPost(post);
+                            setOpenCommentsOnModal(true);
+                          }}
+                          className="flex items-center gap-1.5 cursor-pointer text-slate-500 dark:text-neutral-400 hover:text-blue-500"
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          <MessageCircle className="w-5 h-5" />
+                          <span className="text-sm font-medium">
+                            {profileComments[post.id]?.length || post.comments}
+                          </span>
+                        </motion.button>
+                      </div>
+                    </motion.div>
+                  );
+                })}
               </div>
             </motion.div>
           )}
 
-          {activeTab === 'about' && (
+          {activeProfileTab === 'about' && (
             <motion.div
               key="about"
               initial={{ opacity: 0, y: 10 }}

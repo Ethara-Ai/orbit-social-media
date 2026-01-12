@@ -10,7 +10,7 @@ import {
 } from 'react';
 
 // Import Data
-import { friends, suggestedUsers, createMockNotifications } from '../../data/mockData';
+import { friends, createMockNotifications } from '../../data/mockData';
 
 // Import Services
 import {
@@ -21,12 +21,7 @@ import {
 } from '../../services/notificationService';
 
 // Import Utils
-import {
-  NOTIFICATION_INTERVAL,
-  MAX_NOTIFICATIONS,
-  FRIEND_REQUEST_PROBABILITY,
-  TABS,
-} from '../../utils/constants';
+import { NOTIFICATION_INTERVAL, MAX_NOTIFICATIONS, TABS } from '../../utils/constants';
 
 // Import focused UI hook for tab state
 import { useTab } from './ui';
@@ -57,7 +52,7 @@ export function NotificationsProvider({ children }) {
   // ==========================================================================
   // Initialize Mock Data
   // ==========================================================================
-  const mockNotifications = useMemo(() => createMockNotifications(friends, suggestedUsers), []);
+  const mockNotifications = useMemo(() => createMockNotifications(friends), []);
 
   // ==========================================================================
   // Notifications State
@@ -86,11 +81,7 @@ export function NotificationsProvider({ children }) {
   // ==========================================================================
   useEffect(() => {
     const interval = setInterval(() => {
-      const newNotification = generateRandomNotification(
-        friends,
-        suggestedUsers,
-        FRIEND_REQUEST_PROBABILITY
-      );
+      const newNotification = generateRandomNotification(friends);
 
       if (newNotification) {
         // Read current tab from ref to get latest value

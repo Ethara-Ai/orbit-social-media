@@ -70,7 +70,7 @@ export const friends = [
     avatar:
       'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop&crop=face',
     isOnline: true,
-    mutualFriends: 28,
+    mutualFriends: 12,
     profession: 'Blockchain Developer',
     location: 'Singapore',
     lastSeen: '1m ago',
@@ -94,7 +94,7 @@ export const friends = [
     avatar:
       'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop&crop=face',
     isOnline: true,
-    mutualFriends: 42,
+    mutualFriends: 14,
     profession: 'AI Researcher',
     location: 'Tokyo, Japan',
     lastSeen: 'Just now',
@@ -106,7 +106,7 @@ export const friends = [
     avatar:
       'https://images.unsplash.com/photo-1507591064344-4c6ce005b128?w=150&h=150&fit=crop&crop=face',
     isOnline: true,
-    mutualFriends: 19,
+    mutualFriends: 9,
     profession: 'Product Designer',
     location: 'Lagos, Nigeria',
     lastSeen: '3m ago',
@@ -118,7 +118,7 @@ export const friends = [
     avatar:
       'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=150&h=150&fit=crop&crop=face',
     isOnline: false,
-    mutualFriends: 33,
+    mutualFriends: 11,
     profession: 'Startup Founder',
     location: 'Berlin, Germany',
     lastSeen: '4h ago',
@@ -130,7 +130,7 @@ export const friends = [
     avatar:
       'https://images.unsplash.com/photo-1463453091185-61582044d556?w=150&h=150&fit=crop&crop=face',
     isOnline: true,
-    mutualFriends: 21,
+    mutualFriends: 8,
     profession: 'Music Producer',
     location: 'Los Angeles, CA',
     lastSeen: 'Just now',
@@ -154,7 +154,7 @@ export const friends = [
     avatar:
       'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
     isOnline: true,
-    mutualFriends: 37,
+    mutualFriends: 13,
     profession: 'Full Stack Developer',
     location: 'Barcelona, Spain',
     lastSeen: 'Just now',
@@ -166,7 +166,7 @@ export const friends = [
     avatar:
       'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face',
     isOnline: false,
-    mutualFriends: 24,
+    mutualFriends: 10,
     profession: 'Digital Marketing Strategist',
     location: 'London, UK',
     lastSeen: '2m ago',
@@ -178,7 +178,7 @@ export const friends = [
     avatar:
       'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&h=150&fit=crop&crop=face',
     isOnline: false,
-    mutualFriends: 18,
+    mutualFriends: 7,
     profession: 'Data Scientist',
     location: 'Seoul, South Korea',
     lastSeen: '5h ago',
@@ -190,7 +190,7 @@ export const friends = [
     avatar:
       'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&h=150&fit=crop&crop=face',
     isOnline: false,
-    mutualFriends: 29,
+    mutualFriends: 12,
     profession: 'Fashion Designer',
     location: 'Milan, Italy',
     lastSeen: '3h ago',
@@ -200,7 +200,7 @@ export const friends = [
     name: 'Marcus Johnson',
     username: '@marcusj',
     avatar:
-      'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face',
+      'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=150&h=150&fit=crop&crop=face',
     isOnline: false,
     mutualFriends: 16,
     profession: 'Cybersecurity Expert',
@@ -214,7 +214,7 @@ export const friends = [
     avatar:
       'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face',
     isOnline: false,
-    mutualFriends: 31,
+    mutualFriends: 14,
     profession: 'Healthcare Tech Innovator',
     location: 'Mumbai, India',
     lastSeen: '8h ago',
@@ -226,7 +226,7 @@ export const friends = [
     avatar:
       'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=150&h=150&fit=crop&crop=face',
     isOnline: false,
-    mutualFriends: 22,
+    mutualFriends: 9,
     profession: 'Game Developer',
     location: 'Dublin, Ireland',
     lastSeen: '12h ago',
@@ -238,7 +238,7 @@ export const friends = [
     avatar:
       'https://images.unsplash.com/photo-1542596768-5d1d21f1cf98?w=150&h=150&fit=crop&crop=face',
     isOnline: false,
-    mutualFriends: 26,
+    mutualFriends: 11,
     profession: 'Robotics Engineer',
     location: 'Osaka, Japan',
     lastSeen: '1d ago',
@@ -250,7 +250,7 @@ export const friends = [
     avatar:
       'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=150&h=150&fit=crop&crop=face',
     isOnline: true,
-    mutualFriends: 20,
+    mutualFriends: 8,
     profession: 'UX Designer',
     location: 'Toronto, Canada',
     lastSeen: 'Just now',
@@ -278,7 +278,7 @@ export const createMockPosts = (friendsList) => [
     content:
       "Behind the scenes of today's content shoot! 🎬 Creating authentic stories is what drives me. Remember: your unique perspective is your superpower. Keep creating, keep inspiring, keep being genuinely you!",
     image:
-      'https://images.unsplash.com/photo-1540655037529-dec987208707?w=1920&h=1080&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=1920&h=1080&fit=crop&q=80',
     likes: 245,
     comments: 2,
     shares: 28,
@@ -746,68 +746,80 @@ export const createInitialConversations = (friendsList) => [
   },
 ];
 
-export const createMockNotifications = (friendsList, suggestedUsersList) => [
+// Profile post IDs for notifications (p1-p6 are user's own posts)
+const PROFILE_POST_IDS = ['p1', 'p2', 'p3', 'p4', 'p5', 'p6'];
+
+export const createMockNotifications = (friendsList) => [
   {
     id: '1',
     type: 'like',
     user: friendsList[0],
-    message: 'loved your post about creative workflows',
+    message: 'loved your Mountain vibes post ⛰️',
     timestamp: '2 min ago',
     createdAt: Date.now() - 2 * 60 * 1000,
     isRead: false,
     isConnection: true,
+    postId: 'p1',
   },
   {
     id: '2',
-    type: 'friend_request',
-    user: suggestedUsersList[0],
-    message: 'sent you a connection request',
+    type: 'comment',
+    user: friendsList[1],
+    message: 'commented on your Golden hour magic post ✨',
     timestamp: '10 min ago',
     createdAt: Date.now() - 10 * 60 * 1000,
     isRead: false,
-    isConnection: false,
+    isConnection: true,
+    postId: 'p2',
   },
   {
     id: '3',
-    type: 'comment',
-    user: friendsList[1],
-    message: 'commented on your design showcase',
+    type: 'mention',
+    user: friendsList[2],
+    message: 'mentioned you in your Exploring new horizons post 🌅',
     timestamp: '18 min ago',
     createdAt: Date.now() - 18 * 60 * 1000,
     isRead: false,
     isConnection: true,
+    postId: 'p3',
   },
   {
     id: '4',
-    type: 'friend_request',
-    user: suggestedUsersList[1],
-    message: 'sent you a connection request',
+    type: 'comment',
+    user: friendsList[3],
+    message: "commented on your Nature's beauty post 🌲",
     timestamp: '35 min ago',
     createdAt: Date.now() - 35 * 60 * 1000,
     isRead: true,
-    isConnection: false,
+    isConnection: true,
+    postId: 'p4',
   },
   {
     id: '5',
     type: 'mention',
-    user: friendsList[3],
-    message: 'mentioned you in a post about product design',
+    user: friendsList[4],
+    message: 'mentioned you in your Waterfall adventures post 💧',
     timestamp: '1 hour ago',
     createdAt: Date.now() - 60 * 60 * 1000,
     isRead: true,
     isConnection: true,
+    postId: 'p5',
   },
   {
     id: '6',
-    type: 'like',
-    user: friendsList[4],
-    message: 'liked your startup insights post',
+    type: 'comment',
+    user: friendsList[5],
+    message: 'commented on your Misty mornings post 🌫️',
     timestamp: '2 hours ago',
     createdAt: Date.now() - 2 * 60 * 60 * 1000,
     isRead: true,
     isConnection: true,
+    postId: 'p6',
   },
 ];
+
+// Export profile post IDs for notification service
+export { PROFILE_POST_IDS };
 
 export const trendingTopics = [
   { id: '1', hashtag: '#Web3Revolution', posts: 24680, growth: 32.5 },

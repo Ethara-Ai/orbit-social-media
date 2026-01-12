@@ -18,6 +18,8 @@ TabContext.displayName = 'TabContext';
 export function TabProvider({ children }) {
   const [activeTab, setActiveTabState] = useState(TABS.FEED);
   const [previousTab, setPreviousTab] = useState(null);
+  const [highlightedPostId, setHighlightedPostId] = useState(null);
+  const [pendingProfilePost, setPendingProfilePost] = useState(null); // { postId, openComments, fromNotifications }
 
   // Track if we're leaving the messages tab (used by MessagesTab to cleanup)
   const isLeavingMessagesTab = useMemo(
@@ -40,8 +42,19 @@ export function TabProvider({ children }) {
       previousTab,
       isLeavingMessagesTab,
       setActiveTab,
+      highlightedPostId,
+      setHighlightedPostId,
+      pendingProfilePost,
+      setPendingProfilePost,
     }),
-    [activeTab, previousTab, isLeavingMessagesTab, setActiveTab]
+    [
+      activeTab,
+      previousTab,
+      isLeavingMessagesTab,
+      setActiveTab,
+      highlightedPostId,
+      pendingProfilePost,
+    ]
   );
 
   return <TabContext.Provider value={contextValue}>{children}</TabContext.Provider>;

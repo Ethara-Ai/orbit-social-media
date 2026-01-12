@@ -1,17 +1,19 @@
 /* eslint-disable react-refresh/only-export-components */
-import { memo, useState, useEffect } from 'react';
+import { memo, useState, useEffect, useCallback } from 'react';
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
-import { Heart, MessageCircle, UserPlus, User, Bell, Users } from '../icons';
+import { Heart, MessageCircle, User, Bell } from '../icons';
 import Avatar from '../common/Avatar';
 import EmptyState from '../common/EmptyState';
 import { useNotifications } from '../../context/AppContext';
-import { BORDER_RADIUS } from '../../utils/constants';
+import { useTab } from '../../context/providers/ui';
+import { BORDER_RADIUS, TABS } from '../../utils/constants';
 import { formatRelativeTime } from '../../utils/timeUtils';
 
 const NotificationsTab = () => {
   // Access notifications state directly from context
-  const { notifications } = useNotifications();
+  const { notifications, markNotificationAsRead } = useNotifications();
+  const { setActiveTab, setPendingProfilePost } = useTab();
   const [now, setNow] = useState(() => Date.now());
 
   // Update relative times every minute
@@ -22,6 +24,25 @@ const NotificationsTab = () => {
 
     return () => clearInterval(interval);
   }, []);
+
+  // Handle notification click - navigate to relevant post
+  const handleNotificationClick = useCallback(
+    (notification) => {
+      // Mark notification as read
+      markNotificationAsRead(notification.id);
+
+      // If notification has a postId, set pending post and navigate to profile
+      if (notification.postId) {
+        setPendingProfilePost({
+          postId: notification.postId,
+          openComments: true,
+          fromNotifications: true,
+        });
+        setActiveTab(TABS.PROFILE);
+      }
+    },
+    [markNotificationAsRead, setPendingProfilePost, setActiveTab]
+  );
 
   return (
     <div className="max-w-2xl mx-auto w-full">
@@ -37,6 +58,7 @@ const NotificationsTab = () => {
               notification={notification}
               index={index}
               now={now}
+              onClick={handleNotificationClick}
             />
           ))
         ) : (
@@ -68,12 +90,26 @@ const NotificationsHeader = () => {
 };
 
 const NotificationItem = memo(
-  function NotificationItem({ notification, index, now }) {
+  function NotificationItem({ notification, index, now, onClick }) {
     const isUnread = !notification.isRead;
+
+    const handleClick = () => {
+      if (onClick) {
+        onClick(notification);
+      }
+    };
+
+    const handleKeyDown = (e) => {
+      if (e.key === 'Enter' && onClick) {
+        onClick(notification);
+      }
+    };
 
     return (
       <motion.div
-        className={`bg-white dark:bg-neutral-800 ${BORDER_RADIUS.card} p-4 shadow-xs border cursor-default transition-all duration-300 ${
+        role="button"
+        tabIndex={0}
+        className={`bg-white dark:bg-neutral-800 ${BORDER_RADIUS.card} p-4 shadow-xs border transition-all duration-300 cursor-pointer hover:bg-slate-50 dark:hover:bg-neutral-700/50 ${
           isUnread
             ? 'border-orange-200 dark:border-orange-500/30 bg-orange-50/30 dark:bg-orange-500/10'
             : 'border-slate-200 dark:border-neutral-700'
@@ -81,6 +117,9 @@ const NotificationItem = memo(
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: index * 0.05 }}
+        onClick={handleClick}
+        onKeyDown={handleKeyDown}
+        whileHover={{ x: 2 }}
       >
         <div className="flex items-center gap-4">
           {/* Avatar with Icon Badge */}
@@ -180,17 +219,9 @@ const getNotificationIconConfig = (type) => {
       icon: <MessageCircle className="w-4 h-4 text-blue-500" />,
       bgClass: 'bg-blue-50 dark:bg-blue-500/20',
     },
-    follow: {
-      icon: <UserPlus className="w-4 h-4 text-emerald-500" />,
-      bgClass: 'bg-emerald-50 dark:bg-emerald-500/20',
-    },
     mention: {
       icon: <User className="w-4 h-4 text-orange-500" />,
       bgClass: 'bg-orange-50 dark:bg-orange-500/20',
-    },
-    friend_request: {
-      icon: <Users className="w-4 h-4 text-purple-500" />,
-      bgClass: 'bg-purple-50 dark:bg-purple-500/20',
     },
   };
 
