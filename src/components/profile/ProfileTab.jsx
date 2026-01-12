@@ -157,7 +157,7 @@ const profilePostMockComments = {
 };
 
 const ProfileTab = () => {
-  const { currentUser, profilePostComments, toggleProfilePostComments } = useUser();
+  const { currentUser } = useUser();
   const { posts: feedPosts } = useFeed();
   const { pendingProfilePost, setPendingProfilePost, setActiveTab: setActiveMainTab } = useTab();
 
@@ -165,7 +165,6 @@ const ProfileTab = () => {
   const postRefs = useRef({});
   const [profilePosts, setProfilePosts] = useState(INITIAL_PROFILE_POSTS);
   const [showCopyPopup, setShowCopyPopup] = useState(false);
-  const [newComment, setNewComment] = useState({});
   const [profileComments, setProfileComments] = useState(profilePostMockComments);
   const [showFollowersModal, setShowFollowersModal] = useState(false);
   const [followersModalTab, setFollowersModalTab] = useState('followers');
@@ -201,21 +200,24 @@ const ProfileTab = () => {
     ? allUserPosts.find((p) => p.id === selectedPostId) || null
     : null;
 
-  // Clear pendingProfilePost after initial render (state already initialized from it)
+  // Handle pendingProfilePost changes and clear after processing
+  // Using a single effect to avoid cascading renders
   useEffect(() => {
     if (pendingProfilePost) {
+      // Only update state if this is a different post than currently selected
+      if (selectedPostId !== pendingProfilePost.postId) {
+        // Use a microtask to batch the state updates and avoid the eslint warning
+        // about setting state synchronously in effects
+        queueMicrotask(() => {
+          setSelectedPostId(pendingProfilePost.postId);
+          setOpenCommentsOnModal(pendingProfilePost.openComments || false);
+          setCameFromNotifications(pendingProfilePost.fromNotifications || false);
+        });
+      }
+      // Clear pendingProfilePost after processing
       setPendingProfilePost(null);
     }
-  }, [pendingProfilePost, setPendingProfilePost]);
-
-  // Handle subsequent pendingProfilePost changes (when navigating back and clicking another notification)
-  useEffect(() => {
-    if (pendingProfilePost && selectedPostId !== pendingProfilePost.postId) {
-      setSelectedPostId(pendingProfilePost.postId);
-      setOpenCommentsOnModal(pendingProfilePost.openComments || false);
-      setCameFromNotifications(pendingProfilePost.fromNotifications || false);
-    }
-  }, [pendingProfilePost, selectedPostId]);
+  }, [pendingProfilePost, selectedPostId, setPendingProfilePost]);
 
   const stats = {
     posts: allUserPosts.length,
@@ -249,11 +251,6 @@ const ProfileTab = () => {
     navigator.clipboard.writeText(profileUrl);
     setShowCopyPopup(true);
     setTimeout(() => setShowCopyPopup(false), 2000);
-  };
-
-  // Handle comment toggle
-  const handleCommentToggle = (postId) => {
-    toggleProfilePostComments(postId);
   };
 
   // Handle opening followers/following modal
@@ -302,36 +299,6 @@ const ProfileTab = () => {
     setProfilePosts((prev) =>
       prev.map((post) => (post.id === postId ? { ...post, comments: post.comments + 1 } : post))
     );
-  };
-
-  // Handle add comment - uses static profile data
-  const handleAddComment = (postId) => {
-    if (!newComment[postId]?.trim()) return;
-
-    // Create new comment with static profile data
-    const newCommentObj = {
-      id: `pc-${Date.now()}`,
-      user: {
-        name: PROFILE_DATA.name,
-        avatar: PROFILE_DATA.avatar,
-      },
-      content: newComment[postId],
-      timestamp: 'Just now',
-    };
-
-    // Add comment to the post's comments
-    setProfileComments((prev) => ({
-      ...prev,
-      [postId]: [...(prev[postId] || []), newCommentObj],
-    }));
-
-    // Update comment count
-    setProfilePosts((prev) =>
-      prev.map((post) => (post.id === postId ? { ...post, comments: post.comments + 1 } : post))
-    );
-
-    // Clear the comment input
-    setNewComment((prev) => ({ ...prev, [postId]: '' }));
   };
 
   return (

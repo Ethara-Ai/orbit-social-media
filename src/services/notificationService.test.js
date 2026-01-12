@@ -6,7 +6,6 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import {
   NOTIFICATION_TYPES,
   generateConnectionNotification,
-  generateFriendRequestNotification,
   generateRandomNotification,
   markAllAsRead,
   markAsRead,
@@ -113,7 +112,6 @@ describe('notificationService', () => {
       const validTypes = [
         NOTIFICATION_TYPES.LIKE,
         NOTIFICATION_TYPES.COMMENT,
-        NOTIFICATION_TYPES.FOLLOW,
         NOTIFICATION_TYPES.MENTION,
       ];
       expect(validTypes).toContain(notification.type);
@@ -128,87 +126,11 @@ describe('notificationService', () => {
     });
   });
 
-  describe('generateFriendRequestNotification', () => {
-    beforeEach(() => {
-      vi.spyOn(Date, 'now').mockReturnValue(1234567890123);
-    });
-
-    afterEach(() => {
-      vi.restoreAllMocks();
-    });
-
-    it('should create a notification with required properties', () => {
-      const user = { id: '1', name: 'Jane Doe', avatar: 'avatar.jpg' };
-      const notification = generateFriendRequestNotification(user);
-
-      expect(notification).toHaveProperty('id');
-      expect(notification).toHaveProperty('type');
-      expect(notification).toHaveProperty('user');
-      expect(notification).toHaveProperty('message');
-      expect(notification).toHaveProperty('timestamp');
-      expect(notification).toHaveProperty('isRead');
-      expect(notification).toHaveProperty('isConnection');
-    });
-
-    it('should set type to FRIEND_REQUEST', () => {
-      const user = { id: '1', name: 'Jane Doe' };
-      const notification = generateFriendRequestNotification(user);
-
-      expect(notification.type).toBe(NOTIFICATION_TYPES.FRIEND_REQUEST);
-    });
-
-    it('should set the user correctly', () => {
-      const user = { id: '1', name: 'Jane Doe', avatar: 'avatar.jpg' };
-      const notification = generateFriendRequestNotification(user);
-
-      expect(notification.user).toBe(user);
-    });
-
-    it('should set message to connection request text', () => {
-      const user = { id: '1', name: 'Jane Doe' };
-      const notification = generateFriendRequestNotification(user);
-
-      expect(notification.message).toBe('sent you a connection request');
-    });
-
-    it('should set timestamp to "now"', () => {
-      const user = { id: '1', name: 'John Doe' };
-      const notification = generateFriendRequestNotification(user);
-
-      expect(notification.timestamp).toBe('Just now');
-    });
-
-    it('should set isRead to false', () => {
-      const user = { id: '1', name: 'Jane Doe' };
-      const notification = generateFriendRequestNotification(user);
-
-      expect(notification.isRead).toBe(false);
-    });
-
-    it('should set isConnection to false', () => {
-      const user = { id: '1', name: 'Jane Doe' };
-      const notification = generateFriendRequestNotification(user);
-
-      expect(notification.isConnection).toBe(false);
-    });
-
-    it('should generate id based on timestamp', () => {
-      const user = { id: '1', name: 'Jane Doe' };
-      const notification = generateFriendRequestNotification(user);
-
-      expect(notification.id).toBe('1234567890123');
-    });
-  });
-
   describe('generateRandomNotification', () => {
     const friends = [
       { id: '1', name: 'Friend 1' },
       { id: '2', name: 'Friend 2' },
     ];
-    const suggestedUsers = [
-      { id: '3', name: 'Suggested 1' },
-      { id: '4', name: 'Suggested 2' },
-    ];
 
     beforeEach(() => {
       vi.spyOn(Date, 'now').mockReturnValue(1234567890123);
@@ -218,61 +140,67 @@ describe('notificationService', () => {
       vi.restoreAllMocks();
     });
 
-    it('should generate friend request when random < friendRequestChance', () => {
-      vi.spyOn(Math, 'random').mockReturnValue(0.1);
-      const notification = generateRandomNotification(friends, suggestedUsers, 0.3);
-
-      expect(notification.type).toBe(NOTIFICATION_TYPES.FRIEND_REQUEST);
-      expect(notification.isConnection).toBe(false);
-    });
-
-    it('should generate connection notification when random >= friendRequestChance', () => {
+    it('should generate a connection notification from friends', () => {
       vi.spyOn(Math, 'random').mockReturnValue(0.5);
-      const notification = generateRandomNotification(friends, suggestedUsers, 0.3);
+      const notification = generateRandomNotification(friends);
 
-      expect(notification.type).not.toBe(NOTIFICATION_TYPES.FRIEND_REQUEST);
+      expect(notification).not.toBeNull();
       expect(notification.isConnection).toBe(true);
     });
 
-    it('should use default friendRequestChance of 0.3', () => {
-      vi.spyOn(Math, 'random').mockReturnValue(0.1);
-      const notification = generateRandomNotification(friends, suggestedUsers);
-
-      expect(notification.type).toBe(NOTIFICATION_TYPES.FRIEND_REQUEST);
-    });
-
-    it('should return connection notification when suggestedUsers is empty', () => {
-      vi.spyOn(Math, 'random').mockReturnValue(0.1);
-      const notification = generateRandomNotification(friends, [], 0.3);
-
-      expect(notification.isConnection).toBe(true);
-    });
-
-    it('should return null when both lists are empty', () => {
-      const notification = generateRandomNotification([], []);
+    it('should return null when friends list is empty', () => {
+      const notification = generateRandomNotification([]);
 
       expect(notification).toBeNull();
     });
 
-    it('should return null when friends is empty and random >= friendRequestChance', () => {
+    it('should select a random user from friends', () => {
       vi.spyOn(Math, 'random').mockReturnValue(0.5);
-      const notification = generateRandomNotification([], suggestedUsers, 0.3);
-
-      expect(notification).toBeNull();
-    });
-
-    it('should select a random user from friends for connection notification', () => {
-      vi.spyOn(Math, 'random').mockReturnValue(0.5);
-      const notification = generateRandomNotification(friends, suggestedUsers, 0.3);
+      const notification = generateRandomNotification(friends);
 
       expect(friends).toContainEqual(notification.user);
     });
 
-    it('should select a random user from suggestedUsers for friend request', () => {
-      vi.spyOn(Math, 'random').mockReturnValue(0.1);
-      const notification = generateRandomNotification(friends, suggestedUsers, 0.3);
+    it('should have a valid notification type', () => {
+      vi.spyOn(Math, 'random').mockReturnValue(0.5);
+      const notification = generateRandomNotification(friends);
 
-      expect(suggestedUsers).toContainEqual(notification.user);
+      const validTypes = [
+        NOTIFICATION_TYPES.LIKE,
+        NOTIFICATION_TYPES.COMMENT,
+        NOTIFICATION_TYPES.MENTION,
+      ];
+      expect(validTypes).toContain(notification.type);
+    });
+
+    it('should set isRead to false', () => {
+      vi.spyOn(Math, 'random').mockReturnValue(0.5);
+      const notification = generateRandomNotification(friends);
+
+      expect(notification.isRead).toBe(false);
+    });
+
+    it('should set timestamp to Just now', () => {
+      vi.spyOn(Math, 'random').mockReturnValue(0.5);
+      const notification = generateRandomNotification(friends);
+
+      expect(notification.timestamp).toBe('Just now');
+    });
+
+    it('should have a postId property', () => {
+      vi.spyOn(Math, 'random').mockReturnValue(0.5);
+      const notification = generateRandomNotification(friends);
+
+      expect(notification).toHaveProperty('postId');
+      expect(notification.postId).toBeTruthy();
+    });
+
+    it('should have a message string', () => {
+      vi.spyOn(Math, 'random').mockReturnValue(0.5);
+      const notification = generateRandomNotification(friends);
+
+      expect(typeof notification.message).toBe('string');
+      expect(notification.message.length).toBeGreaterThan(0);
     });
   });
 
