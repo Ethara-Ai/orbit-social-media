@@ -149,12 +149,6 @@ Reusable logic is kept in pure functions within the `services/` directory, makin
 2.  **Commit Messages**: Please use clear, descriptive commit messages.
 3.  **Architecture**: When adding new features, try to stick to the Service/Hook/Component pattern.
 
-## License
-
-This project is licensed under the MIT License.
-
----
-
 ## Copyright
 
 Copyright (c) 2026 Green Rider Technology LLP (Ethara AI). All rights reserved.
