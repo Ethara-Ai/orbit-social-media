@@ -152,3 +152,9 @@ Reusable logic is kept in pure functions within the `services/` directory, makin
 ## License
 
 This project is licensed under the MIT License.
+
+---
+
+## Copyright
+
+Copyright (c) 2026 Green Rider Technology LLP (Ethara AI). All rights reserved.
